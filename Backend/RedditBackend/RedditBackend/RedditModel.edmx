@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="RedditModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="RedditModelTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="RedditModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="RedditModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="RedditModel.User" />
+          <EntitySet Name="Ratings" EntityType="RedditModel.Rating" />
+          <AssociationSet Name="UserRating" Association="RedditModel.UserRating">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Rating" EntitySet="Ratings" />
+          </AssociationSet>
+          <EntitySet Name="Comments" EntityType="RedditModel.Comment" />
+          <AssociationSet Name="UserComment" Association="RedditModel.UserComment">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <EntitySet Name="Posts" EntityType="RedditModel.Post" />
+          <AssociationSet Name="UserPost" Association="RedditModel.UserPost">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Post" EntitySet="Posts" />
+          </AssociationSet>
+          <EntitySet Name="Categorys" EntityType="RedditModel.Category" />
+          <AssociationSet Name="CategoryCategory" Association="RedditModel.CategoryCategory">
+            <End Role="Category" EntitySet="Categorys" />
+            <End Role="Category1" EntitySet="Categorys" />
+          </AssociationSet>
+          <AssociationSet Name="PostCategory" Association="RedditModel.PostCategory">
+            <End Role="Post" EntitySet="Posts" />
+            <End Role="Category" EntitySet="Categorys" />
+          </AssociationSet>
+          <AssociationSet Name="RatingPost" Association="RedditModel.RatingPost">
+            <End Role="Rating" EntitySet="Ratings" />
+            <End Role="Post" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="PostComment" Association="RedditModel.PostComment">
+            <End Role="Post" EntitySet="Posts" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <EntitySet Name="UseCases" EntityType="RedditModel.UseCase" />
+          <EntitySet Name="UserGroups" EntityType="RedditModel.UserGroup" />
+          <AssociationSet Name="UseCaseUserGroup" Association="RedditModel.UseCaseUserGroup">
+            <End Role="UseCase" EntitySet="UseCases" />
+            <End Role="UserGroup" EntitySet="UserGroups" />
+          </AssociationSet>
+          <AssociationSet Name="UserGroupUser" Association="RedditModel.UserGroupUser">
+            <End Role="UserGroup" EntitySet="UserGroups" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <NavigationProperty Name="Ratings" Relationship="RedditModel.UserRating" FromRole="User" ToRole="Rating" />
+          <NavigationProperty Name="Comments" Relationship="RedditModel.UserComment" FromRole="User" ToRole="Comment" />
+          <NavigationProperty Name="Posts" Relationship="RedditModel.UserPost" FromRole="User" ToRole="Post" />
+          <NavigationProperty Name="UserGroups" Relationship="RedditModel.UserGroupUser" FromRole="User" ToRole="UserGroup" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Creator" Relationship="RedditModel.UserRating" FromRole="Rating" ToRole="User" />
+          <NavigationProperty Name="Post" Relationship="RedditModel.RatingPost" FromRole="Rating" ToRole="Post" />
+        </EntityType>
+        <Association Name="UserRating">
+          <End Type="RedditModel.User" Role="User" Multiplicity="1" />
+          <End Type="RedditModel.Rating" Role="Rating" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Creator" Relationship="RedditModel.UserComment" FromRole="Comment" ToRole="User" />
+          <NavigationProperty Name="Post" Relationship="RedditModel.PostComment" FromRole="Comment" ToRole="Post" />
+        </EntityType>
+        <Association Name="UserComment">
+          <End Type="RedditModel.User" Role="User" Multiplicity="1" />
+          <End Type="RedditModel.Comment" Role="Comment" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Creator" Relationship="RedditModel.UserPost" FromRole="Post" ToRole="User" />
+          <NavigationProperty Name="Categories" Relationship="RedditModel.PostCategory" FromRole="Post" ToRole="Category" />
+          <NavigationProperty Name="Ratings" Relationship="RedditModel.RatingPost" FromRole="Post" ToRole="Rating" />
+          <NavigationProperty Name="Comments" Relationship="RedditModel.PostComment" FromRole="Post" ToRole="Comment" />
+          <Property Name="Image" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="UserPost">
+          <End Type="RedditModel.User" Role="User" Multiplicity="1" />
+          <End Type="RedditModel.Post" Role="Post" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="SubCategories" Relationship="RedditModel.CategoryCategory" FromRole="Category" ToRole="Category1" />
+          <NavigationProperty Name="ParentCategory" Relationship="RedditModel.CategoryCategory" FromRole="Category1" ToRole="Category" />
+          <NavigationProperty Name="Posts" Relationship="RedditModel.PostCategory" FromRole="Category" ToRole="Post" />
+        </EntityType>
+        <Association Name="CategoryCategory">
+          <End Type="RedditModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="RedditModel.Category" Role="Category1" Multiplicity="*" />
+        </Association>
+        <Association Name="PostCategory">
+          <End Type="RedditModel.Post" Role="Post" Multiplicity="*" />
+          <End Type="RedditModel.Category" Role="Category" Multiplicity="*" />
+        </Association>
+        <EntityType Name="UrlPost" BaseType="RedditModel.Post">
+          <Property Name="Url" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TextPost" BaseType="RedditModel.Post">
+          <Property Name="Text" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="RatingPost">
+          <End Type="RedditModel.Rating" Role="Rating" Multiplicity="*" />
+          <End Type="RedditModel.Post" Role="Post" Multiplicity="1" />
+        </Association>
+        <Association Name="PostComment">
+          <End Type="RedditModel.Post" Role="Post" Multiplicity="1" />
+          <End Type="RedditModel.Comment" Role="Comment" Multiplicity="*" />
+        </Association>
+        <EntityType Name="UseCase">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="UserGroups" Relationship="RedditModel.UseCaseUserGroup" FromRole="UseCase" ToRole="UserGroup" />
+        </EntityType>
+        <EntityType Name="UserGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="UseCases" Relationship="RedditModel.UseCaseUserGroup" FromRole="UserGroup" ToRole="UseCase" />
+          <NavigationProperty Name="Users" Relationship="RedditModel.UserGroupUser" FromRole="UserGroup" ToRole="User" />
+        </EntityType>
+        <Association Name="UseCaseUserGroup">
+          <End Type="RedditModel.UseCase" Role="UseCase" Multiplicity="*" />
+          <End Type="RedditModel.UserGroup" Role="UserGroup" Multiplicity="*" />
+        </Association>
+        <Association Name="UserGroupUser">
+          <End Type="RedditModel.UserGroup" Role="UserGroup" Multiplicity="*" />
+          <End Type="RedditModel.User" Role="User" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="RedditModel" />
+        <Alias Key="Target" Value="RedditModel.Store" />
+        <EntityContainerMapping CdmEntityContainer="RedditModelContainer" StorageEntityContainer="RedditModelTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Kein" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

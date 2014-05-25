@@ -1,0 +1,7 @@
+﻿<%@ ServiceHost Language="C#" 
+    Debug="true" 
+    Service="RedditBackend.Reddit" 
+    Factory="System.Data.Services.DataServiceHostFactory, 
+            System.Data.Services, Version=4.0.0.0, 
+            Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    CodeBehind="Reddit.svc.cs" %>

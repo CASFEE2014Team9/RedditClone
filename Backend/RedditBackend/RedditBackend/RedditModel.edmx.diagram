@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fe4beb92dffb4506aa60ac4e18b061e9" Name="Diagram1" ZoomLevel="94" >
+        <EntityTypeShape EntityType="RedditModel.User" Width="1.5" PointX="5.875" PointY="5.875" />
+        <EntityTypeShape EntityType="RedditModel.Rating" Width="1.5" PointX="2.75" PointY="8.5" />
+        <AssociationConnector Association="RedditModel.UserRating" />
+        <EntityTypeShape EntityType="RedditModel.Comment" Width="1.5" PointX="9.625" PointY="8.625" />
+        <AssociationConnector Association="RedditModel.UserComment" />
+        <EntityTypeShape EntityType="RedditModel.Post" Width="1.5" PointX="6" PointY="11.25" />
+        <AssociationConnector Association="RedditModel.UserPost" />
+        <EntityTypeShape EntityType="RedditModel.Category" Width="1.5" PointX="9.75" PointY="11.25" />
+        <AssociationConnector Association="RedditModel.CategoryCategory" />
+        <AssociationConnector Association="RedditModel.PostCategory" />
+        <EntityTypeShape EntityType="RedditModel.UrlPost" Width="1.5" PointX="3.75" PointY="14.875" />
+        <EntityTypeShape EntityType="RedditModel.TextPost" Width="1.5" PointX="8" PointY="14.875" />
+        <InheritanceConnector EntityType="RedditModel.UrlPost" />
+        <InheritanceConnector EntityType="RedditModel.TextPost" />
+        <AssociationConnector Association="RedditModel.RatingPost" />
+        <AssociationConnector Association="RedditModel.PostComment" />
+        <EntityTypeShape EntityType="RedditModel.UseCase" Width="1.5" PointX="2" PointY="2.75" />
+        <EntityTypeShape EntityType="RedditModel.UserGroup" Width="1.5" PointX="2" PointY="5.625" />
+        <AssociationConnector Association="RedditModel.UseCaseUserGroup" />
+        <AssociationConnector Association="RedditModel.UserGroupUser" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
