@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+	
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Add Link</title>
+		<link rel="stylesheet" type="text/css" href="default.css">
+	</head>
+	
+	<body onload="OnBodyLoaded()">
+		<div class="header">
+		header: categories and other stuff
+		</div>
+
+		<div id="left">
+			<div class="subHeader">
+			subHeader: filtering elements
+			</div>
+		
+			<div class="addLink">
+				<input type="text" id="webAddress" value="enter a web address...">
+				<input type="text" id="innerHTML" value="enter some text">
+				<button class="button" id="addLinkButton" name="addLink" onclick="OnAddLinkButtonClicked()">Add Link</button>
+			</div>
+			
+			<div class="table" id="linkContentTable">
+				table...
+				<div class="entry">
+					<a title="test" href="http://espn.go.com/nhl">Sports World: ESPN NHL</a>
+				</div>
+			</div>
+		</div>
+		
+		<div id="right">
+			<div class="login">
+			login
+			</div>
+		</div>
+		
+        <script type="text/javascript" src="default.js"></script>
+        
+	</body>
+
+</html>

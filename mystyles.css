@@ -1,0 +1,14 @@
+.login {
+    width: 300px;
+    height: 150px;
+    float: right;
+    border: 20px solid blue;
+    background-color: pink;
+}
+
+.categories {
+    width: 100px;
+    height: 400px;
+    float: right;
+    background-color: greenyellow;
+}
