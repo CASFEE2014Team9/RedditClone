@@ -6,10 +6,7 @@
 
 function OnAddLinkButtonClicked()
 {
-    var webAddress = document.getElementById( "webAddress" );
-    var innerHTML = document.getElementById( "innerHTML" );
-    
-    AddLinkElementToList( webAddress.value, innerHTML.value );
+    AddLinkElementToList( $("#webAddress").val(), $("#innerHTML").val() );
 }
 
 function AddLinkElementToList( link, text )
@@ -25,14 +22,12 @@ function AddLinkElementToList( link, text )
     	text = link;
     }
 
-    var linkElement = document.createElement( "a" );
-    linkElement .href = link;
-    linkElement .innerHTML = text;
-
-
-    var linkDivElement = document.createElement( "div" );
-    linkDivElement .appendChild( linkElement );
-
-    var tableDivElement = document.getElementById( "linkContentTable" );
-    tableDivElement .appendChild( linkDivElement );
+    $("#linkContentTable")
+        .append( $("<div/>")
+            .addClass("entry")
+            .append( $("<a/>")
+                .attr("href",link)
+                .html(text)
+            )
+        );
 }
