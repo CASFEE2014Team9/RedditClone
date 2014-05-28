@@ -156,3 +156,4 @@ $RECYCLE.BIN/
 .DS_Store
 Backend/RedditBackend/packages/
 *.g.cs
+.idea/workspace.xml
