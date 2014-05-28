@@ -1,7 +1,19 @@
 ﻿function OnBodyLoaded()
 {
-	// var addLinkButton = docum.getElementById( "addLinkButton" );
-	// addLinkButton.onclick = onAddLinkButtonClicked;
+    $(".entry").on(
+    {
+        mouseenter : OnElementMouseEntered,
+        mouseout : OnElementMouseLeft
+    });
+}
+
+function OnElementMouseEntered()
+{
+    $(this).css("background", "lightBlue");
+}
+function OnElementMouseLeft()
+{
+    $(this).css("background", "transparent");
 }
 
 function OnAddLinkButtonClicked()
@@ -22,16 +34,23 @@ function AddLinkElementToList( link, text )
     	text = link;
     }
 
-    $("#linkContentTable")
+    var $linkContent = $("#linkContentTable");
+
+    $linkContent
         .append($("<li/>")
             .addClass("entry")
-            .append( $("<a/>")
+            .append($("<a/>")
                 .attr("href",link)
                 .html(text)
             )
+            .on(
+            {
+                mouseenter : OnElementMouseEntered,
+                mouseout : OnElementMouseLeft
+            })
         );
 
-    $("#linkContentTable")
+    $linkContent
         .find("li:odd")
             .css("background","LightGrey");
 
