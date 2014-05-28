@@ -23,11 +23,17 @@ function AddLinkElementToList( link, text )
     }
 
     $("#linkContentTable")
-        .append( $("<div/>")
+        .append($("<li/>")
             .addClass("entry")
             .append( $("<a/>")
                 .attr("href",link)
                 .html(text)
             )
         );
+
+    $("#linkContentTable")
+        .find("li:odd")
+            .css("background","LightGrey");
+
+    $("body").css("background","DarkGray" );
 }
