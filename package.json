@@ -1,0 +1,11 @@
+{
+    "name": "RedditClone",
+    "version": "0.0.1",
+    "dependencies": {
+        "connect": "^2.15.0",
+        "open": "^0.0.5"
+    },
+    "engines": {
+        "node": ">= 0.10"
+    }
+}

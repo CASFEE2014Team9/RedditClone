@@ -157,3 +157,5 @@ $RECYCLE.BIN/
 Backend/RedditBackend/packages/
 *.g.cs
 .idea/workspace.xml
+.idea/dictionaries/
+node_modules/
