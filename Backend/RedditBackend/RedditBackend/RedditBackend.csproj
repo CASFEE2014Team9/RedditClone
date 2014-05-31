@@ -95,7 +95,13 @@
     <Compile Include="Comment.g.cs">
       <DependentUpon>RedditModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="IRedditService.cs" />
     <Compile Include="JSONSupport.cs" />
+    <Compile Include="Migrations\201405250843245_InitialCreate.cs" />
+    <Compile Include="Migrations\201405250843245_InitialCreate.Designer.cs">
+      <DependentUpon>201405250843245_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Post.g.cs">
       <DependentUpon>RedditModel.tt</DependentUpon>
     </Compile>
@@ -111,15 +117,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RedditModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="RedditModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RedditModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="RedditModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RedditModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="RedditModel.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RedditModel.tt</DependentUpon>
     </Compile>
     <Compile Include="RedditModelContainer.cs" />
     <Compile Include="TextPost.g.cs">
@@ -157,8 +163,8 @@
     </Content>
     <Content Include="RedditModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>RedditModel.cs</LastGenOutput>
       <DependentUpon>RedditModel.edmx</DependentUpon>
+      <LastGenOutput>RedditModel.g.cs</LastGenOutput>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -169,6 +175,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201405250843245_InitialCreate.resx">
+      <DependentUpon>201405250843245_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -9,17 +9,6 @@ namespace RedditBackend
 {
     public partial class RedditModelContainer : IRedditModel
     {
-        partial void OnInitialized()
-        {
-            if (!Users.Any())
-            {
-                Users.Add(new User() { Name = "TestUser1" });
-                Users.Add(new User() { Name = "TestUser2" });
-
-                SaveChanges();
-            }
-        }
-
         IQueryable<User> IRedditModel.Users
         {
             get { return Users.OfType<User>().AsQueryable(); }

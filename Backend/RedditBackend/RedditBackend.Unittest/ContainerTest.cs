@@ -5,10 +5,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace RedditBackend.Unittest
 {
     [TestClass]
-    public class UnitTest1
+    public class ContainerTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void TestRetrieveUsers()
         {
             using (var context = new RedditModelContainer())
             {
@@ -17,6 +17,19 @@ namespace RedditBackend.Unittest
                 var userlist = users.ToList();
 
                 //http://localhost:49980/Reddit.svc/Users/?$format=json
+            }
+        }
+
+        [TestMethod]
+        public void TestRetrievePosts()
+        {
+            using (var context = new RedditModelContainer())
+            {
+                var posts = context.Posts.AsQueryable();
+
+                var postlist = posts.ToList();
+
+                //http://localhost:49980/Reddit.svc/Posts/?$format=json
             }
         }
     }
