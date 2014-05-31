@@ -1,6 +1,6 @@
 ﻿<#@ template language="C#" debug="false" hostspecific="true"#>
 <#@ include file="EF6.Utility.CS.ttinclude"#><#@ 
- output extension=".cs"#><#
+ output extension=".g.cs"#><#
 
 const string inputFile = @"RedditModel.edmx";
 var textTransform = DynamicTextTransformation.Create(this);
@@ -308,7 +308,7 @@ public class CodeStringGenerator
     {
         return string.Format(
             CultureInfo.InvariantCulture,
-            "[DataServiceKey(\"Id\")]\r\n{0} {1}partial class {2}{3}",
+            "[DataContract]\r\n[DataServiceKey(\"Id\")]\r\n{0} {1}partial class {2}{3}",
             Accessibility.ForType(entity),
             _code.SpaceAfter(_code.AbstractOption(entity)),
             _code.Escape(entity),
@@ -418,7 +418,7 @@ public class CodeStringGenerator
         return inHeader == string.IsNullOrEmpty(_code.VsNamespaceSuggestion())
             ? string.Format(
                 CultureInfo.InvariantCulture,
-                "{0}using System; using System.Data.Services.Common;{1}" +
+                "{0}using System;\r\nusing System.Data.Services.Common;\r\nusing System.Runtime.Serialization;{1}" +
                 "{2}",
                 inHeader ? Environment.NewLine : "",
                 includeCollections ? (Environment.NewLine + "using System.Collections.Generic;") : "",
