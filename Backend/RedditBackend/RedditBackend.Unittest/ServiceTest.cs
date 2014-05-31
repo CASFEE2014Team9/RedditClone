@@ -13,36 +13,42 @@ namespace RedditBackend.Unittest
         [TestMethod]
         public void TestCreatePost()
         {
+            //http://localhost:49980/Reddit.svc/CreatePost?description='gugus'
             var service = new RedditService();
 
             using (var model = new RedditModelContainer())
             {
-                //var post = service.CreatePost(new UrlPost()
-                //{
-                //    Description = "test",
-                //}, null);
+                var post = service.CreatePost("gugus");
+            }
+        }
+
+        [TestMethod]
+        public void TestUpdatePost()
+        {
+            //http://localhost:49980/Reddit.svc/CreatePost?description='gugus'
+            var service = new RedditService();
+
+            using (var model = new RedditModelContainer())
+            {
+                var post = model.Posts.FirstOrDefault() ?? service.CreatePost("gugus1");
+
+                var updatedpost = service.UpdatePost(post.Id, "gugus2");
             }
         }
 
         [TestMethod]
         public void TestDeletePost()
         {
+            //http://localhost:49980/Reddit.svc/DeletePost?PostId=5
             var service = new RedditService();
 
             using (var model = new RedditModelContainer())
             {
-                //foreach (var post in model.Posts)
-                //{
-                //    service.DeletePost(post.Id);
-                //}
+                foreach (var post in model.Posts)
+                {
+                    service.DeletePost(post.Id);
+                }
             }
-        }
-
-        [TestMethod]
-        public void TestRetrievePosts()
-        {
-            var service = new RedditService();
-
         }
     }
 }

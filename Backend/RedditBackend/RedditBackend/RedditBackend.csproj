@@ -95,7 +95,6 @@
     <Compile Include="Comment.g.cs">
       <DependentUpon>RedditModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="IRedditService.cs" />
     <Compile Include="JSONSupport.cs" />
     <Compile Include="Migrations\201405250843245_InitialCreate.cs" />
     <Compile Include="Migrations\201405250843245_InitialCreate.Designer.cs">
