@@ -53,7 +53,13 @@ function GetPosts()
     var post =
     {
         url:"http://espn.go.com/nhl",
-        description:"Sports World: ESPN NHL"
+        description:"Sports World: ESPN NHL",
+        comments:[],
+        postNode:null,
+        onAddCommentClick:function(comment)
+        {
+            this.comments.push(this.postNode.commentInput.val());
+        }
     };
 
     var posts = [];
@@ -74,22 +80,33 @@ function DisplayPosts()
 {
     var $linkContent = $("#linkContentTable");
 
-    $linkContent.empty();
-
     window.posts.forEach(function(post)
     {
-        $linkContent
-            .append($("<li/>")
+        if ( post.postNode == null )
+        {
+            post.postNode = $("<li/>")
                 .addClass("entry")
                 .append($("<a/>")
                     .attr("href",post.url)
                     .html(post.description)
                 )
-                .on(
-                {
+                .on({
                     mouseenter : OnElementMouseEntered,
                     mouseout : OnElementMouseLeft
                 })
-        );
+                .append($("<button/>")
+                    .on({
+                        click: $.proxy(post.onAddCommentClick, post)
+                    })
+                    .html("add comment")
+                );
+
+            post.postNode.commentInput = $("<input/>")
+                .attr("type", "text")
+                .attr("name", "commentInput");
+
+            $linkContent.append(post.postNode);
+            post.postNode.append(post.postNode.commentInput);
+        }
     });
 }
