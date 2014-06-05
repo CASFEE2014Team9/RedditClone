@@ -1,11 +1,5 @@
 ﻿function OnBodyLoaded()
 {
-    $(".entry").on(
-    {
-        mouseenter : OnElementMouseEntered,
-        mouseout : OnElementMouseLeft
-    });
-
     GetPosts();
 }
 
