@@ -14,31 +14,81 @@ function OnElementMouseLeft()
 
 function OnAddLinkButtonClicked()
 {
-    AddLinkElementToList( $("#webAddress").val(), $("#innerHTML").val() );
+    CreatePost( $("#webAddress").val(), $("#innerHTML").val() );
 }
 
-function AddLinkElementToList( link, text )
+function CreatePost( link, text )
 {
-    if( link == "" )
-    {
+    if( link == "" ) {
     	// show box
     	return;
     }
     
-    if( text == undefined || text == "" )
-    {
+    if( text == undefined || text == "" ) {
     	text = link;
     }
 
-    var post =
-    {
+    var post = {
         url:link,
-        description:text
+        description:text,
+        comments:[],
+        htmlNode:null,
+        onAddCommentClick:function(evt){
+            var comment = {
+                text: this.htmlNode.commentInput.val(),
+                post: this,
+                htmlNode: null,
+                display:function(){
+                    if ( this.htmlNode == null )
+                    {
+                        this.htmlNode = $("<li/>")
+                            .html(this.text);
+
+                        this.post.htmlNode.append(this.htmlNode);
+                    }
+                }
+            };
+
+            this.comments.push(comment);
+            comment.display();
+        },
+        display:function(){
+            if ( this.htmlNode == null )
+            {
+                this.htmlNode = $("<li/>")
+                    .addClass("entry")
+                    .append($("<a/>")
+                        .attr("href",post.url)
+                        .html(post.description)
+                )
+                    .on({
+                        mouseenter : OnElementMouseEntered,
+                        mouseout : OnElementMouseLeft
+                    })
+                    .append($("<button/>")
+                        .on({
+                            click: $.proxy(this.onAddCommentClick, this)
+                        })
+                        .html("add comment")
+                );
+
+                this.htmlNode.commentInput = $("<input/>")
+                    .attr("type", "text")
+                    .attr("name", "commentInput");
+
+                this.htmlNode.append(this.htmlNode.commentInput);
+                                
+                $("#linkContentTable").append(this.htmlNode);
+            }
+
+            this.comments.forEach(function(comment) {
+                comment.display();
+            });
+        }
     };
 
     window.posts.push(post);
-
-    DisplayPosts();
+    post.display();
 }
 
 function GetPosts()
@@ -50,63 +100,6 @@ function GetPosts()
 
    // });
 
-    var post =
-    {
-        url:"http://espn.go.com/nhl",
-        description:"Sports World: ESPN NHL",
-        comments:[],
-        postNode:null,
-        onAddCommentClick:function(comment)
-        {
-            this.comments.push(this.postNode.commentInput.val());
-        }
-    };
-
-    var posts = [];
-
-    posts.push(post);
-
-    OnPostsReceived(posts)
-}
-
-function OnPostsReceived(posts)
-{
-    window.posts = posts;
-
-    DisplayPosts();
-}
-
-function DisplayPosts()
-{
-    var $linkContent = $("#linkContentTable");
-
-    window.posts.forEach(function(post)
-    {
-        if ( post.postNode == null )
-        {
-            post.postNode = $("<li/>")
-                .addClass("entry")
-                .append($("<a/>")
-                    .attr("href",post.url)
-                    .html(post.description)
-                )
-                .on({
-                    mouseenter : OnElementMouseEntered,
-                    mouseout : OnElementMouseLeft
-                })
-                .append($("<button/>")
-                    .on({
-                        click: $.proxy(post.onAddCommentClick, post)
-                    })
-                    .html("add comment")
-                );
-
-            post.postNode.commentInput = $("<input/>")
-                .attr("type", "text")
-                .attr("name", "commentInput");
-
-            $linkContent.append(post.postNode);
-            post.postNode.append(post.postNode.commentInput);
-        }
-    });
+    window.posts = [];
+    CreatePost("http://espn.go.com/nhl","Sports World: ESPN NHL");
 }
