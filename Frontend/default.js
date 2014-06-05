@@ -5,6 +5,8 @@
         mouseenter : OnElementMouseEntered,
         mouseout : OnElementMouseLeft
     });
+
+    GetPosts();
 }
 
 function OnElementMouseEntered()
@@ -34,25 +36,66 @@ function AddLinkElementToList( link, text )
     	text = link;
     }
 
+    var post =
+    {
+        url:link,
+        description:text
+    };
+
+    window.posts.push(post);
+
+    DisplayPosts();
+}
+
+function GetPosts()
+{
+   // OData.read("http://localhost:49980/Reddit.svc/Posts/?$format=json", function (data, response) {
+
+     //   console.dir(data);
+//success handler
+
+   // });
+
+    var post =
+    {
+        url:"http://espn.go.com/nhl",
+        description:"Sports World: ESPN NHL"
+    };
+
+    var posts = [];
+
+    posts.push(post);
+
+    OnPostsReceived(posts)
+}
+
+function OnPostsReceived(posts)
+{
+    window.posts = posts;
+
+    DisplayPosts();
+}
+
+function DisplayPosts()
+{
     var $linkContent = $("#linkContentTable");
 
-    $linkContent
-        .append($("<li/>")
-            .addClass("entry")
-            .append($("<a/>")
-                .attr("href",link)
-                .html(text)
-            )
-            .on(
-            {
-                mouseenter : OnElementMouseEntered,
-                mouseout : OnElementMouseLeft
-            })
+    $linkContent.empty();
+
+    window.posts.forEach(function(post)
+    {
+        $linkContent
+            .append($("<li/>")
+                .addClass("entry")
+                .append($("<a/>")
+                    .attr("href",post.url)
+                    .html(post.description)
+                )
+                .on(
+                {
+                    mouseenter : OnElementMouseEntered,
+                    mouseout : OnElementMouseLeft
+                })
         );
-
-    $linkContent
-        .find("li:odd")
-            .css("background","LightGrey");
-
-    $("body").css("background","DarkGray" );
+    });
 }

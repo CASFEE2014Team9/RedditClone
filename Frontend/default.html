@@ -8,35 +8,32 @@
 	</head>
 	
 	<body onload="OnBodyLoaded()">
-		<div class="header">
+		<div class="region, header">
 		header: categories and other stuff
 		</div>
 
-		<div id="left">
-			<div class="subHeader">
+		<div class="region" id="left">
+			<div class="region, subHeader">
 			subHeader: filtering elements
 			</div>
 		
-			<div class="addLink">
+			<div class="region, addLink">
 				<input type="text" id="webAddress" value="enter a web address...">
 				<input type="text" id="innerHTML" value="enter some text">
 				<button class="button" id="addLinkButton" name="addLink" onclick="OnAddLinkButtonClicked()">Add Link</button>
 			</div>
 			
-			<ul class="table" id="linkContentTable">
-                <li class="entry">
-                    <a title="test" href="http://espn.go.com/nhl">Sports World: ESPN NHL</a>
-                </li>
-            </ul>
+			<ul class="table" id="linkContentTable" />
 		</div>
 		
-		<div id="right">
+		<div class="region" id="right">
 			<div class="login">
 			login
 			</div>
 		</div>
 
         <script type="text/javascript" src="jquery-2.1.1.js"></script>
+        <script type="text/javascript" src="datajs-1.1.2.js"></script>
         <script type="text/javascript" src="default.js"></script>
         
 	</body>
