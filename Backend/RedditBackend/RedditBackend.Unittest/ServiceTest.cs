@@ -25,7 +25,7 @@ namespace RedditBackend.Unittest
         [TestMethod]
         public void TestUpdatePost()
         {
-            //http://localhost:49980/Reddit.svc/CreatePost?description='gugus'
+            //http://localhost:49980/Reddit.svc/UpdatePost?postId=22&description='gugus2'
             var service = new RedditService();
 
             using (var model = new RedditModelContainer())
