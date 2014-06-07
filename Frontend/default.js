@@ -1,12 +1,31 @@
 ﻿function OnBodyLoaded()
 {
     window.posts = [];
+    window.user = null;
+
+    var user = userFromCookie();
+
+    if (user != null)
+    {
+        user.login();
+    }
+
     GetPosts();
 }
 
 function OnAddLinkButtonClicked()
 {
-    new Post($("#webAddress").val(), $("#innerHTML").val());
+    var address = $("#webAddress").val();
+    var text = $("#innerHTML").val();
+    new Post(address, text);
+}
+
+function OnLoginButtonClicked()
+{
+    var userName = $("#userName").val();
+    var password = $("#password").val();
+    var user = new User(userName, password);
+    user.login();
 }
 
 function GetPosts()

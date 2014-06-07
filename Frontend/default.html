@@ -28,15 +28,21 @@
 		
 		<div class="region" id="right">
 			<div class="login">
-			login
+                <input type="text" id="userName" value="enter your login">
+                <input type="password" id="password" value="enter your password">
+		        <Button onclick="OnLoginButtonClicked()" >login</Button>
 			</div>
 		</div>
 
-        <script type="text/javascript" src="jquery-2.1.1.js"></script>
-        <script type="text/javascript" src="datajs-1.1.2.js"></script>
+        <script type="text/javascript" src="Lib/cookies.js"></script>
+        <script type="text/javascript" src="Lib/datajs-1.1.2.js"></script>
+        <script type="text/javascript" src="Lib/jquery-2.1.1.js"></script>
+        <script type="text/javascript" src="Lib/string.js"></script>
 
         <script type="text/javascript" src="Model/Post.js"></script>
         <script type="text/javascript" src="Model/Comment.js"></script>
+        <script type="text/javascript" src="Model/Rating.js"></script>
+        <script type="text/javascript" src="Model/User.js"></script>
         <script type="text/javascript" src="default.js"></script>
         
 	</body>
