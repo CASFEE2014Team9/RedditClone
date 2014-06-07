@@ -2,6 +2,7 @@
 {
     window.posts = [];
     window.user = null;
+    window.PostTableNode = $("#linkContentTable");
 
     var user = userFromCookie();
 
@@ -21,7 +22,7 @@ function OnAddLinkButtonClicked()
 {
     var address = $("#webAddress").val();
     var text = $("#innerHTML").val();
-    new Post(address, text);
+    new Post(window.user, address, text);
 }
 
 function GetPosts()

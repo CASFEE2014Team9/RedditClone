@@ -1,4 +1,4 @@
-function Post( link, text ) {
+function Post( creator, link, text ) {
     if (link == "") {
         // show box
         return;
@@ -8,6 +8,7 @@ function Post( link, text ) {
         text = link;
     }
 
+    this.creator = creator;
     this.url = link;
     this.description = text;
     this.comments = [];
@@ -35,15 +36,35 @@ Post.prototype.display = function() {
                     click: $.proxy(this.onAddCommentClick, this)
                 })
                 .html("add comment")
-        );
+            );
+
+        this.htmlNode.delete = $("<button/>")
+            .on({
+                click: $.proxy(this.onDeleteClick, this)
+            })
+            .html("delete post");
+        this.htmlNode.append(this.htmlNode.delete);
 
         this.htmlNode.commentInput = $("<input/>")
             .attr("type", "text")
             .attr("name", "commentInput");
-
         this.htmlNode.append(this.htmlNode.commentInput);
 
-        $("#linkContentTable").append(this.htmlNode);
+        this.htmlNode.voteUp = $("<button/>")
+            .on({
+                click: $.proxy(this.onVoteUpClick, this)
+            })
+            .html("vote up");
+        this.htmlNode.append(this.htmlNode.voteUp);
+
+        this.htmlNode.voteDown = $("<button/>")
+            .on({
+                click: $.proxy(this.onVoteDownClick, this)
+            })
+            .html("vote down");
+        this.htmlNode.append(this.htmlNode.voteDown);
+
+        window.PostTableNode.append(this.htmlNode);
     }
 
     this.comments.forEach(function(comment) {
@@ -52,8 +73,20 @@ Post.prototype.display = function() {
 };
 
 Post.prototype.onAddCommentClick = function(evt) {
-    new Comment(this, this.htmlNode.commentInput.val());
+    new Comment(window.user, this, this.htmlNode.commentInput.val());
 };
+
+Post.prototype.onDeleteClick = function(evt) {
+    window.PostTableNode.removeChild(this.htmlNode);
+    window.posts.removeItem(this);
+};
+
+Post.prototype.onVoteUpClick = function(evt) {
+};
+
+Post.prototype.onVoteDownClick = function(evt) {
+};
+
 
 function OnElementMouseEntered()
 {
