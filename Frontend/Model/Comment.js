@@ -1,7 +1,8 @@
-function Comment(post,commentText) {
+function Comment(creator,post,commentText) {
 
     this.text = commentText;
     this.post = post;
+    this.creator = creator;
     this.htmlNode = null;
 
     this.post.comments.push(this);

@@ -31,7 +31,7 @@ User.prototype.display = function(){
 
     if (this.loginstate == UserLoginState.LoggedIn)
     {
-        this.htmlNode.append($("<div/>")
+        this.htmlNode.append($("<label/>")
             .html(this.name));
 
         this.htmlNode.append($("<button/>")
