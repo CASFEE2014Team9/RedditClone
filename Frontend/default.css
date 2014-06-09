@@ -11,6 +11,16 @@ footer {
     display: block; /* ältere Browser */
 }
 
+input{
+    height: 2em;
+    border-radius: 0.5em;
+}
+
+button{
+    height: 2.3em;
+    border-radius: 0.5em;
+}
+
 .subregion{
     border: 1px yellow solid;
 }
