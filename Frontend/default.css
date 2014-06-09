@@ -1,4 +1,53 @@
-﻿.region{
+﻿body {
+    font-size: 1.5em;
+    color: #FFFFFF;
+    background: #4D4D4D;
+}
+
+header,
+main,
+aside,
+footer {
+    display: block; /* ältere Browser */
+}
+
+.subregion{
+    border: 1px yellow solid;
+}
+
+.header {
+    padding: 1em;
+    border:1px pink solid;
+}
+.nav {
+    box-sizing: border-box;
+    padding: 1em;
+    width: 20%;
+    border:1px pink solid;
+}
+.main {
+    box-sizing: border-box;
+    padding: 1em;
+    width: 60%;
+    border:1px pink solid;
+}
+.sidebar {
+    box-sizing: border-box;
+    padding: 1em;
+    width: 20%;
+    border:1px pink solid;
+}
+.footer {
+    padding: 1em;
+    border:1px pink solid;
+}
+
+.content{
+    display: flex;
+}
+
+/*
+.region{
 	margin: 10px;
 	padding:10px;
 	border:1px pink solid;
@@ -41,3 +90,4 @@ button{
 
 .login{
 }
+*/

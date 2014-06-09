@@ -8,28 +8,33 @@
 	</head>
 	
 	<body onload="OnBodyLoaded()">
-		<div class="region, header">
-		header: categories and other stuff
-		</div>
 
-		<div class="region" id="left">
-			<div class="region, subHeader">
-			subHeader: filtering elements
-			</div>
-		
-			<div class="region, addLink">
-				<input type="text" id="webAddress" value="enter a web address...">
-				<input type="text" id="innerHTML" value="enter some text">
-				<button class="button" id="addLinkButton" name="addLink" onclick="OnAddLinkButtonClicked()">Add Link</button>
-			</div>
-			
-			<ul class="table" id="linkContentTable" />
-		</div>
-		
-		<div class="region" id="right">
-			<div class="login">
-			</div>
-		</div>
+        <header class="header">Header
+        </header>
+
+        <div class="content">
+            <nav class="nav">Content.Navigation</nav>
+
+            <main class="main">
+                Content.Main
+                <div class="region, addLink">
+                    <input type="text" id="webAddress" value="enter a web address...">
+                    <input type="text" id="innerHTML" value="enter some text">
+                    <button class="button" id="addLinkButton" name="addLink" onclick="OnAddLinkButtonClicked()">Add Link</button>
+                </div>
+
+                <ul class="table" id="linkContentTable" />
+            </main>
+
+            <aside class="sidebar">
+                Content.Aside
+                <div class="login">
+                </div>
+            </aside>
+        </div>
+
+        <footer class="footer">Footer
+        </footer>
 
         <script type="text/javascript" src="Lib/cookies.js"></script>
         <script type="text/javascript" src="Lib/datajs-1.1.2.js"></script>
