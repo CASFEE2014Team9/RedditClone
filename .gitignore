@@ -159,3 +159,4 @@ Backend/RedditBackend/packages/
 .idea/workspace.xml
 .idea/dictionaries/
 node_modules/
+Frontend/default.html

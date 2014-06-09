@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+	
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Reddit Clone</title>
+        <link rel="stylesheet" type="text/css" href="Lib/jquery-ui-1.10.4.css">
+		<link rel="stylesheet" type="text/css" href="default.css">
+	</head>
+	
+	<body onload="OnBodyLoaded()">
+
+<<<<<<< HEAD
+        <header class="header">Header
+        </header>
+
+        <div class="content">
+            <nav class="nav">Content.Navigation</nav>
+
+            <main class="main">
+                Content.Main
+                <div class="region, addLink">
+                    <input type="text" id="webAddress" value="enter a web address...">
+                    <input type="text" id="innerHTML" value="enter some text">
+                    <button class="button" id="addLinkButton" name="addLink" onclick="OnAddLinkButtonClicked()">Add Link</button>
+                </div>
+
+                <ul class="table" id="linkContentTable" />
+            </main>
+
+            <aside class="sidebar">
+                Content.Aside
+                <div class="login">
+                </div>
+            </aside>
+        </div>
+
+        <footer class="footer">Footer
+        </footer>
+=======
+        <div id="loginDialog" class="dialog" title="login" >
+            <label for="loginDialogLoginInput">Login Name</label>
+            <input type="text" id="loginDialogLoginInput" />
+            <label for="loginDialogPasswordInput">Password</label>
+            <input type="password" id="loginDialogPasswordInput" />
+
+            <button id="loginDialogLoginButton" >login</button>
+        </div>
+
+		<div class="region, header">
+		header: categories and other stuff
+		</div>
+
+		<div class="region" id="left">
+			<div class="region, subHeader">
+			subHeader: filtering elements
+			</div>
+		
+			<div class="region, addLink">
+				<input type="text" id="webAddress" value="enter a web address...">
+				<input type="text" id="innerHTML" value="enter some text">
+				<button class="button" id="addLinkButton" name="addLink" onclick="OnAddLinkButtonClicked()">Add Link</button>
+			</div>
+			
+			<ul class="table" id="linkContentTable" />
+		</div>
+		
+		<div class="region" id="right">
+			<div class="login">
+			</div>
+		</div>
+>>>>>>> 5f15edb3dbe7b67467eca33e2eefebdab94e3376
+
+        <script type="text/javascript" src="Lib/cookies.js"></script>
+        <script type="text/javascript" src="Lib/datajs-1.1.2.js"></script>
+        <script type="text/javascript" src="Lib/jquery-2.1.1.js"></script>
+        <script type="text/javascript" src="Lib/jquery-ui-1.10.4.js"></script>
+        <script type="text/javascript" src="Lib/string.js"></script>
+
+        <script type="text/javascript" src="Model/Post.js"></script>
+        <script type="text/javascript" src="Model/Comment.js"></script>
+        <script type="text/javascript" src="Model/Rating.js"></script>
+        <script type="text/javascript" src="Model/User.js"></script>
+        <script type="text/javascript" src="default.js"></script>
+        
+	</body>
+
+</html>
