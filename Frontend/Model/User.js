@@ -43,16 +43,6 @@ User.prototype.display = function(){
     }
     else if (this.loginstate == UserLoginState.LoggedOut)
     {
-        this.htmlNode.loginInput = $("<input/>")
-                .attr("type", "text")
-                .val("enter your login");
-        this.htmlNode.append(this.htmlNode.loginInput);
-
-        this.htmlNode.passwordInput = $("<input/>")
-                .attr("type", "password")
-                .val("enter your password");
-        this.htmlNode.append(this.htmlNode.passwordInput);
-
         this.htmlNode.append($("<Button/>")
                 .html("login")
                 .on({
@@ -63,10 +53,12 @@ User.prototype.display = function(){
 };
 
 User.prototype.onLoginClick = function(){
-    this.name = this.htmlNode.loginInput.val();
-    this.password = this.htmlNode.passwordInput.val();
+    ShowLoginDialog();
+};
 
-    this.login();
+var ShowLoginDialog = function()
+{
+    window.loginDialog.dialog( "open" );
 };
 
 User.prototype.login = function(){

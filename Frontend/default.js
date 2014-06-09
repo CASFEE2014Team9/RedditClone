@@ -4,6 +4,26 @@
     window.user = null;
     window.PostTableNode = $("#linkContentTable");
 
+    window.loginDialog = $( "#loginDialog").dialog({
+        autoOpen: false
+        });
+    window.loginDialog.loginInput = $( "#loginDialogLoginInput");
+    window.loginDialog.passwordInput = $( "#loginDialogPasswordInput");
+    window.loginDialog.loginButton = $( "#loginDialogLoginButton");
+    window.loginDialog.onLoginButtonClick = function() {
+        var name = loginDialog.loginInput.val();
+        var password = loginDialog.passwordInput.val();
+
+        var user = new User(name,password);
+        user.login();
+
+        window.loginDialog.dialog( "close" );
+    };
+
+    window.loginDialog.loginButton.on( {
+        click: window.loginDialog.onLoginButtonClick
+    } );
+
     var user = userFromCookie();
 
     if (user.name != anonymous)
