@@ -17,8 +17,20 @@ input{
 }
 
 button{
-    height: 2.3em;
+    height: 2.4em;
     border-radius: 0.5em;
+}
+
+#webAddress, #innerHTML{
+    width: 40%;
+}
+
+#addLinkButton{
+    width: 15%;
+}
+
+.content{
+    height: 50%;
 }
 
 .subregion{
