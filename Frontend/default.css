@@ -39,6 +39,10 @@ div{
     width: 15%;
 }
 
+.table{
+    list-style-type: none;
+}
+
 .content{
     height: 50%;
 }
