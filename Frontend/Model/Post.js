@@ -26,11 +26,14 @@ Post.prototype.display = function() {
             .append($("<a/>")
                 .attr("href",this.url)
                 .html(this.description)
-        )
+            )
             .on({
                 mouseenter : OnElementMouseEntered,
                 mouseout : OnElementMouseLeft
             })
+            .append($("<div>")
+                .text("All american sports information you can imagine: results, schedules, team information, statistics and background stories about specific issues.")
+            )
             .append($("<button/>")
                 .on({
                     click: $.proxy(this.onAddCommentClick, this)

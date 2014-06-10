@@ -19,6 +19,16 @@ input{
 button{
     height: 2.4em;
     border-radius: 0.5em;
+    min-width: 100px;
+    margin: 10px;
+}
+
+li{
+    min-height: 100px;
+}
+
+div{
+    font-size: 0.9em;
 }
 
 #webAddress, #innerHTML{
