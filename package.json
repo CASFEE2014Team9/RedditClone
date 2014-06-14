@@ -3,9 +3,16 @@
     "version": "0.0.1",
     "dependencies": {
         "connect": "^2.15.0",
-        "open": "^0.0.5"
+        "open": "^0.0.5",
+        "bower": "1.3.5",
+        "karma": "0.12",
+        "karma-qunit": "~0.1"
     },
     "engines": {
         "node": ">= 0.10"
+    },
+    "repository" : {
+        "type" : "git",
+        "url" : "https://github.com/CASFEE2014Team9/RedditClone.git"
     }
 }
