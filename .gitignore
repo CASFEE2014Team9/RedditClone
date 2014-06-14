@@ -160,3 +160,7 @@ Backend/RedditBackend/packages/
 .idea/dictionaries/
 node_modules/
 Frontend/default.html
+Frontend/Lib/Cookies/
+Frontend/Lib/jquery-ui/
+Frontend/Lib/jquery/
+Frontend/Lib/qunit/

@@ -1,0 +1,14 @@
+{
+    "name": "RedditClone",
+    "version": "0.0.1",
+    "dependencies": {
+        "jquery": "2.1.1",
+        "jquery-ui": "1.10.4",
+        "Cookies": "0.4.0",
+        "qunit": "1.14.0"
+    },
+    "repository": {
+        "type": "git",
+        "url" : "https://github.com/CASFEE2014Team9/RedditClone.git"
+    }
+}
