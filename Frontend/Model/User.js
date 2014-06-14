@@ -15,12 +15,13 @@ var UserLoginState = {
 var anonymous = "anonymous";
 
 var userFromCookie = function(){
-    if (!docCookies.hasItem("name"))
+    var name = Cookies.get("name");
+    if ( name == "" || name == undefined )
     {
         return new User(anonymous);
     }
-    var name = docCookies.getItem("name");
-    var password = docCookies.getItem("password");
+
+    var password = Cookies.get("password");
     var user = new User(name, password);
 
     return user;
@@ -64,8 +65,8 @@ var ShowLoginDialog = function()
 User.prototype.login = function(){
     window.user = this;
 
-    docCookies.setItem("name",this.name);
-    docCookies.setItem("password",this.password);
+    Cookies.set("name",this.name);
+    Cookies.set("password",this.password);
 
     this.loginstate = UserLoginState.LoggedIn;
 
@@ -75,8 +76,8 @@ User.prototype.login = function(){
 User.prototype.logout = function(){
     window.user = null;
 
-    docCookies.removeItem("name");
-    docCookies.removeItem("password");
+    Cookies.set("name","");
+    Cookies.set("password","");
 
     this.loginstate = UserLoginState.LoggedOut;
 
