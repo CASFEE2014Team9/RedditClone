@@ -1,14 +1,7 @@
-﻿body {
+﻿body{
     font-size: 1.5em;
     color: #FFFFFF;
     background: #4D4D4D;
-}
-
-header,
-main,
-aside,
-footer {
-    display: block; /* ältere Browser */
 }
 
 input{
@@ -25,61 +18,81 @@ button{
 
 li{
     min-height: 100px;
+    padding: 10px;
+    margin: 0px 0px 0px -40px;
 }
 
-div{
-    font-size: 0.9em;
+li:nth-child(2n){
+    background: darkgray;
 }
 
-#webAddress, #innerHTML{
-    width: 40%;
+.header,
+.nav,
+.main,
+.aside,
+.footer{
+    /*border: 1px pink solid;*/
 }
 
-#addLinkButton{
-    width: 15%;
-}
-
-.table{
-    list-style-type: none;
-}
-
-.content{
-    height: 50%;
-}
-
-.subregion{
-    border: 1px yellow solid;
-}
-
-.header {
-    padding: 1em;
-    border:1px pink solid;
-}
-.nav {
-    box-sizing: border-box;
-    padding: 1em;
+.nav,
+.aside{
     width: 20%;
-    border:1px pink solid;
+    margin: 10px;
 }
-.main {
-    box-sizing: border-box;
-    padding: 1em;
+
+.main{
     width: 60%;
-    border:1px pink solid;
-}
-.sidebar {
-    box-sizing: border-box;
-    padding: 1em;
-    width: 20%;
-    border:1px pink solid;
-}
-.footer {
-    padding: 1em;
-    border:1px pink solid;
+    margin: 10px 0px;
 }
 
 .content{
     display: flex;
+}
+
+.table{
+    list-style: none;
+    background: lightgray;
+    border: #000000 5px outset;
+    border-radius: 10px;
+}
+/**/
+/*
+.header,
+.nav,
+.main,
+.aside,
+.footer{
+    border: 1px pink solid;
+}
+
+.nav,
+.aside{
+    width: 20%;
+    margin: 10px;
+}
+
+.main{
+    width: 60%;
+    margin: 10px 0px;
+}
+
+.content{
+    display: flex;
+}
+
+.table{
+    list-style: none;
+    background: lightgray;
+}
+
+li{
+    min-height: 100px;
+    padding: 10px;
+    margin: 0px 0px 0px -40px;
+}
+
+li:nth-child(2n){
+    background: yellow;
 }
 
 /*
