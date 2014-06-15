@@ -2,6 +2,7 @@
     font-size: 1.5em;
     color: #FFFFFF;
     background: #4D4D4D;
+    padding: 0% 10%;
 }
 
 input{
@@ -29,24 +30,27 @@ li:nth-child(2n){
 .header,
 .nav,
 .main,
-.aside,
+.sidebar,
 .footer{
-    /*border: 1px pink solid;*/
+/*    border: 1px pink solid;*/
 }
 
 .nav,
-.aside{
-    width: 20%;
-    margin: 10px;
+.sidebar{
+    min-width: 15%;
+    margin: 10px ;
 }
 
 .main{
-    width: 60%;
-    margin: 10px 0px;
+    min-width: 60%;
+    margin: 10px;
 }
 
 .content{
     display: flex;
+    border: 3px black groove;
+    background-color: gray;
+    height: 40em;
 }
 
 .table{

@@ -41,17 +41,15 @@
 
             <aside class="sidebar">
                 Content.Aside
-                <div class="login">
+                <div id="loginDialog" class="dialog" title="login" >
+                    <label for="loginDialogLoginInput">Login Name</label>
+                    <input type="text" id="loginDialogLoginInput" />
+                    <label for="loginDialogPasswordInput">Password</label>
+                    <input type="password" id="loginDialogPasswordInput" />
+                    <button id="loginDialogLoginButton" >login</button>
                 </div>
             </aside>
 
-            <div id="loginDialog" class="dialog" title="login" >
-                <label for="loginDialogLoginInput">Login Name</label>
-                <input type="text" id="loginDialogLoginInput" />
-                <label for="loginDialogPasswordInput">Password</label>
-                <input type="password" id="loginDialogPasswordInput" />
-                <button id="loginDialogLoginButton" >login</button>
-            </div>
         </div>
 
         <footer class="footer">Footer
