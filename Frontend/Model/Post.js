@@ -24,12 +24,6 @@ function Post( creator, link, title, description ) {
     this.display();
 }
 
-var createTestPost = function( testUser )
-{
-    var result = new Post(testUser,"www.google.com", "Google", "Description" );
-    return result;
-};
-
 Post.prototype.display = function() {
     if (this.htmlNode == null)
     {

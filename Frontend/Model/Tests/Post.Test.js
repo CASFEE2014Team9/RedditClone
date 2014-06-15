@@ -1,3 +1,9 @@
+var createTestPost = function( testUser )
+{
+    var result = new Post(testUser,"www.google.com", "Google", "Description" );
+    return result;
+};
+
 QUnit.module( "Post" );
 QUnit.test( "create / delete", function( assert ) {
     window.context = createTestContext();

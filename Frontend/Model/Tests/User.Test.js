@@ -1,3 +1,10 @@
+var createTestUser = function(){
+    var result = new User("test","test");
+    result.htmlNode = $("<div>").addClass( "login" );
+
+    return result;
+};
+
 QUnit.module( "User" );
 QUnit.test( "login", function( assert ) {
     window.context = createTestContext();

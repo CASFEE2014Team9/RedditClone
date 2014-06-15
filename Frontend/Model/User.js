@@ -6,13 +6,6 @@ function User(name, password) {
     this.loginstate = UserLoginState.LoggedOut;
 };
 
-var createTestUser = function(){
-    var result = new User("test","test");
-    result.htmlNode = $("<div>").addClass( "login" );
-
-    return result;
-};
-
 var UserLoginState = {
     LoggedOut : {value: 0, name: "LoggedOut"},
     LoggedIn:   {value: 1, name: "LoggedIn"}
