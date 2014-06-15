@@ -1,16 +1,17 @@
-function Post( creator, link, text ) {
+function Post( creator, link, title, description ) {
     if (link == "") {
         // show box
         return;
     }
 
-    if (text == undefined || text == "") {
-        text = link;
+    if (title == undefined || title == "") {
+        title = link;
     }
 
     this.creator = creator;
     this.url = link;
-    this.description = text;
+    this.title = title;
+    this.description = description;
     this.comments = [];
     this.htmlNode = null;
 
@@ -25,20 +26,14 @@ Post.prototype.display = function() {
             .addClass("entry")
             .append($("<a/>")
                 .attr("href",this.url)
-                .html(this.description)
+                .html(this.title)
             )
             .on({
                 mouseenter : OnElementMouseEntered,
                 mouseout : OnElementMouseLeft
             })
             .append($("<div>")
-                .text("All american sports information you can imagine: results, schedules, team information, statistics and background stories about specific issues.")
-            )
-            .append($("<button/>")
-                .on({
-                    click: $.proxy(this.onAddCommentClick, this)
-                })
-                .html("add comment")
+                .text(this.description)
             );
 
         this.htmlNode.delete = $("<button/>")
@@ -47,6 +42,13 @@ Post.prototype.display = function() {
             })
             .html("delete post");
         this.htmlNode.append(this.htmlNode.delete);
+
+        this.htmlNode.addCommentButton = $("<button/>")
+            .on({
+                click: $.proxy(this.onAddCommentClick, this)
+            })
+            .html("add comment")
+        this.htmlNode.append(this.htmlNode.addCommentButton);
 
         this.htmlNode.commentInput = $("<input/>")
             .attr("type", "text")

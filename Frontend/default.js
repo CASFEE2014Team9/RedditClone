@@ -40,6 +40,5 @@ function GetPosts()
 //success handler
 
    // });
-
-    new Post("http://espn.go.com/nhl","Sports World: ESPN NHL");
+    new Post(window.context.user, "http://espn.go.com/nhl", "Sports World: ESPN NHL","All american sports information you can imagine: results, schedules, team information, statistics and background stories about specific issues.");
 }
