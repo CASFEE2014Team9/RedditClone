@@ -1,7 +1,7 @@
 function Context() {
     this.posts = [];
 
-    this.user = userFromCookie();
+    this.user = userFromCookie(this);
 
     if (this.user.name != anonymous)
     {

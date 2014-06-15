@@ -1,5 +1,5 @@
-var createTestUser = function(){
-    var result = new User("test","test");
+var createTestUser = function(context){
+    var result = new User(context, "test", "test");
     result.htmlNode = $("<div>").addClass( "login" );
 
     return result;
@@ -7,9 +7,8 @@ var createTestUser = function(){
 
 QUnit.module( "User" );
 QUnit.test( "login", function( assert ) {
-    window.context = createTestContext();
-
-    var testUser = createTestUser();
+    var testContext = createTestContext();
+    var testUser = createTestUser(testContext);
     assert.equal( testUser.loginstate, UserLoginState.LoggedOut, "Created users are logged out" );
 
     testUser.login();

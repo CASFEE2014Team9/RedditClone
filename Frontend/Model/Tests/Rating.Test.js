@@ -1,14 +1,13 @@
 var createTestRating = function( testUser, testPost )
 {
-    var result = new Rating(testUser,testPost, 100 );
+    var result = new Rating(testUser.context, testUser ,testPost, 100 );
     return result;
 };
 
 QUnit.module( "Rating" );
 QUnit.test( "create / delete", function( assert ) {
-    window.context = createTestContext();
-
-    var testUser = createTestUser();
+    var testContext = createTestContext();
+    var testUser = createTestUser(testContext);
     var testPost = createTestPost(testUser);
 
     var rating = createTestRating(testUser, testPost );
@@ -21,9 +20,8 @@ QUnit.test( "create / delete", function( assert ) {
 });
 
 QUnit.test( "create with wrong arguments", function( assert ) {
-    window.context = createTestContext();
-
-    var testUser = createTestUser();
+    var testContext = createTestContext();
+    var testUser = createTestUser(testContext);
     var testPost = createTestPost(testUser);
 
     assert.throws(

@@ -1,10 +1,12 @@
-function Post( creator, link, title, description ) {
+function Post( context, creator, link, title, description ) {
 
+    guardCustomType(context, "context", Context );
     guardCustomType(creator, "creator", User );
     guardString(link, "link" );
     title = guardStringFallback(title, "title", link);
     description = guardStringFallback(description, "description", "no description");
 
+    this.context = context;
     this.creator = creator;
     this.url = link;
     this.title = title;
@@ -13,7 +15,7 @@ function Post( creator, link, title, description ) {
     this.ratings = [];
     this.htmlNode = null;
 
-    window.context.posts.push(this);
+    this.context.posts.push(this);
     this.display();
 }
 
@@ -96,7 +98,7 @@ Post.prototype.display = function() {
         this.htmlNode.commentInput = commentInput;
         this.htmlNode.comments = comments;
 
-        window.context.postTableNode.append(this.htmlNode);
+        this.context.postTableNode.append(this.htmlNode);
     }
 
     this.comments.forEach(function(comment) {
@@ -107,7 +109,8 @@ Post.prototype.display = function() {
 Post.prototype.onAddCommentClick = function(evt) {
     handleError( "AddComment", this, function ()
     {
-        new Comment(window.context.user, this, this.htmlNode.commentInput.val());
+        var commentText = this.htmlNode.commentInput.val();
+        new Comment(this.context, this.context.user, this, commentText);
     });
 };
 
@@ -120,7 +123,7 @@ Post.prototype.onDeleteClick = function(evt) {
 
 Post.prototype.delete = function() {
     this.htmlNode.remove();
-    window.context.posts.removeItem(this);
+    this.context.posts.removeItem(this);
 };
 
 Post.prototype.onVoteUpClick = function(evt) {

@@ -1,14 +1,13 @@
 var createTestComment = function( testUser, testPost )
 {
-    var result = new Comment(testUser,testPost, "troll" );
+    var result = new Comment(testUser.context, testUser, testPost, "troll" );
     return result;
 };
 
 QUnit.module( "Comment" );
 QUnit.test( "create / delete Comment", function( assert ) {
-    window.context = createTestContext();
-
-    var testUser = createTestUser();
+    var testContext = createTestContext();
+    var testUser = createTestUser(testContext);
     var testPost = createTestPost(testUser);
 
     assert.equal( testPost.htmlNode.comments.children().length, 0, "no comments should be displayed" );
@@ -25,9 +24,8 @@ QUnit.test( "create / delete Comment", function( assert ) {
 });
 
 QUnit.test( "create with wrong arguments", function( assert ) {
-    window.context = createTestContext();
-
-    var testUser = createTestUser();
+    var testContext = createTestContext();
+    var testUser = createTestUser(testContext);
     var testPost = createTestPost(testUser);
 
     assert.throws(

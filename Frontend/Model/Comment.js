@@ -1,8 +1,11 @@
-function Comment(creator,post,commentText) {
+function Comment(context, creator, post, commentText) {
+
+    guardCustomType(context, "context", Context );
     guardCustomType(creator, "creator", User );
     guardCustomType(post, "post", Post );
     guardString(commentText, "commentText" );
 
+    this.context = context;
     this.text = commentText;
     this.post = post;
     this.creator = creator;

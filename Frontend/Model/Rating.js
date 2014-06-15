@@ -1,7 +1,10 @@
-function Rating(creator,post,value) {
+function Rating(context, creator,post,value) {
+
+    guardCustomType(context, "context", Context );
     guardCustomType(creator, "creator", User );
     guardCustomType(post, "post", Post );
 
+    this.context = context;
     this.value = value;
     this.post = post;
     this.creator = creator;

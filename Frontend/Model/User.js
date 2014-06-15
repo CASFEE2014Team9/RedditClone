@@ -1,4 +1,10 @@
-function User(name, password) {
+function User(context, name, password) {
+
+    guardCustomType(context, "context", Context );
+    guardString(name, "name");
+    guardString(password, "password");
+
+    this.context = context;
     this.name = name;
     this.password = password;
     this.posts = [];
@@ -13,15 +19,15 @@ var UserLoginState = {
 
 var anonymous = "anonymous";
 
-var userFromCookie = function(){
+var userFromCookie = function(context){
     var name = Cookies.get("name");
     if ( name == "" || name == undefined )
     {
-        return new User(anonymous);
+        return new User(context, anonymous, anonymous);
     }
 
     var password = Cookies.get("password");
-    var user = new User(name, password);
+    var user = new User(context, name, password);
 
     return user;
 };
@@ -60,11 +66,11 @@ User.prototype.onLoginClick = function(){
 };
 
 var ShowLoginDialog = function(){
-    window.loginDialog.dialog( "open" );
+    this.context.loginDialog.dialog( "open" );
 };
 
 User.prototype.login = function(){
-    window.context.user = this;
+    this.context.user = this;
 
     Cookies.set("name",this.name);
     Cookies.set("password",this.password);
@@ -75,7 +81,7 @@ User.prototype.login = function(){
 };
 
 User.prototype.logout = function(){
-    window.context.user = null;
+    this.context.user = null;
 
     Cookies.set("name","");
     Cookies.set("password","");
