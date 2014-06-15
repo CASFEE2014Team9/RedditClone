@@ -1,13 +1,6 @@
 function Rating(creator,post,value) {
-    if ( !(creator instanceof User) )
-    {
-        throw new TypeError("Parameter creator must be of type User");
-    }
-
-    if ( !(post instanceof Post) )
-    {
-        throw new TypeError("Parameter post must be of type Post");
-    }
+    guardCustomType(creator, "creator", User );
+    guardCustomType(post, "post", Post );
 
     this.value = value;
     this.post = post;

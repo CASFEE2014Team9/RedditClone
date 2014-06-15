@@ -53,11 +53,13 @@ User.prototype.display = function(){
 };
 
 User.prototype.onLoginClick = function(){
-    ShowLoginDialog();
+    handleError( "Login", this, function ()
+    {
+        ShowLoginDialog();
+    });
 };
 
-var ShowLoginDialog = function()
-{
+var ShowLoginDialog = function(){
     window.loginDialog.dialog( "open" );
 };
 

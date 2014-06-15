@@ -25,11 +25,13 @@
     GetPosts();
 }
 
-function OnAddLinkButtonClicked()
-{
-    var address = $("#webAddress").val();
-    var text = $("#innerHTML").val();
-    new Post(window.context.user, address, text);
+function OnAddLinkButtonClicked(){
+    handleError( "Addpost", this, function ()
+    {
+        var address = $("#webAddress").val();
+        var text = $("#innerHTML").val();
+        new Post(window.context.user, address, text);
+    });
 }
 
 function GetPosts()

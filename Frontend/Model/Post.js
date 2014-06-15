@@ -1,17 +1,9 @@
 function Post( creator, link, title, description ) {
-    if (link == "") {
-        // show box
-        return;
-    }
 
-    if (title == undefined || title == "") {
-        title = link;
-    }
-
-    if ( !(creator instanceof User) )
-    {
-        throw new TypeError("Parameter creator must be of type User");
-    }
+    guardCustomType(creator, "creator", User );
+    guardString(link, "link" );
+    title = guardStringFallback(title, "title", link);
+    description = guardStringFallback(description, "description", "no description");
 
     this.creator = creator;
     this.url = link;
@@ -113,11 +105,17 @@ Post.prototype.display = function() {
 };
 
 Post.prototype.onAddCommentClick = function(evt) {
-    new Comment(window.user, this, this.htmlNode.commentInput.val());
+    handleError( "AddComment", this, function ()
+    {
+        new Comment(window.context.user, this, this.htmlNode.commentInput.val());
+    });
 };
 
 Post.prototype.onDeleteClick = function(evt) {
-    this.delete();
+    handleError( "DeletePost", this, function ()
+    {
+        this.delete();
+    });
 };
 
 Post.prototype.delete = function() {
@@ -126,9 +124,15 @@ Post.prototype.delete = function() {
 };
 
 Post.prototype.onVoteUpClick = function(evt) {
+    handleError( "VoteUp", this, function ()
+    {
+    });
 };
 
 Post.prototype.onVoteDownClick = function(evt) {
+    handleError( "VoteDown", this, function ()
+    {
+    });
 };
 
 

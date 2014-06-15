@@ -1,14 +1,7 @@
 function Comment(creator,post,commentText) {
-
-    if ( !(creator instanceof User) )
-    {
-        throw new TypeError("Parameter creator must be of type User");
-    }
-
-    if ( !(post instanceof Post) )
-    {
-        throw new TypeError("Parameter post must be of type Post");
-    }
+    guardCustomType(creator, "creator", User );
+    guardCustomType(post, "post", Post );
+    guardString(commentText, "commentText" );
 
     this.text = commentText;
     this.post = post;
@@ -42,7 +35,10 @@ Comment.prototype.display = function() {
 };
 
 Comment.prototype.onDeleteClick = function(evt) {
-    this.delete();
+    handleError( "DeleteComment", this, function ()
+    {
+        this.delete();
+    });
 };
 
 Comment.prototype.delete = function() {
