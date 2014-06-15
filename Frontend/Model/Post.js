@@ -8,6 +8,11 @@ function Post( creator, link, title, description ) {
         title = link;
     }
 
+    if ( !(creator instanceof User) )
+    {
+        throw new TypeError("Parameter creator must be of type User");
+    }
+
     this.creator = creator;
     this.url = link;
     this.title = title;

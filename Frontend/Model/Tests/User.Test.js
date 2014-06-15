@@ -1,3 +1,4 @@
+QUnit.module( "User" );
 QUnit.test( "login", function( assert ) {
     window.context = createTestContext();
 

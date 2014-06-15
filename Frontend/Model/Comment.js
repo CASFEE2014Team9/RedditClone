@@ -1,5 +1,15 @@
 function Comment(creator,post,commentText) {
 
+    if ( !(creator instanceof User) )
+    {
+        throw new TypeError("Parameter creator must be of type User");
+    }
+
+    if ( !(post instanceof Post) )
+    {
+        throw new TypeError("Parameter post must be of type Post");
+    }
+
     this.text = commentText;
     this.post = post;
     this.creator = creator;

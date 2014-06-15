@@ -1,3 +1,4 @@
+QUnit.module( "Comment" );
 QUnit.test( "create / delete Comment", function( assert ) {
     window.context = createTestContext();
 
@@ -15,5 +16,28 @@ QUnit.test( "create / delete Comment", function( assert ) {
 
     assert.equal( testPost.htmlNode.comments.children().length, 0, "no comments should be displayed" );
     assert.ok( !testPost.comments.contains( comment ), "deleted comments are not present in the post" );
+});
+
+QUnit.test( "create with wrong arguments", function( assert ) {
+    window.context = createTestContext();
+
+    var testUser = createTestUser();
+    var testPost = createTestPost(testUser);
+
+    assert.throws(
+        function() {
+            var comment = new Comment("no user", testPost, "lala");
+        },
+        TypeError
+        , "creator must be a User"
+    );
+
+    assert.throws(
+        function() {
+            var comment = new Comment(testUser, "no post", "lala");
+        },
+        TypeError
+        , "post must be a Post"
+    );
 });
 
