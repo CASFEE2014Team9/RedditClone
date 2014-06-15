@@ -11,9 +11,31 @@ function Comment(creator,post,commentText) {
 
 Comment.prototype.display = function() {
     if (this.htmlNode == null) {
-        this.htmlNode = $("<li/>")
+
+        var commentNode = $("<li/>")
             .html(this.text);
 
-        this.post.htmlNode.append(this.htmlNode);
+        var deleteButton = $("<button/>")
+            .on({
+                click: $.proxy(this.onDeleteClick, this)
+            })
+            .html("delete comment");
+
+
+        commentNode.append(deleteButton);
+
+        this.htmlNode = commentNode;
+
+
+        this.post.htmlNode.comments.append(this.htmlNode);
     }
+};
+
+Comment.prototype.onDeleteClick = function(evt) {
+    this.delete();
+};
+
+Comment.prototype.delete = function() {
+    this.htmlNode.remove();
+    this.post.comments.removeItem(this);
 };

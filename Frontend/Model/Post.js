@@ -19,10 +19,16 @@ function Post( creator, link, title, description ) {
     this.display();
 }
 
+var createTestPost = function( testUser )
+{
+    var result = new Post(testUser,"www.google.com", "Google", "Description" );
+    return result;
+};
+
 Post.prototype.display = function() {
     if (this.htmlNode == null)
     {
-        var entry = $("<li/>")
+        var postNode = $("<li/>")
             .addClass("post")
             .on({
                 mouseenter: OnElementMouseEntered,
@@ -72,12 +78,15 @@ Post.prototype.display = function() {
             .addClass("postDetail");
         var header = $("<header>");
 
+        var comments = $("<div/>")
+            .addClass("postComments");
+
         header.append(title);
-        entry.append(header);
+        postNode.append(header);
 
         rating.append(voteUp);
         rating.append(voteDown);
-        entry.append(rating);
+        postNode.append(rating);
 
 
         detail.append(description);
@@ -88,9 +97,13 @@ Post.prototype.display = function() {
         content.append(rating);
         content.append(detail);
 
-        entry.append(content);
+        postNode.append(content);
+        postNode.append(comments);
 
-        this.htmlNode = entry;
+        this.htmlNode = postNode;
+        this.htmlNode.commentInput = commentInput;
+        this.htmlNode.comments = comments;
+
         window.context.postTableNode.append(this.htmlNode);
     }
 
