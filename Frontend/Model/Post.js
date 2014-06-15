@@ -22,53 +22,75 @@ function Post( creator, link, title, description ) {
 Post.prototype.display = function() {
     if (this.htmlNode == null)
     {
-        this.htmlNode = $("<li/>")
-            .addClass("entry")
-            .append($("<a/>")
-                .attr("href",this.url)
-                .html(this.title)
-            )
+        var entry = $("<li/>")
+            .addClass("post")
             .on({
-                mouseenter : OnElementMouseEntered,
-                mouseout : OnElementMouseLeft
-            })
-            .append($("<div>")
-                .text(this.description)
-            );
+                mouseenter: OnElementMouseEntered,
+                mouseout: OnElementMouseLeft
+            });
 
-        this.htmlNode.delete = $("<button/>")
-            .on({
-                click: $.proxy(this.onDeleteClick, this)
-            })
-            .html("delete post");
-        this.htmlNode.append(this.htmlNode.delete);
+        var title = $("<a/>")
+            .attr("href",this.url)
+            .html(this.title);
 
-        this.htmlNode.addCommentButton = $("<button/>")
-            .on({
-                click: $.proxy(this.onAddCommentClick, this)
-            })
-            .html("add comment")
-        this.htmlNode.append(this.htmlNode.addCommentButton);
+        var description = $("<p>")
+            .text(this.description);
 
-        this.htmlNode.commentInput = $("<input/>")
-            .attr("type", "text")
-            .attr("name", "commentInput");
-        this.htmlNode.append(this.htmlNode.commentInput);
-
-        this.htmlNode.voteUp = $("<button/>")
+        var voteUp = $("<button/>")
             .on({
                 click: $.proxy(this.onVoteUpClick, this)
             })
             .html("vote up");
-        this.htmlNode.append(this.htmlNode.voteUp);
 
-        this.htmlNode.voteDown = $("<button/>")
+        var voteDown = $("<button/>")
             .on({
                 click: $.proxy(this.onVoteDownClick, this)
             })
             .html("vote down");
-        this.htmlNode.append(this.htmlNode.voteDown);
 
+        var deleteButton = $("<button/>")
+            .on({
+                click: $.proxy(this.onDeleteClick, this)
+            })
+            .html("delete post");
+
+        var addCommentButton = $("<button/>")
+            .on({
+                click: $.proxy(this.onAddCommentClick, this)
+            })
+            .html("add comment");
+
+        var commentInput = $("<input/>")
+            .attr("type", "text")
+            .attr("name", "commentInput");
+
+        var rating = $("<div/>")
+            .addClass("postRating");
+        var content = $("<div/>")
+            .addClass("postContent");
+        var detail = $("<div/>")
+            .addClass("postDetail");
+        var header = $("<header>");
+
+        header.append(title);
+        entry.append(header);
+
+        rating.append(voteUp);
+        rating.append(voteDown);
+        entry.append(rating);
+
+
+        detail.append(description);
+        detail.append(deleteButton);
+        detail.append(commentInput);
+        detail.append(addCommentButton);
+
+        content.append(rating);
+        content.append(detail);
+
+        entry.append(content);
+
+        this.htmlNode = entry;
         window.context.postTableNode.append(this.htmlNode);
     }
 

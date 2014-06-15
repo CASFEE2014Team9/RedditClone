@@ -54,8 +54,23 @@ li:nth-child(2n){
 }
 
 .table{
-    list-style: none;
-    background: lightgray;
-    border: #000000 5px outset;
-    border-radius: 10px;
+      list-style: none;
+      background: lightgray;
+      border: #000000 5px outset;
+      border-radius: 10px;
+}
+
+.post{
+}
+
+.postRating{
+    min-width: 10%;
+}
+
+.postContent{
+     display: flex;
+ }
+
+.postDetail{
+    left: 10%;
 }
