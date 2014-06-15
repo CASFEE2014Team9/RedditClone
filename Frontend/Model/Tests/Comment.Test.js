@@ -1,3 +1,9 @@
+var createTestComment = function( testUser, testPost )
+{
+    var result = new Comment(testUser,testPost, "troll" );
+    return result;
+};
+
 QUnit.module( "Comment" );
 QUnit.test( "create / delete Comment", function( assert ) {
     window.context = createTestContext();
@@ -7,7 +13,7 @@ QUnit.test( "create / delete Comment", function( assert ) {
 
     assert.equal( testPost.htmlNode.comments.children().length, 0, "no comments should be displayed" );
 
-    var comment = new Comment(testUser, testPost, "troll" );
+    var comment = createTestComment(testUser, testPost );
 
     assert.equal( testPost.htmlNode.comments.children().length, 1, "created comments should be displayed" );
     assert.ok( testPost.comments.contains( comment ), "created comments are present in the post" );

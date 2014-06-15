@@ -18,6 +18,7 @@ function Post( creator, link, title, description ) {
     this.title = title;
     this.description = description;
     this.comments = [];
+    this.ratings = [];
     this.htmlNode = null;
 
     window.context.posts.push(this);
