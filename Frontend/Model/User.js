@@ -69,7 +69,7 @@ var ShowLoginDialog = function()
 };
 
 User.prototype.login = function(){
-    window.user = this;
+    window.context.user = this;
 
     Cookies.set("name",this.name);
     Cookies.set("password",this.password);
@@ -80,7 +80,7 @@ User.prototype.login = function(){
 };
 
 User.prototype.logout = function(){
-    window.user = null;
+    window.context.user = null;
 
     Cookies.set("name","");
     Cookies.set("password","");

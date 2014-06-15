@@ -18,3 +18,7 @@ Array.prototype.removeByIndex = function(from, to) {
 Array.prototype.removeItem = function(item) {
     this.splice(this.indexOf(item),1);
 };
+
+Array.prototype.contains = function(item) {
+    return this.indexOf(item) >= 0;
+};

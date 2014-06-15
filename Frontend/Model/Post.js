@@ -14,7 +14,7 @@ function Post( creator, link, text ) {
     this.comments = [];
     this.htmlNode = null;
 
-    window.posts.push(this);
+    window.context.posts.push(this);
     this.display();
 }
 
@@ -67,7 +67,7 @@ Post.prototype.display = function() {
             .html("vote down");
         this.htmlNode.append(this.htmlNode.voteDown);
 
-        window.PostTableNode.append(this.htmlNode);
+        window.context.postTableNode.append(this.htmlNode);
     }
 
     this.comments.forEach(function(comment) {
@@ -80,8 +80,12 @@ Post.prototype.onAddCommentClick = function(evt) {
 };
 
 Post.prototype.onDeleteClick = function(evt) {
-    window.PostTableNode.removeChild(this.htmlNode);
-    window.posts.removeItem(this);
+    this.delete();
+};
+
+Post.prototype.delete = function() {
+    this.htmlNode.remove();
+    window.context.posts.removeItem(this);
 };
 
 Post.prototype.onVoteUpClick = function(evt) {

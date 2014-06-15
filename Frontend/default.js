@@ -1,8 +1,6 @@
 ﻿function OnBodyLoaded()
 {
-    window.posts = [];
-    window.user = null;
-    window.PostTableNode = $("#linkContentTable");
+    window.context = new Context();
 
     window.loginDialog = $( "#loginDialog").dialog({
         autoOpen: false
@@ -24,17 +22,6 @@
         click: window.loginDialog.onLoginButtonClick
     } );
 
-    var user = userFromCookie();
-
-    if (user.name != anonymous)
-    {
-        user.login();
-    }
-    else
-    {
-        user.display();
-    }
-
     GetPosts();
 }
 
@@ -42,7 +29,7 @@ function OnAddLinkButtonClicked()
 {
     var address = $("#webAddress").val();
     var text = $("#innerHTML").val();
-    new Post(window.user, address, text);
+    new Post(window.context.user, address, text);
 }
 
 function GetPosts()

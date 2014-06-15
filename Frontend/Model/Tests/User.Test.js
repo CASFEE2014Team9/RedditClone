@@ -1,6 +1,6 @@
-
-
 QUnit.test( "login", function( assert ) {
+    window.context = createTestContext();
+
     var testUser = createTestUser();
     assert.equal( testUser.loginstate, UserLoginState.LoggedOut, "Created users are logged out" );
 
