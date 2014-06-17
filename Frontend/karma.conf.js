@@ -1,6 +1,8 @@
-module.exports = function(config) {
+'use strict';
+
+module.exports = function (config) {
     config.set({
-        plugins: ['karma-qunit','karma-requirejs'],
+        plugins: ['karma-qunit', 'karma-requirejs'],
         frameworks: ['qunit'],
         files: [
             //REQUIRE,
@@ -9,7 +11,7 @@ module.exports = function(config) {
             '*.js'
         ],
         exclude: [
-            'node.js',
+            'node.js'
         ]
     });
 };

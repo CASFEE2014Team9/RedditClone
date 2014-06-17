@@ -1,5 +1,7 @@
+'use strict';
+
 // Array Remove - By John Resig (MIT Licensed)
-Array.prototype.removeByIndex = function(from, to) {
+Array.prototype.removeByIndex = function (from, to) {
     var rest = this.slice((to || from) + 1 || this.length);
     this.length = from < 0 ? this.length + from : from;
     return this.push.apply(this, rest);
@@ -15,10 +17,10 @@ Array.prototype.removeByIndex = function(from, to) {
 //array.removeByIndex(-2,-1);
 
 
-Array.prototype.removeItem = function(item) {
-    this.splice(this.indexOf(item),1);
+Array.prototype.removeItem = function (item) {
+    this.splice(this.indexOf(item), 1);
 };
 
-Array.prototype.contains = function(item) {
+Array.prototype.contains = function (item) {
     return this.indexOf(item) >= 0;
 };

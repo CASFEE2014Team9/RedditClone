@@ -1,15 +1,19 @@
-define(function(require, exports, module) {
+'use strict';
+
+/*jslint browser: true*/
+/*global window, requirejs, define, QUnit */
+
+define(function (require) {
 
     var $ = require("jquery");
     var Comment = require("Comment");
     var Array = require("Array");
-    function TestComment(){};
+    function TestComment() {}
 
     TestComment.createTestComment = function (testUser, testPost) {
         var result = new Comment(testUser.context, testUser, testPost, "troll");
         return result;
     };
-
     QUnit.module("Comment");
     QUnit.test("create / delete Comment", function (assert) {
         var TestContext = require("TestContext");
@@ -46,16 +50,14 @@ define(function(require, exports, module) {
             function () {
                 var comment = new Comment("no user", testPost, "lala");
             },
-            TypeError
-            , "creator must be a User"
+            TypeError, "creator must be a User"
         );
 
         assert.throws(
             function () {
                 var comment = new Comment(testUser, "no post", "lala");
             },
-            TypeError
-            , "post must be a Post"
+            TypeError, "post must be a Post"
         );
     });
 

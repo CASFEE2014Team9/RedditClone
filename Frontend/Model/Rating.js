@@ -1,4 +1,9 @@
-define(function(require, exports, module) {
+'use strict';
+
+/*jslint browser: true*/
+/*global window, requirejs, define */
+
+define(function (require) {
 
     var Guard = require("Guard");
 
@@ -19,7 +24,7 @@ define(function(require, exports, module) {
 
         this.post.ratings.push(this);
         this.post.display();
-    };
+    }
 
     Rating.prototype.delete = function () {
         this.post.ratings.removeItem(this);

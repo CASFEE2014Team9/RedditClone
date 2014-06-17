@@ -1,6 +1,12 @@
-define(function(require, exports, module) {
+'use strict';
+
+/*jslint browser: true*/
+/*global window, requirejs, define */
+
+define(function (require) {
 
     var Guard = require("Guard");
+    var $ = require("jquery");
 
     function Post(context, creator, link, title, description) {
 
@@ -27,12 +33,12 @@ define(function(require, exports, module) {
     }
 
     Post.prototype.display = function () {
-        if (this.htmlNode == null) {
+        if (this.htmlNode === null) {
             var postNode = $("<li/>")
                 .addClass("post")
                 .on({
-                    mouseenter: OnElementMouseEntered,
-                    mouseout: OnElementMouseLeft
+                    mouseenter: Post.OnElementMouseEntered,
+                    mouseout: Post.OnElementMouseLeft
                 });
 
             var title = $("<a/>")
@@ -112,14 +118,15 @@ define(function(require, exports, module) {
         });
     };
 
-    Post.prototype.onAddCommentClick = function (evt) {
+    Post.prototype.onAddCommentClick = function () {
         Guard.handleError("AddComment", this, function () {
+            var Comment = require("Comment");
             var commentText = this.htmlNode.commentInput.val();
             new Comment(this.context, this.context.user, this, commentText);
         });
     };
 
-    Post.prototype.onDeleteClick = function (evt) {
+    Post.prototype.onDeleteClick = function () {
         Guard.handleError("DeletePost", this, function () {
             this.delete();
         });
@@ -130,24 +137,24 @@ define(function(require, exports, module) {
         this.context.posts.removeItem(this);
     };
 
-    Post.prototype.onVoteUpClick = function (evt) {
+    Post.prototype.onVoteUpClick = function () {
         Guard.handleError("VoteUp", this, function () {
         });
     };
 
-    Post.prototype.onVoteDownClick = function (evt) {
+    Post.prototype.onVoteDownClick = function () {
         Guard.handleError("VoteDown", this, function () {
         });
     };
 
 
-    function OnElementMouseEntered() {
+    Post.OnElementMouseEntered = function () {
         $(this).css("background", "lightBlue");
-    }
+    };
 
-    function OnElementMouseLeft() {
+    Post.OnElementMouseLeft = function () {
         $(this).css("background", "transparent");
-    }
+    };
 
     return Post;
 });

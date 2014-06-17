@@ -1,15 +1,17 @@
-define(function(require, exports, module) {
-    function Guard() {
-    };
+'use strict';
 
+define(function (require) {
+    function Guard() {}
+
+    var $ = require("jquery");
     Guard.isUnitTesting = false;
 
     Guard.customType = function (parameter, parameterName, type) {
-        if (parameter == undefined) {
+        if (parameter === undefined) {
             throw new TypeError("{0} must not be undefined".format(parameterName));
         }
 
-        if (parameter == null) {
+        if (parameter === null) {
             throw new TypeError("{0} must not be null".format(parameterName));
         }
 
@@ -19,37 +21,37 @@ define(function(require, exports, module) {
     };
 
     Guard.string = function (parameter, parameterName) {
-        if (parameter == undefined) {
+        if (parameter === undefined) {
             throw new TypeError("{0} must not be undefined".format(parameterName));
         }
 
-        if (parameter == null) {
+        if (parameter === null) {
             throw new TypeError("{0} must not be null".format(parameterName));
         }
 
-        if (typeof parameter != "string") {
+        if (typeof parameter !== "string") {
             throw new TypeError("{0} must be a string".format(parameterName));
         }
 
-        if (parameter == "") {
+        if (parameter === "") {
             throw new TypeError("{0} must not be an empty string".format(parameterName));
         }
     };
 
     Guard.stringFallback = function (parameter, parameterName, fallback) {
-        if (parameter == undefined) {
+        if (parameter === undefined) {
             return fallback;
         }
 
-        if (parameter == null) {
+        if (parameter === null) {
             return fallback;
         }
 
-        if (typeof parameter != "string") {
+        if (typeof parameter !== "string") {
             return fallback;
         }
 
-        if (parameter == "") {
+        if (parameter === "") {
             return fallback;
         }
 
@@ -59,12 +61,10 @@ define(function(require, exports, module) {
     Guard.handleError = function (funcname, context, func) {
         if (Guard.isUnitTesting) {
             $.proxy(func, context)();
-        }
-        else {
+        } else {
             try {
                 $.proxy(func, context)();
-            }
-            catch (ex) {
+            } catch (ex) {
                 alert("{0} failed. {1}".format(funcname, ex));
             }
         }

@@ -1,12 +1,18 @@
-define(function(require, exports, module){
+'use strict';
+
+/*jslint browser: true*/
+/*global window, requirejs, define */
+
+define(function (require) {
 
     var Guard = require("Guard");
     var cookie = require("cookie");
+    var $ = require("jquery");
 
     function User(context, name, password) {
 
         var Context = require("Context");
-        Guard.customType(context, "context", Context );
+        Guard.customType(context, "context", Context);
         Guard.string(name, "name");
         Guard.string(password, "password");
 
@@ -16,7 +22,7 @@ define(function(require, exports, module){
         this.posts = [];
         this.htmlNode =  $($(".login")[0]);
         this.loginstate = User.LoginState.LoggedOut;
-    };
+    }
 
     User.LoginState = {
         LoggedOut : {value: 0, name: "LoggedOut"},
@@ -25,10 +31,9 @@ define(function(require, exports, module){
 
     User.anonymous = "anonymous";
 
-    User.userFromCookie = function(context){
+    User.userFromCookie = function (context) {
         var name = cookie.get("name");
-        if ( name == "" || name == undefined )
-        {
+        if (name === "" || name === undefined) {
             return new User(context, User.anonymous, User.anonymous);
         }
 
@@ -38,59 +43,53 @@ define(function(require, exports, module){
         return user;
     };
 
-    User.prototype.display = function(){
+    User.prototype.display = function () {
         this.htmlNode.empty();
 
-        if (this.loginstate == User.LoginState.LoggedIn)
-        {
+        if (this.loginstate === User.LoginState.LoggedIn) {
             this.htmlNode.append($("<label/>")
                 .html(this.name));
 
             this.htmlNode.append($("<button/>")
-                    .html("logout")
-                    .on({
-                        click: $.proxy(this.logout, this)
-                    })
-            );
-        }
-        else if (this.loginstate == User.LoginState.LoggedOut)
-        {
+                .html("logout")
+                .on({
+                    click: $.proxy(this.logout, this)
+                }));
+        } else if (this.loginstate === User.LoginState.LoggedOut) {
             this.htmlNode.append($("<Button/>")
-                    .html("login")
-                    .on({
-                        click: $.proxy(this.onLoginClick, this)
-                    })
-            );
+                .html("login")
+                .on({
+                    click: $.proxy(this.onLoginClick, this)
+                }));
         }
     };
 
-    User.prototype.onLoginClick = function(){
-        Guard.handleError( "Login", this, function ()
-        {
-            ShowLoginDialog();
+    User.prototype.onLoginClick = function () {
+        Guard.handleError("Login", this, function () {
+            User.ShowLoginDialog();
         });
     };
 
-    var ShowLoginDialog = function(){
-        this.context.loginDialog.dialog( "open" );
+    User.ShowLoginDialog = function () {
+        this.context.loginDialog.dialog("open");
     };
 
-    User.prototype.login = function(){
+    User.prototype.login = function () {
         this.context.user = this;
 
-        cookie.set("name",this.name);
-        cookie.set("password",this.password);
+        cookie.set("name", this.name);
+        cookie.set("password", this.password);
 
         this.loginstate = User.LoginState.LoggedIn;
 
         this.display();
     };
 
-    User.prototype.logout = function(){
+    User.prototype.logout = function () {
         this.context.user = null;
 
-        cookie.set("name","");
-        cookie.set("password","");
+        cookie.set("name", "");
+        cookie.set("password", "");
 
         this.loginstate = User.LoginState.LoggedOut;
 

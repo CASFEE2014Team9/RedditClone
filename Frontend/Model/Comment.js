@@ -1,6 +1,12 @@
-define(function(require, exports, module) {
+'use strict';
+
+/*jslint browser: true*/
+/*global window, requirejs, define */
+
+define(function (require) {
 
     var Guard = require("Guard");
+    var $ = require("jquery");
 
     function Comment(context, creator, post, commentText) {
 
@@ -21,10 +27,10 @@ define(function(require, exports, module) {
 
         this.post.comments.push(this);
         this.display();
-    };
+    }
 
     Comment.prototype.display = function () {
-        if (this.htmlNode == null) {
+        if (this.htmlNode === null) {
 
             var commentNode = $("<li/>")
                 .html(this.text);
@@ -39,13 +45,11 @@ define(function(require, exports, module) {
             commentNode.append(deleteButton);
 
             this.htmlNode = commentNode;
-
-
             this.post.htmlNode.comments.append(this.htmlNode);
         }
     };
 
-    Comment.prototype.onDeleteClick = function (evt) {
+    Comment.prototype.onDeleteClick = function () {
         Guard.handleError("DeleteComment", this, function () {
             this.delete();
         });

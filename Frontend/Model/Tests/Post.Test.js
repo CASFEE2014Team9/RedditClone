@@ -1,9 +1,14 @@
-define(function(require, exports, module) {
+'use strict';
+
+/*jslint browser: true*/
+/*global window, requirejs, define, QUnit */
+
+define(function (require) {
 
     var $ = require("jquery");
     var Post = require("Post");
     var Array = require("Array");
-    function TestPost(){};
+    function TestPost() {}
 
     TestPost.createTestPost = function (testUser) {
         var result = new Post(testUser.context, testUser, "www.google.com", "Google", "Description");
@@ -42,16 +47,14 @@ define(function(require, exports, module) {
             function () {
                 var post = new Post("no user object", "url", "title", "description");
             },
-            TypeError
-            , "creator must be a User"
+            TypeError, "creator must be a User"
         );
 
         assert.throws(
             function () {
                 var post = new Post(testUser, null, "title", "description");
             },
-            TypeError
-            , "url must not be a null"
+            TypeError, "url must not be a null"
         );
     });
 

@@ -1,8 +1,13 @@
-define(function(require, exports, module) {
+'use strict';
+
+/*jslint browser: true*/
+/*global window, requirejs, define, QUnit */
+
+define(function (require) {
 
     var $ = require("jquery");
     var Context = require("Context");
-    function TestContext(){};
+    function TestContext() {}
 
     TestContext.createTestContext = function () {
 
@@ -11,6 +16,7 @@ define(function(require, exports, module) {
         var result = new Context();
         result.user = TestUser.createTestUser(result);
         result.postTableNode = $("<ul>");
+        result.addPostButton = $("<button>");
 
         return result;
     };
