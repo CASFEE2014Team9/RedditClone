@@ -1,18 +1,29 @@
-function Rating(context, creator,post,value) {
+define(function(require, exports, module) {
 
-    guardCustomType(context, "context", Context );
-    guardCustomType(creator, "creator", User );
-    guardCustomType(post, "post", Post );
+    var Guard = require("Guard");
 
-    this.context = context;
-    this.value = value;
-    this.post = post;
-    this.creator = creator;
+    function Rating(context, creator, post, value) {
 
-    this.post.ratings.push(this);
-    this.post.display();
-};
+        var Context = require("Context");
+        var User = require("User");
+        var Post = require("Post");
 
-Rating.prototype.delete = function() {
-    this.post.ratings.removeItem(this);
-};
+        Guard.customType(context, "context", Context);
+        Guard.customType(creator, "creator", User);
+        Guard.customType(post, "post", Post);
+
+        this.context = context;
+        this.value = value;
+        this.post = post;
+        this.creator = creator;
+
+        this.post.ratings.push(this);
+        this.post.display();
+    };
+
+    Rating.prototype.delete = function () {
+        this.post.ratings.removeItem(this);
+    };
+
+    return Rating;
+});

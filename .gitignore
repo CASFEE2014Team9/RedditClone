@@ -164,3 +164,4 @@ Frontend/Lib/Cookies/
 Frontend/Lib/jquery-ui/
 Frontend/Lib/jquery/
 Frontend/Lib/qunit/
+Frontend/Lib/requirejs-domready/

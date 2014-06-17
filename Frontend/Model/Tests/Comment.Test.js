@@ -1,47 +1,64 @@
-var createTestComment = function( testUser, testPost )
-{
-    var result = new Comment(testUser.context, testUser, testPost, "troll" );
-    return result;
-};
+define(function(require, exports, module) {
 
-QUnit.module( "Comment" );
-QUnit.test( "create / delete Comment", function( assert ) {
-    var testContext = createTestContext();
-    var testUser = createTestUser(testContext);
-    var testPost = createTestPost(testUser);
+    var $ = require("jquery");
+    var Comment = require("Comment");
+    var Array = require("Array");
+    function TestComment(){};
 
-    assert.equal( testPost.htmlNode.comments.children().length, 0, "no comments should be displayed" );
+    TestComment.createTestComment = function (testUser, testPost) {
+        var result = new Comment(testUser.context, testUser, testPost, "troll");
+        return result;
+    };
 
-    var comment = createTestComment(testUser, testPost );
+    QUnit.module("Comment");
+    QUnit.test("create / delete Comment", function (assert) {
+        var TestContext = require("TestContext");
+        var TestUser = require("TestUser");
+        var TestPost = require("TestPost");
 
-    assert.equal( testPost.htmlNode.comments.children().length, 1, "created comments should be displayed" );
-    assert.ok( testPost.comments.contains( comment ), "created comments are present in the post" );
+        var testContext = TestContext.createTestContext();
+        var testUser = TestUser.createTestUser(testContext);
+        var testPost = TestPost.createTestPost(testUser);
 
-    comment.delete();
+        assert.equal(testPost.htmlNode.comments.children().length, 0, "no comments should be displayed");
 
-    assert.equal( testPost.htmlNode.comments.children().length, 0, "no comments should be displayed" );
-    assert.ok( !testPost.comments.contains( comment ), "deleted comments are not present in the post" );
-});
+        var comment = TestComment.createTestComment(testUser, testPost);
 
-QUnit.test( "create with wrong arguments", function( assert ) {
-    var testContext = createTestContext();
-    var testUser = createTestUser(testContext);
-    var testPost = createTestPost(testUser);
+        assert.equal(testPost.htmlNode.comments.children().length, 1, "created comments should be displayed");
+        assert.ok(testPost.comments.contains(comment), "created comments are present in the post");
 
-    assert.throws(
-        function() {
-            var comment = new Comment("no user", testPost, "lala");
-        },
-        TypeError
-        , "creator must be a User"
-    );
+        comment.delete();
 
-    assert.throws(
-        function() {
-            var comment = new Comment(testUser, "no post", "lala");
-        },
-        TypeError
-        , "post must be a Post"
-    );
+        assert.equal(testPost.htmlNode.comments.children().length, 0, "no comments should be displayed");
+        assert.ok(!testPost.comments.contains(comment), "deleted comments are not present in the post");
+    });
+
+    QUnit.test("create with wrong arguments", function (assert) {
+        var TestContext = require("TestContext");
+        var TestUser = require("TestUser");
+        var TestPost = require("TestPost");
+
+        var testContext = TestContext.createTestContext();
+        var testUser = TestUser.createTestUser(testContext);
+        var testPost = TestPost.createTestPost(testUser);
+
+        assert.throws(
+            function () {
+                var comment = new Comment("no user", testPost, "lala");
+            },
+            TypeError
+            , "creator must be a User"
+        );
+
+        assert.throws(
+            function () {
+                var comment = new Comment(testUser, "no post", "lala");
+            },
+            TypeError
+            , "post must be a Post"
+        );
+    });
+
+    return TestComment;
 });
 

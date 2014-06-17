@@ -1,8 +1,31 @@
-﻿function OnBodyLoaded()
-{
+﻿requirejs.config({
+    baseUrl: 'http://localhost:9000/',
+    paths: {
+        domReady : './Lib/requirejs-domready/domReady',
+        jquery: './Lib/jquery/dist/jquery',
+        jqueryui:'./Lib/jquery-ui/ui/jquery-ui',
+        cookie:'./Lib/Cookies/dist/cookies.min',
+        Guard:'./Lib/guard',
+        Context:'./Model/Context',
+        User:'./Model/User',
+        Post:'./Model/Post',
+        Comment:'./Model/Comment',
+        Rating:'./Model/Rating'
+    }
+});
+
+require([
+    "jquery",
+    "jqueryui",
+    'domReady!',
+    "Context",
+    "Post",
+    "Guard"],
+    function ( $, $ui, dom, Context, Post, Guard) {
+
     var loginDialog = $( "#loginDialog").dialog({
         autoOpen: false
-        });
+    });
     loginDialog.loginInput = $( "#loginDialogLoginInput");
     loginDialog.passwordInput = $( "#loginDialogPasswordInput");
     loginDialog.loginButton = $( "#loginDialogLoginButton");
@@ -25,25 +48,14 @@
     loginDialog.context = context;
     window.context = context;
 
-    GetPosts();
-}
+    context.GetPosts();
 
-function OnAddLinkButtonClicked(){
-    handleError( "Addpost", this, function ()
-    {
-        var address = $("#webAddress").val();
-        var text = $("#innerHTML").val();
-        new Post(window.context, window.context.user, address, text);
-    });
-}
-
-function GetPosts()
-{
-   // OData.read("http://localhost:49980/Reddit.svc/Posts/?$format=json", function (data, response) {
-
-     //   console.dir(data);
-//success handler
-
-   // });
-    new Post(window.context, window.context.user, "http://espn.go.com/nhl", "Sports World: ESPN NHL","All american sports information you can imagine: results, schedules, team information, statistics and background stories about specific issues.");
-}
+    function OnAddLinkButtonClicked(){
+        Guard.handleError( "Addpost", this, function ()
+        {
+            var address = $("#webAddress").val();
+            var text = $("#innerHTML").val();
+            new Post(context, context.user, address, text);
+        });
+    }
+});

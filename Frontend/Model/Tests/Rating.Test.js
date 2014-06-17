@@ -1,42 +1,60 @@
-var createTestRating = function( testUser, testPost )
-{
-    var result = new Rating(testUser.context, testUser ,testPost, 100 );
-    return result;
-};
+define(function(require, exports, module) {
 
-QUnit.module( "Rating" );
-QUnit.test( "create / delete", function( assert ) {
-    var testContext = createTestContext();
-    var testUser = createTestUser(testContext);
-    var testPost = createTestPost(testUser);
+    var $ = require("jquery");
+    var Rating = require("Rating");
+    var Array = require("Array");
+    function TestRating(){};
 
-    var rating = createTestRating(testUser, testPost );
+    TestRating.createTestRating = function( testUser, testPost )
+    {
+        var result = new Rating(testUser.context, testUser ,testPost, 100 );
+        return result;
+    };
 
-    assert.ok( testPost.ratings.contains( rating ), "created ratings are present in the post" );
+    QUnit.module( "Rating" );
+    QUnit.test( "create / delete", function( assert ) {
+        var TestContext = require("TestContext");
+        var TestUser = require("TestUser");
+        var TestPost = require("TestPost");
 
-    rating.delete();
+        var testContext = TestContext.createTestContext();
+        var testUser = TestUser.createTestUser(testContext);
+        var testPost = TestPost.createTestPost(testUser);
 
-    assert.ok( !testPost.ratings.contains( rating ), "deleted ratings are not present in the post" );
-});
+        var rating = TestRating.createTestRating(testUser, testPost );
 
-QUnit.test( "create with wrong arguments", function( assert ) {
-    var testContext = createTestContext();
-    var testUser = createTestUser(testContext);
-    var testPost = createTestPost(testUser);
+        assert.ok( testPost.ratings.contains( rating ), "created ratings are present in the post" );
 
-    assert.throws(
-        function() {
-            var rating = new Rating("no user", testPost, 100);
-        },
-        TypeError
-        , "creator must be a User"
-    );
+        rating.delete();
 
-    assert.throws(
-        function() {
-            var rating = new Rating(testUser, "no post", 100);
-        },
-        TypeError
-        , "post must be a Post"
-    );
+        assert.ok( !testPost.ratings.contains( rating ), "deleted ratings are not present in the post" );
+    });
+
+    QUnit.test( "create with wrong arguments", function( assert ) {
+        var TestContext = require("TestContext");
+        var TestUser = require("TestUser");
+        var TestPost = require("TestPost");
+
+        var testContext = TestContext.createTestContext();
+        var testUser = TestUser.createTestUser(testContext);
+        var testPost = TestPost.createTestPost(testUser);
+
+        assert.throws(
+            function() {
+                var rating = new Rating("no user", testPost, 100);
+            },
+            TypeError
+            , "creator must be a User"
+        );
+
+        assert.throws(
+            function() {
+                var rating = new Rating(testUser, "no post", 100);
+            },
+            TypeError
+            , "post must be a Post"
+        );
+    });
+
+    return TestRating;
 });

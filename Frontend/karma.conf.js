@@ -1,11 +1,15 @@
 module.exports = function(config) {
     config.set({
+        plugins: ['karma-qunit','karma-requirejs'],
         frameworks: ['qunit'],
-        plugins: ['karma-qunit'],
         files: [
-            REQUIRE,
-            REQUIRE_ADAPTER,
+            //REQUIRE,
+            //REQUIRE_ADAPTER,
+            'Model/Tests/*.js',
             '*.js'
+        ],
+        exclude: [
+            'node.js',
         ]
     });
 };

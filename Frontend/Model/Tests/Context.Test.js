@@ -1,7 +1,19 @@
-var createTestContext = function(){
-    var result = new Context();
-    result.user = createTestUser(result);
-    result.postTableNode = $("<ul>");
+define(function(require, exports, module) {
 
-    return result;
-};
+    var $ = require("jquery");
+    var Context = require("Context");
+    function TestContext(){};
+
+    TestContext.createTestContext = function () {
+
+        var TestUser = require("TestUser");
+
+        var result = new Context();
+        result.user = TestUser.createTestUser(result);
+        result.postTableNode = $("<ul>");
+
+        return result;
+    };
+
+    return TestContext;
+});

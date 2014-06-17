@@ -1,16 +1,34 @@
-function Context() {
-    this.posts = [];
+define(function(require, exports, module) {
+    function Context(){
+        var User = require("User");
 
-    this.user = userFromCookie(this);
+        this.posts = [];
 
-    if (this.user.name != anonymous)
-    {
-        this.user.login();
+        this.user = User.userFromCookie(this);
+
+        if (this.user.name != User.anonymous)
+        {
+            this.user.login();
+        }
+        else
+        {
+            this.user.display();
+        }
+
+        this.postTableNode = $("#linkContentTable");
     }
-    else
+
+    Context.prototype.GetPosts = function()
     {
-        this.user.display();
+        var Post = require("Post");
+        // OData.read("http://localhost:49980/Reddit.svc/Posts/?$format=json", function (data, response) {
+
+        //   console.dir(data);
+//success handler
+
+        // });
+        new Post(this, this.user, "http://espn.go.com/nhl", "Sports World: ESPN NHL","All american sports information you can imagine: results, schedules, team information, statistics and background stories about specific issues.");
     }
 
-    this.postTableNode = $("#linkContentTable");
-};
+    return Context;
+});

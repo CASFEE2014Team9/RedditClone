@@ -1,94 +1,101 @@
-function User(context, name, password) {
+define(function(require, exports, module){
 
-    guardCustomType(context, "context", Context );
-    guardString(name, "name");
-    guardString(password, "password");
+    var Guard = require("Guard");
+    var cookie = require("cookie");
 
-    this.context = context;
-    this.name = name;
-    this.password = password;
-    this.posts = [];
-    this.htmlNode =  $($(".login")[0]);
-    this.loginstate = UserLoginState.LoggedOut;
-};
+    function User(context, name, password) {
 
-var UserLoginState = {
-    LoggedOut : {value: 0, name: "LoggedOut"},
-    LoggedIn:   {value: 1, name: "LoggedIn"}
-};
+        var Context = require("Context");
+        Guard.customType(context, "context", Context );
+        Guard.string(name, "name");
+        Guard.string(password, "password");
 
-var anonymous = "anonymous";
+        this.context = context;
+        this.name = name;
+        this.password = password;
+        this.posts = [];
+        this.htmlNode =  $($(".login")[0]);
+        this.loginstate = User.LoginState.LoggedOut;
+    };
 
-var userFromCookie = function(context){
-    var name = Cookies.get("name");
-    if ( name == "" || name == undefined )
-    {
-        return new User(context, anonymous, anonymous);
-    }
+    User.LoginState = {
+        LoggedOut : {value: 0, name: "LoggedOut"},
+        LoggedIn:   {value: 1, name: "LoggedIn"}
+    };
 
-    var password = Cookies.get("password");
-    var user = new User(context, name, password);
+    User.anonymous = "anonymous";
 
-    return user;
-};
+    User.userFromCookie = function(context){
+        var name = cookie.get("name");
+        if ( name == "" || name == undefined )
+        {
+            return new User(context, User.anonymous, User.anonymous);
+        }
 
-User.prototype.display = function(){
-    this.htmlNode.empty();
+        var password = cookie.get("password");
+        var user = new User(context, name, password);
 
-    if (this.loginstate == UserLoginState.LoggedIn)
-    {
-        this.htmlNode.append($("<label/>")
-            .html(this.name));
+        return user;
+    };
 
-        this.htmlNode.append($("<button/>")
-                .html("logout")
-                .on({
-                    click: $.proxy(this.logout, this)
-                })
-        );
-    }
-    else if (this.loginstate == UserLoginState.LoggedOut)
-    {
-        this.htmlNode.append($("<Button/>")
-                .html("login")
-                .on({
-                    click: $.proxy(this.onLoginClick, this)
-                })
-        );
-    }
-};
+    User.prototype.display = function(){
+        this.htmlNode.empty();
 
-User.prototype.onLoginClick = function(){
-    handleError( "Login", this, function ()
-    {
-        ShowLoginDialog();
-    });
-};
+        if (this.loginstate == User.LoginState.LoggedIn)
+        {
+            this.htmlNode.append($("<label/>")
+                .html(this.name));
 
-var ShowLoginDialog = function(){
-    this.context.loginDialog.dialog( "open" );
-};
+            this.htmlNode.append($("<button/>")
+                    .html("logout")
+                    .on({
+                        click: $.proxy(this.logout, this)
+                    })
+            );
+        }
+        else if (this.loginstate == User.LoginState.LoggedOut)
+        {
+            this.htmlNode.append($("<Button/>")
+                    .html("login")
+                    .on({
+                        click: $.proxy(this.onLoginClick, this)
+                    })
+            );
+        }
+    };
 
-User.prototype.login = function(){
-    this.context.user = this;
+    User.prototype.onLoginClick = function(){
+        Guard.handleError( "Login", this, function ()
+        {
+            ShowLoginDialog();
+        });
+    };
 
-    Cookies.set("name",this.name);
-    Cookies.set("password",this.password);
+    var ShowLoginDialog = function(){
+        this.context.loginDialog.dialog( "open" );
+    };
 
-    this.loginstate = UserLoginState.LoggedIn;
+    User.prototype.login = function(){
+        this.context.user = this;
 
-    this.display();
-};
+        cookie.set("name",this.name);
+        cookie.set("password",this.password);
 
-User.prototype.logout = function(){
-    this.context.user = null;
+        this.loginstate = User.LoginState.LoggedIn;
 
-    Cookies.set("name","");
-    Cookies.set("password","");
+        this.display();
+    };
 
-    this.loginstate = UserLoginState.LoggedOut;
+    User.prototype.logout = function(){
+        this.context.user = null;
 
-    this.display();
-};
+        cookie.set("name","");
+        cookie.set("password","");
 
+        this.loginstate = User.LoginState.LoggedOut;
 
+        this.display();
+    };
+
+    return User;
+});
