@@ -11,7 +11,7 @@ define(function (require) {
     var Array = require("Array");
     function TestRating() {}
 
-    TestRating.createTestRating = function(testUser, testPost) {
+    TestRating.createTestRating = function (testUser, testPost) {
         var result = new Rating(testUser.context, testUser, testPost, 100);
         return result;
     };
@@ -48,14 +48,16 @@ define(function (require) {
             function () {
                 var rating = new Rating("no user", testPost, 100);
             },
-            TypeError, "creator must be a User"
+            TypeError,
+            "creator must be a User"
         );
 
         assert.throws(
             function () {
                 var rating = new Rating(testUser, "no post", 100);
             },
-            TypeError, "post must be a Post"
+            TypeError,
+            "post must be a Post"
         );
     });
 

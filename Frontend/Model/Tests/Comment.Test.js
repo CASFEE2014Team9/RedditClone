@@ -50,14 +50,16 @@ define(function (require) {
             function () {
                 var comment = new Comment("no user", testPost, "lala");
             },
-            TypeError, "creator must be a User"
+            TypeError,
+            "creator must be a User"
         );
 
         assert.throws(
             function () {
                 var comment = new Comment(testUser, "no post", "lala");
             },
-            TypeError, "post must be a Post"
+            TypeError,
+            "post must be a Post"
         );
     });
 
