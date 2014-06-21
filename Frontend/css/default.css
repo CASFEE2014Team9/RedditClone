@@ -1,16 +1,17 @@
 body {
   font-size: 1.5em;
-  color: #FFFFFF;
+  color: #ffffff;
   background: #4D4D4D;
   padding: 0% 10%;
 }
 input {
   height: 2em;
-  border-radius: 0.5em;
+  border-radius: 0.8em;
 }
 button {
   height: 2.4em;
-  border-radius: 0.5em;
+  color: #ffffff;
+  border-radius: 0.8em;
   min-width: 100px;
   margin: 10px;
 }

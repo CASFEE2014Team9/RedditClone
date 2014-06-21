@@ -1,18 +1,22 @@
+@borderRadius: 0.8em;
+@foreground: #FFFFFF;
+
 body{
   font-size: 1.5em;
-  color: #FFFFFF;
+  color: @foreground;
   background: #4D4D4D;
   padding: 0% 10%;
 }
 
 input{
   height: 2em;
-  border-radius: 0.5em;
+  border-radius: @borderRadius;
 }
 
 button{
   height: 2.4em;
-  border-radius: 0.5em;
+  color: @foreground;
+  border-radius: @borderRadius;
   min-width: 100px;
   margin: 10px;
 }
@@ -21,8 +25,8 @@ li{
   min-height: 100px;
   padding: 10px;
   margin: 0px 0px 0px -40px;
-}
 
-li:nth-child(2n){
-  background: darkgray;
+  &:nth-child(2n){
+    background: darkgray;
+  }
 }
