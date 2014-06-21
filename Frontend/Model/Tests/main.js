@@ -37,5 +37,7 @@
         "TestComment",
         "TestRating"], function () {
 
+        QUnit.load();
+        QUnit.start();
     });
 }());

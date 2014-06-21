@@ -4,6 +4,7 @@ var gulp = require('gulp');
 var less = require('gulp-less');
 var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
+var qunit = require('gulp-qunit');
 
 var paths = {
     in: {
@@ -16,7 +17,8 @@ var paths = {
                 './FrontEnd/Lib/string.js',
                 './FrontEnd/Forms/**/*.js'
             ],
-        less: ['./FrontEnd/less/**/*.less']
+        less: ['./FrontEnd/less/**/*.less'],
+        tests: ['./FrontEnd/Model/Tests/Test.html']
     },
     out: {
         css: './FrontEnd/css/'
@@ -38,11 +40,19 @@ gulp.task('lint', function () {
         .pipe(jshint.reporter());
 });
 
+//run tests
+gulp.task('qunit', function () {
+    return gulp.src(paths.in.tests)
+        .pipe(qunit());
+});
+
+
 // Rerun the task when a file changes
 gulp.task('watch', function () {
     gulp.watch(paths.in.scripts, ['lint']);
+    gulp.watch(paths.in.scripts, ['qunit']);
     gulp.watch(paths.in.less, ['less']);
     gulp.watch(paths.in.gulp, ['default']);
 });
 
-gulp.task('default', ['watch', 'lint', 'less']);
+gulp.task('default', ['watch', 'lint', 'qunit', 'less']);
