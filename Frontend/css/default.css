@@ -1,17 +1,20 @@
 body {
   font-size: 1.5em;
   color: #ffffff;
-  background: #4D4D4D;
+  background: #4d4d4d;
+  font-family: Segoe UI, Arial, sans-serif;
   padding: 0% 10%;
 }
 input {
   height: 2em;
-  border-radius: 0.8em;
+  border-radius: 10px;
+  font-family: Segoe UI, Arial, sans-serif;
 }
 button {
   height: 2.4em;
   color: #ffffff;
-  border-radius: 0.8em;
+  border-radius: 10px;
+  font-family: Segoe UI, Arial, sans-serif;
   min-width: 100px;
   margin: 10px;
 }
@@ -22,6 +25,22 @@ li {
 }
 li:nth-child(2n) {
   background: darkgray;
+}
+.ui-dialog {
+  background: #4d4d4d;
+  border-radius: 10px;
+  font-family: Segoe UI, Arial, sans-serif;
+}
+.content {
+  background-color: gray;
+  border: #000000 2px outset;
+  border-radius: 10px;
+  height: 40em;
+}
+.table {
+  background: lightgray;
+  border: #000000 2px outset;
+  border-radius: 10px;
 }
 
 .header,
@@ -42,15 +61,9 @@ li:nth-child(2n) {
 }
 .content {
   display: flex;
-  border: 3px black groove;
-  background-color: gray;
-  height: 40em;
 }
 .table {
   list-style: none;
-  background: lightgray;
-  border: #000000 5px outset;
-  border-radius: 10px;
 }
 .postRating {
   min-width: 10%;

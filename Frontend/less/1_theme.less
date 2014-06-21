@@ -1,22 +1,28 @@
-@borderRadius: 0.8em;
+@borderRadius: 10px;
+@border: #000000 2px outset;
 @foreground: #FFFFFF;
+@background: #4D4D4D;
+@font-family: Segoe UI,Arial,sans-serif;
 
 body{
   font-size: 1.5em;
   color: @foreground;
-  background: #4D4D4D;
+  background: @background;
+  font-family: @font-family;
   padding: 0% 10%;
 }
 
 input{
   height: 2em;
   border-radius: @borderRadius;
+  font-family: @font-family;
 }
 
 button{
   height: 2.4em;
   color: @foreground;
   border-radius: @borderRadius;
+  font-family: @font-family;
   min-width: 100px;
   margin: 10px;
 }
@@ -29,4 +35,23 @@ li{
   &:nth-child(2n){
     background: darkgray;
   }
+}
+
+.ui-dialog{
+  background: @background;
+  border-radius: @borderRadius;
+  font-family: @font-family;
+}
+
+.content{
+  background-color: gray;
+  border: @border;
+  border-radius: @borderRadius;
+  height: 40em;
+}
+
+.table{
+  background: lightgray;
+  border: @border;
+  border-radius: @borderRadius;
 }
