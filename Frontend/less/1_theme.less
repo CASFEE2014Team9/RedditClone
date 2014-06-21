@@ -3,37 +3,47 @@
 @foreground: #FFFFFF;
 @background: #4D4D4D;
 @font-family: Segoe UI,Arial,sans-serif;
+@font-size: 1.5em;
+@height: 2em;
+@padding: .5em;
 
 body{
-  font-size: 1.5em;
   color: @foreground;
   background: @background;
   font-family: @font-family;
+  font-size: @font-size;
   padding: 0% 10%;
 }
 
 input{
-  height: 2em;
+  height: @height;
   border-radius: @borderRadius;
   font-family: @font-family;
 }
 
 button{
-  height: 2.4em;
+  height: @height;
   color: @foreground;
   border-radius: @borderRadius;
-  font-family: @font-family;
+  font-size: @font-size / 2;
   min-width: 100px;
-  margin: 10px;
+  margin: @padding;
+  padding: 0 .5em 0 .5em;
+  background: linear-gradient(to bottom, #000000, #ffffff);
 }
 
 li{
   min-height: 100px;
-  padding: 10px;
+  padding: @padding;
   margin: 0px 0px 0px -40px;
 
   &:nth-child(2n){
     background: darkgray;
+  }
+
+  &:hover
+  {
+    background:lightBlue;
   }
 }
 
@@ -41,6 +51,23 @@ li{
   background: @background;
   border-radius: @borderRadius;
   font-family: @font-family;
+  padding: 0;
+
+  .ui-dialog-titlebar-close{
+    min-width: 0;
+    margin: -@padding @padding 0 0;
+  }
+
+  .ui-dialog-content{
+    padding: @padding;
+  }
+}
+
+.ui-widget-header{
+  background: #000000;
+  border-top-left-radius: @borderRadius;
+  border-top-right-radius: @borderRadius;
+  border:#ffffff;
 }
 
 .content{

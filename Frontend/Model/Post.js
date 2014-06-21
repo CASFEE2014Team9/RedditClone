@@ -34,11 +34,7 @@ define(function (require) {
     Post.prototype.display = function () {
         if (this.htmlNode === null) {
             var postNode = $("<li/>")
-                .addClass("post")
-                .on({
-                    mouseenter: Post.OnElementMouseEntered,
-                    mouseout: Post.OnElementMouseLeft
-                });
+                .addClass("post");
 
             var title = $("<a/>")
                 .attr("href", this.url)
@@ -144,15 +140,6 @@ define(function (require) {
     Post.prototype.onVoteDownClick = function () {
         Guard.handleError("VoteDown", this, function () {
         });
-    };
-
-
-    Post.OnElementMouseEntered = function () {
-        $(this).css("background", "lightBlue");
-    };
-
-    Post.OnElementMouseLeft = function () {
-        $(this).css("background", "transparent");
     };
 
     return Post;

@@ -1,8 +1,8 @@
 body {
-  font-size: 1.5em;
   color: #ffffff;
   background: #4d4d4d;
   font-family: Segoe UI, Arial, sans-serif;
+  font-size: 1.5em;
   padding: 0% 10%;
 }
 input {
@@ -11,25 +11,44 @@ input {
   font-family: Segoe UI, Arial, sans-serif;
 }
 button {
-  height: 2.4em;
+  height: 2em;
   color: #ffffff;
   border-radius: 10px;
-  font-family: Segoe UI, Arial, sans-serif;
+  font-size: 0.75em;
   min-width: 100px;
-  margin: 10px;
+  margin: 0.5em;
+  padding: 0 .5em 0 .5em;
+  background: linear-gradient(to bottom, #000000, #ffffff);
 }
 li {
   min-height: 100px;
-  padding: 10px;
+  padding: 0.5em;
   margin: 0px 0px 0px -40px;
 }
 li:nth-child(2n) {
   background: darkgray;
 }
+li:hover {
+  background: lightBlue;
+}
 .ui-dialog {
   background: #4d4d4d;
   border-radius: 10px;
   font-family: Segoe UI, Arial, sans-serif;
+  padding: 0;
+}
+.ui-dialog .ui-dialog-titlebar-close {
+  min-width: 0;
+  margin: -0.5em 0.5em 0 0;
+}
+.ui-dialog .ui-dialog-content {
+  padding: 0.5em;
+}
+.ui-widget-header {
+  background: #000000;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border: #ffffff;
 }
 .content {
   background-color: gray;

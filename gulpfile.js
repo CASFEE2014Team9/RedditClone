@@ -5,6 +5,7 @@ var less = require('gulp-less');
 var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
 var qunit = require('gulp-qunit');
+var csslint = require('gulp-csslint');
 
 var paths = {
     in: {
@@ -18,7 +19,8 @@ var paths = {
                 './FrontEnd/Forms/**/*.js'
             ],
         less: ['./FrontEnd/less/**/*.less'],
-        tests: ['./FrontEnd/Model/Tests/Test.html']
+        tests: ['./FrontEnd/Model/Tests/Test.html'],
+        css: ['./FrontEnd/css/**/*.css']
     },
     out: {
         css: './FrontEnd/css/'
@@ -39,6 +41,12 @@ gulp.task('lint', function () {
         .pipe(jshint())
         .pipe(jshint.reporter());
 });
+//detect css errors
+gulp.task('csslint', function () {
+    gulp.src(paths.in.css)
+        .pipe(csslint())
+        .pipe(csslint.reporter());
+});
 
 //run tests
 gulp.task('qunit', function () {
@@ -52,7 +60,8 @@ gulp.task('watch', function () {
     gulp.watch(paths.in.scripts, ['lint']);
     gulp.watch(paths.in.scripts, ['qunit']);
     gulp.watch(paths.in.less, ['less']);
+    gulp.watch(paths.in.css, ['csslint']);
     gulp.watch(paths.in.gulp, ['default']);
 });
 
-gulp.task('default', ['watch', 'lint', 'qunit', 'less']);
+gulp.task('default', ['watch', 'lint', 'qunit', 'less', 'csslint']);
