@@ -15,46 +15,17 @@ requirejs.config({
         User: './Model/User',
         Post: './Model/Post',
         Comment: './Model/Comment',
-        Rating: './Model/Rating'
+        Rating: './Model/Rating',
+        LoginDialog: './Forms/LoginDialog'
     }
 });
 
-require(['jquery', 'jqueryui', 'domReady!', 'Context', 'User', 'Post', 'Guard'],
-    function ($, $ui, dom, Context, User, Post, Guard) {
+require(['domReady!', 'Context'],
+    function (dom, Context) {
         'use strict';
 
         var context = new Context();
-        var loginDialog = $("#loginDialog").dialog({
-            autoOpen: false
-        });
-
-        loginDialog.loginInput = $("#loginDialogLoginInput");
-        loginDialog.passwordInput = $("#loginDialogPasswordInput");
-        loginDialog.loginButton = $("#loginDialogLoginButton");
-        loginDialog.onLoginButtonClick = function () {
-            Guard.handleError("Login", this, function () {
-                var name = loginDialog.loginInput.val();
-                var password = loginDialog.passwordInput.val();
-                var user = new User(loginDialog.context, name, password);
-                user.login();
-
-                loginDialog.dialog("close");
-            });
-        };
-
-        loginDialog.loginButton.on({
-            click: loginDialog.onLoginButtonClick
-        });
-
-        context.loginDialog = loginDialog;
-        loginDialog.context = context;
-
-        context.addPostButton = $("#addPostButton");
-        context.addPostButton.on({
-            click: $.proxy(context.onLoginButtonClick, context)
-        });
-
+        context.initialize();
         window.context = context;
-
         context.GetPosts();
     });

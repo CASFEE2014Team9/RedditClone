@@ -8,9 +8,27 @@ define(function (require) {
     var Guard = require("Guard");
 
     function Context() {
+        var LoginDialog = require("LoginDialog");
+
+        //map html elements first so they are rendered correctly
+        this.postTableNode = $("#linkContentTable");
+        this.addPostButton = $("#addPostButton");
+        this.addressInput = $("#webAddress");
+        this.textInput = $("#innerHTML");
+        this.loginDialog = new LoginDialog($("#loginDialog"), this);
+        this.posts = [];
+        this.user = null;
+    }
+
+    Context.prototype.initialize = function () {
         var User = require("User");
 
-        this.posts = [];
+        this.loginDialog.initialize();
+        this.addPostButton.on({
+            click: $.proxy(this.OnAddLinkButtonClicked, this)
+        });
+
+        //then fetch the user from cookies which might take some time
         this.user = User.userFromCookie(this);
 
         if (this.user.name !== User.anonymous) {
@@ -18,9 +36,7 @@ define(function (require) {
         } else {
             this.user.display();
         }
-
-        this.postTableNode = $("#linkContentTable");
-    }
+    };
 
     Context.prototype.GetPosts = function () {
         var Post = require("Post");
@@ -34,8 +50,8 @@ define(function (require) {
     Context.prototype.OnAddLinkButtonClicked = function () {
         Guard.handleError("AddPost", this, function () {
             var Post = require("Post");
-            var address = $("#webAddress").val();
-            var text = $("#innerHTML").val();
+            var address = this.addressInput.val();
+            var text = this.textInput.val();
             new Post(this, this.user, address, text);
         });
     };

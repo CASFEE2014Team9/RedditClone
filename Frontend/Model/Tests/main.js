@@ -25,7 +25,8 @@
             TestUser: './Model/Tests/User.Test',
             TestPost: './Model/Tests/Post.Test',
             TestComment: './Model/Tests/Comment.Test',
-            TestRating: './Model/Tests/Rating.Test'
+            TestRating: './Model/Tests/Rating.Test',
+            LoginDialog: './Forms/LoginDialog'
         }
     });
 

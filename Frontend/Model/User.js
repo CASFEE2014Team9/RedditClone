@@ -71,7 +71,7 @@ define(function (require) {
     };
 
     User.prototype.ShowLoginDialog = function () {
-        this.context.loginDialog.dialog("open");
+        this.context.loginDialog.open();
     };
 
     User.prototype.login = function () {

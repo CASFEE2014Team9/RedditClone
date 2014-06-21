@@ -8,7 +8,14 @@ var concat = require('gulp-concat');
 var paths = {
     in: {
         gulp: ['./gulpfile.js'],
-        scripts: ['./FrontEnd/Model/**/*.js', './FrontEnd/Lib/Array.js', './FrontEnd/Lib/guard.js', './FrontEnd/Lib/string.js' ],
+        scripts:
+            [
+                './FrontEnd/Model/**/*.js',
+                './FrontEnd/Lib/Array.js',
+                './FrontEnd/Lib/guard.js',
+                './FrontEnd/Lib/string.js',
+                './FrontEnd/Forms/**/*.js'
+            ],
         less: ['./FrontEnd/less/**/*.less']
     },
     out: {
