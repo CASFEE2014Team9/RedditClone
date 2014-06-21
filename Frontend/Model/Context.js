@@ -1,6 +1,6 @@
 
 /*jslint browser: true*/
-/*global window, requirejs, define */
+/*global window, requirejs, define, alert */
 
 define(function (require) {
     'use strict';

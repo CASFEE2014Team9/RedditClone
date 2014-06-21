@@ -1,5 +1,4 @@
-﻿'use strict';
-
+﻿
 /*jslint browser: true*/
 /*global window, requirejs, define */
 
@@ -11,6 +10,7 @@ requirejs.config({
         jqueryui: './Lib/jquery-ui/ui/jquery-ui',
         cookie: './Lib/Cookies/dist/cookies.min',
         Guard: './Lib/guard',
+        string: './Lib/string',
         Context: './Model/Context',
         User: './Model/User',
         Post: './Model/Post',
@@ -21,6 +21,7 @@ requirejs.config({
 
 require(['jquery', 'jqueryui', 'domReady!', 'Context', 'User', 'Post', 'Guard'],
     function ($, $ui, dom, Context, User, Post, Guard) {
+        'use strict';
 
         var context = new Context();
         var loginDialog = $("#loginDialog").dialog({
@@ -31,12 +32,14 @@ require(['jquery', 'jqueryui', 'domReady!', 'Context', 'User', 'Post', 'Guard'],
         loginDialog.passwordInput = $("#loginDialogPasswordInput");
         loginDialog.loginButton = $("#loginDialogLoginButton");
         loginDialog.onLoginButtonClick = function () {
-            var name = loginDialog.loginInput.val();
-            var password = loginDialog.passwordInput.val();
-            var user = new User(loginDialog.context, name, password);
-            user.login();
+            Guard.handleError("Login", this, function () {
+                var name = loginDialog.loginInput.val();
+                var password = loginDialog.passwordInput.val();
+                var user = new User(loginDialog.context, name, password);
+                user.login();
 
-            loginDialog.dialog("close");
+                loginDialog.dialog("close");
+            });
         };
 
         loginDialog.loginButton.on({

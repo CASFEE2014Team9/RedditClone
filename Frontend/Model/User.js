@@ -1,6 +1,6 @@
 
 /*jslint browser: true*/
-/*global window, requirejs, define */
+/*global window, requirejs, define, alert */
 
 define(function (require) {
     'use strict';
@@ -66,11 +66,11 @@ define(function (require) {
 
     User.prototype.onLoginClick = function () {
         Guard.handleError("Login", this, function () {
-            User.ShowLoginDialog();
+            this.ShowLoginDialog();
         });
     };
 
-    User.ShowLoginDialog = function () {
+    User.prototype.ShowLoginDialog = function () {
         this.context.loginDialog.dialog("open");
     };
 

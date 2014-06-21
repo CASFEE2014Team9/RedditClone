@@ -1,9 +1,13 @@
-'use strict';
+
+/*jslint browser: true*/
+/*global window, requirejs, define, alert */
 
 define(function (require) {
+    'use strict';
     function Guard() {}
 
     var $ = require("jquery");
+    var string = require("string");
     Guard.isUnitTesting = false;
 
     Guard.customType = function (parameter, parameterName, type) {
@@ -65,7 +69,17 @@ define(function (require) {
             try {
                 $.proxy(func, context)();
             } catch (ex) {
-                alert("{0} failed. {1}".format(funcname, ex));
+
+                var exmsg = "";
+                if (ex.message) {
+                    exmsg += ex.message;
+                }
+                if (ex.stack) {
+                    exmsg += ' | stack: ' + ex.stack;
+                }
+
+                alert("{0} failed. {1}".format(funcname, ex.message));
+                console.log(exmsg);
             }
         }
     };

@@ -7,7 +7,8 @@ var concat = require('gulp-concat');
 
 var paths = {
     in: {
-        scripts: ['./FrontEnd/Model/**/*.js'],
+        gulp: ['./gulpfile.js'],
+        scripts: ['./FrontEnd/Model/**/*.js', './FrontEnd/Lib/Array.js', './FrontEnd/Lib/guard.js', './FrontEnd/Lib/string.js' ],
         less: ['./FrontEnd/less/**/*.less']
     },
     out: {
@@ -34,6 +35,7 @@ gulp.task('lint', function () {
 gulp.task('watch', function () {
     gulp.watch(paths.in.scripts, ['lint']);
     gulp.watch(paths.in.less, ['less']);
+    gulp.watch(paths.in.gulp, ['default']);
 });
 
 gulp.task('default', ['watch', 'lint', 'less']);

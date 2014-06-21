@@ -13,6 +13,7 @@
             jqueryui: './Lib/jquery-ui/ui/jquery-ui',
             cookie: './Lib/Cookies/dist/cookies.min',
             Guard: './Lib/guard',
+            string: './Lib/string',
             Array: './Lib/Array',
             QUnit: './Lib/qunit/qunit/qunit',
             Context: './Model/Context',
