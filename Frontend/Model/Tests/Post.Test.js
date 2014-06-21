@@ -1,10 +1,9 @@
-'use strict';
 
 /*jslint browser: true*/
 /*global window, requirejs, define, QUnit */
 
 define(function (require) {
-
+    'use strict';
     var $ = require("jquery");
     var Post = require("Post");
     var Array = require("Array");

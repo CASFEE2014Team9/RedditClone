@@ -1,10 +1,9 @@
-'use strict';
 
 /*jslint browser: true*/
 /*global window, requirejs, define */
 
 define(function (require) {
-
+    'use strict';
     var Guard = require("Guard");
 
     function Rating(context, creator, post, value) {

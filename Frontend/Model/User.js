@@ -1,9 +1,9 @@
-'use strict';
 
 /*jslint browser: true*/
 /*global window, requirejs, define */
 
 define(function (require) {
+    'use strict';
 
     var Guard = require("Guard");
     var cookie = require("cookie");
