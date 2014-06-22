@@ -59,5 +59,22 @@ define(function (require) {
         );
     });
 
+    QUnit.test("events should be handled without error", function (assert) {
+        var TestContext = require("TestContext");
+
+        var testContext = TestContext.createTestContext();
+
+        testContext.addressInput.val("www.google.com");
+        testContext.textInput.val("a search engine");
+        testContext.addPostButton.trigger('click');
+
+        assert.ok(testContext.posts.length === 1, "Post should be created");
+
+        var post = testContext.posts[0];
+        post.htmlNode.deleteButton.trigger('click');
+
+        assert.ok(testContext.posts.length === 0, "Post should be deleted");
+    });
+
     return TestPost;
 });

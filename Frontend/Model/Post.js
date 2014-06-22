@@ -5,6 +5,7 @@
 define(function (require) {
     'use strict';
     var Guard = require("Guard");
+    var Array = require("Array");
     var $ = require("jquery");
 
     function Post(context, creator, link, title, description) {
@@ -104,6 +105,7 @@ define(function (require) {
             this.htmlNode = postNode;
             this.htmlNode.commentInput = commentInput;
             this.htmlNode.comments = comments;
+            this.htmlNode.deleteButton = deleteButton;
 
             this.context.postTableNode.append(this.htmlNode);
         }
