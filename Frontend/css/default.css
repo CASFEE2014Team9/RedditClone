@@ -7,13 +7,13 @@ body {
 }
 input {
   height: 2em;
-  border-radius: 10px;
+  border-radius: 7px;
   font-family: Segoe UI, Arial, sans-serif;
 }
 button {
   height: 2em;
   color: #ffffff;
-  border-radius: 10px;
+  border-radius: 7px;
   font-size: 0.75em;
   min-width: 100px;
   margin: 0.5em;
@@ -28,12 +28,20 @@ li {
 li:nth-child(2n) {
   background: darkgray;
 }
+li:first-child {
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+li:last-child {
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
 li:hover {
   background: lightBlue;
 }
 .ui-dialog {
   background: #4d4d4d;
-  border-radius: 10px;
+  border-radius: 7px;
   font-family: Segoe UI, Arial, sans-serif;
   padding: 0;
 }
@@ -46,20 +54,20 @@ li:hover {
 }
 .ui-widget-header {
   background: #000000;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
   border: #ffffff;
 }
 .content {
   background-color: gray;
   border: #000000 2px outset;
-  border-radius: 10px;
+  border-radius: 7px;
   height: 40em;
 }
 .table {
   background: lightgray;
   border: #000000 2px outset;
-  border-radius: 10px;
+  border-radius: 7px;
 }
 
 .header,

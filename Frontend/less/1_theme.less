@@ -1,4 +1,4 @@
-@borderRadius: 10px;
+@borderRadius: 7px;
 @border: #000000 2px outset;
 @foreground: #FFFFFF;
 @background: #4D4D4D;
@@ -39,6 +39,16 @@ li{
 
   &:nth-child(2n){
     background: darkgray;
+  }
+
+  &:first-child{
+    border-top-left-radius: @borderRadius;
+    border-top-right-radius: @borderRadius;
+  }
+
+  &:last-child{
+    border-bottom-left-radius: @borderRadius;
+    border-bottom-right-radius: @borderRadius;
   }
 
   &:hover
