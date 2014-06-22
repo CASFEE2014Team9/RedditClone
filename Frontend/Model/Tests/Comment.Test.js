@@ -16,11 +16,10 @@ define(function (require) {
     QUnit.module("Comment");
     QUnit.test("create / delete Comment", function (assert) {
         var TestContext = require("TestContext");
-        var TestUser = require("TestUser");
         var TestPost = require("TestPost");
 
         var testContext = TestContext.createTestContext();
-        var testUser = TestUser.createTestUser(testContext);
+        var testUser = testContext.user;
         var testPost = TestPost.createTestPost(testUser);
 
         assert.equal(testPost.htmlNode.comments.children().length, 0, "no comments should be displayed");

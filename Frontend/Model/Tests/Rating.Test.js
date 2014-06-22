@@ -21,7 +21,7 @@ define(function (require) {
         var TestPost = require("TestPost");
 
         var testContext = TestContext.createTestContext();
-        var testUser = TestUser.createTestUser(testContext);
+        var testUser = testContext.user;
         var testPost = TestPost.createTestPost(testUser);
 
         var rating = TestRating.createTestRating(testUser, testPost);
@@ -35,11 +35,10 @@ define(function (require) {
 
     QUnit.test("create with wrong arguments", function(assert) {
         var TestContext = require("TestContext");
-        var TestUser = require("TestUser");
         var TestPost = require("TestPost");
 
         var testContext = TestContext.createTestContext();
-        var testUser = TestUser.createTestUser(testContext);
+        var testUser = testContext.user;
         var testPost = TestPost.createTestPost(testUser);
 
         assert.throws(

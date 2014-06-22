@@ -47,20 +47,26 @@ define(function (require) {
         this.htmlNode.empty();
 
         if (this.loginstate === User.LoginState.LoggedIn) {
-            this.htmlNode.append($("<label/>")
-                .html(this.name));
-
-            this.htmlNode.append($("<button/>")
+            var nameLabel = $("<label/>")
+                .html(this.name);
+            var logoutButton = $("<button/>")
                 .html("logout")
                 .on({
                     click: $.proxy(this.logout, this)
-                }));
+                });
+
+            this.htmlNode.append(nameLabel);
+            this.htmlNode.logoutButton = logoutButton;
+            this.htmlNode.append(logoutButton);
         } else if (this.loginstate === User.LoginState.LoggedOut) {
-            this.htmlNode.append($("<Button/>")
+            var loginButton = $("<Button/>")
                 .html("login")
                 .on({
                     click: $.proxy(this.onLoginClick, this)
-                }));
+                });
+
+            this.htmlNode.loginButton = loginButton;
+            this.htmlNode.append(loginButton);
         }
     };
 

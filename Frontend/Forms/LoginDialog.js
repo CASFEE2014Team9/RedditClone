@@ -32,10 +32,11 @@ define(function (require) {
 
     LoginDialog.prototype.onLoginButtonClick = function () {
         Guard.handleError("Login", this, function () {
-            var User = require('User');
             var name = this.loginInput.val();
             var password = this.passwordInput.val();
-            var user = new User(this.context, name, password);
+            var user = this.context.user;
+            user.name = name;
+            user.password = password;
             user.login();
 
             this.htmlNode.dialog("close");

@@ -17,10 +17,9 @@ define(function (require) {
     QUnit.module("Post");
     QUnit.test("create / delete", function (assert) {
         var TestContext = require("TestContext");
-        var TestUser = require("TestUser");
 
         var testContext = TestContext.createTestContext();
-        var testUser = TestUser.createTestUser(testContext);
+        var testUser = testContext.user;
 
         assert.equal(testContext.postTableNode.children().length, 0, "no posts should be displayed");
 
@@ -37,10 +36,9 @@ define(function (require) {
 
     QUnit.test("create with wrong arguments", function (assert) {
         var TestContext = require("TestContext");
-        var TestUser = require("TestUser");
 
         var testContext = TestContext.createTestContext();
-        var testUser = TestUser.createTestUser(testContext);
+        var testUser = testContext.user;
 
         assert.throws(
             function () {
