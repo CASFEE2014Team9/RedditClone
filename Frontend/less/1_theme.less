@@ -7,6 +7,21 @@
 @height: 2em;
 @padding: .5em;
 
+.background-opacity(@color, @opacity) {
+  @rgba-color: rgba(red(@color), green(@color), blue(@color), @opacity);
+
+  background-color: @rgba-color;
+
+  // Hack for IE8:
+  background: none\9; // Only IE8
+  filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d')", argb(@rgba-color),argb(@rgba-color))); // IE9 and down
+  // Problem: Filter gets applied twice in IE9.
+  // Solution:
+  &:not([dummy]) {
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled='false'); // Only IE9
+  }
+}
+
 body{
   color: @foreground;
   background: @background;
@@ -21,7 +36,7 @@ input{
   font-family: @font-family;
 }
 
-button{
+button, input[type="button"], input[type="submit"], input[type="reset"] {
   height: @height;
   color: @foreground;
   border-radius: @borderRadius;
@@ -30,6 +45,11 @@ button{
   margin: @padding;
   padding: 0 .5em 0 .5em;
   background: linear-gradient(to bottom, #000000, #ffffff);
+
+  &:disabled {
+    color: darkgrey;
+    background: #d3d3d3;
+  }
 }
 
 li{
@@ -81,14 +101,14 @@ li{
 }
 
 .content{
-  background-color: gray;
+  .background-opacity( white, 0.4);
   border: @border;
   border-radius: @borderRadius;
   height: 40em;
 }
 
 .table{
-  background: lightgray;
+  .background-opacity( white, 0.4);
   border: @border;
   border-radius: @borderRadius;
 }
