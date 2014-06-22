@@ -19,7 +19,7 @@ define(function (require) {
         result.addPostButton = $("<button>");
         result.addressInput = $("<input>");
         result.textInput = $("<input>");
-        result.loginDialog = new LoginDialog($("<div>"), result);
+        result.loginDialog = new LoginDialog($("<form>"), result);
         result.loginDialog.loginInput = $("<input>");
         result.loginDialog.passwordInput = $("<input>");
         result.loginDialog.loginButton = $("<button>");

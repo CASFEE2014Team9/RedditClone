@@ -30,6 +30,12 @@ input[type="reset"]:disabled {
   color: darkgrey;
   background: #d3d3d3;
 }
+form {
+  display: none;
+}
+form .ui-dialog {
+  display: restore;
+}
 li {
   min-height: 100px;
   padding: 0.5em;
