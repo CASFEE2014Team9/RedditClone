@@ -23,6 +23,7 @@ input[type="reset"] {
   background: #d3d3d3;
   background: linear-gradient(to bottom, #d3d3d3 30%, #000000 70%);
 }
+
 button:disabled,
 input[type="button"]:disabled,
 input[type="submit"]:disabled,
@@ -30,6 +31,7 @@ input[type="reset"]:disabled {
   color: darkgrey;
   background: #d3d3d3;
 }
+
 button:hover,
 input[type="button"]:hover,
 input[type="submit"]:hover,
@@ -37,59 +39,46 @@ input[type="reset"]:hover {
   background: #add8e6;
   background: linear-gradient(to bottom, #add8e6 30%, #000000 70%);
 }
+
 form {
   display: none;
 }
+
 li {
   min-height: 100px;
   padding: 0.5em;
   margin: 0 0 0 -40px;
 }
-li:nth-child(2n) {
-  background: darkgray;
-}
-li:first-child {
-  border-top-left-radius: 7px;
-  border-top-right-radius: 7px;
-}
-li:last-child {
-  border-bottom-left-radius: 7px;
-  border-bottom-right-radius: 7px;
-}
-li:hover {
-  background: #add8e6;
-}
+
 .ui-dialog {
   background: #4d4d4d;
   border-radius: 7px;
   font-family: Segoe UI, Arial, sans-serif;
   padding: 0;
 }
+
 .ui-dialog .ui-dialog-titlebar-close {
   min-width: 0;
   margin: -0.5em 0.5em 0 0;
 }
+
 .ui-dialog .ui-dialog-content {
   padding: 0.5em;
 }
+
 .ui-widget-header {
   background: #000000;
   border-top-left-radius: 7px;
   border-top-right-radius: 7px;
   border: #ffffff;
 }
+
 .content {
   background: #ffffff;
   background: rgba(255, 255, 255, 0.4);
   border: #000000 2px outset;
   border-radius: 7px;
   height: 40em;
-}
-.table {
-  background: #ffffff;
-  background: rgba(255, 255, 255, 0.4);
-  border: #000000 2px outset;
-  border-radius: 7px;
 }
 
 .header,
@@ -99,27 +88,71 @@ li:hover {
 .footer {
   /*    border: 1px pink solid;*/
 }
+
 .nav,
 .sidebar {
   min-width: 15%;
   margin: 10px ;
 }
+
 .main {
   min-width: 60%;
   margin: 10px;
 }
+
 .content {
   display: flex;
 }
-.table {
-  list-style: none;
+
+.cat li{
+    list-style: none;
+    display: inline;
+    margin: 10px;
+    padding: 10px;
 }
+
+.cat li:hover{
+    background-color: #5D5D5D;
+    padding: 10px;
+}
+
+.table{
+    list-style: none;
+    border-top: solid darkgray 1px;
+    background: darkgray;
+}
+
+.table li{
+    padding: 10px;
+    margin: 20px 0px 0px -40px;
+}
+
+.table li:nth-child(2n){
+    background: #4D4D4D;
+}
+
+.table li:first-child {
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+
+.table li:last-child {
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+.table li:hover {
+    background: #add8e6;
+}
+
 .postRating {
   min-width: 10%;
 }
+
 .postContent {
   display: flex;
 }
+
 .postDetail {
   left: 10%;
 }
