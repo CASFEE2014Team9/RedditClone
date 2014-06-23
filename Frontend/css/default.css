@@ -3,7 +3,7 @@ body {
   background: #4d4d4d;
   font-family: Segoe UI, Arial, sans-serif;
   font-size: 1.5em;
-  padding: 0% 10%;
+  padding: 0 10%;
 }
 input {
   height: 2em;
@@ -20,7 +20,6 @@ input[type="reset"] {
   font-size: 0.75em;
   min-width: 100px;
   margin: 0.5em;
-  padding: 0 .5em 0 .5em;
   background: linear-gradient(to bottom, #000000, #ffffff);
 }
 button:disabled,
@@ -33,13 +32,10 @@ input[type="reset"]:disabled {
 form {
   display: none;
 }
-form .ui-dialog {
-  display: restore;
-}
 li {
   min-height: 100px;
   padding: 0.5em;
-  margin: 0px 0px 0px -40px;
+  margin: 0 0 0 -40px;
 }
 li:nth-child(2n) {
   background: darkgray;
@@ -75,7 +71,8 @@ li:hover {
   border: #ffffff;
 }
 .content {
-  background-color: rgba(255, 255, 255, 0.4);
+  background: #ffffff;
+  background: rgba(255, 255, 255, 0.4);
   background: none\9;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#66ffffff', endColorstr='#66ffffff');
   border: #000000 2px outset;
@@ -86,7 +83,8 @@ li:hover {
   filter: progid:DXImageTransform.Microsoft.gradient(enabled='false');
 }
 .table {
-  background-color: rgba(255, 255, 255, 0.4);
+  background: #ffffff;
+  background: rgba(255, 255, 255, 0.4);
   background: none\9;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#66ffffff', endColorstr='#66ffffff');
   border: #000000 2px outset;

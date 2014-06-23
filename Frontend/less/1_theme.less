@@ -10,7 +10,8 @@
 .background-opacity(@color, @opacity) {
   @rgba-color: rgba(red(@color), green(@color), blue(@color), @opacity);
 
-  background-color: @rgba-color;
+  background: @color;
+  background: @rgba-color;
 
   // Hack for IE8:
   background: none\9; // Only IE8
@@ -27,7 +28,7 @@ body{
   background: @background;
   font-family: @font-family;
   font-size: @font-size;
-  padding: 0% 10%;
+  padding: 0 10%;
 }
 
 input{
@@ -43,7 +44,6 @@ button, input[type="button"], input[type="submit"], input[type="reset"] {
   font-size: @font-size / 2;
   min-width: 100px;
   margin: @padding;
-  padding: 0 .5em 0 .5em;
   background: linear-gradient(to bottom, #000000, #ffffff);
 
   &:disabled {
@@ -54,16 +54,12 @@ button, input[type="button"], input[type="submit"], input[type="reset"] {
 
 form {
   display: none;
-
-  .ui-dialog{
-    display: restore;
-  }
 }
 
 li{
   min-height: 100px;
   padding: @padding;
-  margin: 0px 0px 0px -40px;
+  margin: 0 0 0 -40px;
 
   &:nth-child(2n){
     background: darkgray;
@@ -79,8 +75,7 @@ li{
     border-bottom-right-radius: @borderRadius;
   }
 
-  &:hover
-  {
+  &:hover{
     background:lightBlue;
   }
 }
