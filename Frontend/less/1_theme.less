@@ -6,21 +6,22 @@
 @font-size: 1.5em;
 @height: 2em;
 @padding: .5em;
+@hover: lightBlue;
 
 .background-opacity(@color, @opacity) {
   @rgba-color: rgba(red(@color), green(@color), blue(@color), @opacity);
 
   background: @color;
   background: @rgba-color;
+}
 
-  // Hack for IE8:
-  background: none\9; // Only IE8
-  filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d')", argb(@rgba-color),argb(@rgba-color))); // IE9 and down
-  // Problem: Filter gets applied twice in IE9.
-  // Solution:
-  &:not([dummy]) {
-    filter: progid:DXImageTransform.Microsoft.gradient(enabled='false'); // Only IE9
-  }
+.background-gradient-opacity(@color, @opacity, @percentage, @color2, @opacity2, @percentage2) {
+  @rgba-color: rgba(red(@color), green(@color), blue(@color), @opacity);
+  @rgba-color2: rgba(red(@color2), green(@color2), blue(@color2), @opacity2);
+
+  background: @color;
+  background: @rgba-color;
+  background: linear-gradient(to bottom, @rgba-color @percentage, @rgba-color2 @percentage2);
 }
 
 body{
@@ -44,11 +45,15 @@ button, input[type="button"], input[type="submit"], input[type="reset"] {
   font-size: @font-size / 2;
   min-width: 100px;
   margin: @padding;
-  background: linear-gradient(to bottom, #000000, #ffffff);
+  .background-gradient-opacity( lightgray, 180, 30%, black, 180, 70%);
 
   &:disabled {
     color: darkgrey;
     background: #d3d3d3;
+  }
+
+  &:hover{
+    .background-gradient-opacity( @hover, 255, 30%, black, 180, 70%);
   }
 }
 
@@ -76,7 +81,7 @@ li{
   }
 
   &:hover{
-    background:lightBlue;
+    background:@hover;
   }
 }
 

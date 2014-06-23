@@ -20,7 +20,8 @@ input[type="reset"] {
   font-size: 0.75em;
   min-width: 100px;
   margin: 0.5em;
-  background: linear-gradient(to bottom, #000000, #ffffff);
+  background: #d3d3d3;
+  background: linear-gradient(to bottom, #d3d3d3 30%, #000000 70%);
 }
 button:disabled,
 input[type="button"]:disabled,
@@ -28,6 +29,13 @@ input[type="submit"]:disabled,
 input[type="reset"]:disabled {
   color: darkgrey;
   background: #d3d3d3;
+}
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+  background: #add8e6;
+  background: linear-gradient(to bottom, #add8e6 30%, #000000 70%);
 }
 form {
   display: none;
@@ -49,7 +57,7 @@ li:last-child {
   border-bottom-right-radius: 7px;
 }
 li:hover {
-  background: lightBlue;
+  background: #add8e6;
 }
 .ui-dialog {
   background: #4d4d4d;
@@ -73,25 +81,15 @@ li:hover {
 .content {
   background: #ffffff;
   background: rgba(255, 255, 255, 0.4);
-  background: none\9;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#66ffffff', endColorstr='#66ffffff');
   border: #000000 2px outset;
   border-radius: 7px;
   height: 40em;
 }
-.content:not([dummy]) {
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled='false');
-}
 .table {
   background: #ffffff;
   background: rgba(255, 255, 255, 0.4);
-  background: none\9;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#66ffffff', endColorstr='#66ffffff');
   border: #000000 2px outset;
   border-radius: 7px;
-}
-.table:not([dummy]) {
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled='false');
 }
 
 .header,
