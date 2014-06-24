@@ -8,21 +8,45 @@
 
 .nav,
 .sidebar{
-  min-width: 15%;
-  margin: 10px ;
+  width: 15%;
+  margin: 10px 0;
 }
 
 .main{
-  min-width: 60%;
+  width: 60%;
   margin: 10px;
+  min-width: 500px;
 }
 
 .content{
   display: flex;
 }
 
+.cat li{
+  list-style: none;
+  display: inline;
+  margin: 10px;
+  padding: 10px;
+}
+
+.cat li:hover{
+  background-color: #5D5D5D;
+  padding: 10px;
+}
+
 .table{
   list-style: none;
+  border-top: solid darkgray 1px;
+  background: darkgray;
+}
+
+.table li{
+  padding: 10px;
+  margin: 20px 0px 0px -40px;
+}
+
+.table li:nth-child(2n){
+  background: #4D4D4D;
 }
 
 .post{
