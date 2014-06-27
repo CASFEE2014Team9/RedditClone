@@ -4,15 +4,16 @@
 
 define(function (require) {
     'use strict';
-    var $ = require("jquery");
     var Comment = require("Comment");
     var Array = require("Array");
-    function TestComment() {}
+    function TestComment() {
+    }
 
     TestComment.createTestComment = function (testUser, testPost) {
         var result = new Comment(testUser.context, testUser, testPost, "troll");
         return result;
     };
+
     QUnit.module("Comment");
     QUnit.test("create / delete Comment", function (assert) {
         var TestContext = require("TestContext");
@@ -25,11 +26,12 @@ define(function (require) {
         assert.equal(testPost.htmlNode.comments.children().length, 0, "no comments should be displayed");
 
         var comment = TestComment.createTestComment(testUser, testPost);
+        testPost.addComment(comment);
 
         assert.equal(testPost.htmlNode.comments.children().length, 1, "created comments should be displayed");
         assert.ok(testPost.comments.contains(comment), "created comments are present in the post");
 
-        comment.delete();
+        testPost.removeComment(comment);
 
         assert.equal(testPost.htmlNode.comments.children().length, 0, "no comments should be displayed");
         assert.ok(!testPost.comments.contains(comment), "deleted comments are not present in the post");
@@ -47,6 +49,7 @@ define(function (require) {
         assert.throws(
             function () {
                 var comment = new Comment("no user", testPost, "lala");
+                comment.toString();
             },
             TypeError,
             "creator must be a User"
@@ -55,6 +58,7 @@ define(function (require) {
         assert.throws(
             function () {
                 var comment = new Comment(testUser, "no post", "lala");
+                comment.toString();
             },
             TypeError,
             "post must be a Post"

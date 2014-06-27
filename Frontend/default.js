@@ -7,12 +7,13 @@
 
     require(["requirejs-config"], function () {
         require(['domReady!', 'Context'],
-            function (dom, Context) {
+            function main(dom, Context) {
 
                 var context = new Context();
                 context.initialize();
                 window.context = context;
-                context.GetPosts();
+                context.getCategories();
+                context.getPosts();
             });
     });
 }());

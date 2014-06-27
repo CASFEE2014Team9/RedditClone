@@ -6,7 +6,8 @@ define(function (require) {
     'use strict';
     var $ = require("jquery");
     var Context = require("Context");
-    function TestContext() {}
+    function TestContext() {
+    }
 
     TestContext.createTestContext = function () {
 
@@ -16,6 +17,7 @@ define(function (require) {
         var result = new Context();
         result.user = TestUser.createTestUser(result);
         result.postTableNode = $("<ul>");
+        result.categoryTableNode = $("<ul>");
         result.addPostButton = $("<button>");
         result.addressInput = $("<input>");
         result.textInput = $("<input>");

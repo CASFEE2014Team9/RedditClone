@@ -4,13 +4,15 @@
 
 define(function (require) {
     'use strict';
-    function Guard() {}
 
-    var $ = require("jquery");
-    var string = require("string");
+    function Guard() {
+    }
+
     Guard.isUnitTesting = false;
 
-    Guard.customType = function (parameter, parameterName, type) {
+    var string = require("string");
+
+    Guard.customType = function customType(parameter, parameterName, type) {
         if (parameter === undefined) {
             throw new TypeError("{0} must not be undefined".format(parameterName));
         }
@@ -24,7 +26,7 @@ define(function (require) {
         }
     };
 
-    Guard.string = function (parameter, parameterName) {
+    Guard.string = function string(parameter, parameterName) {
         if (parameter === undefined) {
             throw new TypeError("{0} must not be undefined".format(parameterName));
         }
@@ -42,7 +44,7 @@ define(function (require) {
         }
     };
 
-    Guard.stringFallback = function (parameter, parameterName, fallback) {
+    Guard.stringFallback = function stringFallback(parameter, fallback) {
         if (parameter === undefined) {
             return fallback;
         }
@@ -62,12 +64,38 @@ define(function (require) {
         return parameter;
     };
 
-    Guard.handleError = function (funcname, context, func) {
+    Guard.namedFunction = function namedFunction(parameter, parameterName, length) {
+        if (parameter === undefined) {
+            throw new TypeError("{0} must not be undefined".format(parameterName));
+        }
+
+        if (parameter === null) {
+            throw new TypeError("{0} must not be null".format(parameterName));
+        }
+
+        if (typeof parameter !== "function") {
+            throw new TypeError("{0} must be a function".format(parameterName));
+        }
+
+        if (parameter.length !== length) {
+            throw new TypeError("{0} must be a function with {1} parameters not {2}".format(parameterName, length, parameter.length));
+        }
+
+        if (parameter.name === undefined || parameter.name === "" || parameter.name === null) {
+            throw new TypeError("{0} must be a function with a name".format(parameterName, length, parameter.length));
+        }
+
+        return parameter;
+    };
+
+    Guard.handleError = function handleError(context, func) {
         if (Guard.isUnitTesting) {
-            $.proxy(func, context)();
+            Guard.namedFunction(func, "func", 1);
+            func(context);
         } else {
             try {
-                $.proxy(func, context)();
+                Guard.namedFunction(func, "func", 1);
+                func(context);
             } catch (ex) {
 
                 var exmsg = "";
@@ -78,7 +106,7 @@ define(function (require) {
                     exmsg += ' | stack: ' + ex.stack;
                 }
 
-                alert("{0} failed. {1}".format(funcname, ex.message));
+                alert("{0} failed. {1}".format(func.name, ex.message));
                 console.log(exmsg);
             }
         }

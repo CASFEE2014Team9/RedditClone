@@ -20,7 +20,7 @@ define(function (require) {
         this.loginButton = $("#loginDialogLoginButton");
     }
 
-    LoginDialog.prototype.initialize = function () {
+    LoginDialog.prototype.initialize = function initialize() {
         this.loginButton.on({
             click: $.proxy(this.onLoginButtonClick, this)
         });
@@ -30,20 +30,20 @@ define(function (require) {
         });
     };
 
-    LoginDialog.prototype.onLoginButtonClick = function () {
-        Guard.handleError("Login", this, function () {
-            var name = this.loginInput.val();
-            var password = this.passwordInput.val();
-            var user = this.context.user;
+    LoginDialog.prototype.onLoginButtonClick = function onLoginButtonClick() {
+        Guard.handleError(this, function login(item) {
+            var name = item.loginInput.val();
+            var password = item.passwordInput.val();
+            var user = item.context.user;
             user.name = name;
             user.password = password;
             user.login();
 
-            this.htmlNode.dialog("close");
+            item.htmlNode.dialog("close");
         });
     };
 
-    LoginDialog.prototype.open = function () {
+    LoginDialog.prototype.open = function open() {
         this.htmlNode.dialog("open");
     };
 

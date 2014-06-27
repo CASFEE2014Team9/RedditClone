@@ -24,11 +24,10 @@ define(function (require) {
         this.creator = creator;
         this.htmlNode = null;
 
-        this.post.comments.push(this);
         this.display();
     }
 
-    Comment.prototype.display = function () {
+    Comment.prototype.display = function display() {
         if (this.htmlNode === null) {
 
             var commentNode = $("<li/>")
@@ -48,15 +47,10 @@ define(function (require) {
         }
     };
 
-    Comment.prototype.onDeleteClick = function () {
-        Guard.handleError("DeleteComment", this, function () {
-            this.delete();
+    Comment.prototype.onDeleteClick = function onDeleteClick() {
+        Guard.handleError(this, function remove(item) {
+            item.post.removeComment(item);
         });
-    };
-
-    Comment.prototype.delete = function () {
-        this.htmlNode.remove();
-        this.post.comments.removeItem(this);
     };
 
     return Comment;

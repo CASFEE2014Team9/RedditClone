@@ -6,9 +6,10 @@ define(function (require) {
     'use strict';
     var $ = require("jquery");
     var User = require("User");
-    function TestUser() {}
+    function TestUser() {
+    }
 
-    TestUser.createTestUser = function (context) {
+    TestUser.createTestUser = function createTestUser(context) {
         var result = new User(context, "test", "test");
         result.htmlNode = $("<div>").addClass("login");
         result.display();

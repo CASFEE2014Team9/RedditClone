@@ -16,6 +16,7 @@ requirejs.config({
         User: './Model/User',
         Post: './Model/Post',
         Comment: './Model/Comment',
+        Category: './Model/Category',
         Rating: './Model/Rating',
         LoginDialog: './Forms/LoginDialog'
     }

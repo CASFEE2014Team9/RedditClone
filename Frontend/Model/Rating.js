@@ -21,13 +21,8 @@ define(function (require) {
         this.post = post;
         this.creator = creator;
 
-        this.post.ratings.push(this);
         this.post.display();
     }
-
-    Rating.prototype.delete = function () {
-        this.post.ratings.removeItem(this);
-    };
 
     return Rating;
 });

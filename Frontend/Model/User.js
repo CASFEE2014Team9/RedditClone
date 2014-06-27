@@ -31,19 +31,18 @@ define(function (require) {
 
     User.anonymous = "anonymous";
 
-    User.userFromCookie = function (context) {
+    User.userFromCookie = function userFromCookie(context) {
         var name = cookie.get("name");
         if (name === "" || name === undefined) {
             return new User(context, User.anonymous, User.anonymous);
         }
 
         var password = cookie.get("password");
-        var user = new User(context, name, password);
 
-        return user;
+        return new User(context, name, password);
     };
 
-    User.prototype.display = function () {
+    User.prototype.display = function display() {
         this.htmlNode.empty();
 
         if (this.loginstate === User.LoginState.LoggedIn) {
@@ -70,17 +69,17 @@ define(function (require) {
         }
     };
 
-    User.prototype.onLoginClick = function () {
-        Guard.handleError("Login", this, function () {
-            this.ShowLoginDialog();
+    User.prototype.onLoginClick = function onLoginClick() {
+        Guard.handleError(this, function showLoginDialog(item) {
+            item.showLoginDialog();
         });
     };
 
-    User.prototype.ShowLoginDialog = function () {
+    User.prototype.showLoginDialog = function showLoginDialog() {
         this.context.loginDialog.open();
     };
 
-    User.prototype.login = function () {
+    User.prototype.login = function login() {
         this.context.user = this;
 
         cookie.set("name", this.name);
@@ -91,7 +90,7 @@ define(function (require) {
         this.display();
     };
 
-    User.prototype.logout = function () {
+    User.prototype.logout = function logout() {
         this.context.user = null;
 
         cookie.set("name", "");

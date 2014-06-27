@@ -4,12 +4,13 @@
 
 define(function (require) {
     'use strict';
-    var $ = require("jquery");
     var Rating = require("Rating");
     var Array = require("Array");
-    function TestRating() {}
 
-    TestRating.createTestRating = function (testUser, testPost) {
+    function TestRating() {
+    }
+
+    TestRating.createTestRating = function createTestRating(testUser, testPost) {
         var result = new Rating(testUser.context, testUser, testPost, 100);
         return result;
     };
@@ -17,7 +18,6 @@ define(function (require) {
     QUnit.module("Rating");
     QUnit.test("create / delete", function (assert) {
         var TestContext = require("TestContext");
-        var TestUser = require("TestUser");
         var TestPost = require("TestPost");
 
         var testContext = TestContext.createTestContext();
@@ -25,15 +25,16 @@ define(function (require) {
         var testPost = TestPost.createTestPost(testUser);
 
         var rating = TestRating.createTestRating(testUser, testPost);
+        testPost.addRating(rating);
 
         assert.ok(testPost.ratings.contains(rating), "created ratings are present in the post");
 
-        rating.delete();
+        testPost.removeRating(rating);
 
         assert.ok(!testPost.ratings.contains(rating), "deleted ratings are not present in the post");
     });
 
-    QUnit.test("create with wrong arguments", function(assert) {
+    QUnit.test("create with wrong arguments", function (assert) {
         var TestContext = require("TestContext");
         var TestPost = require("TestPost");
 
@@ -44,6 +45,7 @@ define(function (require) {
         assert.throws(
             function () {
                 var rating = new Rating("no user", testPost, 100);
+                rating.toString();
             },
             TypeError,
             "creator must be a User"
@@ -52,6 +54,7 @@ define(function (require) {
         assert.throws(
             function () {
                 var rating = new Rating(testUser, "no post", 100);
+                rating.toString();
             },
             TypeError,
             "post must be a Post"

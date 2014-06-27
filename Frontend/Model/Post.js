@@ -28,11 +28,10 @@ define(function (require) {
         this.ratings = [];
         this.htmlNode = null;
 
-        this.context.posts.push(this);
         this.display();
     }
 
-    Post.prototype.display = function () {
+    Post.prototype.display = function display() {
         if (this.htmlNode === null) {
             var postNode = $("<li/>")
                 .addClass("post");
@@ -115,33 +114,45 @@ define(function (require) {
         });
     };
 
-    Post.prototype.onAddCommentClick = function () {
-        Guard.handleError("AddComment", this, function () {
+    Post.prototype.onAddCommentClick = function onAddCommentClick() {
+        Guard.handleError(this, function addComment(item) {
             var Comment = require("Comment");
-            var commentText = this.htmlNode.commentInput.val();
-            new Comment(this.context, this.context.user, this, commentText);
+            var commentText = item.htmlNode.commentInput.val();
+            item.addComment(new Comment(item.context, item.context.user, item, commentText));
         });
     };
 
-    Post.prototype.onDeleteClick = function () {
-        Guard.handleError("DeletePost", this, function () {
-            this.delete();
+    Post.prototype.onDeleteClick = function onDeleteClick() {
+        Guard.handleError(this, function removePost(item) {
+            item.context.removePost(item);
         });
     };
 
-    Post.prototype.delete = function () {
-        this.htmlNode.remove();
-        this.context.posts.removeItem(this);
-    };
-
-    Post.prototype.onVoteUpClick = function () {
-        Guard.handleError("VoteUp", this, function () {
+    Post.prototype.onVoteUpClick = function onVoteUpClick() {
+        Guard.handleError(this, function voteUp(item) {
         });
     };
 
-    Post.prototype.onVoteDownClick = function () {
-        Guard.handleError("VoteDown", this, function () {
+    Post.prototype.onVoteDownClick = function onVoteDownClick() {
+        Guard.handleError(this, function voteDown(item) {
         });
+    };
+
+    Post.prototype.addComment = function addComment(commment) {
+        this.comments.push(commment);
+    };
+
+    Post.prototype.removeComment = function removeComment(commment) {
+        commment.htmlNode.remove();
+        this.comments.removeItem(commment);
+    };
+
+    Post.prototype.addRating = function addRating(rating) {
+        this.ratings.push(rating);
+    };
+
+    Post.prototype.removeRating = function removeRating(rating) {
+        this.ratings.removeItem(rating);
     };
 
     return Post;
