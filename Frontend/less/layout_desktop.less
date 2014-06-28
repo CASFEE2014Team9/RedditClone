@@ -1,0 +1,118 @@
+@font-size: 1.5em;
+@height: 2em;
+@padding: .5em;
+@borderRadius: 7px;
+@border: #000000 2px outset;
+
+.header,
+.nav,
+.main,
+.sidebar,
+.footer{
+  border: 1px pink solid;
+  overflow: hidden;
+}
+
+body{
+  font-size: @font-size;
+  padding: 0 10%;
+}
+
+input{
+  height: @height;
+}
+
+button, input[type="button"], input[type="submit"], input[type="reset"] {
+  border-radius: @borderRadius;
+  font-size: @font-size / 2;
+  min-width: 100px;
+  margin: @padding;
+}
+
+.nav,
+.sidebar{
+  width: 15%;
+  margin: 10px 0;
+}
+
+.main{
+  width: 60%;
+  margin: 10px;
+  min-width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header{
+  position: absolute;
+  top: 0;
+  width:80%;
+}
+
+.content{
+  display: flex;
+  position: absolute;
+  top: 40px;
+  Bottom: 40px;
+  width:80%;
+}
+.footer{
+  position: absolute;
+  bottom: 0;
+  width:80%;
+}
+
+.cat li{
+  list-style: none;
+  display: inline;
+  margin: 10px;
+  padding: 10px;
+}
+
+.cat li:hover{
+  padding: 10px;
+}
+
+.table{
+  list-style: none;
+  //overflow:auto;
+  overflow-y: scroll;
+  flex: 1 1 auto;
+
+//  position:absolute;
+ // bottom: 0;
+//  top: 140px;
+//  left: 10%;
+}
+
+.table li{
+  padding: 10px;
+  margin: 0 0 0 -40px;
+}
+
+.post{
+}
+
+.postRating{
+  min-width: 10%;
+}
+
+.postContent{
+  display: flex;
+}
+
+.postDetail{
+  left: 10%;
+}
+
+.ui-dialog{
+
+  .ui-dialog-titlebar-close{
+    min-width: 0;
+    margin: -@padding @padding 0 0;
+  }
+
+  .ui-dialog-content{
+    padding: @padding;
+  }
+}
