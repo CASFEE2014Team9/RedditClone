@@ -31,7 +31,6 @@ var paths = {
 gulp.task('less', function () {
     gulp.src(paths.in.less)
         .pipe(less())
-        .pipe(concat('default.css'))
         .pipe(gulp.dest(paths.out.css));
 });
 

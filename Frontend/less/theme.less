@@ -1,12 +1,12 @@
+
 @borderRadius: 7px;
 @border: #000000 2px outset;
 @foreground: #FFFFFF;
 @background: #4D4D4D;
 @font-family: Segoe UI,Arial,sans-serif;
-@font-size: 1.5em;
-@height: 2em;
-@padding: .5em;
 @hover: lightBlue;
+@alternate-background: darkgray;
+@disabled-color: darkgray;
 
 .background-opacity(@color, @opacity) {
   @rgba-color: rgba(red(@color), green(@color), blue(@color), @opacity);
@@ -28,27 +28,19 @@ body{
   color: @foreground;
   background: @background;
   font-family: @font-family;
-  font-size: @font-size;
-  padding: 0 10%;
 }
 
 input{
-  height: @height;
   border-radius: @borderRadius;
   font-family: @font-family;
 }
 
 button, input[type="button"], input[type="submit"], input[type="reset"] {
-  height: @height;
   color: @foreground;
-  border-radius: @borderRadius;
-  font-size: @font-size / 2;
-  min-width: 100px;
-  margin: @padding;
   .background-gradient-opacity( lightgray, 180, 30%, black, 180, 70%);
 
   &:disabled {
-    color: darkgrey;
+    color: @disabled-color;
     background: #d3d3d3;
   }
 
@@ -61,13 +53,15 @@ form {
   display: none;
 }
 
+.table{
+  border-top: solid darkgray 1px;
+  background: darkgray;
+}
+
 .table li{
-  min-height: 100px;
-  padding: @padding;
-  margin: 0 0 0 -40px;
 
   &:nth-child(2n){
-    background: darkgray;
+    background: @alternate-background;
   }
 
   &:first-child{
@@ -79,26 +73,12 @@ form {
     border-bottom-left-radius: @borderRadius;
     border-bottom-right-radius: @borderRadius;
   }
-
-  &:hover{
-    background:@hover;
-  }
 }
 
 .ui-dialog{
   background: @background;
   border-radius: @borderRadius;
   font-family: @font-family;
-  padding: 0;
-
-  .ui-dialog-titlebar-close{
-    min-width: 0;
-    margin: -@padding @padding 0 0;
-  }
-
-  .ui-dialog-content{
-    padding: @padding;
-  }
 }
 
 .ui-widget-header{
@@ -112,11 +92,18 @@ form {
   .background-opacity( white, 0.4);
   border: @border;
   border-radius: @borderRadius;
-  height: 40em;
 }
 
 .table{
   .background-opacity( white, 0.4);
   border: @border;
   border-radius: @borderRadius;
+}
+
+.table li:nth-child(2n){
+  background: @alternate-background;
+}
+
+.cat li:hover {
+  background-color: @hover;
 }
