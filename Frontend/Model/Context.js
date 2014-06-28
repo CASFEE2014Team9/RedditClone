@@ -6,9 +6,12 @@ define(function (require) {
     'use strict';
     var $ = require("jquery");
     var Guard = require("Guard");
+    var List = require("List");
 
     function Context() {
         var LoginDialog = require("LoginDialog");
+        var Post = require("Post");
+        var Category = require("Category");
 
         //map html elements first so they are rendered correctly
         this.postTableNode = $("#linkContentTable");
@@ -17,8 +20,8 @@ define(function (require) {
         this.addressInput = $("#webAddress");
         this.textInput = $("#innerHTML");
         this.loginDialog = new LoginDialog($("#loginDialog"), this);
-        this.posts = [];
-        this.categories = [];
+        this.posts = new List(Post);
+        this.categories = new List(Category);
         this.user = null;
     }
 
@@ -50,21 +53,21 @@ define(function (require) {
     };
 
     Context.prototype.addPost = function addPost(post) {
-        this.posts.push(post);
+        this.posts.add(post);
     };
 
     Context.prototype.removePost = function removePost(post) {
         post.htmlNode.remove();
-        this.posts.removeItem(post);
+        this.posts.remove(post);
     };
 
     Context.prototype.addCategory = function addCategory(category) {
-        this.categories.push(category);
+        this.categories.add(category);
     };
 
     Context.prototype.removeCategory = function addCategory(category) {
         category.htmlNode.remove();
-        this.categories.removeItem(category);
+        this.categories.add(category);
     };
 
     Context.prototype.getCategories = function getCategories() {

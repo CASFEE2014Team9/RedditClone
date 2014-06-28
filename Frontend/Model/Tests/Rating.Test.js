@@ -5,7 +5,6 @@
 define(function (require) {
     'use strict';
     var Rating = require("Rating");
-    var Array = require("Array");
 
     function TestRating() {
     }

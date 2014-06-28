@@ -5,7 +5,6 @@
 define(function (require) {
     'use strict';
     var Comment = require("Comment");
-    var Array = require("Array");
     function TestComment() {
     }
 

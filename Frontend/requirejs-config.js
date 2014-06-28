@@ -11,7 +11,7 @@ requirejs.config({
         cookie: './Lib/Cookies/dist/cookies.min',
         Guard: './Lib/guard',
         string: './Lib/string',
-        Array: './Lib/Array',
+        List: './Lib/List',
         Context: './Model/Context',
         User: './Model/User',
         Post: './Model/Post',

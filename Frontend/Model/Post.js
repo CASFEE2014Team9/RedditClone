@@ -5,13 +5,15 @@
 define(function (require) {
     'use strict';
     var Guard = require("Guard");
-    var Array = require("Array");
+    var List = require("List");
     var $ = require("jquery");
 
     function Post(context, creator, link, title, description) {
 
         var Context = require("Context");
         var User = require("User");
+        var Rating = require("Rating");
+        var Comment = require("Comment");
 
         Guard.customType(context, "context", Context);
         Guard.customType(creator, "creator", User);
@@ -24,8 +26,8 @@ define(function (require) {
         this.url = link;
         this.title = title;
         this.description = description;
-        this.comments = [];
-        this.ratings = [];
+        this.comments = new List(Comment);
+        this.ratings = new List(Rating);
         this.htmlNode = null;
 
         this.display();
@@ -109,7 +111,7 @@ define(function (require) {
             this.context.postTableNode.append(this.htmlNode);
         }
 
-        this.comments.forEach(function (comment) {
+        this.comments.items.forEach(function (comment) {
             comment.display();
         });
     };
@@ -130,29 +132,33 @@ define(function (require) {
 
     Post.prototype.onVoteUpClick = function onVoteUpClick() {
         Guard.handleError(this, function voteUp(item) {
+            var Rating = require("Rating");
+            item.addRating(new Rating(item.context, item.context.user, item, 1));
         });
     };
 
     Post.prototype.onVoteDownClick = function onVoteDownClick() {
         Guard.handleError(this, function voteDown(item) {
+            var Rating = require("Rating");
+            item.addRating(new Rating(item.context, item.context.user, item, -1));
         });
     };
 
     Post.prototype.addComment = function addComment(commment) {
-        this.comments.push(commment);
+        this.comments.add(commment);
     };
 
     Post.prototype.removeComment = function removeComment(commment) {
         commment.htmlNode.remove();
-        this.comments.removeItem(commment);
+        this.comments.remove(commment);
     };
 
     Post.prototype.addRating = function addRating(rating) {
-        this.ratings.push(rating);
+        this.ratings.add(rating);
     };
 
     Post.prototype.removeRating = function removeRating(rating) {
-        this.ratings.removeItem(rating);
+        this.ratings.remove(rating);
     };
 
     return Post;

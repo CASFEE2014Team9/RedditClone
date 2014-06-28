@@ -5,7 +5,6 @@
 define(function (require) {
     'use strict';
     var Post = require("Post");
-    var Array = require("Array");
 
     function TestPost() {
     }
@@ -70,12 +69,12 @@ define(function (require) {
         testContext.textInput.val("a search engine");
         testContext.addPostButton.trigger('click');
 
-        assert.ok(testContext.posts.length === 1, "Post should be created");
+        assert.ok(testContext.posts.count() === 1, "Post should be created");
 
-        var post = testContext.posts[0];
+        var post = testContext.posts.items[0];
         post.htmlNode.deleteButton.trigger('click');
 
-        assert.ok(testContext.posts.length === 0, "Post should be deleted");
+        assert.ok(testContext.posts.count() === 0, "Post should be deleted");
     });
 
     return TestPost;

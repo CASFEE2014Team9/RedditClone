@@ -13,7 +13,7 @@ var paths = {
         scripts:
             [
                 './FrontEnd/Model/**/*.js',
-                './FrontEnd/Lib/Array.js',
+                './FrontEnd/Lib/List.js',
                 './FrontEnd/Lib/guard.js',
                 './FrontEnd/Lib/string.js',
                 './FrontEnd/Forms/**/*.js'

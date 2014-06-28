@@ -32,5 +32,19 @@ define(function (require) {
         return result;
     };
 
+    QUnit.module("Context");
+    QUnit.test("lists should be type save", function (assert) {
+        assert.throws(
+            function () {
+                var testContext = TestContext.createTestContext();
+                var Category = require("Category");
+                var category = new Category(testContext, "category");
+                testContext.addPost(category);
+            },
+            TypeError,
+            "only posts may be added to the post list"
+        );
+    });
+
     return TestContext;
 });

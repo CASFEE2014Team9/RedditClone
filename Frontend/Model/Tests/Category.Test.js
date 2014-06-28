@@ -5,7 +5,6 @@
 define(function (require) {
     'use strict';
     var Category = require("Category");
-    var Array = require("Array");
 
     function TestCategory() {
     }
