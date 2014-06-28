@@ -2,7 +2,7 @@
 /*jslint browser: true*/
 /*global window, requirejs, define, QUnit */
 
-define(function (require) {
+define(function defineTestContext(require) {
     'use strict';
     var $ = require("jquery");
     var Context = require("Context");

@@ -2,7 +2,7 @@
 /*jslint browser: true*/
 /*global window, requirejs, define, alert */
 
-define(function (require) {
+define(function defineUser(require) {
     'use strict';
 
     var Guard = require("Guard");

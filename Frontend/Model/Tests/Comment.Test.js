@@ -2,7 +2,7 @@
 /*jslint browser: true*/
 /*global window, requirejs, define, QUnit */
 
-define(function (require) {
+define(function defineTestComment(require) {
     'use strict';
     var Comment = require("Comment");
     function TestComment() {

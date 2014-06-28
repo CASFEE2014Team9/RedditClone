@@ -2,7 +2,7 @@
 /*jslint browser: true*/
 /*global window, requirejs, define, QUnit */
 
-define(function (require) {
+define(function defineTestRating(require) {
     'use strict';
     var Rating = require("Rating");
 

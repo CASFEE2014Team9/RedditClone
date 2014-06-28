@@ -2,7 +2,7 @@
 /*jslint browser: true*/
 /*global window, requirejs, define, alert */
 
-define(function (require) {
+define(function defineContext(require) {
     'use strict';
     var $ = require("jquery");
     var Guard = require("Guard");

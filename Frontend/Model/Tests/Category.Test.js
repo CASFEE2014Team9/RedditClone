@@ -2,7 +2,7 @@
 /*jslint browser: true*/
 /*global window, requirejs, define, QUnit */
 
-define(function (require) {
+define(function defineTestCategory(require) {
     'use strict';
     var Category = require("Category");
 

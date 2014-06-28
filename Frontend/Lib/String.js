@@ -2,7 +2,7 @@
 /*jslint browser: true*/
 /*global window, requirejs, define, alert, parseInt */
 
-(function () {
+(function defineString() {
     'use strict';
 
     if (!String.prototype.format) {

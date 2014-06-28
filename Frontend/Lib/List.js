@@ -2,10 +2,8 @@
 /*jslint browser: true*/
 /*global window, requirejs, define, alert */
 
-define(function (requrie) {
+define(function defineList(requrie) {
     'use strict';
-
-    var Guard = requrie("Guard");
 
     function List(elementType) {
         this.items = [];
@@ -21,6 +19,7 @@ define(function (requrie) {
 
     List.prototype.add = function add(item) {
         if (this.elementType !== undefined) {
+            var Guard = requrie("Guard");
             Guard.customType(item, "item", this.elementType);
         }
         this.items.push(item);

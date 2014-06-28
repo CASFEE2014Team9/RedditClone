@@ -2,7 +2,7 @@
 /*jslint browser: true*/
 /*global window, requirejs, define, alert */
 
-define(function (require) {
+define(function definePost(require) {
     'use strict';
     var Guard = require("Guard");
     var List = require("List");
@@ -28,6 +28,7 @@ define(function (require) {
         this.description = description;
         this.comments = new List(Comment);
         this.ratings = new List(Rating);
+        this.totalRating = 0;
         this.htmlNode = null;
 
         this.display();
@@ -155,6 +156,9 @@ define(function (require) {
 
     Post.prototype.addRating = function addRating(rating) {
         this.ratings.add(rating);
+
+        var Enumerable = require("linqjs");
+        this.totalRating = Enumerable.From(this.ratings.items).Select(function (rating) { return rating.value; }).Sum();
     };
 
     Post.prototype.removeRating = function removeRating(rating) {
