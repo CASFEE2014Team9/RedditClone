@@ -47,16 +47,18 @@ define(function definePost(require) {
                 .text(this.description);
 
             var voteUp = $("<button/>")
+                .addClass("voteUp")
                 .on({
                     click: $.proxy(this.onVoteUpClick, this)
                 })
-                .html("vote up");
+                .html("&#x25B2");
 
             var voteDown = $("<button/>")
+                .addClass("voteDown")
                 .on({
                     click: $.proxy(this.onVoteDownClick, this)
                 })
-                .html("vote down");
+                .html("&#x25BC");
 
             var deleteButton = $("<button/>")
                 .on({
