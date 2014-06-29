@@ -1,9 +1,16 @@
 ﻿
 /*jslint browser: true*/
-/*global window, requirejs, define */
+/*global window, requirejs, define, alert */
 
 (function () {
     'use strict';
+
+    requirejs.onError = function (err) {
+        var errorMessage = 'failed to load: ' + err.requireModules;
+        console.log(errorMessage);
+        alert(errorMessage);
+        throw err;
+    };
 
     require(["requirejs-config"], function () {
         require(['domReady!', 'Context'],
