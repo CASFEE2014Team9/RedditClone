@@ -32,12 +32,10 @@ button, input[type="button"], input[type="submit"], input[type="reset"] {
 .nav,
 .sidebar{
   width: 15%;
-  margin: 10px 0;
 }
 
 .main{
   width: 70%;
-  margin: 10px;
   min-width: 500px;
   display: flex;
   flex-direction: column;
@@ -67,22 +65,23 @@ button, input[type="button"], input[type="submit"], input[type="reset"] {
   display: inline;
   margin: 10px;
   padding: 10px;
+  flex: 1 1 auto;
 }
 
 .cat li:hover{
   padding: 10px;
 }
 
+.addLink{
+  margin: 10px 0;
+  flex: 0 0 auto;
+}
+
 .table{
   list-style: none;
-  //overflow:auto;
-  overflow-y: scroll;
+  overflow-y: auto;
   flex: 1 1 auto;
-
-//  position:absolute;
- // bottom: 0;
-//  top: 140px;
-//  left: 10%;
+  margin: 0;
 }
 
 .table li{
