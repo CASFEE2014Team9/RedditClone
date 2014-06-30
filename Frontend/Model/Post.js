@@ -76,29 +76,34 @@ define(function definePost(require) {
                 .attr("type", "text")
                 .attr("name", "commentInput");
 
-            var rating = $("<div/>")
-                .addClass("postRating");
             var content = $("<div/>")
                 .addClass("postContent");
-            var detail = $("<div/>")
-                .addClass("postDetail");
+            var rating = $("<div/>")
+                .addClass("postRating");
+            var postDescription = $("<div/>")
+                .addClass("postDescription");
             var header = $("<header>");
 
             var comments = $("<div/>")
                 .addClass("postComments");
 
+            var detail = $("<div/>")
+                .addClass("postDetail");
+
             header.append(title);
-            postNode.append(header);
 
             rating.append(voteUp);
             rating.append(voteDown);
             postNode.append(rating);
 
 
-            detail.append(description);
-            detail.append(deleteButton);
-            detail.append(commentInput);
-            detail.append(addCommentButton);
+            postDescription.append(description);
+            postDescription.append(deleteButton);
+            postDescription.append(commentInput);
+            postDescription.append(addCommentButton);
+
+            detail.append(header);
+            detail.append(postDescription);
 
             content.append(rating);
             content.append(detail);
