@@ -88,7 +88,7 @@ define(function (require) {
         return parameter;
     };
 
-    Guard.handleError = function handleError(context, func) {
+    Guard.handleError = function handleError(context, func, rethrow) {
         if (Guard.isUnitTesting) {
             Guard.namedFunction(func, "func", 1);
             func(context);
@@ -108,6 +108,10 @@ define(function (require) {
 
                 alert("{0} failed. {1}".format(func.name, ex.message));
                 console.log(exmsg);
+
+                if (rethrow) {
+                    throw ex;
+                }
             }
         }
     };

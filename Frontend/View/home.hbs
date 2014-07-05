@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Reddit Clone</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="stylesheet" type="text/css" href="Lib/jquery-ui/themes/smoothness/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="css/theme.css">
+    <link rel="stylesheet" type="text/css" href="css/layout_desktop.css">
+</head>
+
+<body>
+
+<header class="header">Header
+</header>
+
+<div class="content">
+
+    <nav class="nav">
+        <p>
+            <a href="Tests/Test.html">Tests</a>
+        </p>
+        <p>
+            <a href="style-guide/Index.html">StyleGuide</a>
+        </p>
+        <p>
+            Content.Navigation
+        </p>
+    </nav>
+
+    <main class="main">
+        <ul class="cat">
+            {{#each categories.items}}
+                {{> category}}
+            {{/each}}
+        </ul>
+
+        <div class="region, addLink">
+            <input type="text" id="webAddress" placeholder="web address...">
+            <input type="text" id="innerHTML" placeholder="visible text...">
+            <button class="button" id="addPostButton" name="addLink">Add Link</button>
+        </div>
+
+        <ul class="table" id="linkContentTable" >
+            {{#each posts.items}}
+                {{> post}}
+            {{/each}}
+        </ul>
+    </main>
+
+
+
+    <aside class="sidebar">
+        <div class="login"></div>
+        <form id="loginDialog" class="dialog" title="login" method="none" >
+            <label for="loginDialogLoginInput">Login Name</label>
+            <input type="text" id="loginDialogLoginInput" />
+            <label for="loginDialogPasswordInput">Password</label>
+            <input type="password" id="loginDialogPasswordInput" />
+            <button id="loginDialogLoginButton" >login</button>
+        </form>
+        <p>Content.Aside</p>
+    </aside>
+
+</div>
+
+<footer class="footer">Footer
+</footer>
+
+<script data-main="default" src="Lib/require.js"></script>
+</body>
+
+</html>

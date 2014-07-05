@@ -20,7 +20,7 @@ define(function defineTestRating(require) {
         var TestPost = require("TestPost");
 
         var testContext = TestContext.createTestContext();
-        var testUser = testContext.user;
+        var testUser = testContext.userViewModel;
         var testPost = TestPost.createTestPost(testUser);
 
         var rating = TestRating.createTestRating(testUser, testPost);
@@ -38,7 +38,7 @@ define(function defineTestRating(require) {
         var TestPost = require("TestPost");
 
         var testContext = TestContext.createTestContext();
-        var testUser = testContext.user;
+        var testUser = testContext.userViewModel;
         var testPost = TestPost.createTestPost(testUser);
 
         assert.throws(

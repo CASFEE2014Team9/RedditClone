@@ -6,21 +6,23 @@
     'use strict';
 
     requirejs.onError = function (err) {
-        var errorMessage = 'failed to load: ' + err.requireModules;
+        var errorMessage = 'failed to load: ' + err.requireModules + ' ' + err.message;
         console.log(errorMessage);
         alert(errorMessage);
         throw err;
     };
 
     require(["requirejs-config"], function () {
-        require(['domReady!', 'Context'],
-            function main(dom, Context) {
+        require(['domReady!', 'ContextViewModel'],
+            function main(dom, ContextViewModel) {
 
-                var context = new Context();
-                context.initialize();
-                window.context = context;
-                context.getCategories();
-                context.getPosts();
+                var contextViewModel = new ContextViewModel();
+                contextViewModel.initialize();
+                window.contextViewModel = contextViewModel;
+
+                contextViewModel.context.getCategories();
+                contextViewModel.context.getPosts();
+                contextViewModel.connectModelWithView();
             });
     });
 }());

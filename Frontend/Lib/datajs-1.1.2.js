@@ -2590,7 +2590,7 @@
                     }
                 };
 
-                xhr.open(request.method || "GET", url, true, request.user, request.password);
+                xhr.open(request.method || "GET", url, true, request.userViewModel, request.password);
 
                 // Set the name/value pairs.
                 if (request.headers) {
@@ -9171,7 +9171,7 @@
         return {
             method: "GET",
             requestUri: uri,
-            user: options.user,
+            user: options.userViewModel,
             password: options.password,
             enableJsonpCallback: options.enableJsonpCallback,
             callbackParameterName: options.callbackParameterName,

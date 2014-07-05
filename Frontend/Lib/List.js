@@ -37,5 +37,15 @@ define(function defineList(requrie) {
         return this.items.length;
     };
 
+    List.prototype.findByKey = function findByKey(key, value) {
+        var i;
+        for (i = 0; i < this.items.length; i++) {
+            if (this.items[i][key] === value) {
+                return this.items[i];
+            }
+        }
+        return null;
+    };
+
     return List;
 });

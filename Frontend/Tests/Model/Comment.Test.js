@@ -19,7 +19,7 @@ define(function defineTestComment(require) {
         var TestPost = require("TestPost");
 
         var testContext = TestContext.createTestContext();
-        var testUser = testContext.user;
+        var testUser = testContext.userViewModel;
         var testPost = TestPost.createTestPost(testUser);
 
         assert.equal(testPost.htmlNode.comments.children().length, 0, "no comments should be displayed");

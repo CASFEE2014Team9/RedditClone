@@ -15,7 +15,7 @@ define(function defineTestContext(require) {
         var LoginDialog = require("LoginDialog");
 
         var result = new Context();
-        result.user = TestUser.createTestUser(result);
+        result.userViewModel = TestUser.createTestUser(result);
         result.postTableNode = $("<ul>");
         result.categoryTableNode = $("<ul>");
         result.addPostButton = $("<button>");

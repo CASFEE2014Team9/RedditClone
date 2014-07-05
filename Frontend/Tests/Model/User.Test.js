@@ -21,7 +21,7 @@ define(function defineTestUser(require) {
     QUnit.asyncTest("login", function (assert) {
         require(["TestContext"], function (TestContext) {
             var testContext = TestContext.createTestContext();
-            var testUser = testContext.user;
+            var testUser = testContext.userViewModel;
             assert.equal(testUser.loginstate, User.LoginState.LoggedOut, "Created users are logged out");
 
             testUser.login();
@@ -37,7 +37,7 @@ define(function defineTestUser(require) {
     QUnit.asyncTest("events should be handled without error", function (assert) {
         require(["TestContext"], function (TestContext) {
             var testContext = TestContext.createTestContext();
-            var testUser = testContext.user;
+            var testUser = testContext.userViewModel;
 
             testUser.htmlNode.loginButton.trigger("click");
 

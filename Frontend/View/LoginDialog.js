@@ -8,12 +8,12 @@ define(function (require) {
     var Guard = require('Guard');
     var $ui = require('jqueryui');
 
-    function LoginDialog(htmlNode, context) {
-        var Context = require('Context');
-        Guard.customType(context, "context", Context);
+    function LoginDialog(htmlNode, contextViewModel) {
+        //var Context = require('Context');
+        //Guard.customType(context, "context", Context);
 
         this.htmlNode = htmlNode;
-        this.context = context;
+        this.contextViewModel = contextViewModel;
 
         this.loginInput = $("#loginDialogLoginInput");
         this.passwordInput = $("#loginDialogPasswordInput");
@@ -31,16 +31,21 @@ define(function (require) {
     };
 
     LoginDialog.prototype.onLoginButtonClick = function onLoginButtonClick() {
-        Guard.handleError(this, function login(item) {
-            var name = item.loginInput.val();
-            var password = item.passwordInput.val();
-            var user = item.context.user;
-            user.name = name;
-            user.password = password;
-            user.login();
+        try {
+            Guard.handleError(this, function login(item) {
+                var name = item.loginInput.val();
+                var password = item.passwordInput.val();
+                var userViewModel = item.contextViewModel.userViewModel;
+                var user = userViewModel.user;
+                user.name = name;
+                user.password = password;
+                userViewModel.login();
 
-            item.htmlNode.dialog("close");
-        });
+                item.htmlNode.dialog("close");
+            }, true);
+        } finally {
+            return false;
+        }
     };
 
     LoginDialog.prototype.open = function open() {

@@ -19,7 +19,7 @@ define(function defineTestPost(require) {
         var TestContext = require("TestContext");
 
         var testContext = TestContext.createTestContext();
-        var testUser = testContext.user;
+        var testUser = testContext.userViewModel;
 
         assert.equal(testContext.postTableNode.children().length, 0, "no posts should be displayed");
 
@@ -39,7 +39,7 @@ define(function defineTestPost(require) {
         var TestContext = require("TestContext");
 
         var testContext = TestContext.createTestContext();
-        var testUser = testContext.user;
+        var testUser = testContext.userViewModel;
 
         assert.throws(
             function () {

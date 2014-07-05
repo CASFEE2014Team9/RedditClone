@@ -6,6 +6,8 @@ define(function defineRating(require) {
     'use strict';
     var Guard = require("Guard");
 
+    var ids = 0;
+
     function Rating(context, creator, post, value) {
 
         var Context = require("Context");
@@ -16,12 +18,12 @@ define(function defineRating(require) {
         Guard.customType(creator, "creator", User);
         Guard.customType(post, "post", Post);
 
+        this.id = ids;
+        ids = ids + 1;
         this.context = context;
         this.value = value;
         this.post = post;
         this.creator = creator;
-
-        this.post.display();
     }
 
     return Rating;

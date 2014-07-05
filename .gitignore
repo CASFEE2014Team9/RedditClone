@@ -167,3 +167,5 @@ Frontend/Lib/qunit/
 Frontend/Lib/requirejs-domready/
 Frontend/Lib/linqjs-amd/
 Frontend/css/
+Frontend/Lib/handlebars/
+Frontend/Lib/require-handlebars-plugin/

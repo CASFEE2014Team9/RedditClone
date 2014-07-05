@@ -5,7 +5,9 @@
 define(function defineCategory(require) {
     'use strict';
     var Guard = require("Guard");
-    var $ = require("jquery");
+   // var $ = require("jquery");
+
+    var ids = 0;
 
     function Category(context, name) {
         var Context = require("Context");
@@ -13,15 +15,17 @@ define(function defineCategory(require) {
         Guard.customType(context, "context", Context);
         Guard.string(name, "name");
 
+        this.id = ids;
+        ids = ids + 1;
         this.context = context;
         this.name = name;
-        this.htmlNode = null;
         this.posts = [];
-
-        this.display();
     }
 
     Category.prototype.display = function () {
+
+        /*
+
         if (this.htmlNode === null) {
             var categoryNode = $("<li/>")
                 .text(this.name);
@@ -29,6 +33,7 @@ define(function defineCategory(require) {
             this.htmlNode = categoryNode;
             this.context.categoryTableNode.append(categoryNode);
         }
+        */
     };
 
     return Category;

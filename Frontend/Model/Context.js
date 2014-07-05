@@ -4,70 +4,25 @@
 
 define(function defineContext(require) {
     'use strict';
-    var $ = require("jquery");
-    var Guard = require("Guard");
+
     var List = require("List");
 
     function Context() {
-        var LoginDialog = require("LoginDialog");
         var Post = require("Post");
         var Category = require("Category");
 
-        //map html elements first so they are rendered correctly
-        this.postTableNode = $("#linkContentTable");
-        this.categoryTableNode = $(".cat");
-        this.addPostButton = $("#addPostButton");
-        this.addressInput = $("#webAddress");
-        this.textInput = $("#innerHTML");
-        this.loginDialog = new LoginDialog($("#loginDialog"), this);
         this.posts = new List(Post);
         this.categories = new List(Category);
-        this.user = null;
     }
-
-    Context.prototype.initialize = function initialize() {
-        var User = require("User");
-
-        this.loginDialog.initialize();
-        this.addPostButton.on({
-            click: $.proxy(this.onAddLinkButtonClicked, this)
-        });
-
-        //then fetch the user from cookies which might take some time
-        this.user = User.userFromCookie(this);
-
-        if (this.user.name !== User.anonymous) {
-            this.user.login();
-        } else {
-            this.user.display();
-        }
-    };
 
     Context.prototype.getPosts = function getPosts() {
         var Post = require("Post");
+        var User = require("User");
         // OData.read("http://localhost:49980/Reddit.svc/Posts/?$format=json", function (data, response) {
         //   console.dir(data);
         //success handler
         // });
-        this.addPost(new Post(this, this.user, "http://espn.go.com/nhl", "Sports World: ESPN NHL", "All american sports information you can imagine: results, schedules, team information, statistics and background stories about specific issues."));
-    };
-
-    Context.prototype.addPost = function addPost(post) {
-        this.posts.add(post);
-    };
-
-    Context.prototype.removePost = function removePost(post) {
-        post.htmlNode.remove();
-        this.posts.remove(post);
-    };
-
-    Context.prototype.addCategory = function addCategory(category) {
-        this.categories.add(category);
-    };
-
-    Context.prototype.removeCategory = function addCategory(category) {
-        category.htmlNode.remove();
-        this.categories.add(category);
+        this.addPost(new Post(this, new User(this, "lala", "lala"), "http://espn.go.com/nhl", "Sports World: ESPN NHL", "All american sports information you can imagine: results, schedules, team information, statistics and background stories about specific issues."));
     };
 
     Context.prototype.getCategories = function getCategories() {
@@ -82,13 +37,20 @@ define(function defineContext(require) {
         this.addCategory(new Category(this, "Sports"));
     };
 
-    Context.prototype.onAddLinkButtonClicked = function onAddLinkButtonClicked() {
-        Guard.handleError(this, function addPost(item) {
-            var Post = require("Post");
-            var address = item.addressInput.val();
-            var text = item.textInput.val();
-            item.addPost(new Post(item, item.user, address, text));
-        });
+    Context.prototype.addPost = function addPost(post) {
+        this.posts.add(post);
+    };
+
+    Context.prototype.removePost = function removePost(post) {
+        this.posts.remove(post);
+    };
+
+    Context.prototype.addCategory = function addCategory(category) {
+        this.categories.add(category);
+    };
+
+    Context.prototype.removeCategory = function addCategory(category) {
+        this.categories.add(category);
     };
 
     return Context;

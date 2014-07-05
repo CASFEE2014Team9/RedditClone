@@ -1,0 +1,24 @@
+<li class="post" data-id="{{this.id}}" >
+    <div class="postContent" >
+        <div class="postRating" >
+            <button class="postRatingVoteUpButton" >&#x25B2</button>
+            <button class="postRatingVoteDownButton" >&#x25BC</button>
+        </div>
+        <div class="postDetail" >
+            <header>
+                <a href="{{this.url}}" >{{this.title}}</a>
+            </header>
+            <div class="postDescription" >
+                <p>{{this.description}}</p>
+                <button class="postDeleteButton" >delete post</button>
+                <input type="text" class="postCommentInput" />
+                <button class="postAddCommentButton" >add comment</button>
+            </div>
+        </div>
+    </div>
+    <div class="postComments" >
+        {{#each comments.items}}
+            {{> comment}}
+        {{/each}}
+    </div>
+</li>
