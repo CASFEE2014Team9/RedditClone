@@ -5,14 +5,16 @@
 (function () {
     'use strict';
 
+    var modelTests = './Tests/Model/';
+
     requirejs.config({
         baseUrl: 'http://localhost:9000/',
         paths: {
-            TestContext: './Model/Tests/Context.Test',
-            TestUser: './Model/Tests/User.Test',
-            TestPost: './Model/Tests/Post.Test',
-            TestComment: './Model/Tests/Comment.Test',
-            TestRating: './Model/Tests/Rating.Test'
+            TestContext: modelTests + 'Context.Test',
+            TestUser: modelTests + 'User.Test',
+            TestPost: modelTests + 'Post.Test',
+            TestComment: modelTests + 'Comment.Test',
+            TestRating: modelTests + 'Rating.Test'
         }
     });
 

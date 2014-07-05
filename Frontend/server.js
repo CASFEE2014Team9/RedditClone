@@ -27,6 +27,7 @@
     app.use("/Model", express.static(dir + '/Model/'));
     app.use("/style-guide", express.static(dir + '/style-guide/'));
     app.use("/View", express.static(dir + '/View/'));
+    app.use("/Tests", express.static(dir + '/Tests/'));
 
     // setup routes
     routes(app);
