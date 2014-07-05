@@ -16,7 +16,7 @@ var paths = {
                 './FrontEnd/Lib/List.js',
                 './FrontEnd/Lib/guard.js',
                 './FrontEnd/Lib/string.js',
-                './FrontEnd/Forms/**/*.js'
+                './FrontEnd/View/**/*.js'
             ],
         less: ['./FrontEnd/less/**/*.less'],
         tests: ['./FrontEnd/Model/Tests/Test.html'],

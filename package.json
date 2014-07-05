@@ -14,7 +14,9 @@
         "connect": "*",
         "open": "*",
         "requirejs": "*",
-        "hbs": "*"
+        "express": "*",
+        "hbs": "*",
+        "mime": "*"
     },
     "engines": {
         "node": ">= 0.10"

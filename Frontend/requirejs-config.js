@@ -19,6 +19,6 @@ requirejs.config({
         Comment: './Model/Comment',
         Category: './Model/Category',
         Rating: './Model/Rating',
-        LoginDialog: './Forms/LoginDialog'
+        LoginDialog: './View/LoginDialog'
     }
 });
