@@ -1,20 +1,36 @@
 <li class="post" data-id="{{this.id}}" >
     <div class="postContent" >
-        <div class="postRating" >
-            <button class="postRatingVoteUpButton" >&#x25B2</button>
-            <button class="postRatingVoteDownButton" >&#x25BC</button>
-        </div>
-        <div class="postDetail" >
-            <header>
-                <a href="{{this.url}}" >{{this.title}}</a>
-            </header>
-            <div class="postDescription" >
-                <p>{{this.description}}</p>
-                <button class="postDeleteButton" >delete post</button>
-                <input type="text" class="postCommentInput" />
-                <button class="postAddCommentButton" >add comment</button>
+        {{#if this.isEditing}}
+            <div class="region, addLink">
+                <div>
+                    <input type="text" class="postAddressInput" placeholder="web address...">
+                    <input type="text" class="postTitleInput" placeholder="title...">
+                </div>
+                <div>
+                    <textarea class="postDescriptionInput" placeholder="description..." ></textarea>
+                </div>
+                <div>
+                    <button class="postCommitEditButton" >commit</button>
+                    <button class="postCancelEditButton" >cancel</button>
+                </div>
             </div>
-        </div>
+        {{else}}
+            <div class="postRating" >
+                <button class="postRatingVoteUpButton" >&#x25B2</button>
+                <button class="postRatingVoteDownButton" >&#x25BC</button>
+            </div>
+            <div class="postDetail" >
+                <header>
+                    <a href="{{this.url}}" >{{this.title}}</a>
+                </header>
+                <div class="postDescription" >
+                    <p>{{this.description}}</p>
+                    <button class="postDeleteButton" >delete post</button>
+                    <input type="text" class="postCommentInput" />
+                    <button class="postAddCommentButton" >add comment</button>
+                </div>
+            </div>
+        {{/if}}
     </div>
     <div class="postComments" >
         {{#each comments.items}}

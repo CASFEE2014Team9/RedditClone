@@ -8,6 +8,7 @@
         "gulp-concat": "*",
         "gulp-qunit": "*",
         "gulp-csslint": "*",
+        "amdefine": "*",
         "bower": "*"
     },
     "dependencies": {

@@ -11,16 +11,8 @@ define(function definePost(require) {
 
     function Post(context, creator, link, title, description) {
 
-        var Context = require("Context");
-        var User = require("User");
         var Rating = require("Rating");
         var Comment = require("Comment");
-
-        Guard.customType(context, "context", Context);
-        Guard.customType(creator, "creator", User);
-        Guard.string(link, "link");
-        title = Guard.stringFallback(title, "title", link);
-        description = Guard.stringFallback(description, "description", "no description");
 
         this.id = ids;
         ids = ids + 1;
@@ -32,7 +24,19 @@ define(function definePost(require) {
         this.comments = new List(Comment);
         this.ratings = new List(Rating);
         this.totalRating = 0;
+        this.isEditing = false;
     }
+
+    Post.prototype.validate = function validatePost() {
+        var Context = require("Context");
+        var User = require("User");
+
+        Guard.customType(this.context, "context", Context);
+        Guard.customType(this.creator, "creator", User);
+        Guard.string(this.url, "url");
+        this.title = Guard.stringFallback(this.title, "title", this.url);
+        this.description = Guard.stringFallback(this.description, "description", "no description");
+    };
 
     Post.prototype.addComment = function addComment(commment) {
         this.comments.add(commment);

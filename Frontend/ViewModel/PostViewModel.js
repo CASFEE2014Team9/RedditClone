@@ -1,6 +1,6 @@
 
 /*jslint browser: true*/
-/*global window, requirejs, define, alert */
+/*global window, requirejs, define, alert, parseInt */
 
 define(function definePostViewModel(require) {
     'use strict';
@@ -17,7 +17,11 @@ define(function definePostViewModel(require) {
         var item = this;
         require(['hbs!View/post'], function (template) {
             item.htmlNode = $(template(item.post));
-            item.contextViewModel.postTableNode.append(item.htmlNode);
+            if (item.post.isEditing) {
+                item.contextViewModel.postTableNode.prepend(item.htmlNode);
+            } else {
+                item.contextViewModel.postTableNode.append(item.htmlNode);
+            }
             callback();
         });
     };
@@ -25,11 +29,13 @@ define(function definePostViewModel(require) {
     PostViewModel.prototype.connectModelWithView = function connectWithModel() {
         this.htmlNode.commentInput = this.htmlNode.find(".postCommentInput");
         this.htmlNode.comments = this.htmlNode.find(".postComments");
+        this.htmlNode.postAddressInput = this.htmlNode.find(".postAddressInput");
+        this.htmlNode.postTitleInput = this.htmlNode.find(".postTitleInput");
+        this.htmlNode.postDescriptionInput = this.htmlNode.find(".postDescriptionInput");
 
         this.htmlNode.find(".postDeleteButton").on({
             click: $.proxy(this.onDeleteClick, this)
         });
-
         this.htmlNode.find(".postAddCommentButton").on({
             click: $.proxy(this.onAddCommentClick, this)
         });
@@ -40,6 +46,14 @@ define(function definePostViewModel(require) {
 
         this.htmlNode.find(".postRatingVoteDownButton").on({
             click: $.proxy(this.onVoteDownClick, this)
+        });
+
+        this.htmlNode.find(".postCommitEditButton").on({
+            click: $.proxy(this.onCommitEditClick, this)
+        });
+
+        this.htmlNode.find(".postCancelEditButton").on({
+            click: $.proxy(this.onCancelEditClick, this)
         });
 
         var item = this;
@@ -87,6 +101,33 @@ define(function definePostViewModel(require) {
         Guard.handleError(this, function voteDown(item) {
             var Rating = require("Rating");
             item.post.addRating(new Rating(item.contextViewModel.context, item.contextViewModel.userViewModel.user, item.post, -1));
+        });
+    };
+
+    PostViewModel.prototype.onCommitEditClick = function onCommitEditClick() {
+        var valid;
+        Guard.handleError(this, function CommitEdit(item) {
+            item.post.url = item.htmlNode.postAddressInput.val();
+            item.post.title = item.htmlNode.postTitleInput.val();
+            item.post.description = item.htmlNode.postDescriptionInput.val();
+            item.post.validate();
+            valid = true;
+        });
+
+        if (valid) {
+            var item = this;
+            item.htmlNode.remove();
+            item.post.isEditing = false;
+            item.display(function onDisplayed() {
+                item.connectModelWithView();
+            });
+        }
+    };
+
+    PostViewModel.prototype.onCancelEditClick = function onCancelEditClick() {
+        Guard.handleError(this, function CancelEdit(item) {
+            item.contextViewModel.context.removePost(item.post);
+            item.htmlNode.remove();
         });
     };
 

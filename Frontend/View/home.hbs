@@ -37,13 +37,6 @@
                 {{> category}}
             {{/each}}
         </ul>
-
-        <div class="region, addLink">
-            <input type="text" id="webAddress" placeholder="web address...">
-            <input type="text" id="innerHTML" placeholder="visible text...">
-            <button class="button" id="addPostButton" name="addLink">Add Link</button>
-        </div>
-
         <ul class="table" id="linkContentTable" >
             {{#each posts.items}}
                 {{> post}}
@@ -62,6 +55,7 @@
             <input type="password" id="loginDialogPasswordInput" />
             <button id="loginDialogLoginButton" >login</button>
         </form>
+        <button class="button" id="addPostButton" name="addLink">Add Link</button>
         <p>Content.Aside</p>
     </aside>
 
