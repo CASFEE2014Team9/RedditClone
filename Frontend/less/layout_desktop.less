@@ -135,12 +135,34 @@ button, input[type="button"], input[type="submit"], input[type="reset"] {
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 100em) {
   body{
     padding: 0;
   }
 
-  .header, .content, .footer {
+  .header,
+  .content,
+  .footer {
+    width: 100%;
+  }
+}
+
+@media (max-width: 50em) {
+  .header,
+  .content,
+  .footer {
+    position: relative;
+    top: auto;
+    bottom: auto;
+  }
+
+  .content {
+    display: block;
+  }
+
+  .nav,
+  .sidebar,
+  .main {
     width: 100%;
   }
 }
