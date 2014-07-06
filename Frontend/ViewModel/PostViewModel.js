@@ -16,12 +16,17 @@ define(function definePostViewModel(require) {
     PostViewModel.prototype.display = function display(callback) {
         var item = this;
         require(['hbs!View/post'], function (template) {
-            item.htmlNode = $(template(item.post));
-            if (item.post.isEditing) {
-                item.contextViewModel.postTableNode.prepend(item.htmlNode);
+            var newNode = $(template(item.post));
+            if (item.htmlNode) {
+                item.htmlNode.replaceWith(newNode);
             } else {
-                item.contextViewModel.postTableNode.append(item.htmlNode);
+                if (item.post.isEditing) {
+                    item.contextViewModel.postTableNode.prepend(newNode);
+                } else {
+                    item.contextViewModel.postTableNode.append(newNode);
+                }
             }
+            item.htmlNode = newNode;
             item.connectModelWithView();
             if (callback) {
                 callback();
@@ -95,6 +100,7 @@ define(function definePostViewModel(require) {
         Guard.handleError(this, function voteUp(item) {
             var Rating = require("Rating");
             item.post.addRating(new Rating(item.contextViewModel.context, item.contextViewModel.userViewModel.user, item.post, 1));
+            item.display();
         });
     };
 
@@ -102,6 +108,7 @@ define(function definePostViewModel(require) {
         Guard.handleError(this, function voteDown(item) {
             var Rating = require("Rating");
             item.post.addRating(new Rating(item.contextViewModel.context, item.contextViewModel.userViewModel.user, item.post, -1));
+            item.display();
         });
     };
 
@@ -117,7 +124,6 @@ define(function definePostViewModel(require) {
 
         if (valid) {
             var item = this;
-            item.htmlNode.remove();
             item.post.isEditing = false;
             item.display();
         }

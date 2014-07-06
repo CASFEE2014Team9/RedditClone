@@ -16,9 +16,16 @@
             </div>
         {{else}}
             <div class="postRating" >
-                <button class="postRatingVoteUpButton" >&#x25B2</button>
-                <button class="postRatingVoteDownButton" >&#x25BC</button>
-                <button class="postDeleteButton" >X</button>
+                <div>
+                    <button class="postRatingVoteUpButton" >&#x25B2</button>
+                </div>
+                <p>{{this.totalRating}}</p>
+                <div>
+                    <button class="postRatingVoteDownButton" >&#x25BC</button>
+                </div>
+                <div>
+                    <button class="postDeleteButton" >X</button>
+                </div>
             </div>
             <div class="postDetail" >
                 <header>

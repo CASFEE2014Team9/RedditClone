@@ -79,6 +79,7 @@ form {
   background: @background;
   border-radius: @borderRadius;
   font-family: @font-family;
+  padding: 0;
 }
 
 .ui-widget-header{
@@ -86,6 +87,11 @@ form {
   border-top-left-radius: @borderRadius;
   border-top-right-radius: @borderRadius;
   border:#ffffff;
+  color: @foreground;
+}
+
+.ui-widget-content{
+  color: @foreground;
 }
 
 .content{
@@ -108,12 +114,14 @@ form {
   background-color: @hover;
 }
 
-.postRating button{
-  border: none;
-  background: transparent;
-  color: white;
-}
+.postRating {
+  button {
+    border: none;
+    background: transparent;
+    color: white;
 
-.postRating button:hover{
-  color: @hover;
+    &:hover {
+      color: @hover;
+    }
+  }
 }
