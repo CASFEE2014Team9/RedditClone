@@ -54,7 +54,7 @@ define(function defineUserViewModel(require) {
     };
 
     UserViewModel.prototype.logout = function logout() {
-        this.contextViewModel.userViewModel = null;
+        this.contextViewModel.userViewModel = new UserViewModel(new User(this.contextViewModel.context, User.anonymous, User.anonymous), this.contextViewModel);
 
         cookie.set("name", "");
         cookie.set("password", "");
