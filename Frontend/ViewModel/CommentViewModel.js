@@ -18,7 +18,10 @@ define(function defineCommentViewModel(require) {
         require(['hbs!View/comment'], function (template) {
             item.htmlNode = $(template(item.comment));
             item.postViewModel.htmlNode.comments.append(item.htmlNode);
-            callback();
+            item.connectModelWithView();
+            if (callback) {
+                callback();
+            }
         });
     };
 

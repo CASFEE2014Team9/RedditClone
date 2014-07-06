@@ -48,6 +48,7 @@ define(function defineUserViewModel(require) {
         cookie.set("password", this.user.password);
 
         this.loginstate = User.LoginState.LoggedIn;
+        this.user.loginstate = this.loginstate;
 
         this.display();
     };
@@ -59,6 +60,7 @@ define(function defineUserViewModel(require) {
         cookie.set("password", "");
 
         this.loginstate = User.LoginState.LoggedOut;
+        this.user.loginstate = this.loginstate;
 
         this.display();
     };

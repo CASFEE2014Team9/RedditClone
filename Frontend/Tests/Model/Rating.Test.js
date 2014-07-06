@@ -10,7 +10,7 @@ define(function defineTestRating(require) {
     }
 
     TestRating.createTestRating = function createTestRating(testUser, testPost) {
-        var result = new Rating(testUser.context, testUser, testPost, 100);
+        var result = new Rating(testUser.contextViewModel.context, testUser.user, testPost.post, 100);
         return result;
     };
 
@@ -21,16 +21,16 @@ define(function defineTestRating(require) {
 
         var testContext = TestContext.createTestContext();
         var testUser = testContext.userViewModel;
-        var testPost = TestPost.createTestPost(testUser);
+        var testPostViewModel = TestPost.createTestPost(testUser);
 
-        var rating = TestRating.createTestRating(testUser, testPost);
-        testPost.addRating(rating);
+        var rating = TestRating.createTestRating(testUser, testPostViewModel);
+        testPostViewModel.post.addRating(rating);
 
-        assert.ok(testPost.ratings.contains(rating), "created ratings are present in the post");
+        assert.ok(testPostViewModel.post.ratings.contains(rating), "created ratings are present in the post");
 
-        testPost.removeRating(rating);
+        testPostViewModel.post.removeRating(rating);
 
-        assert.ok(!testPost.ratings.contains(rating), "deleted ratings are not present in the post");
+        assert.ok(!testPostViewModel.post.ratings.contains(rating), "deleted ratings are not present in the post");
     });
 
     QUnit.test("create with wrong arguments", function (assert) {

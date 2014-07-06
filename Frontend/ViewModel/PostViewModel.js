@@ -22,7 +22,10 @@ define(function definePostViewModel(require) {
             } else {
                 item.contextViewModel.postTableNode.append(item.htmlNode);
             }
-            callback();
+            item.connectModelWithView();
+            if (callback) {
+                callback();
+            }
         });
     };
 
@@ -77,9 +80,7 @@ define(function definePostViewModel(require) {
             var comment = new Comment(item.contextViewModel.context, item.contextViewModel.userViewModel.user, item.post, commentText);
             item.post.addComment(comment);
             var commentViewModel = new CommentViewModel(comment, item);
-            commentViewModel.display(function onDisplayed() {
-                commentViewModel.connectModelWithView();
-            });
+            commentViewModel.display();
         });
     };
 
@@ -118,9 +119,7 @@ define(function definePostViewModel(require) {
             var item = this;
             item.htmlNode.remove();
             item.post.isEditing = false;
-            item.display(function onDisplayed() {
-                item.connectModelWithView();
-            });
+            item.display();
         }
     };
 

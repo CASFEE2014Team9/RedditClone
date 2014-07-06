@@ -54,9 +54,7 @@ define(function defineContextViewModel(require) {
 
             item.context.addPost(post);
             var postViewModel = new PostViewModel(post, item);
-            postViewModel.display(function onDisplayed() {
-                postViewModel.connectModelWithView();
-            });
+            postViewModel.display();
         });
     };
 

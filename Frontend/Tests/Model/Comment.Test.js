@@ -1,6 +1,6 @@
 
 /*jslint browser: true*/
-/*global window, requirejs, define, QUnit */
+/*global window, requirejs, define, QUnit, setTimeout */
 
 define(function defineTestComment(require) {
     'use strict';
@@ -9,31 +9,38 @@ define(function defineTestComment(require) {
     }
 
     TestComment.createTestComment = function (testUser, testPost) {
-        var result = new Comment(testUser.context, testUser, testPost, "troll");
+        var result = new Comment(testUser.contextViewModel.context, testUser.user, testPost.post, "troll");
         return result;
     };
 
     QUnit.module("Comment");
-    QUnit.test("create / delete Comment", function (assert) {
-        var TestContext = require("TestContext");
-        var TestPost = require("TestPost");
+    QUnit.asyncTest("create / delete Comment", function (assert) {
+        setTimeout(function () {
+            var TestContext = require("TestContext");
+            var TestPost = require("TestPost");
 
-        var testContext = TestContext.createTestContext();
-        var testUser = testContext.userViewModel;
-        var testPost = TestPost.createTestPost(testUser);
+            var testContext = TestContext.createTestContext();
+            var testUser = testContext.userViewModel;
+            var testPost = TestPost.createTestPost(testUser);
 
-        assert.equal(testPost.htmlNode.comments.children().length, 0, "no comments should be displayed");
+            testPost.display(function onPostDisplayed() {
+                assert.equal(testPost.htmlNode.comments.children().length, 0, "no comments should be displayed");
 
-        var comment = TestComment.createTestComment(testUser, testPost);
-        testPost.addComment(comment);
+                var comment = TestComment.createTestComment(testUser, testPost);
+                testPost.post.addComment(comment);
+                testPost.display(function onCommentDisplayed() {
 
-        assert.equal(testPost.htmlNode.comments.children().length, 1, "created comments should be displayed");
-        assert.ok(testPost.comments.contains(comment), "created comments are present in the post");
+                    assert.equal(testPost.htmlNode.comments.children().length, 1, "created comments should be displayed");
+                    assert.ok(testPost.post.comments.contains(comment), "created comments are present in the post");
 
-        testPost.removeComment(comment);
+                    testPost.post.removeComment(comment);
 
-        assert.equal(testPost.htmlNode.comments.children().length, 0, "no comments should be displayed");
-        assert.ok(!testPost.comments.contains(comment), "deleted comments are not present in the post");
+                    assert.equal(testPost.htmlNode.comments.children().length, 0, "no comments should be displayed");
+                    assert.ok(!testPost.post.comments.contains(comment), "deleted comments are not present in the post");
+                    QUnit.start();
+                });
+            });
+        }, 1000);
     });
 
     QUnit.test("create with wrong arguments", function (assert) {

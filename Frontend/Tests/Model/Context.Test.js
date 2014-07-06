@@ -5,7 +5,7 @@
 define(function defineTestContext(require) {
     'use strict';
     var $ = require("jquery");
-    var Context = require("Context");
+    var ContextViewModel = require("ContextViewModel");
     function TestContext() {
     }
 
@@ -14,22 +14,24 @@ define(function defineTestContext(require) {
         var TestUser = require("TestUser");
         var LoginDialog = require("LoginDialog");
 
-        var result = new Context();
-        result.userViewModel = TestUser.createTestUser(result);
-        result.postTableNode = $("<ul>");
-        result.categoryTableNode = $("<ul>");
-        result.addPostButton = $("<button>");
-        result.addressInput = $("<input>");
-        result.textInput = $("<input>");
-        result.loginDialog = new LoginDialog($("<form>"), result);
-        result.loginDialog.loginInput = $("<input>");
-        result.loginDialog.passwordInput = $("<input>");
-        result.loginDialog.loginButton = $("<button>");
+        var contextViewModel = new ContextViewModel();
+        contextViewModel.postTableNode = $("<ul>");
+        contextViewModel.categoryTableNode = $("<ul>");
+        contextViewModel.addPostButton = $("<button>");
+        contextViewModel.addressInput = $("<input>");
+        contextViewModel.textInput = $("<input>");
+        contextViewModel.loginDialog = new LoginDialog($("<form>"), contextViewModel);
+        contextViewModel.loginDialog.loginInput = $("<input>");
+        contextViewModel.loginDialog.passwordInput = $("<input>");
+        contextViewModel.loginDialog.loginButton = $("<button>");
 
-        result.initialize();
-        result.loginDialog.initialize();
+        contextViewModel.initialize();
+        contextViewModel.loginDialog.initialize();
 
-        return result;
+        // test user overrides cookie user from initialize
+        contextViewModel.userViewModel = TestUser.createTestUser(contextViewModel);
+
+        return contextViewModel;
     };
 
     QUnit.module("Context");
