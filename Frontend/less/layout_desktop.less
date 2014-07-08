@@ -192,11 +192,14 @@ button, input[type="button"], input[type="submit"], input[type="reset"] {
 .navi a:hover {
   color: #000;
 }
-.navi .current a {
+.navi .Categories{
+  visibility: collapse;
+}
+/*.navi .Categories a {
   background: #999;
   color: #fff;
   border-radius: 5px;
-}
+}*/
 
 @media screen and (max-width: 1520px) {
   .navi {
@@ -219,15 +222,16 @@ button, input[type="button"], input[type="submit"], input[type="reset"] {
     display: none; /* hide all <li> items */
     margin: 0;
   }
-  .navi .current {
+  .navi .Categories {
     display: block; /* show only current <li> item */
+    visibility: visible;
   }
   .navi a {
     display: block;
     padding: 5px 5px 5px 32px;
     text-align: left;
   }
-  .navi .current a {
+  .navi .Categories a {
     background: none;
     color: #666;
   }
@@ -240,7 +244,7 @@ button, input[type="button"], input[type="submit"], input[type="reset"] {
     display: block;
     margin: 0 0 5px;
   }
-  .navi ul:hover .current {
+  .navi ul:hover .Categories {
     background: lightgreen;
   }
 }

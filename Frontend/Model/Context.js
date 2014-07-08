@@ -28,6 +28,7 @@ define(function defineContext(require) {
     Context.prototype.getCategories = function getCategories() {
         var Category = require("Category");
 
+        this.addCategory(new Category(this, "Categories"));
         this.addCategory(new Category(this, "All"));
         this.addCategory(new Category(this, "Animals"));
         this.addCategory(new Category(this, "Cars"));
