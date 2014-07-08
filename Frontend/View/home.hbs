@@ -14,7 +14,7 @@
 
 <body>
 
-<header class="header">Header
+<header class="header">
 </header>
 
 <div class="content">
@@ -27,16 +27,17 @@
             <a href="style-guide/Index.html">StyleGuide</a>
         </p>
         <p>
-            Content.Navigation
         </p>
     </nav>
 
     <main class="main">
-        <ul class="cat">
-            {{#each categories.items}}
-                {{> category}}
-            {{/each}}
-        </ul>
+	    <nav class="navi">
+	        <ul class="cat">
+	            {{#each categories.items}}
+	                {{> category}}
+	            {{/each}}
+	        </ul>
+        </nav>
         <ul class="table" id="linkContentTable" >
             {{#each posts.items}}
                 {{> post}}
@@ -60,12 +61,13 @@
             <button id="loginDialogLoginButton" >login</button>
         </form>
         <button class="button" id="addPostButton" name="addLink">Add Link</button>
-        <p>Content.Aside</p>
+        <p>
+        </p>
     </aside>
 
 </div>
 
-<footer class="footer">Footer
+<footer class="footer">
 </footer>
 
 <script data-main="default" src="Lib/require.js"></script>
