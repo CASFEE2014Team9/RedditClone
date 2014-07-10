@@ -14,61 +14,65 @@
 
 <body>
 
-<header class="header">
-</header>
+<div id="site">
 
-<div class="content">
+	<header class="header">HEADER
+	</header>
 
-    <nav class="nav">
-        <p>
-            <a href="Tests/Test.html">Tests</a>
-        </p>
-        <p>
-            <a href="style-guide/Index.html">StyleGuide</a>
-        </p>
-        <p>
-        </p>
-    </nav>
+	<div class="content">
 
-    <main class="main">
-	    <nav class="navi">
-	        <ul class="cat">
-	            {{#each categories.items}}
-	                {{> category}}
+	    <nav class="nav">
+	        <p>
+	            <a href="Tests/Test.html">Tests</a>
+	        </p>
+	        <p>
+	            <a href="style-guide/Index.html">StyleGuide</a>
+	        </p>
+	        <p>
+	        </p>
+	    </nav>
+
+	    <main class="main">
+		    <nav class="navi">
+		        <ul class="cat">
+		            {{#each categories.items}}
+		                {{> category}}
+		            {{/each}}
+		        </ul>
+	        </nav>
+	        <ul class="table" id="linkContentTable" >
+	            {{#each posts.items}}
+	                {{> post}}
 	            {{/each}}
 	        </ul>
-        </nav>
-        <ul class="table" id="linkContentTable" >
-            {{#each posts.items}}
-                {{> post}}
-            {{/each}}
-        </ul>
-    </main>
+	    </main>
 
 
 
-    <aside class="sidebar">
-        <div class="login"></div>
-        <form id="loginDialog" class="dialog" title="login" method="none" >
-            <div>
-                <label for="loginDialogLoginInput">Login Name</label>
-                <input type="text" id="loginDialogLoginInput" />
-            </div>
-            <div>
-                <label for="loginDialogPasswordInput">Password</label>
-                <input type="password" id="loginDialogPasswordInput" />
-            </div>
-            <button id="loginDialogLoginButton" >login</button>
-        </form>
-        <button class="button" id="addPostButton" name="addLink">Add Link</button>
-        <p>
-        </p>
-    </aside>
+	    <aside class="sidebar">
+	        <div class="login"></div>
+	        <form id="loginDialog" class="dialog" title="login" method="none" >
+	            <div>
+	                <label for="loginDialogLoginInput">Login Name</label>
+	                <input type="text" id="loginDialogLoginInput" />
+	            </div>
+	            <div>
+	                <label for="loginDialogPasswordInput">Password</label>
+	                <input type="password" id="loginDialogPasswordInput" />
+	            </div>
+	            <button id="loginDialogLoginButton" >login</button>
+	        </form>
+	        <button class="button" id="addPostButton" name="addLink">Add Link</button>
+	        <p>
+	        </p>
+	    </aside>
+
+	</div>
+
+	<footer class="footer">FOOTER
+	</footer>
 
 </div>
-
-<footer class="footer">
-</footer>
 
 <script data-main="default" src="Lib/require.js"></script>
 </body>
