@@ -60,23 +60,22 @@
 	                <label for="loginDialogPasswordInput">Password</label>
 	                <input type="password" id="loginDialogPasswordInput" />
 	            </div>
-	            <button id="loginDialogLoginButton" >login</button>
+		        <div>
+			        <button id="loginDialogLoginButton" >login</button>
+                </div>
 	        </form>
 	        <button class="button" id="addPostButton" name="addLink">Add Link</button>
 	        <p>
 	        </p>
 	    </aside>
 
-        <form class="commentPostDialog" class="dialog" title="add comment" method="none" >
-            <div>
-                <label for="loginDialogLoginInput">Login Name</label>
-                <input type="text" id="loginDialogLoginInput" />
+        <form id="commentPostDialog" class="dialog" title="add comment" method="none" >
+            <div >
+	            <textarea class="postCommentInput" placeholder="Add comment text..."></textarea>
+	        </div>
+	        <div>
+                <button class="postAddCommentButton" >add comment</button>
             </div>
-            <div>
-                <label for="loginDialogPasswordInput">Password</label>
-                <input type="password" id="loginDialogPasswordInput" />
-            </div>
-            <button class="loginDialogLoginButton" >login</button>
         </form>
 
 	</div>

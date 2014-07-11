@@ -57,7 +57,7 @@ define(function definePostViewModel(require) {
         this.htmlNode.find(".commentPostButton").on({
             click: $.proxy(this.onCommentPostClick, this)
         });
-        this.htmlNode.commentPostDialog = $(".commentPostDialog").dialog({
+        this.htmlNode.commentPostDialog = $("#commentPostDialog").dialog({
             autoOpen: false
         });
 
