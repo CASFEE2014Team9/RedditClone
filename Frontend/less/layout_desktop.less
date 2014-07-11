@@ -77,12 +77,13 @@ button, input[type="button"], input[type="submit"], input[type="reset"] {
   list-style: none;
   overflow-y: auto;
   flex: 1 1 auto;
-  margin: 0;
+  margin:0;
+  padding: 0;
 }
 
 .table li{
-  padding: 10px;
-  margin: 0 0 0 -40px;
+  display: flex;
+  flex-direction: column;
 }
 
 .post{
@@ -91,12 +92,6 @@ button, input[type="button"], input[type="submit"], input[type="reset"] {
 .postRating{
   min-width: 10%;
   max-width: 10%;
-}
-
-.postRating{
-  div{
-    text-align: center;
-  }
 }
 
 .postRating {
@@ -109,6 +104,7 @@ button, input[type="button"], input[type="submit"], input[type="reset"] {
   div {
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
   }
 
   p {
@@ -122,12 +118,11 @@ button, input[type="button"], input[type="submit"], input[type="reset"] {
 }
 
 .postDetail{
-  left: 10%;
+  width: 80%;
 }
 
 .postInteraction {
-  min-width: 5%;
-  max-width: 5%;
+  width: 10%;
   text-align: center;
 
   button {
@@ -139,11 +134,13 @@ button, input[type="button"], input[type="submit"], input[type="reset"] {
   }
 
   .postDeleteButton:hover{
-      background: orangered;
+    background: red;
+    border: white 2px solid;
   }
 
   .commentPostButton:hover{
-      background: #000000;
+    background: #000000;
+    border: white 2px solid;
   }
 }
 
