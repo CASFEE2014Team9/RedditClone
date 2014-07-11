@@ -8,10 +8,17 @@ define(function definePostViewModel(require) {
     var $ = require("jquery");
 
     function PostViewModel(post, contextViewModel, htmlNode) {
+        var LoginDialog = require("LoginDialog");
+
         this.post = post;
         this.contextViewModel = contextViewModel;
         this.htmlNode = htmlNode;
+        this.commentDialog = new LoginDialog($("#loginDialog"), this);
     }
+
+    PostViewModel.prototype.initialize = function initialize() {
+        this.commentDialog.initialize();
+    };
 
     PostViewModel.prototype.display = function display(callback) {
         var item = this;
@@ -46,6 +53,12 @@ define(function definePostViewModel(require) {
         });
         this.htmlNode.find(".postAddCommentButton").on({
             click: $.proxy(this.onAddCommentClick, this)
+        });
+        this.htmlNode.find(".commentPostButton").on({
+            click: $.proxy(this.onCommentPostClick, this)
+        });
+        this.htmlNode.commentPostDialog = $(".commentPostDialog").dialog({
+            autoOpen: false
         });
 
         this.htmlNode.find(".postRatingVoteUpButton").on({
@@ -87,6 +100,10 @@ define(function definePostViewModel(require) {
             var commentViewModel = new CommentViewModel(comment, item);
             commentViewModel.display();
         });
+    };
+
+    PostViewModel.prototype.onCommentPostClick = function onCommentPostClick() {
+        this.htmlNode.commentPostDialog.dialog("open");
     };
 
     PostViewModel.prototype.onDeleteClick = function onDeleteClick() {
