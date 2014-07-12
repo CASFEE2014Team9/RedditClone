@@ -30,7 +30,7 @@ requirejs.config({
     }
 });
 
-requirejs(['http', 'express', 'fs', 'hbs', './routes'], function (http, express, fs, hbs, routes) {
+requirejs(['http', 'express', 'fs', 'hbs', './routes', 'path'], function (http, express, fs, hbs, routes, path) {
     'use strict';
 
     var port = 9000;
@@ -44,11 +44,12 @@ requirejs(['http', 'express', 'fs', 'hbs', './routes'], function (http, express,
 
     // setup static routes for static stuff
     var dir = __dirname;
+    var viewDir = dir + '/View/';
     app.use("/css", express.static(dir + '/css/'));
     app.use("/Lib", express.static(dir + '/Lib/'));
     app.use("/Model", express.static(dir + '/Model/'));
     app.use("/style-guide", express.static(dir + '/style-guide/'));
-    app.use("/View", express.static(dir + '/View/'));
+    app.use("/View", express.static(viewDir));
     app.use("/ViewModel", express.static(dir + '/ViewModel/'));
     app.use("/Tests", express.static(dir + '/Tests/'));
 
@@ -57,35 +58,24 @@ requirejs(['http', 'express', 'fs', 'hbs', './routes'], function (http, express,
 
     //setup view render engine
     app.set('view engine', 'hbs');
-    app.set('views', dir + '/View');
+    app.set('views', viewDir);
 
     var handlebars = hbs.handlebars;
 
-    fs.readFile(dir + '/View/' + 'category.hbs', function (err, content) {
+    //register all views as possible partials
+    fs.readdir(viewDir, function OnViewDirRead(err, views) {
         if (err) {
-            console.error(err);
-            return;
+            return console.error(err);
         }
-
-        handlebars.registerPartial('category', content.toString());
-    });
-
-    fs.readFile(dir + '/View/' + 'post.hbs', function (err, content) {
-        if (err) {
-            console.error(err);
-            return;
-        }
-
-        handlebars.registerPartial('post', content.toString());
-    });
-
-    fs.readFile(dir + '/View/' + 'comment.hbs', function (err, content) {
-        if (err) {
-            console.error(err);
-            return;
-        }
-
-        handlebars.registerPartial('comment', content.toString());
+        views.forEach(function (item) {
+            fs.readFile(viewDir + item, 'utf8', function (err, content) {
+                if (err) {
+                    return console.error(err);
+                }
+                var partialName = path.basename(item, '.hbs');
+                handlebars.registerPartial(partialName, content);
+            });
+        });
     });
 
     //setup server

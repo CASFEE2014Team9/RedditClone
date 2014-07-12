@@ -16,7 +16,8 @@
         "requirejs": "*",
         "express": "*",
         "hbs": "*",
-        "mime": "*"
+        "mime": "*",
+        "path": "*"
     },
     "engines": {
         "node": ">= 0.10"

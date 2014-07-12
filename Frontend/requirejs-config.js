@@ -31,5 +31,8 @@ requirejs.config({
         RatingViewModel: './ViewModel/RatingViewModel',
 
         LoginDialog: './View/LoginDialog'
+    },
+    hbs: {
+        partialsUrl: 'View'
     }
 });
