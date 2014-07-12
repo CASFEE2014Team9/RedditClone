@@ -46,7 +46,7 @@ define(function definePostViewModel(require) {
     };
 
     PostViewModel.prototype.connectModelWithView = function connectWithModel() {
-        this.htmlNode.commentInput = this.htmlNode.find(".postCommentInput");
+        this.htmlNode.commentInput = $(".postCommentInput");
         this.htmlNode.comments = this.htmlNode.find(".postComments");
         this.htmlNode.postAddressInput = this.htmlNode.find(".postAddressInput");
         this.htmlNode.postTitleInput = this.htmlNode.find(".postTitleInput");
@@ -55,7 +55,7 @@ define(function definePostViewModel(require) {
         this.htmlNode.deleteButton = this.htmlNode.find(".postDeleteButton").on({
             click: $.proxy(this.onDeleteClick, this)
         });
-        this.htmlNode.find(".postAddCommentButton").on({
+        $(".postAddCommentButton").on({
             click: $.proxy(this.onAddCommentClick, this)
         });
         this.htmlNode.find(".commentPostButton").on({
@@ -113,7 +113,11 @@ define(function definePostViewModel(require) {
             item.post.addComment(comment);
 
             commentViewModel.display();
+
+            item.htmlNode.commentPostDialog.dialog("close");
         });
+
+        return false;
     };
 
     PostViewModel.prototype.onCommentPostClick = function onCommentPostClick() {
