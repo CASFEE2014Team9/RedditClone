@@ -5,11 +5,13 @@
 define(function defineTestComment(require) {
     'use strict';
     var Comment = require("Comment");
+    var CommentViewModel = require("CommentViewModel");
     function TestComment() {
     }
 
     TestComment.createTestComment = function (testUser, testPost) {
-        var result = new Comment(testUser.contextViewModel.context, testUser.user, testPost.post, "troll");
+        var result = new CommentViewModel(new Comment(testUser.contextViewModel.context, testUser.user, testPost.post, "troll"), testPost);
+        testPost.commentViewModels.add(result);
         return result;
     };
 
@@ -26,17 +28,17 @@ define(function defineTestComment(require) {
             testPost.display(function onPostDisplayed() {
                 assert.equal(testPost.htmlNode.comments.children().length, 0, "no comments should be displayed");
 
-                var comment = TestComment.createTestComment(testUser, testPost);
-                testPost.post.addComment(comment);
+                var commentViewModel = TestComment.createTestComment(testUser, testPost);
+                testPost.post.addComment(commentViewModel.comment);
                 testPost.display(function onCommentDisplayed() {
 
                     assert.equal(testPost.htmlNode.comments.children().length, 1, "created comments should be displayed");
-                    assert.ok(testPost.post.comments.contains(comment), "created comments are present in the post");
+                    assert.ok(testPost.post.comments.contains(commentViewModel.comment), "created comments are present in the post");
 
-                    testPost.post.removeComment(comment);
+                    commentViewModel.remove();
 
                     assert.equal(testPost.htmlNode.comments.children().length, 0, "no comments should be displayed");
-                    assert.ok(!testPost.post.comments.contains(comment), "deleted comments are not present in the post");
+                    assert.ok(!testPost.post.comments.contains(commentViewModel.comment), "deleted comments are not present in the post");
                     QUnit.start();
                 });
             });

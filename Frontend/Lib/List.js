@@ -47,5 +47,15 @@ define(function defineList(requrie) {
         return null;
     };
 
+    List.prototype.findByPredicate = function findByPredicate(predicate) {
+        var i;
+        for (i = 0; i < this.items.length; i++) {
+            if (predicate(this.items[i])) {
+                return this.items[i];
+            }
+        }
+        return null;
+    };
+
     return List;
 });

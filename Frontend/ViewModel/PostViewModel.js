@@ -9,11 +9,14 @@ define(function definePostViewModel(require) {
 
     function PostViewModel(post, contextViewModel, htmlNode) {
         var LoginDialog = require("LoginDialog");
+        var List = require("List");
+        var CommentViewModel = require("CommentViewModel");
 
         this.post = post;
         this.contextViewModel = contextViewModel;
         this.htmlNode = htmlNode;
         this.commentDialog = new LoginDialog($("#loginDialog"), this);
+        this.commentViewModels = new List(CommentViewModel);
     }
 
     PostViewModel.prototype.initialize = function initialize() {
@@ -23,7 +26,8 @@ define(function definePostViewModel(require) {
     PostViewModel.prototype.display = function display(callback) {
         var item = this;
         require(['hbs!View/post'], function (template) {
-            var newNode = $(template(item.post));
+            var neon$ = template(item.post);
+            var newNode = $(neon$);
             if (item.htmlNode) {
                 item.htmlNode.replaceWith(newNode);
             } else {
@@ -48,7 +52,7 @@ define(function definePostViewModel(require) {
         this.htmlNode.postTitleInput = this.htmlNode.find(".postTitleInput");
         this.htmlNode.postDescriptionInput = this.htmlNode.find(".postDescriptionInput");
 
-        this.htmlNode.find(".postDeleteButton").on({
+        this.htmlNode.deleteButton = this.htmlNode.find(".postDeleteButton").on({
             click: $.proxy(this.onDeleteClick, this)
         });
         this.htmlNode.find(".postAddCommentButton").on({
@@ -69,7 +73,7 @@ define(function definePostViewModel(require) {
             click: $.proxy(this.onVoteDownClick, this)
         });
 
-        this.htmlNode.find(".postCommitEditButton").on({
+        this.htmlNode.commitEditButton = this.htmlNode.find(".postCommitEditButton").on({
             click: $.proxy(this.onCommitEditClick, this)
         });
 
@@ -83,8 +87,15 @@ define(function definePostViewModel(require) {
 
             var htmlNode = $(this);
             var dataId = parseInt(htmlNode.attr("data-id"));
-            var comment = item.contextViewModel.context.comments.findByKey('id', dataId);
-            var commentViewModel = new CommentViewModel(comment, item, htmlNode);
+
+            var commentViewModel = item.commentViewModels.findByPredicate(function (c) { return c.comment.id === dataId; });
+            if (!commentViewModel) {
+                var comment = item.post.comments.findByKey('id', dataId);
+                commentViewModel = new CommentViewModel(comment, item, htmlNode);
+            } else {
+                commentViewModel.htmlNode = htmlNode;
+            }
+
             commentViewModel.connectModelWithView();
         });
     };
@@ -96,8 +107,11 @@ define(function definePostViewModel(require) {
 
             var commentText = item.htmlNode.commentInput.val();
             var comment = new Comment(item.contextViewModel.context, item.contextViewModel.userViewModel.user, item.post, commentText);
-            item.post.addComment(comment);
             var commentViewModel = new CommentViewModel(comment, item);
+
+            item.commentViewModels.add(commentViewModel);
+            item.post.addComment(comment);
+
             commentViewModel.display();
         });
     };
@@ -108,9 +122,17 @@ define(function definePostViewModel(require) {
 
     PostViewModel.prototype.onDeleteClick = function onDeleteClick() {
         Guard.handleError(this, function removePost(item) {
-            item.contextViewModel.context.removePost(item.post);
-            item.htmlNode.remove();
+            item.remove();
         });
+    };
+
+    PostViewModel.prototype.remove = function remove() {
+        this.contextViewModel.context.removePost(this.post);
+        this.contextViewModel.postViewModels.remove(this);
+
+        if (this.htmlNode) {
+            this.htmlNode.remove();
+        }
     };
 
     PostViewModel.prototype.onVoteUpClick = function onVoteUpClick() {

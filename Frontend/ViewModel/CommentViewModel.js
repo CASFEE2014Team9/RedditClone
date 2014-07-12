@@ -33,9 +33,17 @@ define(function defineCommentViewModel(require) {
 
     CommentViewModel.prototype.onDeleteClick = function onDeleteClick() {
         Guard.handleError(this, function remove(item) {
-            item.postViewModel.post.removeComment(item);
-            item.htmlNode.remove();
+            item.remove();
         });
+    };
+
+    CommentViewModel.prototype.remove = function remove() {
+        this.postViewModel.post.removeComment(this.comment);
+        this.postViewModel.commentViewModels.remove(this);
+
+        if (this.htmlNode) {
+            this.htmlNode.remove();
+        }
     };
 
     return CommentViewModel;

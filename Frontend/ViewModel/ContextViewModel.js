@@ -8,9 +8,11 @@ define(function defineContextViewModel(require) {
     var $ = require("jquery");
     var Guard = require("Guard");
     var Context = require("Context");
+    var List = require("List");
 
     function ContextViewModel() {
         var LoginDialog = require("LoginDialog");
+        var PostViewModel = require("PostViewModel");
 
         this.userViewModel = null;
         this.context = new Context();
@@ -21,6 +23,7 @@ define(function defineContextViewModel(require) {
         this.addressInput = $("#webAddress");
         this.textInput = $("#innerHTML");
         this.loginDialog = new LoginDialog($("#loginDialog"), this);
+        this.postViewModels = new List(PostViewModel);
     }
 
     ContextViewModel.prototype.initialize = function initialize() {
@@ -51,27 +54,35 @@ define(function defineContextViewModel(require) {
             var text = item.textInput.val();
             var post = new Post(item.context, item.userViewModel.user, address, text);
             post.isEditing = true;
-
-            item.context.addPost(post);
             var postViewModel = new PostViewModel(post, item);
+
+            item.postViewModels.add(postViewModel);
+            item.context.addPost(post);
             postViewModel.display();
         });
     };
 
     ContextViewModel.prototype.connectModelWithView = function connectWithModel() {
         var PostViewModel = require("PostViewModel");
-        var CategoryViewModel = require("CategoryViewModel");
         var item = this;
 
         this.postTableNode.children().each(function () {
             var htmlNode = $(this);
             var dataId = parseInt(htmlNode.attr("data-id"));
-            var post = item.context.posts.findByKey('id', dataId);
-            var postViewModel = new PostViewModel(post, item, htmlNode);
+
+            var postViewModel = item.postViewModels.findByPredicate(function (p) { return p.post.id === dataId; });
+            if (!postViewModel) {
+                var post = item.context.posts.findByKey('id', dataId);
+                postViewModel = new PostViewModel(post, item, htmlNode);
+            } else {
+                postViewModel.htmlNode = htmlNode;
+            }
+
             postViewModel.connectModelWithView();
         });
 
         /*
+        var CategoryViewModel = require("CategoryViewModel");
         this.categoryTableNode.children().each(function () {
             var htmlNode = $(this);
             var dataId = $(this).attr("data-id");
