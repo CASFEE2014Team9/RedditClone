@@ -18,28 +18,26 @@ define(function defineTestPost(require) {
 
     QUnit.module("Post");
     QUnit.asyncTest("create / delete", function (assert) {
-        setTimeout(function () {
-            var TestContext = require("TestContext");
+        var TestContext = require("TestContext");
 
-            var testContextViewModel = TestContext.createTestContext();
-            var testUser = testContextViewModel.userViewModel;
+        var testContextViewModel = TestContext.createTestContext();
+        var testUser = testContextViewModel.userViewModel;
+
+        assert.equal(testContextViewModel.postTableNode.children().length, 0, "no posts should be displayed");
+
+        var postViewModel = TestPost.createTestPost(testUser);
+        testContextViewModel.context.addPost(postViewModel.post);
+
+        postViewModel.display(function onPostDisplayed() {
+            assert.equal(testContextViewModel.postTableNode.children().length, 1, "created posts should be displayed");
+            assert.ok(testContextViewModel.context.posts.contains(postViewModel.post), "created posts are present in the context");
+
+            postViewModel.remove();
 
             assert.equal(testContextViewModel.postTableNode.children().length, 0, "no posts should be displayed");
-
-            var postViewModel = TestPost.createTestPost(testUser);
-            testContextViewModel.context.addPost(postViewModel.post);
-
-            postViewModel.display(function onPostDisplayed() {
-                assert.equal(testContextViewModel.postTableNode.children().length, 1, "created posts should be displayed");
-                assert.ok(testContextViewModel.context.posts.contains(postViewModel.post), "created posts are present in the context");
-
-                postViewModel.remove();
-
-                assert.equal(testContextViewModel.postTableNode.children().length, 0, "no posts should be displayed");
-                assert.ok(!testContextViewModel.context.posts.contains(postViewModel.post), "deleted posts are not present in the context");
-                QUnit.start();
-            });
-        }, 1000);
+            assert.ok(!testContextViewModel.context.posts.contains(postViewModel.post), "deleted posts are not present in the context");
+            QUnit.start();
+        });
     });
 
     QUnit.test("create with wrong arguments", function (assert) {

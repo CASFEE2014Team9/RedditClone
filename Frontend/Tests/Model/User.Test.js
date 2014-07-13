@@ -22,38 +22,33 @@ define(function defineTestUser(require) {
     QUnit.module("User");
     QUnit.asyncTest("login", function (assert) {
         require(["TestContext"], function (TestContext) {
-            setTimeout(function () {
-                var testContext = TestContext.createTestContext();
-                var testUser = testContext.userViewModel;
-                assert.equal(testUser.loginstate, User.LoginState.LoggedOut, "Created users are logged out");
+            var testContext = TestContext.createTestContext();
+            var testUser = testContext.userViewModel;
+            assert.equal(testUser.loginstate, User.LoginState.LoggedOut, "Created users are logged out");
 
-                testUser.login();
-                assert.equal(testUser.loginstate, User.LoginState.LoggedIn, "after login was called a user is logged in");
+            testUser.login();
+            assert.equal(testUser.loginstate, User.LoginState.LoggedIn, "after login was called a user is logged in");
 
-                testUser.logout();
-                assert.equal(testUser.loginstate, User.LoginState.LoggedOut, "after logout was called a user is logged out");
-                QUnit.start();
-            }, 1000);
+            testUser.logout();
+            assert.equal(testUser.loginstate, User.LoginState.LoggedOut, "after logout was called a user is logged out");
+            QUnit.start();
         });
     });
 
     QUnit.asyncTest("events should be handled without error", function (assert) {
         require(["TestContext"], function (TestContext) {
-            setTimeout(function () {
-                var testContext = TestContext.createTestContext();
-                var testUser = testContext.userViewModel;
+            var testContext = TestContext.createTestContext();
+            var testUser = testContext.userViewModel;
 
-                testUser.htmlNode.loginButton.trigger("click");
+            testUser.htmlNode.loginButton.trigger("click");
 
-                testContext.loginDialog.loginInput.val("someName");
-                testContext.loginDialog.passwordInput.val("somePassword");
-                testContext.loginDialog.loginButton.trigger("click");
-                assert.equal(testUser.loginstate, User.LoginState.LoggedIn, "after login was called a user is logged in");
-
-                testUser.htmlNode.logoutButton.trigger("click");
-                assert.equal(testUser.loginstate, User.LoginState.LoggedOut, "after logout was called a user is logged out");
-                QUnit.start();
-            }, 1000);
+            testContext.loginDialog.loginInput.val("someName");
+            testContext.loginDialog.passwordInput.val("somePassword");
+            testContext.loginDialog.loginButton.trigger("click");
+            assert.equal(testUser.loginstate, User.LoginState.LoggedIn, "after login was called a user is logged in");
+            testUser.htmlNode.logoutButton.trigger("click");
+            assert.equal(testUser.loginstate, User.LoginState.LoggedOut, "after logout was called a user is logged out");
+            QUnit.start();
         });
     });
 

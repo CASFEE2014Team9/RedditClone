@@ -17,32 +17,30 @@ define(function defineTestComment(require) {
 
     QUnit.module("Comment");
     QUnit.asyncTest("create / delete Comment", function (assert) {
-        setTimeout(function () {
-            var TestContext = require("TestContext");
-            var TestPost = require("TestPost");
+        var TestContext = require("TestContext");
+        var TestPost = require("TestPost");
 
-            var testContext = TestContext.createTestContext();
-            var testUser = testContext.userViewModel;
-            var testPost = TestPost.createTestPost(testUser);
+        var testContext = TestContext.createTestContext();
+        var testUser = testContext.userViewModel;
+        var testPost = TestPost.createTestPost(testUser);
 
-            testPost.display(function onPostDisplayed() {
+        testPost.display(function onPostDisplayed() {
+            assert.equal(testPost.htmlNode.comments.children().length, 0, "no comments should be displayed");
+
+            var commentViewModel = TestComment.createTestComment(testUser, testPost);
+            testPost.post.addComment(commentViewModel.comment);
+            testPost.display(function onCommentDisplayed() {
+
+                assert.equal(testPost.htmlNode.comments.children().length, 1, "created comments should be displayed");
+                assert.ok(testPost.post.comments.contains(commentViewModel.comment), "created comments are present in the post");
+
+                commentViewModel.remove();
+
                 assert.equal(testPost.htmlNode.comments.children().length, 0, "no comments should be displayed");
-
-                var commentViewModel = TestComment.createTestComment(testUser, testPost);
-                testPost.post.addComment(commentViewModel.comment);
-                testPost.display(function onCommentDisplayed() {
-
-                    assert.equal(testPost.htmlNode.comments.children().length, 1, "created comments should be displayed");
-                    assert.ok(testPost.post.comments.contains(commentViewModel.comment), "created comments are present in the post");
-
-                    commentViewModel.remove();
-
-                    assert.equal(testPost.htmlNode.comments.children().length, 0, "no comments should be displayed");
-                    assert.ok(!testPost.post.comments.contains(commentViewModel.comment), "deleted comments are not present in the post");
-                    QUnit.start();
-                });
+                assert.ok(!testPost.post.comments.contains(commentViewModel.comment), "deleted comments are not present in the post");
+                QUnit.start();
             });
-        }, 1000);
+        });
     });
 
     QUnit.test("create with wrong arguments", function (assert) {
