@@ -16,32 +16,51 @@ gulp                // use gulp to compile / style check / convert stuff
 ## dev dependencies
 
 gulp            task runner / compiler replacement
+
 gulp-jshint     reports bad js style
+
 gulp-less       converts less to css
+
 gulp-concat     concats files
+
 gulp-qunit      unit tests
+
 gulp-csslint    reports bad css style
+
 amdefine        package definition
+
 bower           client package manager
 
 ## dependencies
 
 connect         used for socket listening
+
 requirejs       dependency management / late loading
+
 express         mvc control implementation
+
 hbs             mvc view implementation rendering on server
+
 mime            helper for discovery of mime types
+
 path            helper for manipulating path strings
 
 ## ui / bower dependencies
 
 jquery                      improved dom manipulation
+
 jquery-ui                   widgets and interaction behaviors
+
 Cookies                     cookies
+
 qunit                       unittests
+
 requirejs-domready          waiting for domready the requirejs way
+
 linqjs-amd                  linq for js searching / filtering / sorting / joining of enumerables + aggregate functions
+
 handlebars                  mvc view implementation for rendering from view model
+
 require-handlebars-plugin   require views for rendering
 
 # documentation
