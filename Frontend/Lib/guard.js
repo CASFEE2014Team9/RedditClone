@@ -81,9 +81,10 @@ define(function (require) {
             throw new TypeError("{0} must be a function with {1} parameters not {2}".format(parameterName, length, parameter.length));
         }
 
-        if (parameter.name === undefined || parameter.name === "" || parameter.name === null) {
-            throw new TypeError("{0} must be a function with a name".format(parameterName, length, parameter.length));
-        }
+        //not working in ie
+        //if (parameter.name === undefined || parameter.name === "" || parameter.name === null) {
+        //    throw new TypeError("{0} must be a function with a name".format(parameterName, length, parameter.length));
+        //}
 
         return parameter;
     };
