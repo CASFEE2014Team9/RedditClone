@@ -52,32 +52,46 @@ define(function definePostViewModel(require) {
         this.htmlNode.postTitleInput = this.htmlNode.find(".postTitleInput");
         this.htmlNode.postDescriptionInput = this.htmlNode.find(".postDescriptionInput");
 
-        this.htmlNode.deleteButton = this.htmlNode.find(".postDeleteButton").on({
+        this.htmlNode.deleteButton = this.htmlNode.find(".postDeleteButton").off({
+            click: $.proxy(this.onDeleteClick, this)
+        }).on({
             click: $.proxy(this.onDeleteClick, this)
         });
-        $(".postAddCommentButton").on({
+        $(".postAddCommentButton").off({
+            click: $.proxy(this.onAddCommentClick, this)
+        }).on({
             click: $.proxy(this.onAddCommentClick, this)
         });
-        this.htmlNode.find(".commentPostButton").on({
+        this.htmlNode.find(".commentPostButton").off({
+            click: $.proxy(this.onCommentPostClick, this)
+        }).on({
             click: $.proxy(this.onCommentPostClick, this)
         });
         this.htmlNode.commentPostDialog = $("#commentPostDialog").dialog({
             autoOpen: false
         });
 
-        this.htmlNode.find(".postRatingVoteUpButton").on({
+        this.htmlNode.find(".postRatingVoteUpButton").off({
+            click: $.proxy(this.onVoteUpClick, this)
+        }).on({
             click: $.proxy(this.onVoteUpClick, this)
         });
 
-        this.htmlNode.find(".postRatingVoteDownButton").on({
+        this.htmlNode.find(".postRatingVoteDownButton").off({
+            click: $.proxy(this.onVoteDownClick, this)
+        }).on({
             click: $.proxy(this.onVoteDownClick, this)
         });
 
-        this.htmlNode.commitEditButton = this.htmlNode.find(".postCommitEditButton").on({
+        this.htmlNode.commitEditButton = this.htmlNode.find(".postCommitEditButton").off({
+            click: $.proxy(this.onCommitEditClick, this)
+        }).on({
             click: $.proxy(this.onCommitEditClick, this)
         });
 
-        this.htmlNode.find(".postCancelEditButton").on({
+        this.htmlNode.find(".postCancelEditButton").off({
+            click: $.proxy(this.onCancelEditClick, this)
+        }).on({
             click: $.proxy(this.onCancelEditClick, this)
         });
 

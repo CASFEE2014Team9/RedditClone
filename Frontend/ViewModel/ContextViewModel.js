@@ -31,7 +31,9 @@ define(function defineContextViewModel(require) {
         var UserViewModel = require("UserViewModel");
 
         this.loginDialog.initialize();
-        this.addPostButton.on({
+        this.addPostButton.off({
+            click: $.proxy(this.onAddLinkButtonClicked, this)
+        }).on({
             click: $.proxy(this.onAddLinkButtonClicked, this)
         });
 

@@ -26,7 +26,9 @@ define(function defineCommentViewModel(require) {
     };
 
     CommentViewModel.prototype.connectModelWithView = function connectWithModel() {
-        this.htmlNode.find(".commentDeleteButton").on({
+        this.htmlNode.find(".commentDeleteButton").off({
+            click: $.proxy(this.onDeleteClick, this)
+        }).on({
             click: $.proxy(this.onDeleteClick, this)
         });
     };
