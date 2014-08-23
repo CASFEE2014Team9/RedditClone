@@ -25,6 +25,7 @@ define(function definePost(require) {
         this.ratings = new List(Rating);
         this.totalRating = 0;
         this.isEditing = false;
+        this.isNew = false;
     }
 
     Post.prototype.validate = function validatePost() {

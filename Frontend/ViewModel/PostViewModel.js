@@ -31,7 +31,7 @@ define(function definePostViewModel(require) {
             if (item.htmlNode) {
                 item.htmlNode.replaceWith(newNode);
             } else {
-                if (item.post.isEditing) {
+                if (item.post.isEditing && item.post.isNew) {
                     item.contextViewModel.postTableNode.prepend(newNode);
                 } else {
                     item.contextViewModel.postTableNode.append(newNode);
@@ -57,6 +57,13 @@ define(function definePostViewModel(require) {
         }).on({
             click: $.proxy(this.onDeleteClick, this)
         });
+
+        this.htmlNode.postEditButton = this.htmlNode.find(".postEditButton").off({
+            click: $.proxy(this.onPostEditClick, this)
+        }).on({
+            click: $.proxy(this.onPostEditClick, this)
+        });
+
         $(".postAddCommentButton").off({
             click: $.proxy(this.onAddCommentClick, this)
         }).on({
@@ -169,27 +176,38 @@ define(function definePostViewModel(require) {
         });
     };
 
+    PostViewModel.prototype.onPostEditClick = function onPostEditClick() {
+        Guard.handleError(this, function BeginEdit(item) {
+            item.post.isEditing = true;
+            item.display();
+        });
+    };
+
     PostViewModel.prototype.onCommitEditClick = function onCommitEditClick() {
-        var valid;
-        Guard.handleError(this, function CommitEdit(item) {
+        var valid = Guard.handleError(this, function CommitEdit(item) {
             item.post.url = item.htmlNode.postAddressInput.val();
             item.post.title = item.htmlNode.postTitleInput.val();
             item.post.description = item.htmlNode.postDescriptionInput.val();
             item.post.validate();
-            valid = true;
         });
 
         if (valid) {
             var item = this;
             item.post.isEditing = false;
+            item.post.isNew = false;
             item.display();
         }
     };
 
     PostViewModel.prototype.onCancelEditClick = function onCancelEditClick() {
         Guard.handleError(this, function CancelEdit(item) {
-            item.contextViewModel.context.removePost(item.post);
-            item.htmlNode.remove();
+            if (item.post.isNew) {
+                item.contextViewModel.context.removePost(item.post);
+                item.htmlNode.remove();
+            } else {
+                item.post.isEditing = false;
+                item.display();
+            }
         });
     };
 

@@ -3,11 +3,11 @@
         {{#if this.isEditing}}
             <div class="region, addLink">
                 <div>
-                    <input type="text" class="postAddressInput" placeholder="web address...">
-                    <input type="text" class="postTitleInput" placeholder="title...">
+                    <input type="text" class="postAddressInput" placeholder="web address..." value="{{this.url}}" >
+                    <input type="text" class="postTitleInput" placeholder="title..." value="{{this.title}}" >
                 </div>
                 <div>
-                    <textarea class="postDescriptionInput" placeholder="description..." ></textarea>
+                    <textarea class="postDescriptionInput" placeholder="description..." >{{this.description}}</textarea>
                 </div>
                 <div>
                     <button class="postCommitEditButton" >commit</button>
@@ -40,6 +40,9 @@
                 </div>
                 <div>
                     <button class="commentPostButton">C</button>
+                </div>
+                <div>
+                    <button class="postEditButton">E</button>
                 </div>
             </div>
         {{/if}}

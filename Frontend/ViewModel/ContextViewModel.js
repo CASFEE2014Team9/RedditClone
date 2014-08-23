@@ -56,6 +56,7 @@ define(function defineContextViewModel(require) {
             var text = item.textInput.val();
             var post = new Post(item.context, item.userViewModel.user, address, text);
             post.isEditing = true;
+            post.isNew = true;
             var postViewModel = new PostViewModel(post, item);
 
             item.postViewModels.add(postViewModel);
