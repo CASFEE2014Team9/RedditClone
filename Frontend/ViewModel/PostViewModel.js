@@ -114,7 +114,9 @@ define(function definePostViewModel(require) {
         });
     };
 
-    PostViewModel.prototype.onAddCommentClick = function onAddCommentClick() {
+    PostViewModel.prototype.onAddCommentClick = function onAddCommentClick(evt) {
+        evt.preventDefault();
+
         Guard.handleError(this, function addComment(item) {
             var Comment = require("Comment");
             var CommentViewModel = require("CommentViewModel");
@@ -130,8 +132,6 @@ define(function definePostViewModel(require) {
 
             item.htmlNode.commentPostDialog.dialog("close");
         });
-
-        return false;
     };
 
     PostViewModel.prototype.onCommentPostClick = function onCommentPostClick() {

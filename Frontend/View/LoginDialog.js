@@ -30,26 +30,28 @@ define(function (require) {
         });
     };
 
-    LoginDialog.prototype.onLoginButtonClick = function onLoginButtonClick() {
-        try {
-            Guard.handleError(this, function login(item) {
-                var name = item.loginInput.val();
-                var password = item.passwordInput.val();
-                var userViewModel = item.contextViewModel.userViewModel;
-                var user = userViewModel.user;
-                user.name = name;
-                user.password = password;
-                userViewModel.login();
+    LoginDialog.prototype.onLoginButtonClick = function onLoginButtonClick(evt) {
+        evt.preventDefault();
 
-                item.htmlNode.dialog("close");
-            }, true);
-        } finally {
-            return false;
-        }
+        Guard.handleError(this, function login(item) {
+            var name = item.loginInput.val();
+            var password = item.passwordInput.val();
+            var userViewModel = item.contextViewModel.userViewModel;
+            var user = userViewModel.user;
+            user.name = name;
+            user.password = password;
+            userViewModel.login();
+
+            item.close();
+        }, true);
     };
 
     LoginDialog.prototype.open = function open() {
         this.htmlNode.dialog("open");
+    };
+
+    LoginDialog.prototype.close = function close() {
+        this.htmlNode.dialog("close");
     };
 
     return LoginDialog;
