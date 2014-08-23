@@ -93,27 +93,31 @@ define(function (require) {
         if (Guard.isUnitTesting) {
             Guard.namedFunction(func, "func", 1);
             func(context);
-        } else {
-            try {
-                Guard.namedFunction(func, "func", 1);
-                func(context);
-            } catch (ex) {
+            return true;
+        }
 
-                var exmsg = "";
-                if (ex.message) {
-                    exmsg += ex.message;
-                }
-                if (ex.stack) {
-                    exmsg += ' | stack: ' + ex.stack;
-                }
+        try {
+            Guard.namedFunction(func, "func", 1);
+            func(context);
+            return true;
+        } catch (ex) {
 
-                alert("{0} failed. {1}".format(func.name, ex.message));
-                console.log(exmsg);
-
-                if (rethrow) {
-                    throw ex;
-                }
+            var exmsg = "";
+            if (ex.message) {
+                exmsg += ex.message;
             }
+            if (ex.stack) {
+                exmsg += ' | stack: ' + ex.stack;
+            }
+
+            alert("{0} failed. {1}".format(func.name, ex.message));
+            console.log(exmsg);
+
+            if (rethrow) {
+                throw ex;
+            }
+
+            return false;
         }
     };
 
