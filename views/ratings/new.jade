@@ -1,0 +1,16 @@
+form(action='/data/ratings',method='post')
+    div(data-role='fieldcontain')
+        fieldset(data-role='controlgroup')
+            label(for='user') user
+                input(id='user',type='integer',value='', name='user')
+    div#passworddiv(data-role='fieldcontain')
+        fieldset(data-role='controlgroup')
+            label(for='post') post
+                input(id='post',type='integer',value='', name='post')
+    div#passworddiv(data-role='fieldcontain')
+        fieldset(data-role='controlgroup')
+            label(for='score') score
+                input(id='score',type='integer',value='', name='score')
+    div(data-role='fieldcontain')
+        input(type='submit',value='Sign Up',data-transition='fade', data-theme='c')
+
