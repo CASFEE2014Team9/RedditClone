@@ -13,4 +13,9 @@ router.get('/ratings/new', function(req, res) {
 
     res.render('ratings/new');
 });
+
+router.get('/posts/new', function(req, res) {
+    res.render('posts/new');
+});
+
 module.exports = router;
