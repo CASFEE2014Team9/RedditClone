@@ -13,17 +13,23 @@ router.get('/users', function(req, res) {
     res.sendfile(usersPath);
 });
 
-/*get one user by Id*/
-router.get('/users/:id', function(req, res) {
+/*get all ratings*/
+router.get('/ratings', function(req, res) {
+    var usersPath = path.join(root, "public/data", "ratings.json");
 
-    var usersPath = path.join(root, "public/data", "users.json");
+    res.sendfile(usersPath);
+});
+/*get one user by Id*/
+router.get('/ratings/:id', function(req, res) {
+
+    var ratingsPath = path.join(root, "public/data", "ratings.json");
 
     var id = req.params.id;
 
-    fs.readFile( usersPath, function( err, data ) {
-        var users = JSON.parse(data);
+    fs.readFile( ratingsPath, function( err, data ) {
+        var ratings = JSON.parse(data);
 
-        res.json(users[id]);
+        res.json(ratings[id]);
     } );
 });
 
@@ -59,6 +65,37 @@ router.post('/users', function(req, res) {
     } );
 });
 
+/*post one rating*/
+/*with id -> update*/
+/*without id -> create*/
+router.post('/ratings', function(req, res) {
+
+    var ratingsPath = path.join(root, "public/data", "ratings.json");
+
+    var rating = {
+        id : req.body.id,
+        user_id: req.body.user_id,
+        post_id : req.body.post_id,
+        score: req.body.score
+    };
+
+
+    fs.readFile( ratingsPath, function( err, data ) {
+        var ratings = JSON.parse(data);
+
+        if (rating.id === undefined)
+        {
+            ratings.maxId = ratings.maxId + 1;
+            rating.id = ratings.maxId;
+        }
+
+        ratings[rating.id] = rating;
+
+        fs.writeFile( ratingsPath, JSON.stringify(ratings) );
+
+        res.end('Rating wurde durchgeführt');
+    } );
+});
 
 /*get one user by Id*/
 router.delete('/users/:id', function(req, res) {
@@ -78,4 +115,21 @@ router.delete('/users/:id', function(req, res) {
     } );
 });
 
+/*get one rating by Id*/
+router.delete('/ratings/:id', function(req, res) {
+
+    var ratingsPath = path.join(root, "public/data", "ratings.json");
+
+    var id = req.params.id;
+
+    fs.readFile( ratingsPath, function( err, data ) {
+        var ratings = JSON.parse(data);
+
+        delete ratings[id];
+
+        fs.writeFile( ratingsPath, JSON.stringify(ratings) );
+
+        res.returnValue = 200;
+    } );
+});
 module.exports = router;

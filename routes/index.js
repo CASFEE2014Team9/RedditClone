@@ -8,4 +8,9 @@ router.get('/', function(req, res) {
     res.render('users/new');
 });
 
+router.get('/ratings/new', function(req, res) {
+  //res.render('index', { title: 'Express' });
+
+    res.render('ratings/new');
+});
 module.exports = router;
