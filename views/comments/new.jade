@@ -1,4 +1,4 @@
-form(action='/data/ratings',method='post')
+form(action='/data/comments',method='post')
     div(data-role='fieldcontain')
         fieldset(data-role='controlgroup')
             label(for='userId') userId
@@ -9,7 +9,7 @@ form(action='/data/ratings',method='post')
                 input(id='postId',type='integer',value='', name='postId')
     div#passworddiv(data-role='fieldcontain')
         fieldset(data-role='controlgroup')
-            label(for='score') score
-                input(id='score',type='integer',value='', name='score')
+            label(for='comment') comment
+                input(id='comment',type='text',value='', name='comment')
     div(data-role='fieldcontain')
         input(type='submit',value='Sign Up',data-transition='fade', data-theme='c')
