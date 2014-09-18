@@ -6,7 +6,7 @@
     var root = path.resolve(process.cwd());
 
     var Repository = function Repository(type) {
-        var dataPath = path.join(root, "public/data", type + "s.json");
+        var dataPath = path.join(root, "backend/data", type + "s.json");
         var items = null;
 
         /*saves pending modifications*/
