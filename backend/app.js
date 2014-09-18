@@ -6,10 +6,12 @@
     var logger = require('morgan');
     var cookieParser = require('cookie-parser');
     var bodyParser = require('body-parser');
+    var livereload = require('express-livereload');
 
     var data = require('./routes/data');
 
     var app = express();
+
 
     app.root = path.join(__dirname, '/../');
 
@@ -58,6 +60,10 @@
             message: err.message,
             error: {}
         });
+    });
+
+    livereload(app, {
+        watchDir: path.join(app.root, '/app')
     });
 
     module.exports = app;
