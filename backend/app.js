@@ -20,6 +20,9 @@
     app.use(bodyParser.urlencoded());
     app.use(cookieParser());
 
+    app.set('views', path.join(app.root, '/backend/views'));
+    app.set('view engine', 'jade');
+
     //routes
     app.use(express.static(path.join(app.root, '/app')));
     app.use('/bower_components/', express.static(path.join(app.root, '/bower_components')));
