@@ -7,23 +7,23 @@
     var cookieParser = require('cookie-parser');
     var bodyParser = require('body-parser');
 
-    var routes = require('./routes/html');
     var data = require('./routes/data');
 
     var app = express();
 
-    // view engine setup
-    app.set('views', path.join(__dirname, '/../views'));
-    app.set('view engine', 'jade');
+    app.root = path.join(__dirname, '/../');
 
+    //middleware
     app.use(favicon());
     app.use(logger('dev'));
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded());
     app.use(cookieParser());
-    app.use(express.static(path.join(__dirname, '/../public')));
 
-    app.use('/', routes);
+    //routes
+    app.use(express.static(path.join(app.root, '/app')));
+    app.use('/bower_components/', express.static(path.join(app.root, '/bower_components')));
+
     app.use('/data/', data);
 
     /// catch 404 and forward to error handler

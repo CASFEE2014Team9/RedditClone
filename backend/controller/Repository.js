@@ -3,10 +3,8 @@
     var fs = require('fs');
     var path = require('path');
 
-    var root = path.resolve(process.cwd());
-
     var Repository = function Repository(type) {
-        var dataPath = path.join(root, "backend/data", type + "s.json");
+        var dataPath = path.join(__dirname, "./../data", type + "s.json");
         var items = null;
 
         /*saves pending modifications*/
