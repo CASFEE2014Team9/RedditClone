@@ -16,7 +16,9 @@
         password : item.password
       };
 
-      return UserController.parent.post(user);
+      self.repository.post(user);
+      self.repository.saveChanges();
+      return self.success();
     };
 
     this.deleteItem = function deleteItem(id) {
@@ -28,7 +30,9 @@
       new CommentController().deleteIfPropertyMatches('userId', id);
       new RatingController().deleteIfPropertyMatches('userId', id);
 
-      return UserController.parent.delete(id);
+      self.repository.delete(id);
+      self.repository.saveChanges();
+      return self.success();
     };
   };
 

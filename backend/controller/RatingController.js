@@ -26,7 +26,9 @@
         return self.notFound(PostController.repository.type, item.postId);
       }
 
-      return RatingController.parent.post(rating);
+      self.repository.post(rating);
+      self.repository.saveChanges();
+      return self.success();
     };
   };
 

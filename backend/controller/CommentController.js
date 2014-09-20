@@ -26,7 +26,9 @@
         return self.notFound(PostController.repository.type, item.postId);
       }
 
-      return CommentController.parent.post(comment);
+      self.repository.post(comment);
+      self.repository.saveChanges();
+      return self.success();
     };
   };
 

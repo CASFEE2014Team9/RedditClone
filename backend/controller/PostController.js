@@ -32,7 +32,9 @@
       new CommentController().deleteIfPropertyMatches('postId', id);
       new RatingController().deleteIfPropertyMatches('postId', id);
 
-      return PostController.parent.deleteItem(id);
+      self.repository.post(post);
+      self.repository.saveChanges();
+      return self.success();
     };
   };
 

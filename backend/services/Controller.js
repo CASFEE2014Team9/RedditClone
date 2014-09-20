@@ -30,12 +30,6 @@
       return self.json(self.repository.get(id));
     };
 
-    this.post = function post(item) {
-      self.repository.post(item);
-      self.repository.saveChanges();
-      return self.success();
-    };
-
     this.deleteItem = function deleteItem(id) {
       self.repository.delete(id);
       self.repository.saveChanges();
