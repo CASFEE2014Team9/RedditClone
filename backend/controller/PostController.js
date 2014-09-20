@@ -1,33 +1,14 @@
 (function () {
   'use strict';
-  var Repository = require('./Repository');
+  var Repository = require('./../services/Repository');
+  var Controller = require('./../services/Controller');
   var postRepository = new Repository('post');
 
   var PostController = function PostController() {
-    this.req = null;
-    this.res = null;
+    Controller.call(this, postRepository);
     var self = this;
 
-    var json = function (data) {
-      if (self.res) {
-        self.res.json(data);
-      }
-      return data;
-    };
-
-    var success = function () {
-      return json(200);
-    };
-
-    this.getAll = function () {
-      return json(postRepository.getAll());
-    };
-
-    this.get = function (id) {
-      return json(postRepository.get(id));
-    };
-
-    this.post = function (item) {
+    this.post = function post(item) {
       var post = {
         id : item.id,
         url : item.url,
@@ -38,29 +19,26 @@
 
       var UserController = require('./UserController');
       if (!UserController.repository.exists(item.userId)) {
-        return json('user ' + item.userId + ' not found');
+        return self.notFound(UserController.repository.type, item.userId);
       }
 
-      postRepository.post(post);
-      postRepository.saveChanges();
-      return success();
+      return PostController.parent.post(post);
     };
 
-    this.delete = function (id) {
+    this.deleteItem = function deleteItem(id) {
       var CommentController = require('./CommentController');
       var RatingController = require('./RatingController');
 
-      CommentController.repository.deleteIfPropertyMatches('postId', id);
-      RatingController.repository.deleteIfPropertyMatches('postId', id);
-      postRepository.delete(id);
+      new CommentController().deleteIfPropertyMatches('postId', id);
+      new RatingController().deleteIfPropertyMatches('postId', id);
 
-      CommentController.repository.saveChanges();
-      RatingController.repository.saveChanges();
-      postRepository.saveChanges();
-      return success();
+      return PostController.parent.deleteItem(id);
     };
   };
 
+  PostController.prototype = new Controller();
+  PostController.prototype.constructor = PostController;
+  PostController.parent = Controller.prototype;
   PostController.repository = postRepository;
 
   module.exports = PostController;

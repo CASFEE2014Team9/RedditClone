@@ -1,62 +1,38 @@
 (function () {
   'use strict';
-  var Repository = require('./Repository');
+  var Repository = require('./../services/Repository');
+  var Controller = require('./../services/Controller');
   var ratingRepository = new Repository('rating');
 
   var RatingController = function RatingController() {
-    this.req = null;
-    this.res = null;
+    Controller.call(this, ratingRepository);
     var self = this;
 
-    var json = function (data) {
-      if (self.res) {
-          self.res.json(data);
-      }
-      return data;
-    };
-
-    var success = function () {
-      return json(200);
-    };
-
-    this.getAll = function () {
-      return json(ratingRepository.getAll());
-    };
-
-    this.get = function (id) {
-      return json(ratingRepository.get(id));
-    };
-
-    this.post = function (item) {
+    this.post = function post(item) {
       var rating = {
-          id : item.id,
-          userId: item.userId,
-          postId : item.postId,
-          score: item.score
+        id : item.id,
+        userId: item.userId,
+        postId : item.postId,
+        score: item.score
       };
 
       var UserController = require('./UserController');
       if (!UserController.repository.exists(item.userId)) {
-          return json('user ' + item.userId + ' not found');
+        return self.notFound(UserController.repository.type, item.userId);
       }
 
       var PostController = require('./PostController');
       if (!PostController.repository.exists(item.postId)) {
-          return json('post ' + item.postId + ' not found');
+        return self.notFound(PostController.repository.type, item.postId);
       }
 
-      ratingRepository.post(rating);
-      ratingRepository.saveChanges();
-      return success();
-    };
-
-    this.delete = function (id) {
-      ratingRepository.delete(id);
-      ratingRepository.saveChanges();
-      return success();
+      return RatingController.parent.post(rating);
     };
   };
 
+  RatingController.prototype = new Controller();
+  RatingController.prototype.constructor = RatingController;
+  RatingController.parent = Controller.prototype;
   RatingController.repository = ratingRepository;
 
   module.exports = RatingController;

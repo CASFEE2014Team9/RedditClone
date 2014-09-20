@@ -4,6 +4,7 @@
   var path = require('path');
 
   var Repository = function Repository(type) {
+    this.type = type;
     var dataPath = path.join(__dirname, "./../data", type + "s.json");
     var items = null;
 
@@ -15,6 +16,21 @@
     /*get all items*/
     this.getAll = function getAll() {
       return items;
+    };
+
+    /*get all items where the given property matches the given value*/
+    this.getMatching = function getMatching(property, value) {
+      var filtered = [];
+      var id;
+      var item;
+
+      for (id in items) {
+        item = items[id];
+        if (item[property] === value) {
+          filtered.push(item);
+        }
+      }
+      return filtered;
     };
 
     /*get one item by its id*/
@@ -36,16 +52,6 @@
     /*delete an item by its id*/
     this.delete = function (id) {
       delete items[id];
-    };
-
-    /*delete an item if its property matches a certain value*/
-    this.deleteIfPropertyMatches = function (property, value) {
-      for (var id in items) {
-        var item = items[id];
-        if (item[property] === value) {
-            this.delete(id);
-        }
-      }
     };
 
     this.exists = function(id) {
