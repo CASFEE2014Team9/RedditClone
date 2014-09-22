@@ -33,6 +33,10 @@
           templateUrl: 'views/about.html',
           controller: 'AboutCtrl'
         })
+        .when('/comment', {
+          templateUrl: 'views/comment.html',
+          controller: 'CommentCtrl'
+        })
         .otherwise({
           redirectTo: '/'
         });
