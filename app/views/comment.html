@@ -4,15 +4,9 @@
   <h2 class="page-title"></h2>
 </section>
 
-<table>
-    <thead>
-        <tr><th>First name</th><th>Last name</th><th>EMail</th></tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat='cmnt in comments'>
-          <td>{{ cmnt.name }}</td>
-          <td>{{ cmnt.prename }}</td>
-          <td>{{ cmnt.email }}</td>
-        </tr>
-    </tbody>
-</table>
+<div class='media' ng-repeat='cmnt in comments' ng-show='cmnt.comment'>
+  <div class='media-body'>
+    <h4 class='media-heading'>by userId {{ cmnt.userId }}</h4>
+    {{ cmnt.comment }}
+  </div>
+</div>
