@@ -8,7 +8,8 @@
         this.type = type;
         var items = null;
         var self = this;
-        var url = $location.$$protocol + '://' + $location.$$host + ':' + $location.$$port + $location.$$url + 'data/';
+        var loc = window.location;
+        var url = loc.origin + loc.pathname + 'data/';
         url = url + type + 's/';
         var changes = [];
 
