@@ -3,18 +3,18 @@
     <h4 class="list-group-item-heading">by userId {{ post.userId }} at {{ post.createdAt }}</h4>
     <p class="list-group-item-text">{{ post.description }}</p>
   </a>
-  <form name='commentForm' ng-controller='CommentCtrl' ng-submit='commentCtrl.addComment(post)'>
+  <form name='commentForm' ng-controller='CommentCtrl' ng-submit='addComment(post)'>
     <h2> Schreibe einen Kommentar </h2>
     <div class='panel panel-default'>
       <div class='panel-heading'>
         <div class='panel-title'>Vorschau</div>
       </div>
       <div class='panel-body'>
-        Post: {{ CommentCtrl.comment.postId }}
+        Post: {{ comment.postId }}
         <br>
-        User: {{ CommentCtrl.comment.userId }}
+        User: {{ comment.userId }}
         <br>
-        Comment: {{ CommentCtrl.comment.comment }}
+        Comment: {{ comment.comment }}
       </div>
     </div>
     <div class='form-group'>
@@ -26,8 +26,8 @@
     </div>
     <div class="form-group">
       <label for='comment'>Kommentar</label>
-      <textarea class='form-control' rows='3' id='comment' ng-model='CommentCtrl.comment.comment'></textarea>
+      <textarea class='form-control' rows='3' id='comment' ng-model='comment.comment'></textarea>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary" >Submit</button>
   </form>
 </div>
