@@ -73,13 +73,35 @@
     })
     .factory('userRepository', ['$injector', 'Repository', function ($injector, Repository) {
       return new Repository('user', function (obj) {
+        var postRepository = $injector.get('postRepository');
+        var commentRepository = $injector.get('commentRepository');
+        var ratingRepository = $injector.get('ratingRepository');
+
+        obj.posts = postRepository.getMatching(obj.postId).then(function (data) {
+          obj.posts = data;
+        });
+        obj.comments = commentRepository.getMatching(obj.postId).then(function (data) {
+          obj.comments = data;
+        });
+        obj.ratings = ratingRepository.getMatching(obj.postId).then(function (data) {
+          obj.ratings = data;
+        });
       });
     }])
     .factory('postRepository', ['$injector', 'Repository', function ($injector, Repository) {
       return new Repository('post', function (obj) {
         var userRepository = $injector.get('userRepository');
+        var commentRepository = $injector.get('commentRepository');
+        var ratingRepository = $injector.get('ratingRepository');
+
         obj.user = userRepository.get(obj.userId).then(function (data) {
           obj.user = data;
+        });
+        obj.comments = commentRepository.getMatching(obj.postId).then(function (data) {
+          obj.comments = data;
+        });
+        obj.ratings = ratingRepository.getMatching(obj.postId).then(function (data) {
+          obj.ratings = data;
         });
       });
     }])

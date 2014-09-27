@@ -36,6 +36,10 @@
       return self.success(self.repository.get(id));
     };
 
+    this.getMatching = function getMatching(property, value) {
+      return self.success(self.repository.getMatching(property, value));
+    };
+
     this.deleteItem = function deleteItem(id) {
       self.repository.delete(id);
       self.repository.saveChanges();
@@ -43,7 +47,7 @@
     };
 
     this.deleteIfPropertyMatches = function deleteIfPropertyMatches(property, value) {
-      var matchingItems = repository.getMatching(property, value);
+      var matchingItems = self.repository.getMatching(property, value);
       var i;
 
       for (i = 0; i < matchingItems.length; i++) {
