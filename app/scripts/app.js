@@ -20,8 +20,6 @@
       'repository'
     ]);
 
-  var inj = angular.injector().get;
-
   redditcloneApp
     .config(function config($routeProvider) {
       $routeProvider

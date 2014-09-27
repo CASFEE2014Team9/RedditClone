@@ -1,4 +1,6 @@
 
+var inj = angular.injector().get;
+
 function allServices(mod) {
   var modInst = angular.module(mod);
   var r = {};
