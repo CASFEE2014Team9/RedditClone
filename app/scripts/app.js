@@ -71,19 +71,45 @@
         }
       };
     })
-  .factory('userRepository', ['Repository', function (Repository) {
-      return new Repository('user');
+    .factory('userRepository', ['$injector', 'Repository', function ($injector, Repository) {
+      return new Repository('user', function (obj) {
+      });
     }])
-    .factory('postRepository', ['Repository', function (Repository) {
-      return new Repository('post');
+    .factory('postRepository', ['$injector', 'Repository', function ($injector, Repository) {
+      return new Repository('post', function (obj) {
+        var userRepository = $injector.get('userRepository');
+        obj.user = userRepository.get(obj.userId).then(function (data) {
+          obj.user = data;
+        });
+      });
     }])
-    .factory('commentRepository', ['Repository', function (Repository) {
-      return new Repository('comment');
+    .factory('commentRepository', ['$injector', 'Repository', function ($injector, Repository) {
+      return new Repository('comment', function (obj) {
+        var userRepository = $injector.get('userRepository');
+        var postRepository = $injector.get('postRepository');
+
+        obj.user = userRepository.get(obj.userId).then(function (data) {
+          obj.user = data;
+        });
+        obj.post = postRepository.get(obj.postId).then(function (data) {
+          obj.post = data;
+        });
+      });
     }])
-    .factory('ratingRepository', ['Repository', function (Repository) {
-      return new Repository('rating');
+    .factory('ratingRepository', ['$injector', 'Repository', function ($injector, Repository) {
+      return new Repository('rating', function (obj) {
+        var userRepository = $injector.get('userRepository');
+        var postRepository = $injector.get('postRepository');
+
+        obj.user = userRepository.get(obj.userId).then(function (data) {
+          obj.user = data;
+        });
+        obj.post = postRepository.get(obj.postId).then(function (data) {
+          obj.post = data;
+        });
+      });
     }])
-    .controller('testController', ['userRepository', function (userRepository) {
+    .controller('testController', ['userRepository', function ($injector, userRepository) {
 
     }]);
 }());

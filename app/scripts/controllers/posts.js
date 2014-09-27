@@ -9,10 +9,9 @@
    * Controller of the redditcloneApp
    */
   angular.module('redditcloneApp')
-    .controller('PostsCtrl', ['$scope', 'postRepository', function ($scope, postRepository) {
-      $scope.posts = [ ];
-      postRepository.getAll().then(function (data) {
+    .controller('PostsCtrl', ['$scope', '$q', 'postRepository', function ($scope, $q, postRepository) {
+      $scope.posts = postRepository.getAll().then(function (data) {
         $scope.posts = data;
       });
-    } ]);
+    }]);
 }());

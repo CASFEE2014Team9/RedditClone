@@ -1,6 +1,6 @@
 <div class='list-group' ng-repeat='post in posts' ng-show='post.description'>
   <a href='{{ post.url }}' class='list-group-item'>
-    <h4 class="list-group-item-heading">by userId {{ post.userId }} at {{ post.createdAt }}</h4>
+    <h4 class="list-group-item-heading">by {{ post.user.name }} at {{ post.createdAt }}</h4>
     <p class="list-group-item-text">{{ post.description }}</p>
   </a>
   <form name='commentForm' ng-controller='CommentCtrl' ng-submit='addComment()' transfer="post" >

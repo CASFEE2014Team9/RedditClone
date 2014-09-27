@@ -20,11 +20,10 @@
         $scope.comment = {};
       };
 
-      $scope.post = {};
+      $scope.post = undefined;
       $scope.comment = {};
-      $scope.comments = [ ];
 
-      commentRepository.getAll().then(function (data) {
+      $scope.comments = commentRepository.getAll().then(function (data) {
         $scope.comments = data;
       });
     }]);

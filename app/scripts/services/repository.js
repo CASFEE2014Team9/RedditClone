@@ -4,8 +4,9 @@
 
   repositoryModule
     .factory('Repository', function ($http, $location, $q) {
-      function Repository(type) {
+      function Repository(type, wrapper) {
         this.type = type;
+        this.wrapper = wrapper;
         var items = null;
         var self = this;
         var loc = window.location;
@@ -26,7 +27,14 @@
             $http.get(url)
               .success(function (data, status, headers, config) {
                 if (data.ret === 'success') {
-                  items = data.data;
+                  var localData = data.data;
+                  if (self.wrapper !== undefined) {
+                    var id;
+                    for (id in localData) {
+                      self.wrapper(localData[id]);
+                    }
+                  }
+                  items = localData;
                   deferred.resolve(items);
                 } else {
                   console.log(data.message);
@@ -43,17 +51,22 @@
 
         /*get all items where the given property matches the given value*/
         this.getMatching = function getMatching(property, value) {
-          var filtered = [];
-          var id;
-          var item;
+          var deferred = $q.defer();
 
-          for (id in items) {
-            item = items[id];
-            if (item[property] === value) {
-              filtered.push(item);
+          var filtered = [];
+          self.getAll().then(function (data) {
+            var id;
+            var item;
+            for (id in data) {
+              item = data[id];
+              if (item[property] === value) {
+                filtered.push(item);
+              }
             }
-          }
-          return filtered;
+            deferred.resolve(filtered);
+          });
+
+          return deferred.promise;
         };
 
         /*get one item by its id*/
@@ -75,8 +88,12 @@
             $http.get(url + id + '/')
               .success(function (data, status, headers, config) {
                 if (data.ret === 'success') {
-                  items[id] = data.data;
-                  deferred.resolve(data.data);
+                  var localData = data.data;
+                  if (self.wrapper !== undefined) {
+                    self.wrapper(localData);
+                  }
+                  items[id] = localData;
+                  deferred.resolve(localData);
                 } else {
                   console.log(data.message);
                   deferred.reject(data.message);
