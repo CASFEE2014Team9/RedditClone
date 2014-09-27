@@ -77,13 +77,13 @@
         var commentRepository = $injector.get('commentRepository');
         var ratingRepository = $injector.get('ratingRepository');
 
-        obj.posts = postRepository.getMatching(obj.postId).then(function (data) {
+        obj.posts = postRepository.getMatching('userId', obj.id).then(function (data) {
           obj.posts = data;
         });
-        obj.comments = commentRepository.getMatching(obj.postId).then(function (data) {
+        obj.comments = commentRepository.getMatching('userId', obj.id).then(function (data) {
           obj.comments = data;
         });
-        obj.ratings = ratingRepository.getMatching(obj.postId).then(function (data) {
+        obj.ratings = ratingRepository.getMatching('userId', obj.id).then(function (data) {
           obj.ratings = data;
         });
       });
@@ -97,10 +97,10 @@
         obj.user = userRepository.get(obj.userId).then(function (data) {
           obj.user = data;
         });
-        obj.comments = commentRepository.getMatching(obj.postId).then(function (data) {
+        obj.comments = commentRepository.getMatching('postId', obj.id).then(function (data) {
           obj.comments = data;
         });
-        obj.ratings = ratingRepository.getMatching(obj.postId).then(function (data) {
+        obj.ratings = ratingRepository.getMatching('postId', obj.id).then(function (data) {
           obj.ratings = data;
         });
       });
