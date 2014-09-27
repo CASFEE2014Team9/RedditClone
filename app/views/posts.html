@@ -3,14 +3,14 @@
     <h4 class="list-group-item-heading">by userId {{ post.userId }} at {{ post.createdAt }}</h4>
     <p class="list-group-item-text">{{ post.description }}</p>
   </a>
-  <form name='commentForm' ng-controller='CommentCtrl' ng-submit='addComment(post)'>
+  <form name='commentForm' ng-controller='CommentCtrl' ng-submit='addComment()' transfer="post" >
     <h2> Schreibe einen Kommentar </h2>
     <div class='panel panel-default'>
       <div class='panel-heading'>
         <div class='panel-title'>Vorschau</div>
       </div>
       <div class='panel-body'>
-        Post: {{ comment.postId }}
+        Post: {{ post.id }}
         <br>
         User: {{ comment.userId }}
         <br>

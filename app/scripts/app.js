@@ -63,7 +63,17 @@
         }
       };
     }])
-    .factory('userRepository', ['Repository', function (Repository) {
+    .directive('transfer', function transferDirective() {
+      return {
+        restrict: 'A', // only attributes
+        scope: true,
+        link: function (scope, el, attrs) {
+          var transfer = attrs.transfer;
+          scope[transfer] = scope.$parent[transfer];
+        }
+      };
+    })
+  .factory('userRepository', ['Repository', function (Repository) {
       return new Repository('user');
     }])
     .factory('postRepository', ['Repository', function (Repository) {

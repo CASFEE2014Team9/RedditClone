@@ -9,20 +9,20 @@
  */
 angular.module('redditcloneApp')
   .controller('CommentCtrl', ['$scope', 'commentRepository', function ($scope, commentRepository) {
-    var self = this;
-    this.comment = {};
-    $scope.addComment = function (post) {
-      self.comment.postId = post.id;
+    $scope.addComment = function () {
+      $scope.comment.postId = $scope.post.id;
       //self.comment.userId = ???
+      $scope.comment.userId = $scope.post.userId;
 
-      self.comment.userId = post.userId;
-      commentRepository.post(self.comment);
+      commentRepository.post($scope.comment);
 
-      //post.comments.push(self.comment);
+      $scope.comment = {};
     };
-    this.comment = {};
+
+    $scope.post = {};
+    $scope.comment = {};
     $scope.comments = [ ];
-    $scope.comment = this.comment;
+
     commentRepository.getAll().then(function (data) {
       $scope.comments = data;
     });
