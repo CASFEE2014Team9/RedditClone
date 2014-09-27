@@ -22,7 +22,9 @@
         return self.notFound(UserController.repository.type, item.userId);
       }
 
-      return PostController.parent.post(post);
+      self.repository.post(post);
+      self.repository.saveChanges();
+      return self.success(post);
     };
 
     this.deleteItem = function deleteItem(id) {
@@ -32,7 +34,7 @@
       new CommentController().deleteIfPropertyMatches('postId', id);
       new RatingController().deleteIfPropertyMatches('postId', id);
 
-      self.repository.post(post);
+      self.repository.delete(id);
       self.repository.saveChanges();
       return self.success();
     };

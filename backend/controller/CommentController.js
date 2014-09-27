@@ -28,7 +28,7 @@
 
       self.repository.post(comment);
       self.repository.saveChanges();
-      return self.success();
+      return self.success(comment);
     };
   };
 

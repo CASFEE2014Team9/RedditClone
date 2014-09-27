@@ -14,20 +14,26 @@
       return data;
     };
 
-    this.success = function success() {
-      return self.json(200);
+    this.success = function success(data) {
+      return self.json({
+        ret : 'success',
+        data : data
+      });
     };
 
     this.notFound = function notFound(type, id) {
-      return self.json(type + ' ' + id + ' not found');
+      return self.json({
+        ret : 'not found',
+        message : type + ' ' + id + ' not found'
+      });
     };
 
     this.getAll = function getAll() {
-      return self.json(self.repository.getAll());
+      return self.success(self.repository.getAll());
     };
 
     this.get = function get(id) {
-      return self.json(self.repository.get(id));
+      return self.success(self.repository.get(id));
     };
 
     this.deleteItem = function deleteItem(id) {

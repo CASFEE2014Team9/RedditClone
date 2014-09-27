@@ -28,7 +28,7 @@
 
       self.repository.post(rating);
       self.repository.saveChanges();
-      return self.success();
+      return self.success(rating);
     };
   };
 

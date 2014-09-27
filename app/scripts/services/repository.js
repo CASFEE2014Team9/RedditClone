@@ -25,8 +25,13 @@
           } else {
             $http.get(url)
               .success(function (data, status, headers, config) {
-                items = data;
-                deferred.resolve(items);
+                if (data.ret === 'success') {
+                  items = data.data;
+                  deferred.resolve(items);
+                } else {
+                  console.log(data.message);
+                  deferred.reject(data.message);
+                }
               })
               .error(function (data, status, headers, config) {
                 console.log(data);
@@ -69,8 +74,13 @@
           if (!found) {
             $http.get(url + id + '/')
               .success(function (data, status, headers, config) {
-                items[id] = data;
-                deferred.resolve(data);
+                if (data.ret === 'success') {
+                  items[id] = data.data;
+                  deferred.resolve(data.data);
+                } else {
+                  console.log(data.message);
+                  deferred.reject(data.message);
+                }
               })
               .error(function (data, status, headers, config) {
                 console.log(data);
@@ -87,14 +97,19 @@
           var deferred = $q.defer();
           $http.post(url, item)
             .success(function (data, status, headers, config) {
-              deferred.resolve(item);
+              if (data.ret === 'success') {
+                item = data.data;
+                items[item.id] = item;
+                deferred.resolve(item);
+              } else {
+                console.log(data.message);
+                deferred.reject(data.message);
+              }
             })
             .error(function (data, status, headers, config) {
               console.log(data);
               deferred.reject(status);
             });
-           // .then(self.get() )
-          items[item.id] = item;
 
           return deferred.promise;
         };

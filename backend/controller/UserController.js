@@ -18,7 +18,7 @@
 
       self.repository.post(user);
       self.repository.saveChanges();
-      return self.success();
+      return self.success(user);
     };
 
     this.deleteItem = function deleteItem(id) {
