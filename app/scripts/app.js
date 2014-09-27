@@ -71,64 +71,57 @@
         }
       };
     })
-    .factory('userRepository', ['$injector', 'Repository', function ($injector, Repository) {
+    .factory('lazy', function () {
+      var lazy = function (promise, assign) {
+        assign(function () {
+          promise.then(function (data) {
+            assign(function () {
+              return data;
+            });
+          });
+          return null;
+        });
+      };
+      return lazy;
+    })
+    .factory('userRepository', ['$injector', 'Repository', 'lazy', function ($injector, Repository, lazy) {
       return new Repository('user', function (obj) {
         var postRepository = $injector.get('postRepository');
         var commentRepository = $injector.get('commentRepository');
         var ratingRepository = $injector.get('ratingRepository');
 
-        obj.posts = postRepository.getMatching('userId', obj.id).then(function (data) {
-          obj.posts = data;
-        });
-        obj.comments = commentRepository.getMatching('userId', obj.id).then(function (data) {
-          obj.comments = data;
-        });
-        obj.ratings = ratingRepository.getMatching('userId', obj.id).then(function (data) {
-          obj.ratings = data;
-        });
+        lazy(postRepository.getMatching('userId', obj.id), function (l) { obj.posts = l; });
+        lazy(commentRepository.getMatching('userId', obj.id), function (l) { obj.comments = l; });
+        lazy(ratingRepository.getMatching('userId', obj.id), function (l) { obj.ratings = l; });
       });
     }])
-    .factory('postRepository', ['$injector', 'Repository', function ($injector, Repository) {
+    .factory('postRepository', ['$injector', 'Repository', 'lazy', function ($injector, Repository, lazy) {
       return new Repository('post', function (obj) {
         var userRepository = $injector.get('userRepository');
         var commentRepository = $injector.get('commentRepository');
         var ratingRepository = $injector.get('ratingRepository');
 
-        obj.user = userRepository.get(obj.userId).then(function (data) {
-          obj.user = data;
-        });
-        obj.comments = commentRepository.getMatching('postId', obj.id).then(function (data) {
-          obj.comments = data;
-        });
-        obj.ratings = ratingRepository.getMatching('postId', obj.id).then(function (data) {
-          obj.ratings = data;
-        });
+        lazy(userRepository.get(obj.userId), function (l) { obj.user = l; });
+        lazy(commentRepository.getMatching('postId', obj.id), function (l) { obj.comments = l; });
+        lazy(ratingRepository.getMatching('postId', obj.id), function (l) { obj.ratings = l; });
       });
     }])
-    .factory('commentRepository', ['$injector', 'Repository', function ($injector, Repository) {
+    .factory('commentRepository', ['$injector', 'Repository', 'lazy', function ($injector, Repository, lazy) {
       return new Repository('comment', function (obj) {
         var userRepository = $injector.get('userRepository');
         var postRepository = $injector.get('postRepository');
 
-        obj.user = userRepository.get(obj.userId).then(function (data) {
-          obj.user = data;
-        });
-        obj.post = postRepository.get(obj.postId).then(function (data) {
-          obj.post = data;
-        });
+        lazy(userRepository.get(obj.userId), function (l) { obj.user = l; });
+        lazy(postRepository.get(obj.postId), function (l) { obj.post = l; });
       });
     }])
-    .factory('ratingRepository', ['$injector', 'Repository', function ($injector, Repository) {
+    .factory('ratingRepository', ['$injector', 'Repository', 'lazy', function ($injector, Repository, lazy) {
       return new Repository('rating', function (obj) {
         var userRepository = $injector.get('userRepository');
         var postRepository = $injector.get('postRepository');
 
-        obj.user = userRepository.get(obj.userId).then(function (data) {
-          obj.user = data;
-        });
-        obj.post = postRepository.get(obj.postId).then(function (data) {
-          obj.post = data;
-        });
+        lazy(userRepository.get(obj.userId), function (l) { obj.user = l; });
+        lazy(postRepository.get(obj.postId), function (l) { obj.post = l; });
       });
     }])
     .controller('testController', ['userRepository', function ($injector, userRepository) {

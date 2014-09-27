@@ -28,6 +28,7 @@
                 if (self.wrapper !== undefined) {
                   var id;
                   var item;
+                  delete data.data.data.maxId;
                   for (id in data.data.data) {
                     item = data.data.data[id];
                     self.wrapper(item);
