@@ -63,22 +63,19 @@
         }
       };
     }])
-    .controller('testController', ['Repository', function (Repository) {
-      var userRepository = new Repository('user');
-      userRepository.getAll().then(function (users) {
+    .factory('userRepository', ['Repository', function (Repository) {
+      return new Repository('user');
+    }])
+    .factory('postRepository', ['Repository', function (Repository) {
+      return new Repository('post');
+    }])
+    .factory('commentRepository', ['Repository', function (Repository) {
+      return new Repository('comment');
+    }])
+    .factory('ratingRepository', ['Repository', function (Repository) {
+      return new Repository('rating');
+    }])
+    .controller('testController', ['userRepository', function (userRepository) {
 
-      });
-
-      userRepository.get(2).then(function (user) {
-
-      });
-
-      userRepository.post({
-        name : 'test',
-        email : 'test@test.com',
-        password : 'test'
-      }).then(function (user) {
-
-      });
     }]);
 }());

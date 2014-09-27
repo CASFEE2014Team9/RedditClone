@@ -8,14 +8,14 @@
  * Controller of the redditcloneApp
  */
 angular.module('redditcloneApp')
-  .controller('CommentCtrl', ['$http', '$scope', function ($http, $scope) {
+  .controller('CommentCtrl', ['$scope', 'commentRepository', function ($scope, commentRepository) {
     this.comment = {};
-    this.addComment = function(post) {
+    this.addComment = function (post) {
       post.comments.push(this.comment);
     };
     this.comment = {};
     $scope.comments = [ ];
-    $http.get('/data/comments').success(function (data) {
-        $scope.comments = data;
+    commentRepository.getAll().then(function (data) {
+      $scope.comments = data;
     });
   } ]);
