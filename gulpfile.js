@@ -1,41 +1,49 @@
-'use strict';
+(function () {
+  'use strict';
 
-var gulp = require('gulp');
-var less = require('gulp-less');
-var jshint = require('gulp-jshint');
-var concat = require('gulp-concat');
-var qunit = require('gulp-qunit');
-var csslint = require('gulp-csslint');
+  var gulp = require('gulp');
+  var less = require('gulp-less');
+  var jshint = require('gulp-jshint');
+  var concat = require('gulp-concat');
+  var qunit = require('gulp-qunit');
+  var csslint = require('gulp-csslint');
 
-var paths = {
+  var paths = {
     in: {
-        app: require('./bower.json').appPath || 'app',
-        gulp:    ['./gulpfile.js'],
-        scripts: ['./app/scripts/**/*.js'],
-        css:     ['./app/styles/**/*.css']
+      app: require('./bower.json').appPath || 'app',
+      gulp:    ['./gulpfile.js'],
+      scripts: [
+        './app/scripts/**/*.js',
+        './backend/**/*.js'],
+      css:     ['./app/styles/**/*.css']
     },
     out: {
     }
-};
+  };
 
-//detect js errors
-gulp.task('lint', function () {
+  //detect js errors
+  gulp.task('lint', function () {
     return gulp.src(paths.in.scripts)
-        .pipe(jshint())
-        .pipe(jshint.reporter());
-});
-//detect css errors
-gulp.task('csslint', function () {
+      .pipe(jshint())
+      .pipe(jshint.reporter());
+  });
+  //detect css errors
+  gulp.task('csslint', function () {
     gulp.src(paths.in.css)
-        .pipe(csslint())
-        .pipe(csslint.reporter());
-});
+      .pipe(csslint())
+      .pipe(csslint.reporter());
+  });
 
-// Rerun the task when a file changes
-gulp.task('watch', function () {
+  gulp.task('serve', function () {
+    var server = require('./bin/www');
+  });
+
+  // Rerun the task when a file changes
+  gulp.task('watch', function () {
     gulp.watch(paths.in.scripts, ['lint']);
     gulp.watch(paths.in.css, ['csslint']);
     gulp.watch(paths.in.gulp, ['default']);
-});
+  });
 
-gulp.task('default', ['watch', 'lint', 'csslint']);
+  gulp.task('default', ['watch', 'lint', 'csslint', 'serve']);
+}());
