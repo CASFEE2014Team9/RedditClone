@@ -13,9 +13,9 @@
    * Controller of the redditcloneApp
    */
   angular.module('redditcloneApp')
-    .controller('PostsCtrl', ['$scope', '$q', 'postRepository', function ($scope, $q, postRepository) {
-      $scope.posts = postRepository.getAll().then(function (data) {
-        $scope.posts = data;
-      });
+    .controller('LoginCtrl', ['$scope', '$rootScope', 'session', 'userRoles', function ($scope, $rootScope, session, userRoles) {
+      $rootScope.session.user.name = '';
+      $rootScope.session.user.password = '';
+      $rootScope.session.user.role = userRoles.public;
     }]);
 }());

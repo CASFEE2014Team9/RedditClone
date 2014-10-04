@@ -65,6 +65,12 @@
           return itemsByPropertyPromises[property][value];
         };
 
+        this.getFirstMatching = function getFirstMatching(property, value) {
+          return self.getMatching(property, value).then(function (data) {
+            return data[0];
+          });
+        };
+
         /*get one item by its id*/
         this.get = function get(id) {
           if (!itemsByIdPromises[id]) {

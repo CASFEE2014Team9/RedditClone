@@ -1,3 +1,7 @@
+
+/*jslint browser: true*/
+/*global angular */
+
 (function () {
   'use strict';
 
@@ -9,10 +13,14 @@
    * Controller of the redditcloneApp
    */
   angular.module('redditcloneApp')
-    .controller('CommentCtrl', ['$scope', 'commentRepository', 'session', function ($scope, commentRepository, session) {
+    .controller('CommentCtrl', ['$scope', '$location', 'commentRepository', 'session', function ($scope, $location, commentRepository, session) {
       $scope.addComment = function () {
+        if (!session.isLoggedIn()) {
+          $location.path('/login');
+        }
+
         $scope.comment.postId = $scope.post.id;
-        $scope.comment.userId = session.user.userId;
+        $scope.comment.userId = session.user.data.userId;
 
         commentRepository.post($scope.comment);
 

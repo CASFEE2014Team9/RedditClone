@@ -1,6 +1,6 @@
 
 /*jslint browser: true*/
-/*global window, angular */
+/*global angular */
 
 (function () {
   'use strict';
@@ -43,6 +43,10 @@
         .when('/posts', {
           templateUrl: 'views/posts.html',
           controller: 'PostsCtrl'
+        })
+        .when('/login', {
+          templateUrl: 'views/login.html',
+          controller: 'LoginCtrl'
         })
         .otherwise({
           redirectTo: '/'
@@ -88,6 +92,25 @@
         });
       };
       return lazy;
+    })
+    .factory('history', function ($rootScope, $location) {
+      var back = function back() {
+        var prevUrl = history.stack.length > 1 ? history.stack.splice(-2)[0] : "/";
+        $location.path(prevUrl);
+      };
+
+      var history = {
+        stack : [],
+        back : back
+      };
+
+      $rootScope.$on('$routeChangeSuccess', function() {
+        history.stack.push($location.$$path);
+      });
+
+      $rootScope.back = back;
+
+      return history;
     })
     .factory('userRepository', ['$injector', 'Repository', 'lazy', function ($injector, Repository, lazy) {
       return new Repository('user', function (obj) {
@@ -154,5 +177,8 @@
           return postRepository.get(obj.postId);
         }, function (l) { obj.post = l; });
       });
-    }]);
+    }])
+    .run(function (history) {
+
+    });
 }());
