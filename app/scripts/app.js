@@ -21,7 +21,8 @@
       'ngRoute',
       'ngSanitize',
       'ngTouch',
-      'services'
+      'repository',
+      'session'
     ]);
 
   redditcloneApp

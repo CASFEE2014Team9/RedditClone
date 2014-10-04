@@ -9,11 +9,10 @@
    * Controller of the redditcloneApp
    */
   angular.module('redditcloneApp')
-    .controller('CommentCtrl', ['$scope', 'commentRepository', function ($scope, commentRepository) {
+    .controller('CommentCtrl', ['$scope', 'commentRepository', 'session', function ($scope, commentRepository, session) {
       $scope.addComment = function () {
         $scope.comment.postId = $scope.post.id;
-        //self.comment.userId = ???
-        $scope.comment.userId = $scope.post.userId;
+        $scope.comment.userId = session.user.userId;
 
         commentRepository.post($scope.comment);
 

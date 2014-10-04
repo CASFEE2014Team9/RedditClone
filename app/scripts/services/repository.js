@@ -4,9 +4,9 @@
 
 (function () {
   'use strict';
-  var servicesModule = angular.module('services', []);
+  var reposityModule = angular.module('repository', []);
 
-  servicesModule
+  reposityModule
     .factory('Repository', function ($http) {
       function Repository(type, wrapper) {
         this.type = type;
