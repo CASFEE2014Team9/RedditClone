@@ -1,13 +1,13 @@
 
 /*jslint browser: true*/
-/*global window, alert, angular */
+/*global window, angular */
 
 (function () {
   'use strict';
   var repositoryModule = angular.module('repository', []);
 
   repositoryModule
-    .factory('Repository', function ($http, $q) {
+    .factory('Repository', function ($http) {
       function Repository(type, wrapper) {
         this.type = type;
         this.wrapper = wrapper;
@@ -22,7 +22,7 @@
         /*get all items*/
         this.getAll = function getAll() {
           if (!itemsPromise) {
-            itemsPromise = $http.get(url).then(function (data, status, headers, config) {
+            itemsPromise = $http.get(url).then(function (data) {
               if (data.data.ret === 'success') {
                 var localData = {};
                 if (self.wrapper !== undefined) {
@@ -80,7 +80,7 @@
         /*if id is undefined create a new item*/
         /*if id is defined update an existing item*/
         this.post = function post(item) {
-          return $http.post(url, item).then(function (data, status, headers, config) {
+          return $http.post(url, item).then(function (data) {
             if (data.data.ret === 'success') {
               item = data.data.data;
               self.getAll().then(function (existing) {
@@ -96,7 +96,7 @@
 
         /*delete an item by its id*/
         this.delete = function (id) {
-          return $http.delete(url + id + '/').then(function (data, status, headers, config) {
+          return $http.delete(url + id + '/').then(function (data) {
             if (data.data.ret === 'success') {
               self.getAll().then(function (existing) {
                 delete existing[id];

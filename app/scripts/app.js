@@ -46,7 +46,7 @@
     .directive('activeLink', ['$location', function activeLinkDirective(location) {
       return {
         restrict: 'A', // only attributes
-        link: function (scope, element, attrs, controller) {
+        link: function (scope, element, attrs) {
           var clazz = attrs.activeLink;
           var path = attrs.href;
           path = path.substring(1); //hack because path does not return including hashbang
@@ -123,8 +123,5 @@
         lazy(userRepository.get(obj.userId), function (l) { obj.user = l; });
         lazy(postRepository.get(obj.postId), function (l) { obj.post = l; });
       });
-    }])
-    .controller('testController', ['userRepository', function ($injector, userRepository) {
-
     }]);
 }());
