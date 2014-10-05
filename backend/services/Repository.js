@@ -5,7 +5,7 @@
 
   var Repository = function Repository(type) {
     this.type = type;
-    var dataPath = path.join(__dirname, "./../data", type + "s.json");
+    var dataPath = path.join(__dirname, './../data', type + 's.json');
     var items = null;
 
     /*saves pending modifications*/
@@ -41,7 +41,7 @@
     /*if id is undefined create a new item*/
     /*if id is defined update an existing item*/
     this.post = function post(item) {
-      if (item.id === undefined || item.id === "") {
+      if (item.id === undefined || item.id === '') {
         items.maxId = items.maxId + 1;
         item.id = items.maxId;
       }
@@ -54,7 +54,7 @@
       delete items[id];
     };
 
-    this.exists = function(id) {
+    this.exists = function (id) {
       if (id === undefined) {
         return false;
       } else {

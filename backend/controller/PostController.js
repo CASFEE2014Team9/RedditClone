@@ -9,7 +9,7 @@
     var self = this;
 
     this.post = function post(item) {
-      var post = {
+      var postdata = {
         id : item.id,
         url : item.url,
         description : item.description,
@@ -18,13 +18,13 @@
       };
 
       var UserController = require('./UserController');
-      if (!UserController.repository.exists(item.userId)) {
-        return self.notFound(UserController.repository.type, item.userId);
+      if (!UserController.repository.exists(postdata.userId)) {
+        return self.notFound(UserController.repository.type, postdata.userId);
       }
 
-      self.repository.post(post);
+      self.repository.post(postdata);
       self.repository.saveChanges();
-      return self.success(post);
+      return self.success(postdata);
     };
 
     this.deleteItem = function deleteItem(id) {

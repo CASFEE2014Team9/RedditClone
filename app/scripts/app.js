@@ -95,7 +95,7 @@
     })
     .factory('history', function ($rootScope, $location) {
       var back = function back() {
-        var prevUrl = history.stack.length > 1 ? history.stack.splice(-2)[0] : "/";
+        var prevUrl = history.stack.length > 1 ? history.stack.splice(-2)[0] : '/';
         $location.path(prevUrl);
       };
 
