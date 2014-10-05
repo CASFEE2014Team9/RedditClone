@@ -26,7 +26,7 @@
                 userRoles.admin,
         admin:  userRoles.admin    // 100
       };
-    }).factory('session', function ($q, userRoles, $rootScope, $injector, history) {
+    }).factory('session', function ($q, $rootScope, $injector, $cookies, userRoles, history) {
 
       var user = {
         role : userRoles.public,
@@ -35,26 +35,49 @@
         data : null
       };
 
+      var login = function () {
+        var userRepository = $injector.get('userRepository');
+        return userRepository.getFirstMatching('name', user.name).then(function (data) {
+          if (user.password === data.password) {
+            user.data = data;
+            user.role = userRoles.user;
+
+
+            return user;
+          }
+        }, function (data) {
+          return $q.reject(data);
+        });
+      };
+
       var session = {
         user : user,
         isLoggedIn: function () {
           return user.role === userRoles.user || user.role === userRoles.admin;
         },
         login : function () {
-          var userRepository = $injector.get('userRepository');
-          var history = $injector.get('history');
-          return userRepository.getFirstMatching('name', user.name).then(function (data) {
-            if (user.password === data.password) {
-              user.data = data;
-              user.role = userRoles.user;
-              history.back();
-              return user;
-            }
-          }, function (data) {
-            return $q.reject(data);
+          login().then(function (data) {
+            $cookies.user = user.name;
+            $cookies.password = user.password;
+            history.back();
+            return data;
           });
+        },
+        logout : function () {
+          delete $cookies.user;
+          delete $cookies.password;
+          user.data = undefined;
+          user.name = '';
+          user.password = '';
+          user.role = userRoles.public;
         }
       };
+
+      if ($cookies.user) {
+        user.name = $cookies.user;
+        user.password = $cookies.password;
+        login();
+      }
 
       $rootScope.session = session;
 
