@@ -31,6 +31,7 @@
                   delete data.data.data.maxId;
                   for (id in data.data.data) {
                     item = data.data.data[id];
+                    item.id = id;
                     self.wrapper(item);
                     localData[id] = item;
                   }

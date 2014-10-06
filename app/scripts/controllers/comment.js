@@ -20,7 +20,7 @@
         }
 
         $scope.comment.postId = $scope.post.id;
-        $scope.comment.userId = session.user.data.userId;
+        $scope.comment.userId = session.user.data.id;
 
         commentRepository.post($scope.comment);
 

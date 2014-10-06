@@ -22,15 +22,16 @@
       'ngSanitize',
       'ngTouch',
       'repository',
-      'session'
+      'session',
+      'navigation'
     ]);
 
   redditcloneApp
     .config(function config($routeProvider) {
       $routeProvider
         .when('/', {
-          templateUrl: 'views/main.html',
-          controller: 'MainCtrl'
+          templateUrl: 'views/home.html',
+          controller: 'PostsCtrl'
         })
         .when('/about', {
           templateUrl: 'views/about.html',
