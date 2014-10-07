@@ -22,8 +22,7 @@
       'ngSanitize',
       'ngTouch',
       'repository',
-      'session',
-      'navigation'
+      'session'
     ]);
 
   redditcloneApp
@@ -180,6 +179,5 @@
       });
     }])
     .run(function (history) {
-
     });
 }());
