@@ -1,5 +1,6 @@
 (function () {
   'use strict';
+  var http = require('http');
   var express = require('express');
   var path = require('path');
   var favicon = require('static-favicon');
@@ -7,11 +8,12 @@
   var cookieParser = require('cookie-parser');
   var bodyParser = require('body-parser');
   var livereload = require('express-livereload');
+  var socket = require('socket.io');
 
-  var data = require('./routes/data');
+  var dataRouter = require('./routes/data');
 
   var app = express();
-
+  var io = socket.listen(3001);
 
   app.root = path.join(__dirname, '/../');
 
@@ -29,7 +31,7 @@
   app.use(express.static(path.join(app.root, '/app')));
   app.use('/bower_components/', express.static(path.join(app.root, '/bower_components')));
 
-  app.use('/data/', data);
+  app.use('/data/', dataRouter(io));
 
   /// catch 404 and forward to error handler
   app.use(function (req, res, next) {

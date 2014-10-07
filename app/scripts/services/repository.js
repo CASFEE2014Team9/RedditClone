@@ -111,6 +111,16 @@
             }
           });
         };
+
+        var updatePath = 'http://localhost:3001/' + type + 's';
+        var socket = io(updatePath);
+        socket.on('connect', function () {
+          console.log('connected to ' + updatePath);
+        });
+
+        socket.on('disconnect', function () {
+          console.log('disconnected from ' + updatePath);
+        });
       }
       return Repository;
     });

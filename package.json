@@ -1,6 +1,7 @@
 {
   "name": "redditclone",
   "version": "0.0.0",
+  "repository": "https://github.com/CASFEE2014Team9/RedditClone.git",
   "dependencies": {
     "express": "*",
     "debug": "*",
@@ -8,7 +9,9 @@
     "static-favicon": "*",
     "morgan" : "*",
     "cookie-parser" : "*",
-    "body-parser" : "*"
+    "body-parser" : "*",
+    "socket.io" : "*",
+    "jade": "*"
   },
   "devDependencies": {
     "gulp" : "*",

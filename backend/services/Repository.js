@@ -71,6 +71,20 @@
         maxId : 0
       };
     }
+
+    var sockets = {};
+
+    this.handleUpdates = function (io) {
+      io.on('connection', function (socket) {
+        sockets[socket.id] = socket;
+        console.log('connection ' + socket.id);
+
+        socket.on('disconnect', function () {
+          console.log('disconnection ' + socket.id);
+          delete sockets[socket.id];
+        });
+      });
+    };
   };
 
   module.exports = Repository;

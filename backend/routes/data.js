@@ -7,7 +7,9 @@
   var RatingController = require('./../controller/RatingController');
   var CommentController = require('./../controller/CommentController');
 
-  var routeController = function (path, Controller) {
+  var routeController = function (path, Controller, io) {
+    Controller.repository.handleUpdates(io.of(path));
+
     router.get(path, function (req, res) {
       var controller = new Controller();
       controller.req = req;
@@ -36,10 +38,12 @@
     });
   };
 
-  routeController('/users', UserController);
-  routeController('/posts', PostController);
-  routeController('/ratings', RatingController);
-  routeController('/comments', CommentController);
+  module.exports = function (io) {
+    routeController('/users', UserController, io);
+    routeController('/posts', PostController, io);
+    routeController('/ratings', RatingController, io);
+    routeController('/comments', CommentController, io);
 
-  module.exports = router;
+    return router;
+  };
 }());
