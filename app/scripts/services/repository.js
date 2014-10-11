@@ -1,6 +1,6 @@
 
 /*jslint browser: true*/
-/*global window, angular */
+/*global window, angular, io */
 
 (function () {
   'use strict';
@@ -84,13 +84,34 @@
           return itemsByIdPromises[id];
         };
 
+        /*is called if a post was successful or io receives an update*/
         var onPostSuccess = function (item) {
           self.getAll().then(function (existing) {
+            var property;
+            var promise;
             if (self.wrapper !== undefined) {
               self.wrapper(item);
             }
             existing[item.id] = item;
+
+            var updatePromise = function (filtered) {
+              filtered.push(item);
+            };
+
+            for (property in itemsByPropertyPromises) {
+              promise = itemsByPropertyPromises[property][item[property]];
+              if (promise) {
+                promise.then(updatePromise);
+              }
+            }
             return item;
+          });
+        };
+
+        /*is called if a delete was successful or io receives an delete*/
+        var onDeleteSuccess = function (id) {
+          self.getAll().then(function (existing) {
+            delete existing[id];
           });
         };
 
@@ -109,9 +130,7 @@
         this.delete = function (id) {
           return $http.delete(url + id + '/').then(function (data) {
             if (data.data.ret === 'success') {
-              self.getAll().then(function (existing) {
-                delete existing[id];
-              });
+              onDeleteSuccess(id);
             }
           });
         };
@@ -134,6 +153,7 @@
 
         socket.on('delete ', function (id) {
           console.log('delete ' + id);
+          onDeleteSuccess(id);
         });
       }
       return Repository;
