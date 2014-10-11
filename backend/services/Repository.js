@@ -7,6 +7,7 @@
     this.type = type;
     var dataPath = path.join(__dirname, './../data', type + 's.json');
     var items = null;
+    var sockets = {};
 
     /*saves pending modifications*/
     this.saveChanges = function saveChanges() {
@@ -41,17 +42,26 @@
     /*if id is undefined create a new item*/
     /*if id is defined update an existing item*/
     this.post = function post(item) {
+      var sockId;
       if (item.id === undefined || item.id === '') {
         items.maxId = items.maxId + 1;
         item.id = items.maxId;
       }
 
       items[item.id] = item;
+      for (sockId in sockets) {
+        sockets[sockId].emit('post', item);
+      }
     };
 
     /*delete an item by its id*/
     this.delete = function (id) {
+      var sockId;
+
       delete items[id];
+      for (sockId in sockets) {
+        sockets[sockId].emit('delete', id);
+      }
     };
 
     this.exists = function (id) {
@@ -71,8 +81,6 @@
         maxId : 0
       };
     }
-
-    var sockets = {};
 
     this.handleUpdates = function (io) {
       io.on('connection', function (socket) {

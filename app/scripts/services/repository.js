@@ -84,19 +84,23 @@
           return itemsByIdPromises[id];
         };
 
+        var onPostSuccess = function (item) {
+          self.getAll().then(function (existing) {
+            if (self.wrapper !== undefined) {
+              self.wrapper(item);
+            }
+            existing[item.id] = item;
+            return item;
+          });
+        };
+
         /*if id is undefined create a new item*/
         /*if id is defined update an existing item*/
         this.post = function post(item) {
           return $http.post(url, item).then(function (data) {
             if (data.data.ret === 'success') {
               item = data.data.data;
-              self.getAll().then(function (existing) {
-                if (self.wrapper !== undefined) {
-                  self.wrapper(item);
-                }
-                existing[item.id] = item;
-                return item;
-              });
+              return onPostSuccess(item);
             }
           });
         };
@@ -120,6 +124,16 @@
 
         socket.on('disconnect', function () {
           console.log('disconnected from ' + updatePath);
+        });
+
+        socket.on('post', function (item) {
+          console.log('post ');
+          console.dir(item);
+          onPostSuccess(item);
+        });
+
+        socket.on('delete ', function (id) {
+          console.log('delete ' + id);
         });
       }
       return Repository;
