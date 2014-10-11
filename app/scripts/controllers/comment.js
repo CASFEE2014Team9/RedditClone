@@ -17,6 +17,7 @@
       $scope.addComment = function () {
         if (!session.isLoggedIn()) {
           $location.path('/login');
+          return;
         }
 
         $scope.comment.postId = $scope.post.id;
