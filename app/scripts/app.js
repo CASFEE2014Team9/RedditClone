@@ -49,6 +49,10 @@
           templateUrl: 'views/login.html',
           controller: 'LoginCtrl'
         })
+        .when('/new', {
+          templateUrl: 'views/newpost.html',
+          controller: 'PostsCtrl'
+        })
         .otherwise({
           redirectTo: '/'
         });

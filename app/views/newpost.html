@@ -1,0 +1,15 @@
+<div>
+    <form name='newPostForm' ng-submit='post.create()' >
+        <h3> Create new Post. </h3>
+        <p> Enter a link and a description.</p>
+        <div class="form-group">
+            <input type='text' id='link' name="link" placeholder="http://..." ng-model='post'>
+        </div>
+        <div class="form-group">
+            <textarea id='description' name="description" placeholder="describe your post..." ng-model='description'>
+        </div>
+
+        <a href="" ng-click="createPost()">Create</a>
+        <a href="" ng-click="cancelPost()">Cancel</a>
+    </form>
+</div>
