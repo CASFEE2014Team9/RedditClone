@@ -6,7 +6,7 @@
     "express": "*",
     "debug": "*",
     "bower": "*",
-    "static-favicon": "*",
+    "serve-favicon": "*",
     "morgan" : "*",
     "cookie-parser" : "*",
     "body-parser" : "*",
