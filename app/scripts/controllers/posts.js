@@ -13,9 +13,17 @@
    * Controller of the redditcloneApp
    */
   angular.module('redditcloneApp')
-    .controller('PostsCtrl', ['$scope', '$q', 'postRepository', function ($scope, $q, postRepository) {
+    .controller('PostsCtrl', ['$window', '$scope', '$q', 'postRepository', function ($window, $scope, $q, postRepository) {
       $scope.posts = postRepository.getAll().then(function (data) {
         $scope.posts = data;
       });
+
+      $scope.create = function () {
+        // save link and description...
+      };
+
+      $scope.cancel = function () {
+        $window.history.back();
+      };
     }]);
 }());
