@@ -13,7 +13,7 @@
    * Controller of the redditcloneApp
    */
   angular.module('redditcloneApp')
-    .controller('LoginCtrl', ['$scope', '$rootScope', 'session', 'userRoles', function ($scope, $rootScope, session, userRoles) {
+    .controller('LoginCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
       if ($rootScope.session.user.name === 'anonymous') {
         $rootScope.session.user.name = '';
         $rootScope.session.user.password = '';

@@ -178,6 +178,9 @@
         }, function (l) { obj.post = l; });
       });
     }])
+    /*jshint unused: false*/
     .run(function (history) {
     });
+
+    /*jshint unused: true*/
 }());

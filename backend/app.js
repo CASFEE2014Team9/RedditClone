@@ -44,6 +44,7 @@
 
   // development error handler
   // will print stacktrace
+  /*jshint unused: false*/
   if (app.get('env') === 'development') {
     app.use(function (err, req, res, next) {
       res.status(err.status || 500);
@@ -63,6 +64,7 @@
       error: {}
     });
   });
+  /*jshint unused: true*/
 
   livereload(app, {
     watchDir: path.join(app.root, '/app')

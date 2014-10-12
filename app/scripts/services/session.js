@@ -1,6 +1,7 @@
 
 /*jslint browser: true*/
 /*global angular */
+/* jshint bitwise: false */
 
 (function () {
   'use strict';
