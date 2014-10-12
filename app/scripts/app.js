@@ -21,12 +21,13 @@
       'ngRoute',
       'ngSanitize',
       'ngTouch',
+      'LocalStorageModule',
       'repository',
       'session'
     ]);
 
   redditcloneApp
-    .config(function config($routeProvider) {
+    .config(function config($routeProvider, localStorageServiceProvider) {
       $routeProvider
         .when('/', {
           templateUrl: 'views/home.html',
@@ -51,6 +52,9 @@
         .otherwise({
           redirectTo: '/'
         });
+
+      localStorageServiceProvider
+        .setPrefix('redditClone');
     })
     .directive('activeLink', ['$location', function activeLinkDirective(location) {
       return {
