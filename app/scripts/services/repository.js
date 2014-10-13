@@ -7,10 +7,9 @@
   var reposityModule = angular.module('repository', []);
 
   reposityModule
-    .factory('Repository', function ($http) {
-      function Repository(type, wrapper) {
+    .factory('Repository', function ($http, $q) {
+      function Repository(type) {
         this.type = type;
-        this.wrapper = wrapper;
         var itemsPromise = null;
         var itemsByIdPromises = {};
         var itemsByPropertyPromises = {};
@@ -24,21 +23,17 @@
           if (!itemsPromise) {
             itemsPromise = $http.get(url).then(function (data) {
               if (data.data.ret === 'success') {
+                var id, item;
                 var localData = {};
-                if (self.wrapper !== undefined) {
-                  var id;
-                  var item;
-                  delete data.data.data.maxId;
-                  for (id in data.data.data) {
-                    item = data.data.data[id];
-                    item.id = id;
-                    self.wrapper(item);
-                    localData[id] = item;
-                  }
+                delete data.data.data.maxId;
+                for (id in data.data.data) {
+                  item = data.data.data[id];
+                  item.id = id;
+                  localData[id] = item;
                 }
                 return localData;
               }
-              console.log(data.data.message);
+              return $q.reject(data.data.message);
             });
           }
           return itemsPromise;
@@ -52,8 +47,7 @@
           if (!itemsByPropertyPromises[property][value]) {
             itemsByPropertyPromises[property][value] = self.getAll().then(function (data) {
               var filtered = [];
-              var id;
-              var item;
+              var id, item;
               for (id in data) {
                 item = data[id];
                 if (item[property] === value) {
@@ -79,19 +73,14 @@
               return data[id];
             });
           }
-          //$http.get(url + id + '/');
-
           return itemsByIdPromises[id];
         };
 
         /*is called if a post was successful or io receives an update*/
         var onPostSuccess = function (item) {
           self.getAll().then(function (existing) {
-            var property;
-            var promise;
-            if (self.wrapper !== undefined) {
-              self.wrapper(item);
-            }
+            var property, promise;
+
             existing[item.id] = item;
 
             var updatePromise = function (filtered) {

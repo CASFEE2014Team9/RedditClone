@@ -75,13 +75,13 @@
       var commentRepository = $injector.get('commentRepository');
       var ratingRepository = $injector.get('ratingRepository');
 
-      $scope.post.user = userRepository.get($scope.post.userId).then(function (user) {
+      userRepository.get($scope.post.userId).then(function (user) {
         $scope.post.user = user;
       });
-      $scope.post.comments = commentRepository.getMatching('postId', $scope.post.id).then(function (comments) {
+      commentRepository.getMatching('postId', $scope.post.id).then(function (comments) {
         $scope.post.comments = comments;
       });
-      $scope.post.ratings = ratingRepository.getMatching('postId', $scope.post.id).then(function (ratings) {
+      ratingRepository.getMatching('postId', $scope.post.id).then(function (ratings) {
         $scope.post.ratings = ratings;
       });
 
@@ -96,7 +96,6 @@
         });
       };
 
-      $scope.post.score = 0;
       scorePromise().then(function (score) {
         $scope.post.score = score;
       });

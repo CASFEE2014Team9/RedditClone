@@ -39,7 +39,7 @@
         })
         .when('/comment', {
           templateUrl: 'views/comment.html',
-          controller: 'CommentCtrl'
+          controller: 'CommentsCtrl'
         })
         .when('/posts', {
           templateUrl: 'views/posts.html',
@@ -120,87 +120,20 @@
 
       return history;
     })
-    .factory('userRepository', ['$injector', 'Repository', 'lazy', function ($injector, Repository, lazy) {
-      return new Repository('user', function (obj) {
-
-        lazy(function () {
-          var postRepository = $injector.get('postRepository');
-          return postRepository.getMatching('userId', obj.id);
-        }, function (l) { obj.posts = l; });
-
-        lazy(function () {
-          var commentRepository = $injector.get('commentRepository');
-          return commentRepository.getMatching('userId', obj.id);
-        }, function (l) { obj.comments = l; });
-
-        lazy(function () {
-          var ratingRepository = $injector.get('ratingRepository');
-          return ratingRepository.getMatching('userId', obj.id);
-        }, function (l) { obj.ratings = l; });
-      });
+    .factory('userRepository', ['Repository', function (Repository) {
+      return new Repository('user');
     }])
-    .factory('postRepository', ['$injector', 'Repository', 'lazy', function ($injector, Repository, lazy) {
-      return new Repository('post', function (obj) {
-
-        lazy(function () {
-          var userRepository = $injector.get('userRepository');
-          return userRepository.get(obj.userId);
-        }, function (l) { obj.user = l; });
-
-        lazy(function () {
-          var commentRepository = $injector.get('commentRepository');
-          return commentRepository.getMatching('postId', obj.id);
-        }, function (l) { obj.comments = l; });
-
-        lazy(function () {
-          var ratingRepository = $injector.get('ratingRepository');
-          return ratingRepository.getMatching('postId', obj.id);
-        }, function (l) { obj.ratings = l; });
-
-
-        lazy(function () {
-          var ratingRepository = $injector.get('ratingRepository');
-          return ratingRepository.getMatching('postId', obj.id).then(function (ratings) {
-            var result = 0;
-
-            ratings.forEach(function (item) {
-              result = result + parseInt(item.score);
-            });
-            return result;
-          });
-        }, function (l) { obj.score = l; });
-      });
+    .factory('postRepository', ['Repository', function (Repository) {
+      return new Repository('post');
     }])
-    .factory('commentRepository', ['$injector', 'Repository', 'lazy', function ($injector, Repository, lazy) {
-      return new Repository('comment', function (obj) {
-
-        lazy(function () {
-          var userRepository = $injector.get('userRepository');
-          return userRepository.get(obj.userId);
-        }, function (l) { obj.user = l; });
-
-        lazy(function () {
-          var postRepository = $injector.get('postRepository');
-          return postRepository.get(obj.postId);
-        }, function (l) { obj.post = l; });
-      });
+    .factory('commentRepository', ['Repository', function (Repository) {
+      return new Repository('comment');
     }])
-    .factory('ratingRepository', ['$injector', 'Repository', 'lazy', function ($injector, Repository, lazy) {
-      return new Repository('rating', function (obj) {
-
-        lazy(function () {
-          var userRepository = $injector.get('userRepository');
-          return userRepository.get(obj.userId);
-        }, function (l) { obj.user = l; });
-
-        lazy(function () {
-          var postRepository = $injector.get('postRepository');
-          return postRepository.get(obj.postId);
-        }, function (l) { obj.post = l; });
-      });
+    .factory('ratingRepository', ['Repository', function (Repository) {
+      return new Repository('rating');
     }])
     /*jshint unused: false*/
-    .run(function (history) {
+    .run(function (history, session) {
     });
 
     /*jshint unused: true*/
