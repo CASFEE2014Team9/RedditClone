@@ -13,54 +13,63 @@
    * Controller of the redditcloneApp
    */
   angular.module('redditcloneApp')
-    .controller('CommentCtrl', [
-      '$scope',
-      '$location',
-      'commentRepository',
-      'session',
-      'localStorageService',
-      function ($scope, $location, commentRepository, session, localStorageService) {
-        $scope.addComment = function () {
-          if (!session.isLoggedIn()) {
-            $location.path('/login');
-            return;
-          }
+    .controller('CommentsCtrl', ['$scope', 'commentRepository', function ($scope, commentRepository) {
+      commentRepository.getAll().then(function (comments) {
+        $scope.comments = comments;
+      });
+    }])
+    .controller('CommentCtrl', ['$scope', '$injector', function ($scope, $injector) {
+      var postRepository = $injector.get('postRepository');
+      var userRepository = $injector.get('userRepository');
 
-          $scope.comment.postId = $scope.post.id;
-          $scope.comment.userId = session.user.data.id;
+      userRepository.get($scope.comment.userId).then(function (user) {
+        $scope.comment.user = user;
+      });
+      postRepository.get($scope.comment.postId).then(function (post) {
+        $scope.comment.post = post;
+      });
+    }])
+    .controller('CommentEditCtrl', ['$scope', '$location', 'session', 'localStorageService', 'commentRepository', function ($scope, $location, session, localStorageService, commentRepository) {
+      $scope.addComment = function () {
+        if (!session.isLoggedIn()) {
+          $location.path('/login');
+          return;
+        }
 
-          // update stuff
-          commentRepository.post($scope.comment);
+        $scope.comment.postId = $scope.post.id;
+        $scope.comment.userId = session.user.data.id;
 
-          // clear input
-          $scope.comment = {};
+        // update stuff
+        commentRepository.post($scope.comment);
 
-          // clear local storage
-          localStorageService.remove($scope.post.id + 'editComment');
-        };
-
-        $scope.post = undefined;
+        // clear input
         $scope.comment = {};
 
-        $scope.$watch('post', function (newValue, oldValue) {
-          // if a post is known we can try to load stored comment
-          $scope.comment = localStorageService.get($scope.post.id + 'editComment');
-        });
+        // clear local storage
+        localStorageService.remove($scope.post.id + 'editComment');
+      };
 
-        //store the input for each post
-        $scope.$watch('comment.comment', function (newValue, oldValue) {
-          if ($scope.post === undefined) {
-            return;
-          }
-          if ($scope.comment.comment === undefined) {
-            return;
-          }
+      $scope.$watch('post', function (newValue, oldValue) {
+        // if a post is known we can try to load stored comment
+        $scope.comment = localStorageService.get($scope.post.id + 'editComment');
+      });
 
-          localStorageService.set($scope.post.id + 'editComment', $scope.comment);
-        });
+      $scope.post = undefined;
+      $scope.comment = {};
 
-        $scope.comments = commentRepository.getAll().then(function (data) {
-          $scope.comments = data;
-        });
+      //store the input for each post
+      $scope.$watch('comment.comment', function (newValue, oldValue) {
+        if (!$scope.post) {
+          return;
+        }
+        if (!$scope.comment) {
+          return;
+        }
+        if (!$scope.comment.comment) {
+          return;
+        }
+
+        localStorageService.set($scope.post.id + 'editComment', $scope.comment);
+      });
     }]);
 }());

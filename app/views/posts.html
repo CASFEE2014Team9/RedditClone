@@ -1,9 +1,9 @@
 <div class='list-group' ng-repeat='post in posts' ng-show='post.description'>
-  <a href='{{ post.url }}' class='list-group-item'>
-    <h4 class="list-group-item-heading">by {{ post.user().name }} at {{ post.createdAt }}</h4>
+  <a href='{{ post.url }}' class='list-group-item' ng-controller='PostCtrl' >
+    <h4 class="list-group-item-heading">by {{ post.user.name }} at {{ post.createdAt }}</h4>
     <p class="list-group-item-text">{{ post.description }}</p>
   </a>
-  <form name='commentForm' ng-controller='CommentCtrl' ng-submit='addComment()' transfer="post" >
+  <form name='commentForm' ng-controller='CommentEditCtrl' ng-submit='addComment()' transfer="post" >
     <h2> Schreibe einen Kommentar </h2>
     <div class="form-group">
       <label for='comment'>Kommentar</label>
