@@ -63,5 +63,42 @@
         localStorageService.remove('postForm');
         $window.history.back();
       };
+
+      $scope.score = 0;
+      $scope.calcScore = function (rating) {
+        var s = $scope.score;
+        $scope.score = s + rating;
+      };
+    }])
+    .controller('PostCtrl', ['$scope', '$injector', function ($scope, $injector) {
+      var userRepository = $injector.get('userRepository');
+      var commentRepository = $injector.get('commentRepository');
+      var ratingRepository = $injector.get('ratingRepository');
+
+      $scope.post.user = userRepository.get($scope.post.userId).then(function (user) {
+        $scope.post.user = user;
+      });
+      $scope.post.comments = commentRepository.getMatching('postId', $scope.post.id).then(function (comments) {
+        $scope.post.comments = comments;
+      });
+      $scope.post.ratings = ratingRepository.getMatching('postId', $scope.post.id).then(function (ratings) {
+        $scope.post.ratings = ratings;
+      });
+
+      var scorePromise = function () {
+        return ratingRepository.getMatching('postId', $scope.post.id).then(function (ratings) {
+          var result = 0;
+
+          ratings.forEach(function (item) {
+            result = result + parseInt(item.score);
+          });
+          return result;
+        });
+      };
+
+      $scope.post.score = 0;
+      scorePromise().then(function (score) {
+        $scope.post.score = score;
+      });
     }]);
 }());

@@ -156,6 +156,19 @@
           var ratingRepository = $injector.get('ratingRepository');
           return ratingRepository.getMatching('postId', obj.id);
         }, function (l) { obj.ratings = l; });
+
+
+        lazy(function () {
+          var ratingRepository = $injector.get('ratingRepository');
+          return ratingRepository.getMatching('postId', obj.id).then(function (ratings) {
+            var result = 0;
+
+            ratings.forEach(function (item) {
+              result = result + parseInt(item.score);
+            });
+            return result;
+          });
+        }, function (l) { obj.score = l; });
       });
     }])
     .factory('commentRepository', ['$injector', 'Repository', 'lazy', function ($injector, Repository, lazy) {
