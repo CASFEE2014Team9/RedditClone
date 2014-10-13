@@ -1,15 +1,15 @@
 <div>
-    <form name='newPostForm' ng-submit='post.create()' >
+    <form name='newPostForm'>
         <h3> Create new Post. </h3>
         <p> Enter a link and a description.</p>
         <div class="form-group">
-            <input type='text' id='link' name="link" placeholder="http://..." ng-model='post'>
+            <input type='text' id='link' name="link" placeholder="http://..." ng-model='post.url'>
         </div>
         <div class="form-group">
-            <textarea id='description' name="description" placeholder="describe your post..." ng-model='description' />
+            <textarea id='description' name="description" placeholder="describe your post..." ng-model='post.description' />
         </div>
 
-        <button ng-click="create()">Create</button>
-        <button ng-click="cancel()">Cancel</button>
+        <button class="btn btn-primary" ng-click="create()">Create</button>
+        <button class="btn" ng-click="cancel()">Cancel</button>
     </form>
 </div>
