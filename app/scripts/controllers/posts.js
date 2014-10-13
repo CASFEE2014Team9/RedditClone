@@ -63,12 +63,6 @@
         localStorageService.remove('postForm');
         $window.history.back();
       };
-
-      $scope.score = 0;
-      $scope.calcScore = function (rating) {
-        var s = $scope.score;
-        $scope.score = s + rating;
-      };
     }])
     .controller('PostCtrl', ['$scope', '$injector', function ($scope, $injector) {
       var userRepository = $injector.get('userRepository');
