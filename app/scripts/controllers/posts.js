@@ -99,5 +99,38 @@
         // go back to last page
         $window.history.back();
       };
+    }])
+    .controller('VoteCtrl', ['$location', '$scope', 'session', 'ratingRepository', function ($location, $scope, session, repository) {
+      $scope.voteUp = function () {
+        // check user already logged in...
+        if (!session.isLoggedIn()) {
+          // ...if not, open login page
+          $location.path('/login');
+          return;
+        }
+
+        // create new rating, with score '1'
+        var rating = {};
+        rating.userId = session.user.data.id;
+        rating.postId = $scope.post.id;
+        rating.score = 1;
+        repository.post(rating);
+      };
+
+      $scope.voteDown = function () {
+        // check user already logged in...
+        if (!session.isLoggedIn()) {
+          // ...if not, open login page
+          $location.path('/login');
+          return;
+        }
+
+        // create new rating, with score '-1'
+        var rating = {};
+        rating.userId = session.user.data.id;
+        rating.postId = $scope.post.id;
+        rating.score = -1;
+        repository.post(rating);
+      };
     }]);
 }());

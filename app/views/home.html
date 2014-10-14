@@ -4,9 +4,11 @@
 
 <div class="list-group" ng-repeat='post in posts'>
     <div class='list-group-item' ng-controller="PostCtrl" transfer="post" >
-        <a>up</a>
-        <a>down</a>
-        <p>{{post.score}}</p>
+        <div ng-controller="VoteCtrl">
+            <a href="" ng-click="voteUp()">up</a>
+            <a href="" ng-click="voteDown()">down</a>
+            <p ng-bind="post.score"></p>
+        </div>
         <a ng-href="post.url" ng-bind="post.url"></a>
         <p ng-bind="post.description"></p>
         <p>post created by user '{{post.user.name}}' at '{{post.createdAt}}'</p>
