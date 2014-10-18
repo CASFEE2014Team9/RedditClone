@@ -44,6 +44,12 @@
         });
         $scope.post.score = score;
       }, true);
+
+
+      $scope.delete = function () {
+        var postRepository = $injector.get('postRepository');
+        postRepository.delete($scope.post.id);
+      };
     }])
     .controller('EditCtrl', ['$window', '$location', '$scope', 'localStorageService', 'session', 'postRepository', function ($window, $location, $scope, localStorageService, session, repository) {
       // load 'post' form information from local storage
