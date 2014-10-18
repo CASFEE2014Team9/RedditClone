@@ -46,6 +46,8 @@
 
             return user;
           }
+
+          return $q.reject(data);
         }, function (data) {
           return $q.reject(data);
         });
@@ -62,6 +64,9 @@
             $cookies.password = user.password;
             history.back();
             return data;
+          }, function (data) {
+            alert('login failed');
+            return $q.reject(data);
           });
         },
         logout : function () {

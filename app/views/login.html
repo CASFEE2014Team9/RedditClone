@@ -1,5 +1,5 @@
 <div ng-if="session.user.role == 1" >
-  <form name='loginForm' ng-submit='session.login()' >
+  <form name='loginForm' >
     <h2> Bitte einloggen </h2>
     <div class="form-group">
       <label for='user'>Benutzername</label>
@@ -14,7 +14,8 @@
     <!--
     <p>{{ session.user.role }}</p>
     -->
-    <button type="submit" class="btn btn-primary">Login</button>
+    <button type="submit" class="btn btn-primary" ng-click='session.login()' >Login</button>
+    <button type="submit" class="btn" ng-click="register()" >Register</button>
   </form>
 </div>
 <div ng-if="session.user.role > 1" >
