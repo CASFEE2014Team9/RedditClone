@@ -33,20 +33,17 @@
         $scope.post.ratings = ratings;
       });
 
-      var scorePromise = function () {
-        return ratingRepository.getMatching('postId', $scope.post.id).then(function (ratings) {
-          var result = 0;
+      $scope.$watch('post.ratings', function (newValue, oldValue) {
+        if (!newValue) {
+          return;
+        }
 
-          ratings.forEach(function (item) {
-            result = result + parseInt(item.score);
-          });
-          return result;
+        var score = 0;
+        newValue.forEach(function (item) {
+          score = score + parseInt(item.score);
         });
-      };
-
-      scorePromise().then(function (score) {
         $scope.post.score = score;
-      });
+      }, true);
     }])
     .controller('EditCtrl', ['$window', '$location', '$scope', 'localStorageService', 'session', 'postRepository', function ($window, $location, $scope, localStorageService, session, repository) {
       // load 'post' form information from local storage
