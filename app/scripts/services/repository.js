@@ -152,7 +152,7 @@
           onPostSuccess(item);
         });
 
-        socket.on('delete ', function (id) {
+        socket.on('delete', function (id) {
           console.log('delete ' + id);
           onDeleteSuccess(id);
         });
