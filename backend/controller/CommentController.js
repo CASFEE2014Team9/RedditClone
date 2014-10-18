@@ -13,7 +13,8 @@
         id : item.id,
         userId: item.userId,
         postId : item.postId,
-        comment : item.comment
+        comment : item.comment,
+        createdAt : item.createdAt
       };
 
       var UserController = require('./UserController');

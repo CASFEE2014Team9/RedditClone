@@ -28,6 +28,14 @@
       postRepository.get($scope.comment.postId).then(function (post) {
         $scope.comment.post = post;
       });
+
+      if ($scope.comment.createdAt) {
+        try {
+          $scope.createdAt = new Date(JSON.parse($scope.comment.createdAt));
+        } catch (ignore) {
+          $scope.createdAt = $scope.comment.createdAt;
+        }
+      }
     }])
     .controller('CommentEditCtrl', ['$scope', '$location', 'session', 'localStorageService', 'commentRepository', function ($scope, $location, session, localStorageService, commentRepository) {
       $scope.addComment = function () {
@@ -38,6 +46,7 @@
 
         $scope.comment.postId = $scope.post.id;
         $scope.comment.userId = session.user.data.id;
+        $scope.comment.createdAt = JSON.stringify(new Date());
 
         // update stuff
         commentRepository.post($scope.comment);
@@ -57,8 +66,7 @@
       $scope.post = undefined;
       $scope.comment = {};
 
-      //store the input for each post
-      $scope.$watch('comment.comment', function (newValue, oldValue) {
+      var onDataChanged = function (newValue, oldValue) {
         if (!$scope.post) {
           return;
         }
@@ -70,6 +78,9 @@
         }
 
         localStorageService.set($scope.post.id + 'editComment', $scope.comment);
-      });
+      };
+
+      //store the input for each post
+      $scope.$watch('comment.comment',onDataChanged);
     }]);
 }());

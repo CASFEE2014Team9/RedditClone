@@ -50,6 +50,14 @@
         var postRepository = $injector.get('postRepository');
         postRepository.delete($scope.post.id);
       };
+
+      if ($scope.post.createdAt) {
+        try {
+          $scope.createdAt = new Date(JSON.parse($scope.post.createdAt));
+        } catch (ignore) {
+          $scope.createdAt = $scope.post.createdAt;
+        }
+      }
     }])
     .controller('EditCtrl', ['$window', '$location', '$scope', 'localStorageService', 'session', 'postRepository', function ($window, $location, $scope, localStorageService, session, repository) {
       // load 'post' form information from local storage
@@ -81,6 +89,7 @@
 
         // ... otherwise get user id
         $scope.post.userId = session.user.data.id;
+        $scope.post.createdAt = JSON.stringify(new Date());
 
         // update post (data)
         repository.post($scope.post);

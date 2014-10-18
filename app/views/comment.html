@@ -6,7 +6,7 @@
 
 <div class='media' ng-repeat='comment in comments' ng-show='comment.comment'>
   <div class='media-body' ng-controller="CommentCtrl" transfer="comment" >
-    <h4 class='media-heading'>by {{ comment.user.name }}</h4>
+    <h4 class='media-heading'>by {{ comment.user.name }} at {{ createdAt  | date:'medium' }}</h4>
     {{ comment.comment }}
   </div>
 </div>
