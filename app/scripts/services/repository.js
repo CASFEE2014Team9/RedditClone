@@ -84,7 +84,19 @@
             existing[item.id] = item;
 
             var updatePromise = function (filtered) {
-              filtered.push(item);
+              var idx = -1;
+              filtered.some(function (fi, index) {
+                var result = fi.id === item.id;
+                if (result) {
+                  idx = index;
+                }
+                return result;
+              });
+              if (idx >= 0) {
+                filtered[idx] = item;
+              } else {
+                filtered.push(item);
+              }
             };
 
             for (property in itemsByPropertyPromises) {
