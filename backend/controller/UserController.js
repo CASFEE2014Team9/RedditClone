@@ -30,7 +30,7 @@
       new CommentController().deleteIfPropertyMatches('userId', id);
       new RatingController().deleteIfPropertyMatches('userId', id);
 
-      self.repository.delete(id);
+      self.repository.deleteItem(id);
       self.repository.saveChanges();
       return self.success();
     };

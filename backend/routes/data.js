@@ -34,7 +34,7 @@
       var controller = new Controller();
       controller.req = req;
       controller.res = res;
-      controller.delete(id);
+      controller.deleteItem(id);
     });
   };
 

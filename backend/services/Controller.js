@@ -41,7 +41,7 @@
     };
 
     this.deleteItem = function deleteItem(id) {
-      self.repository.delete(id);
+      self.repository.deleteItem(id);
       self.repository.saveChanges();
       return self.success();
     };

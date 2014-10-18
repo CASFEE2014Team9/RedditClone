@@ -55,7 +55,7 @@
     };
 
     /*delete an item by its id*/
-    this.delete = function (id) {
+    this.deleteItem = function (id) {
       var sockId;
 
       delete items[id];

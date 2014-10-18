@@ -34,7 +34,7 @@
       new CommentController().deleteIfPropertyMatches('postId', id);
       new RatingController().deleteIfPropertyMatches('postId', id);
 
-      self.repository.delete(id);
+      self.repository.deleteItem(id);
       self.repository.saveChanges();
       return self.success();
     };
