@@ -1,6 +1,6 @@
 
 /*jslint browser: true*/
-/*global angular */
+/*global angular, alert */
 /* jshint bitwise: false */
 
 (function () {

@@ -58,7 +58,7 @@
         localStorageService.remove($scope.post.id + 'editComment');
       };
 
-      $scope.$watch('post', function (newValue, oldValue) {
+      $scope.$watch('post', function () {
         // if a post is known we can try to load stored comment
         $scope.comment = localStorageService.get($scope.post.id + 'editComment');
       });
@@ -66,7 +66,7 @@
       $scope.post = undefined;
       $scope.comment = {};
 
-      var onDataChanged = function (newValue, oldValue) {
+      var onDataChanged = function () {
         if (!$scope.post) {
           return;
         }
@@ -81,6 +81,6 @@
       };
 
       //store the input for each post
-      $scope.$watch('comment.comment',onDataChanged);
+      $scope.$watch('comment.comment', onDataChanged);
     }]);
 }());

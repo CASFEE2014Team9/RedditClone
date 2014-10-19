@@ -33,7 +33,7 @@
         $scope.post.ratings = ratings;
       });
 
-      $scope.$watch('post.ratings', function (newValue, oldValue) {
+      $scope.$watch('post.ratings', function (newValue) {
         if (!newValue) {
           return;
         }
@@ -64,7 +64,7 @@
       $scope.post = localStorageService.get('postForm');
 
       // callback function -> if 'post' form data changed
-      var onDataChanged = function (newValue, oldValue) {
+      var onDataChanged = function () {
         if ($scope.post === undefined) {
           return;
         }
