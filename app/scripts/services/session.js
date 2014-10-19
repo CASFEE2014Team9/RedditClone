@@ -79,6 +79,9 @@
           user.name = '';
           user.password = '';
           user.role = userRoles.public;
+        },
+        authorize: function (accessLevel) {
+          return (accessLevel & user.role) > 0;
         }
       };
 
@@ -91,5 +94,21 @@
       $rootScope.session = session;
 
       return session;
-    });
+    })
+    .directive('ownsOrAdminToEnable', ['$parse', 'session', 'accessLevels', function ownsOrAdminToEnableDirective($parse, session, accessLevels) {
+      return {
+        restrict: 'A', // only attributes
+        link: function (scope, el, attrs) {
+          scope.$watch(attrs.ownsOrAdminToEnable, function (newValue) {
+            if (!newValue) {
+              return;
+            }
+            // the logged in user must either own the specified item or must be admin
+            // so the action on the element can be performed
+            var enabled = session.user.data.id === newValue.userId || session.authorize(accessLevels.admin);
+            el.prop('disabled', !enabled);
+          });
+        }
+      };
+    }]);
 }());
