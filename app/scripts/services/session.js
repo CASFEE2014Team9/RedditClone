@@ -43,6 +43,9 @@
             user.data = data;
             user.role = userRoles.user;
 
+            if (user.data.role) {
+              user.role = user.data.role;
+            }
 
             return user;
           }
