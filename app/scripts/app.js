@@ -33,10 +33,6 @@
           templateUrl: 'views/home.html',
           controller: 'PostsCtrl'
         })
-        .when('/about', {
-          templateUrl: 'views/about.html',
-          controller: 'AboutCtrl'
-        })
         .when('/comment', {
           templateUrl: 'views/comment.html',
           controller: 'CommentsCtrl'
