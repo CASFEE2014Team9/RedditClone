@@ -13,6 +13,7 @@
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
       <link rel="stylesheet" href="styles/main.css">
+      <link rel="stylesheet" href="styles/application.css">
     <!-- endbuild -->
   </head>
   <body ng-app="redditcloneApp">
@@ -21,13 +22,17 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
+
+
+
     <div class="container">
       <div class="header">
         <a href="#/"><img src="images/logo.svg" alt="redditclone Logo"></a>
+        <a id='#login-btn' ng-href="#/login" class="btn btn-success">Login</a>
         <ul class="nav nav-pills nav-justified pull-bottom">
           <li active-link="active" href="#/" ><a ng-href="#">Home</a></li>
           <li active-link="active" href="#/new" ><a ng-href="#/new">New Post</a></li>
-          <li active-link="active" href="#/login" ><a  ng-href="#/login">Login</a></li>
+
         </ul>
       </div>
 
