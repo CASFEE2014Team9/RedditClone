@@ -11,10 +11,25 @@
         </div>
         <a ng-href="post.url" ng-bind="post.url"></a>
         <p ng-bind="post.description"></p>
-        <p>post created by user '{{post.user.name}}' at {{createdAt | date:'medium'}}</p>
-        <div ng-repeat="comment in post.comments">
-            <p>{{comment.comment}}</p>
+
+        <p>post created by user '{{post.user.name}}' at '{{post.createdAt}}'</p>
+
+
+        <div ng-controller="CommentsCtrl">
+            <accordion close-others="oneAtATime">
+                <accordion-group is-open="status.open">
+                    <accordion-heading>
+                        {{post.comments.length}} Comments
+                        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                    </accordion-heading>
+                    <div ng-repeat="comment in post.comments">
+                        <p>{{comment.comment}}</p>
+                    </div>
+                </accordion-group>
+            </accordion>
+
         </div>
+
         <a ng-href="#/posts(1)">Comments</a>
 <!--        <div ng-controller="NavCtrl">
                     <a href="" ng-click="showComments()"></a>-->
