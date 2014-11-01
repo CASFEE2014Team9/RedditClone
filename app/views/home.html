@@ -11,7 +11,7 @@
         </div>
         <a ng-href="post.url" ng-bind="post.url"></a>
         <p ng-bind="post.description"></p>
-        <p>post created by user '{{post.user.name}}' at '{{post.createdAt}}'</p>
+        <p>post created by user '{{post.user.name}}' at {{createdAt | date:'medium'}}</p>
         <div ng-repeat="comment in post.comments">
             <p>{{comment.comment}}</p>
         </div>
