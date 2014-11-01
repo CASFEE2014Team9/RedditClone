@@ -20,7 +20,7 @@
       var controller = new Controller();
       controller.req = req;
       controller.res = res;
-      controller.post(req.body);
+      controller.post(req.body.data);
     });
     router.get(path + '/:id', function (req, res) {
       var id = req.params.id;

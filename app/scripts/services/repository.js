@@ -7,7 +7,7 @@
   var reposityModule = angular.module('repository', []);
 
   reposityModule
-    .factory('Repository', function ($http, $q) {
+    .factory('Repository', function ($http, $q, $injector) {
       function Repository(type) {
         this.type = type;
         var itemsPromise = null;
@@ -119,7 +119,12 @@
         /*if id is undefined create a new item*/
         /*if id is defined update an existing item*/
         this.post = function post(item) {
-          return $http.post(url, item).then(function (data) {
+          var session = $injector.get('session');
+          return $http.post(url, {
+            credentialsUser : session.user.user,
+            credentialsPassword : session.user.password,
+            data : item
+          }).then(function (data) {
             if (data.data.ret === 'success') {
               item = data.data.data;
               return onPostSuccess(item);
@@ -129,7 +134,11 @@
 
         /*delete an item by its id*/
         this.delete = function (id) {
-          return $http.delete(url + id + '/').then(function (data) {
+          var session = $injector.get('session');
+          return $http.delete(url + id + '/', {
+            credentialsUser : session.user.user,
+            credentialsPassword : session.user.password
+          }).then(function (data) {
             if (data.data.ret === 'success') {
               onDeleteSuccess(id);
             }

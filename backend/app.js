@@ -26,6 +26,39 @@
   app.set('views', path.join(app.root, '/backend/views'));
   app.set('view engine', 'jade');
 
+  /// authentification
+  var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
+  var UserController = require('./controller/UserController');
+
+  passport.use(new LocalStrategy({
+    usernameField: 'credentialsUser',
+    passwordField: 'credentialsPassword'
+  }, function (username, password, done) {
+    var user = UserController.repository.getMatching('name', username)[0];
+    if (!user) {
+      return done(null, false, { message: 'Incorrect username.' });
+    }
+    if (user.password !== password) {
+      return done(null, false, { message: 'Incorrect password.' });
+    }
+    return done(null, user);
+  }));
+  app.use(passport.initialize());
+  var authenticate = function (req, res, next) {
+    passport.authenticate('local', function (err, user, info) {
+      delete req.credentialsUser;
+      delete req.credentialsPassword;
+      if (err) {
+        return next(err);
+      }
+      req.user = user;
+      next();
+    })(req, res, next);
+  };
+
+  app.post('*', authenticate);
+  app.delete('*', authenticate);
+
   //routes
   app.use(express.static(path.join(app.root, '/app')));
   app.use('/bower_components/', express.static(path.join(app.root, '/bower_components')));
