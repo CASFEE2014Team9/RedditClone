@@ -1,4 +1,22 @@
-body
-  background-color: blue
-  background-color: blue
-  background-color: yellow
+@import settings
+
+@import small/base
+@import small/layout
+@import small/states
+@import small/modules/back_link
+@import small/modules/post
+
+@media screen and (min-width: 25em)
+  @import medium/base
+  @import medium/layout
+  @import medium/states
+  @import medium/modules/back_link
+  @import medium/modules/post
+
+
+@media screen and (min-width: 48em)
+  @import large/base
+  @import large/layout
+  @import large/states
+  @import large/modules/back_link
+  @import large/modules/post
