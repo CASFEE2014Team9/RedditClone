@@ -16,6 +16,9 @@ button {
   button:focus {
     background-color: #64ae4e; }
 
+h2 {
+  margin-top: 0; }
+
 body {
   background-image: url("../../images/melone_small.png");
   padding: 0; }
@@ -136,7 +139,17 @@ form {
     margin-right: 2rem; }
 
   #footer span {
-    display: block; } }
+    display: block; }
+
+  form {
+    padding: 1.5rem; }
+    form label,
+    form input[type="text"],
+    form input[type="password"] {
+      display: inline-block;
+      width: auto; }
+    form label {
+      min-width: 12rem; } }
 @media screen and (min-width: 48em) {
   body {
     background-image: url("../../images/melone_large.png"); }
