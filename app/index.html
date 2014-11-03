@@ -26,19 +26,13 @@
 
 
     <div class="container">
-      <div class="header">
-        <a href="#/"><img src="images/logo.svg" alt="redditclone Logo"></a>
-        <a id='#login-btn' ng-href="#/login" class="btn btn-success">Login</a>
-        <ul class="nav nav-pills nav-justified pull-bottom">
-          <li active-link="active" href="#/" ><a ng-href="#">Home</a></li>
-          <li active-link="active" href="#/new" ><a ng-href="#/new">New Post</a></li>
-
-        </ul>
-      </div>
-
+      <header id="header">
+        <a id='login-btn' ng-href="#/login">Login</a>
+        <a href="#" id='logo'><img src="images/logo.svg" alt="redditclone Logo"></a>
+      </header>
       <div ng-view=""></div>
 
-      <div class="footer">
+      <div id="footer">
         <p><span class="glyphicon glyphicon-heart"></span> CAS FEE team 9</p>
       </div>
     </div>

@@ -1,0 +1,123 @@
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 200; }
+
+a {
+  color: #e62425; }
+  a:hover, a:focus {
+    color: #191919; }
+
+.btn {
+  background-color: #191919;
+  color: #F2F2F2; }
+  .btn:hover, .btn:focus {
+    background-color: #64ae4e; }
+
+body {
+  background-image: url("../../images/melone_small.png");
+  padding: 0; }
+
+#header {
+  background-color: #191919;
+  border-bottom: 5px solid #e62425;
+  padding: 2.5rem 0 1rem 0;
+  text-align: center;
+  position: relative; }
+
+#login-btn {
+  color: #FFF;
+  text-transform: uppercase;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0.3rem 0.6rem 0 0.3rem;
+  text-decoration: none; }
+  #login-btn:hover, #login-btn:focus {
+    border-bottom: 2px solid #FFF; }
+
+#logo {
+  display: block; }
+
+#footer {
+  background-color: #e62425;
+  padding: 0.3rem;
+  margin-bottom: 0.3rem;
+  text-align: center; }
+  #footer p {
+    margin-bottom: 0; }
+
+.is-right-aligned {
+  text-align: right; }
+
+.nav-btn {
+  text-align: center;
+  padding: 0.5rem 0 1rem 0;
+  margin-bottom: 1rem;
+  background-color: #e62425; }
+  .nav-btn a {
+    color: #191919;
+    text-transform: uppercase;
+    text-decoration: none; }
+    .nav-btn a:hover, .nav-btn a:focus {
+      border-bottom: 2px solid #191919; }
+
+.post {
+  border: none; }
+
+.post__created-by {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-top: 0.2rem; }
+
+.post__ranking {
+  text-align: center; }
+  .post__ranking p {
+    margin-bottom: 0; }
+
+.post__delete {
+  display: inline-block; }
+  .post__delete .btn {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    background-color: #FFF;
+    color: #e62425;
+    padding: 0;
+    font-size: 2rem; }
+    .post__delete .btn:hover, .post__delete .btn:focus {
+      color: #191919; }
+
+.post__controllers .up,
+.post__controllers .down {
+  display: inline-block; }
+
+.post__comment {
+  margin-bottom: 0.8rem;
+  border-bottom: 1px solid #F2F2F2;
+  padding-bottom: 0.3rem; }
+  .post__comment p {
+    margin-bottom: 0; }
+
+.post__show-comments {
+  display: inline-block;
+  margin-bottom: 1rem; }
+
+@media screen and (min-width: 25em) {
+  body {
+    background-image: url("../../images/melone_medium.png"); }
+
+  #header {
+    padding: 4rem; }
+
+  #login-btn {
+    font-size: 2rem;
+    margin-right: 2rem; }
+
+  #footer span {
+    display: block; } }
+@media screen and (min-width: 48em) {
+  body {
+    background-image: url("../../images/melone_large.png"); }
+
+  #login-btn {
+    margin-right: 6rem; } }

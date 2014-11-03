@@ -1,25 +1,36 @@
-<div>
+<div class='nav-btn'>
     <a ng-href="#/new">New Post</a>
 </div>
 
 <div class="list-group" ng-repeat='post in posts'>
-    <div class='list-group-item' ng-controller="PostCtrl" transfer="post" >
-        <div ng-controller="VoteCtrl">
-            <a href="" ng-click="voteUp()">up</a>
-            <a href="" ng-click="voteDown()">down</a>
-            <p ng-bind="post.score"></p>
+    <div class='post list-group-item' ng-controller="PostCtrl" transfer="post" >
+        <div ng-controller="VoteCtrl" class="post__ranking">
+          <a class='up' href="" ng-click="voteUp()"> <span class="glyphicon glyphicon-plus"></span></a>
+          <p>
+            <span class="glyphicon glyphicon-heart-empty"></span>
+            Ranking:
+            <span ng-bind="post.score"></span>
+          </p>
+          <a class='down' href="" ng-click="voteDown()"> <span class="glyphicon glyphicon-minus"></span></a>
         </div>
-        <a ng-href="post.url" ng-bind="post.url"></a>
+        <div class='post__delete is-right-aligned'>
+          <button class="btn" ng-click="delete()" owns-or-admin-to-enable="post" ><span class="glyphicon glyphicon-remove-circle"></span></button>
+        </div>
         <p ng-bind="post.description"></p>
-        <p>post created by user '{{post.user.name}}' at '{{post.createdAt}}'</p>
-        <div ng-repeat="comment in post.comments">
-            <p>{{comment.comment}}</p>
+        <a ng-href="post.url" ng-bind="post.url"></a>
+        <div class='is-right-aligned'>
+        <p class='post__created-by'>by user "{{post.user.name}}" at {{post.createdAt}}</p>
         </div>
-        <a ng-href="#/posts(1)">Comments</a>
+        <a class='post__show-comments' ng-href="#/posts(1)">Comments</a>
+        <div class='post__comment' ng-repeat="comment in post.comments">
+            <p>{{comment.comment}}</p>
+            <div class='is-right-aligned'>
+              <p class='post__created-by'>by user "{{comment.user.name}}" at {{comment.createdAt}}</p>
+            </div>
+        </div>
 <!--        <div ng-controller="NavCtrl">
                     <a href="" ng-click="showComments()"></a>-->
 
-        <button class="btn" ng-click="delete()" owns-or-admin-to-enable="post" >Delete</button>
 
     </div>
 </div>
