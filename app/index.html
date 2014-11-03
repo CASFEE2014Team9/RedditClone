@@ -27,7 +27,13 @@
 
     <div class="container">
       <header id="header">
-        <a id='login-btn' ng-href="#/login">Login</a>
+        <div ng-if="session.user.role == 1" >
+          <a id='login-btn' ng-href="#/login">Login</a>
+        </div>
+        <div ng-if="session.user.role > 1" >
+            <a id='login-btn' href='#' ng-click="session.logout()">Logout</a>
+        </div>
+
         <a href="#" id='logo'><img src="images/logo.svg" alt="redditclone Logo"></a>
       </header>
       <div ng-view=""></div>

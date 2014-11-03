@@ -7,10 +7,13 @@ a {
   a:hover, a:focus {
     color: #191919; }
 
-.btn {
+.btn,
+button {
   background-color: #191919;
   color: #F2F2F2; }
-  .btn:hover, .btn:focus {
+  .btn:hover, .btn:focus,
+  button:hover,
+  button:focus {
     background-color: #64ae4e; }
 
 body {
@@ -101,6 +104,25 @@ body {
 .post__show-comments {
   display: inline-block;
   margin-bottom: 1rem; }
+
+.panel .panel-title a {
+  color: #e62425; }
+  .panel .panel-title a:hover {
+    cursor: pointer;
+    color: #191919; }
+.panel .panel-item {
+  border-bottom: 1px solid #F2F2F2;
+  margin-bottom: 0.5rem; }
+
+form {
+  background-color: #FFF;
+  padding: 1rem;
+  margin: 1rem 0; }
+  form label {
+    display: block; }
+  form input[type="text"],
+  form input[type="password"] {
+    width: 100%; }
 
 @media screen and (min-width: 25em) {
   body {
