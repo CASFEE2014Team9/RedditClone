@@ -23,7 +23,8 @@
       'ngTouch',
       'LocalStorageModule',
       'repository',
-      'session'
+      'session',
+      'ui.bootstrap'
     ]);
 
   redditcloneApp

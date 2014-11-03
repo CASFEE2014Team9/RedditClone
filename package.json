@@ -11,7 +11,9 @@
     "cookie-parser" : "*",
     "body-parser" : "*",
     "socket.io" : "*",
-    "jade": "*"
+    "jade": "*",
+    "passport": "*",
+    "passport-local": "*"
   },
   "devDependencies": {
     "gulp" : "*",
