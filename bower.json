@@ -13,7 +13,8 @@
     "angular-touch": "~1.2.0",
     "angular-route": "~1.2.0",
     "socket.io-client": "*",
-    "angular-local-storage": "*"
+    "angular-local-storage": "*",
+    "angular-bootstrap": "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",
