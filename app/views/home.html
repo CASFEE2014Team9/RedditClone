@@ -5,13 +5,13 @@
 <div class="list-group" ng-repeat='post in posts'>
     <div class='post list-group-item' ng-controller="PostCtrl" transfer="post" >
         <div ng-controller="VoteCtrl" class="post__ranking">
-          <a class='up' href="" ng-click="voteUp()"> <span class="glyphicon glyphicon-plus"></span></a>
+          <button class='up' href="" ng-click="voteUp()" ng-disabled="ratingDisabled" > <span class="glyphicon glyphicon-plus"></span></button>
           <p>
             <span class="glyphicon glyphicon-heart-empty"></span>
             Ranking:
             <span ng-bind="post.score"></span>
           </p>
-          <a class='down' href="" ng-click="voteDown()"> <span class="glyphicon glyphicon-minus"></span></a>
+          <button class='down' href="" ng-click="voteDown()" ng-disabled="ratingDisabled" > <span class="glyphicon glyphicon-minus"></span></button>
         </div>
         <div class='post__delete is-right-aligned'>
           <button class="btn" ng-click="delete()" owns-or-admin-to-enable="post" ><span class="glyphicon glyphicon-remove-circle"></span></button>

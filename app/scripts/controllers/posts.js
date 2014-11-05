@@ -144,5 +144,20 @@
         rating.score = -1;
         repository.post(rating);
       };
+
+      $scope.$watch('post.ratings', function (newValue) {
+        if (!newValue) {
+          return;
+        }
+        var ratingDisabled = false;
+        newValue.forEach(function (item) {
+          if (item.userId === session.user.data.id) {
+            ratingDisabled = true;
+          }
+        });
+        $scope.ratingDisabled = ratingDisabled;
+
+      }, true);
+
     }]);
 }());
