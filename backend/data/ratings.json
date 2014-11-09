@@ -1,1 +1,1 @@
-{"2":{"id":"2","userId":"1","postId":2,"score":1},"3":{"id":3,"userId":"1","postId":"2","score":1},"maxId":3}
+{"2":{"id":"2","userId":"1","postId":2,"score":1},"3":{"id":"3","userId":"1","postId":"2","score":1},"4":{"id":"4","userId":"3","postId":"2","score":1},"5":{"id":5,"userId":"4","postId":"2","score":1},"maxId":5}

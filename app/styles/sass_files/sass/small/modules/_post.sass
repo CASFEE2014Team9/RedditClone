@@ -10,6 +10,15 @@
   text-align: center
   p
     margin-bottom: 0
+  button
+    background: none
+    color: $red
+    border: none
+    &:hover,
+    &:focus
+      color: $black
+  button[disabled]
+    color: $grey
 
 .post__delete
   display: inline-block
@@ -41,4 +50,5 @@
 .post__show-comments
   display: inline-block
   margin-bottom: 1rem
+
 

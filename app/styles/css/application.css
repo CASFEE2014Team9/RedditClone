@@ -10,7 +10,7 @@ a {
 .btn,
 button {
   background-color: #191919;
-  color: #F2F2F2; }
+  color: #BBBBBB; }
   .btn:hover, .btn:focus,
   button:hover,
   button:focus {
@@ -79,6 +79,14 @@ body {
   text-align: center; }
   .post__ranking p {
     margin-bottom: 0; }
+  .post__ranking button {
+    background: none;
+    color: #e62425;
+    border: none; }
+    .post__ranking button:hover, .post__ranking button:focus {
+      color: #191919; }
+  .post__ranking button[disabled] {
+    color: #BBBBBB; }
 
 .post__delete {
   display: inline-block; }
@@ -99,7 +107,7 @@ body {
 
 .post__comment {
   margin-bottom: 0.8rem;
-  border-bottom: 1px solid #F2F2F2;
+  border-bottom: 1px solid #BBBBBB;
   padding-bottom: 0.3rem; }
   .post__comment p {
     margin-bottom: 0; }
@@ -114,7 +122,7 @@ body {
     cursor: pointer;
     color: #191919; }
 .panel .panel-item {
-  border-bottom: 1px solid #F2F2F2;
+  border-bottom: 1px solid #BBBBBB;
   margin-bottom: 0.5rem; }
 
 form {
