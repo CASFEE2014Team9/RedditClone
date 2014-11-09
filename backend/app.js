@@ -10,6 +10,7 @@
   var socket = require('socket.io');
 
   var dataRouter = require('./routes/data');
+  var loginRouter = require('./routes/login');
 
   var app = express();
   var io = socket.listen(3001);
@@ -64,6 +65,7 @@
   app.use('/bower_components/', express.static(path.join(app.root, '/bower_components')));
 
   app.use('/data/', dataRouter(io));
+  app.use('/', loginRouter());
 
   /// catch 404 and forward to error handler
   app.use(function (req, res, next) {

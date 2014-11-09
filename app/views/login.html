@@ -14,8 +14,8 @@
     <!--
     <p>{{ session.user.role }}</p>
     -->
-    <button type="submit" class="btn" ng-click='session.login()' ng-disabled="loginForm.password.$error" >Login</button>
-    <button type="submit" class="btn" ng-click="register()" ng-disabled="loginForm.password.$error" >Register</button>
+    <button type="submit" class="btn" ng-click='session.login()' ng-disabled="!loginForm.password.$valid" >Login</button>
+    <button type="submit" class="btn" ng-click="register()" ng-disabled="!loginForm.password.$valid" >Register</button>
   </form>
 </div>
   <div ng-if="session.user.role > 1" >

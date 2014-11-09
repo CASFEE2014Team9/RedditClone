@@ -27,7 +27,7 @@
                 userRoles.admin,
         admin:  userRoles.admin    // 100
       };
-    }).factory('session', function ($q, $rootScope, $injector, $cookies, userRoles, history) {
+    }).factory('session', function ($q, $rootScope, $injector, $cookies, userRoles, history, $http) {
 
       var user = {
         role : userRoles.public,
@@ -37,20 +37,21 @@
       };
 
       var login = function () {
-        var userRepository = $injector.get('userRepository');
-        return userRepository.getFirstMatching('name', user.name).then(function (data) {
-          if (user.password === data.password) {
-            user.data = data;
-            user.role = userRoles.user;
+        var loc = window.location;
+        var url = loc.origin + loc.pathname + 'login';
 
-            if (user.data.role) {
-              user.role = user.data.role;
-            }
+        return $http.post(url, {
+          credentialsUser : user.name,
+          credentialsPassword : user.password
+        }).then(function (data) {
+          user.data = data.data.data;
+          user.role = userRoles.user;
 
-            return user;
+          if (user.data.role) {
+            user.role = user.data.role;
           }
 
-          return $q.reject(data);
+          return user;
         }, function (data) {
           return $q.reject(data);
         });
