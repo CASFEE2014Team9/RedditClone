@@ -128,7 +128,7 @@
         this.delete = function (id) {
           var session = $injector.get('session');
           return $http.delete(url + id + '/', {
-            credentialsUser : session.user.user,
+            credentialsUser : session.user.name,
             credentialsPassword : session.user.password
           }).then(function (data) {
             if (data.data.ret === 'success') {

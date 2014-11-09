@@ -32,9 +32,10 @@
     };
 
     this.deleteItem = function deleteItem(id) {
-      if (!self.authenticate(id)) {
-        return;
-      }
+      // do not try to authentifcate delete as angular does not send body
+      //if (!self.authenticate(self.repository.get(id).userId)) {
+      //  return self.notAuthentificated();
+      //}
 
       var CommentController = require('./CommentController');
       var RatingController = require('./RatingController');
