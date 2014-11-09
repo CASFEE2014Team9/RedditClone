@@ -3,7 +3,7 @@ body {
   font-weight: 200; }
 
 a {
-  color: #e62425; }
+  color: #cd4a4a; }
   a:hover, a:focus {
     color: #191919; }
 
@@ -14,18 +14,21 @@ button {
   .btn:hover, .btn:focus,
   button:hover,
   button:focus {
-    background-color: #64ae4e; }
+    background-color: #187848; }
 
 h2 {
   margin-top: 0; }
 
+textarea {
+  width: 100%; }
+
 body {
-  background-image: url("../../images/melone_small.png");
+  background-image: url("../../images/christmas.png");
   padding: 0; }
 
 #header {
   background-color: #191919;
-  border-bottom: 5px solid #e62425;
+  border-bottom: 5px solid #cd4a4a;
   padding: 2.5rem 0 1rem 0;
   text-align: center;
   position: relative; }
@@ -45,7 +48,7 @@ body {
   display: block; }
 
 #footer {
-  background-color: #e62425;
+  background-color: #cd4a4a;
   padding: 0.3rem;
   margin-bottom: 0.3rem;
   text-align: center; }
@@ -59,7 +62,7 @@ body {
   text-align: center;
   padding: 0.5rem 0 1rem 0;
   margin-bottom: 1rem;
-  background-color: #e62425; }
+  background-color: #cd4a4a; }
   .nav-btn a {
     color: #191919;
     text-transform: uppercase;
@@ -81,7 +84,7 @@ body {
     margin-bottom: 0; }
   .post__ranking button {
     background: none;
-    color: #e62425;
+    color: #cd4a4a;
     border: none; }
     .post__ranking button:hover, .post__ranking button:focus {
       color: #191919; }
@@ -95,7 +98,7 @@ body {
     right: 0.5rem;
     top: 0.5rem;
     background-color: #FFF;
-    color: #e62425;
+    color: #cd4a4a;
     padding: 0;
     font-size: 2rem; }
     .post__delete .btn:hover, .post__delete .btn:focus {
@@ -117,7 +120,7 @@ body {
   margin-bottom: 1rem; }
 
 .panel .panel-title a {
-  color: #e62425; }
+  color: #cd4a4a; }
   .panel .panel-title a:hover {
     cursor: pointer;
     color: #191919; }
@@ -136,14 +139,11 @@ form {
     width: 100%; }
 
 @media screen and (min-width: 25em) {
-  body {
-    background-image: url("../../images/melone_medium.png"); }
-
   #header {
     padding: 4rem; }
 
   #login-btn {
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-right: 2rem; }
 
   #footer span {
@@ -159,8 +159,5 @@ form {
     form label {
       min-width: 12rem; } }
 @media screen and (min-width: 48em) {
-  body {
-    background-image: url("../../images/melone_large.png"); }
-
   #login-btn {
     margin-right: 6rem; } }
