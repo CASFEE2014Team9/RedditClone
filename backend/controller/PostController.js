@@ -22,12 +22,20 @@
         return self.notFound(UserController.repository.type, postdata.userId);
       }
 
+      if (!self.authenticate(postdata.userId)) {
+        return self.notAuthentificated();
+      }
+
       self.repository.post(postdata);
       self.repository.saveChanges();
       return self.success(postdata);
     };
 
     this.deleteItem = function deleteItem(id) {
+      if (!self.authenticate(id)) {
+        return;
+      }
+
       var CommentController = require('./CommentController');
       var RatingController = require('./RatingController');
 

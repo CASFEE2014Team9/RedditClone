@@ -27,6 +27,10 @@
         return self.notFound(PostController.repository.type, item.postId);
       }
 
+      if (!self.authenticate(item.userId)) {
+        return self.notAuthentificated();
+      }
+
       self.repository.post(comment);
       self.repository.saveChanges();
       return self.success(comment);

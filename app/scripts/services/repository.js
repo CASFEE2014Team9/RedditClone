@@ -113,7 +113,7 @@
         this.post = function post(item) {
           var session = $injector.get('session');
           return $http.post(url, {
-            credentialsUser : session.user.user,
+            credentialsUser : session.user.name,
             credentialsPassword : session.user.password,
             data : item
           }).then(function (data) {
@@ -148,13 +148,13 @@
         });
 
         socket.on('post', function (item) {
-          console.log('post ');
+          console.log('post ' + type + ' ');
           console.dir(item);
           onPostSuccess(item);
         });
 
         socket.on('delete', function (id) {
-          console.log('delete ' + id);
+          console.log('delete ' + type + ' ' + id);
           onDeleteSuccess(id);
         });
       }

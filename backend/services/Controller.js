@@ -28,6 +28,13 @@
       });
     };
 
+    this.notAuthentificated = function notAuthentificated() {
+      return self.json({
+        ret : 'not Authentificated',
+        message : 'not Authentificated'
+      });
+    };
+
     this.getAll = function getAll() {
       return self.success(self.repository.getAll());
     };
@@ -53,6 +60,16 @@
       for (i = 0; i < matchingItems.length; i++) {
         self.deleteItem(matchingItems[i].id);
       }
+    };
+
+    this.authenticate = function (userId) {
+      if (self.req) {
+        if (userId !== undefined) {
+          return self.req.user.id === userId || self.req.user.role === 4;
+        }
+        return self.req.user !== undefined;
+      }
+      return true;
     };
   };
 
