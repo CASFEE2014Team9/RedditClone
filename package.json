@@ -13,7 +13,8 @@
     "socket.io" : "*",
     "jade": "*",
     "passport": "*",
-    "passport-local": "*"
+    "passport-local": "*",
+    "q-io": "*"
   },
   "devDependencies": {
     "gulp" : "*",

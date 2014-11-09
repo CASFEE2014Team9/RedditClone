@@ -23,15 +23,7 @@
           if (!itemsPromise) {
             itemsPromise = $http.get(url).then(function (data) {
               if (data.data.ret === 'success') {
-                var id, item;
-                var localData = {};
-                delete data.data.data.maxId;
-                for (id in data.data.data) {
-                  item = data.data.data[id];
-                  item.id = id;
-                  localData[id] = item;
-                }
-                return localData;
+                return data.data.data;
               }
               return $q.reject(data.data.message);
             });

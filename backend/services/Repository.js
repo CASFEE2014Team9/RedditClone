@@ -1,22 +1,48 @@
 (function () {
   'use strict';
-  var fs = require('fs');
+  var FS = require("q-io/fs");
   var path = require('path');
 
   var Repository = function Repository(type) {
     this.type = type;
     var dataPath = path.join(__dirname, './../data', type + 's.json');
     var items = null;
+    var saving = null;
     var sockets = {};
+    var self = this;
+
+    this.getPublicData = function getPublicData(id, item) {
+      item.id = id;
+      return item;
+    };
 
     /*saves pending modifications*/
     this.saveChanges = function saveChanges() {
-      fs.writeFile(dataPath, JSON.stringify(items));
+      //handle file concurrency by allowing just one write at a time
+      //if saving is in progress schedule next save after current is completed
+      if (saving) {
+        return saving.then(function () {
+          saveChanges();
+        });
+      }
+
+      saving = FS.write(dataPath, JSON.stringify(items));
+      saving.then(function () {
+        saving = null;
+      });
     };
 
     /*get all items*/
     this.getAll = function getAll() {
-      return items;
+      var localData = {};
+      var id;
+      for (id in items) {
+        if (id === 'maxId') {
+          continue;
+        }
+        localData[id] = self.getPublicData(id, items[id]);
+      }
+      return localData;
     };
 
     /*get all items where the given property matches the given value*/
@@ -28,7 +54,7 @@
       for (id in items) {
         item = items[id];
         if (item[property] === value) {
-          filtered.push(item);
+          filtered.push(self.getPublicData(id, item));
         }
       }
       return filtered;
@@ -36,7 +62,7 @@
 
     /*get one item by its id*/
     this.get = function get(id) {
-      return items[id];
+      return self.getPublicData(id, items[id]);
     };
 
     /*if id is undefined create a new item*/
@@ -72,15 +98,15 @@
       }
     };
 
-    if (fs.existsSync(dataPath)) {
-      fs.readFile(dataPath, function (err, data) {
+    FS.exists(dataPath).then(function success() {
+      FS.read(dataPath).then(function success(data) {
         items = JSON.parse(data);
       });
-    } else {
+    }, function failed() {
       items = {
         maxId : 0
       };
-    }
+    });
 
     this.handleUpdates = function (io) {
       io.on('connection', function (socket) {
