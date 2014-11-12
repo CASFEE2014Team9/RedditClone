@@ -14,9 +14,37 @@
    */
   angular.module('redditcloneApp')
     .controller('PostsCtrl', ['$window', '$scope', '$q', 'postRepository', function ($window, $scope, $q, postRepository) {
-      $scope.posts = postRepository.getAll().then(function (data) {
-        $scope.posts = data;
+      $scope.posts = [];
+      $scope.visiblePosts = [];
+      $scope.maxVisiblePages = 5;
+      $scope.currentPage = 1;
+      $scope.postsPerPage = 1;
+
+      postRepository.getAll().then(function (data) {
+        var id;
+        for (id in data) {
+          $scope.posts.push(data[id]);
+        }
       });
+
+      $scope.numPages = function () {
+        return Math.ceil($scope.posts.length / $scope.postsPerPage);
+      };
+
+      $scope.$watch('currentPage', function (newValue) {
+        if (!newValue) {
+          return;
+        }
+
+        if ($scope.posts === undefined) {
+          return;
+        }
+
+        var start = ($scope.currentPage - 1) * $scope.postsPerPage;
+        var end = start + $scope.postsPerPage;
+
+        $scope.visiblePosts = $scope.posts.slice(start, end);
+      }, true);
     }])
     .controller('PostCtrl', ['$scope', '$injector', function ($scope, $injector) {
       var userRepository = $injector.get('userRepository');
