@@ -15,7 +15,7 @@
   angular.module('redditcloneApp')
     .controller('UsersCtrl', ['$scope', 'userRepository', function ($scope, userRepository) {
       userRepository.getAll().then(function (data) {
-        $scope.posts = data;
+        $scope.users = data;
       });
     }])
     .controller('UserCtrl', ['$scope', '$injector', function ($scope, $injector) {
