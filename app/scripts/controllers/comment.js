@@ -38,6 +38,9 @@
       }
     }])
     .controller('CommentEditCtrl', ['$scope', '$location', 'session', 'localStorageService', 'commentRepository', function ($scope, $location, session, localStorageService, commentRepository) {
+      $scope.post = undefined;
+      $scope.comment = {};
+
       $scope.addComment = function () {
         if (!session.isLoggedIn()) {
           $location.path('/login');
@@ -56,15 +59,20 @@
 
         // clear local storage
         localStorageService.remove($scope.post.id + 'editComment');
+
+        // close accordion group 'add'
+        $scope.status.openAdd = !$scope.status.openAdd;
+      };
+
+      $scope.cancel = function () {
+        // close accordion group 'add'
+        $scope.status.openAdd = !$scope.status.openAdd;
       };
 
       $scope.$watch('post', function () {
         // if a post is known we can try to load stored comment
         $scope.comment = localStorageService.get($scope.post.id + 'editComment');
       });
-
-      $scope.post = undefined;
-      $scope.comment = {};
 
       var onDataChanged = function () {
         if (!$scope.post) {

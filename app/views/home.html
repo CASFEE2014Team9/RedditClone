@@ -26,17 +26,30 @@
 
         <div ng-controller="CommentsCtrl">
             <accordion close-others="oneAtATime">
-                <accordion-group is-open="status.open">
+                <accordion-group is-open="status.openComments">
                     <accordion-heading>
-                        {{post.comments.length}} Comments
-                        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                      {{post.comments.length}} Comments
+                      <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': commentGroupIsOpen, 'glyphicon-chevron-right': !commentGroupIsOpen}"></i>
                     </accordion-heading>
                     <div class='panel-item' ng-repeat="comment in post.comments">
-                        <p>{{comment.comment}}</p>
+                      <p>{{comment.comment}}</p>
                       <div class='is-right-aligned'>
                         <p class='post__created-by'>by user "{{comment.user.name}}" at {{comment.createdAt}}</p>
                       </div>
                     </div>
+
+                    <accordion-group is-open="status.openAdd" heading="add">
+                      <div ng-controller="CommentEditCtrl" transfer="post">
+                        <form name='newCommentForm'>
+                          <div class="form-group">
+                            <textarea id='comment' name="comment" placeholder="your thoughts..." ng-model='comment.comment' required/>
+                          </div>
+
+                          <button class="btn btn-primary" ng-click="addComment()">Add</button>
+                          <button class="btn" ng-click="cancel()">Cancel</button>
+                        </form>
+                      </div>
+                    </accordion-group>
                 </accordion-group>
             </accordion>
 
