@@ -20,10 +20,15 @@
 
         /*get all items*/
         this.getAll = function getAll() {
+          var result = [];
           if (!itemsPromise) {
             itemsPromise = $http.get(url).then(function (data) {
               if (data.data.ret === 'success') {
-                return data.data.data;
+                var id;
+                for (id in data.data.data) {
+                  result.push(data.data.data[id]);
+                }
+                return result;
               }
               return $q.reject(data.data.message);
             });

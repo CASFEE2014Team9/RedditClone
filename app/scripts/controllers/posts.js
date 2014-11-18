@@ -21,10 +21,7 @@
       $scope.postsPerPage = 1;
 
       postRepository.getAll().then(function (data) {
-        var id;
-        for (id in data) {
-          $scope.posts.push(data[id]);
-        }
+        $scope.posts = data;
       });
 
       $scope.numPages = function () {
