@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-  var FS = require("q-io/fs");
+  var FS = require('q-io/fs');
   var path = require('path');
 
   var Repository = function Repository(type) {
