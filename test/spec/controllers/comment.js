@@ -1,3 +1,6 @@
+
+/*global describe, beforeEach, it, expect, inject */
+
 'use strict';
 
 describe('Controller: CommentCtrl', function () {
@@ -11,6 +14,9 @@ describe('Controller: CommentCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
+    scope.comment = {
+      userId : 1
+    };
     CommentCtrl = $controller('CommentCtrl', {
       $scope: scope
     });

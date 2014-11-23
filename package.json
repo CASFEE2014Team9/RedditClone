@@ -23,7 +23,11 @@
     "gulp-concat": "*",
     "gulp-qunit": "*",
     "gulp-csslint": "*",
-    "express-livereload": "*"
+    "express-livereload": "*",
+    "karma": "*",
+    "gulp-karma": "*",
+    "karma-jasmine": "*",
+    "karma-phantomjs-launcher": "*"
   },
   "engines": {
     "node": ">=0.10.0"

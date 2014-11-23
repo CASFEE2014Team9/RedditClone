@@ -7,6 +7,7 @@
   var concat = require('gulp-concat');
   var qunit = require('gulp-qunit');
   var csslint = require('gulp-csslint');
+  var karma = require('gulp-karma');
 
   var paths = {
     in: {
@@ -15,6 +16,8 @@
       scripts: [
         './app/scripts/**/*.js',
         './backend/**/*.js'],
+      tests: [
+        './test/**/*.js'],
       css:     ['./app/styles/**/*.css']
     },
     out: {
@@ -27,6 +30,22 @@
       .pipe(jshint())
       .pipe(jshint.reporter());
   });
+
+  //run tests
+  gulp.task('test', function () {
+    return gulp.src(paths.in.tests)
+      .pipe(karma({
+        configFile: 'test/karma.conf.js',
+        action: 'run'
+      }));
+    /*
+      .on('error', function (err) {
+        // Make sure failed tests cause gulp to exit non-zero
+        throw err;
+      });
+      */
+  });
+
   //detect css errors
   gulp.task('csslint', function () {
     gulp.src(paths.in.css)
@@ -41,9 +60,11 @@
   // Rerun the task when a file changes
   gulp.task('watch', function () {
     gulp.watch(paths.in.scripts, ['lint']);
+    gulp.watch(paths.in.scripts, ['test']);
+    gulp.watch(paths.in.tests, ['test']);
     gulp.watch(paths.in.css, ['csslint']);
     gulp.watch(paths.in.gulp, ['default']);
   });
 
-  gulp.task('default', ['watch', 'lint', 'csslint', 'serve']);
+  gulp.task('default', ['watch', 'lint', 'test', 'csslint', 'serve']);
 }());
