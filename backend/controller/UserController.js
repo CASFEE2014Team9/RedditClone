@@ -4,6 +4,14 @@
   var Controller = require('./../services/Controller');
   var userRepository = new Repository('user');
 
+  userRepository.getPublicData = function getPublicData(id, item) {
+    return {
+      id : id,
+      name : item.name,
+      email : item.email
+    };
+  };
+
   var UserController = function UserController() {
     Controller.call(this, userRepository);
     var self = this;
