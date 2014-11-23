@@ -17,11 +17,12 @@
       $scope.posts = [];
       $scope.visiblePosts = [];
       $scope.maxVisiblePages = 5;
-      $scope.currentPage = 1;
+      $scope.currentPage = 0;
       $scope.postsPerPage = 1;
 
       postRepository.getAll().then(function (data) {
         $scope.posts = data;
+        $scope.currentPage = 1;
       });
 
       $scope.numPages = function () {
