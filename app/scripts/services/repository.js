@@ -1,13 +1,13 @@
 
 /*jslint browser: true*/
-/*global window, angular, io */
+/*global window, angular */
 
 (function () {
   'use strict';
-  var reposityModule = angular.module('repository', []);
+  var reposityModule = angular.module('repository', ['io']);
 
   reposityModule
-    .factory('Repository', function ($http, $q, $injector) {
+    .factory('Repository', function ($http, $q, $injector, io) {
       function Repository(type) {
         this.type = type;
         var itemsPromise = null;
@@ -15,8 +15,8 @@
         var itemsByPropertyPromises = {};
         var self = this;
         var loc = window.location;
-        var url = loc.origin + loc.pathname + 'data/';
-        url = url + type + 's/';
+        var url = loc.origin + loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1) + 'data/';
+        var url = url + type + 's/';
 
         /*get all items*/
         this.getAll = function getAll() {
@@ -65,9 +65,18 @@
 
         /*get one item by its id*/
         this.get = function get(id) {
+          if (typeof id === "string") {
+            id = parseInt(id);
+          }
           if (!itemsByIdPromises[id]) {
             itemsByIdPromises[id] = self.getAll().then(function (data) {
-              return data[id];
+              var i = 0;
+              for (i; i < data.length; i++) {
+                if (parseInt(data[i].id) === id) {
+                  return data[i];
+                }
+              }
+              return null;
             });
           }
           return itemsByIdPromises[id];
