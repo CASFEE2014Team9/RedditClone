@@ -106,7 +106,11 @@
             }
             // the logged in user must either own the specified item or must be admin
             // so the action on the element can be performed
-            var enabled = session.user.data.id === newValue.userId || session.authorize(accessLevels.admin);
+            var enabled = session.isLoggedIn();
+            if (enabled) {
+              enabled = session.user.data.id === newValue.userId || session.authorize(accessLevels.admin);
+            }
+
             el.prop('disabled', !enabled);
           });
         }

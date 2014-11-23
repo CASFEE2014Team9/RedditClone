@@ -176,11 +176,17 @@
           return;
         }
         var ratingDisabled = false;
-        newValue.forEach(function (item) {
-          if (item.userId === session.user.data.id) {
-            ratingDisabled = true;
-          }
-        });
+
+        if (session.isLoggedIn()) {
+          newValue.forEach(function (item) {
+            if (item.userId === session.user.data.id) {
+              ratingDisabled = true;
+            }
+          });
+        } else {
+          ratingDisabled = true;
+        }
+
         $scope.ratingDisabled = ratingDisabled;
 
       }, true);
