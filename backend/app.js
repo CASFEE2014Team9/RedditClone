@@ -21,7 +21,7 @@
   app.use(favicon(path.join(app.root, '/app/favicon.ico')));
   app.use(logger('dev'));
   app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded());
+  app.use(bodyParser.urlencoded({ extended: true }));
   app.use(cookieParser());
 
   app.set('views', path.join(app.root, '/backend/views'));
