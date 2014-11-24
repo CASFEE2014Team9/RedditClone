@@ -34,16 +34,7 @@
   passport.use(new LocalStrategy({
     usernameField: 'credentialsUser',
     passwordField: 'credentialsPassword'
-  }, function (username, password, done) {
-    var user = UserController.repository.getMatching('name', username)[0];
-    if (!user) {
-      return done(null, false, { message: 'Incorrect username.' });
-    }
-    if (user.password !== password) {
-      return done(null, false, { message: 'Incorrect password.' });
-    }
-    return done(null, user);
-  }));
+  }, UserController.login));
   app.use(passport.initialize());
   var authenticate = function (req, res, next) {
     passport.authenticate('local', function (err, user, info) {

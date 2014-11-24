@@ -44,6 +44,16 @@
     };
   };
 
+  UserController.login = function (username, password, done) {
+    var user = UserController.repository.getMatching('name', username, true)[0];
+    if (!user) {
+      return done(null, false, { message: 'Incorrect username.' });
+    }
+    if (user.password !== password) {
+      return done(null, false, { message: 'Incorrect password.' });
+    }
+    return done(null, user);
+  };
   UserController.prototype = new Controller();
   UserController.prototype.constructor = UserController;
   UserController.parent = Controller.prototype;

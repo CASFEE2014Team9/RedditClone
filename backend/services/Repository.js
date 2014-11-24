@@ -46,15 +46,21 @@
     };
 
     /*get all items where the given property matches the given value*/
-    this.getMatching = function getMatching(property, value) {
+    this.getMatching = function getMatching(property, value, forinternal) {
       var filtered = [];
       var id;
       var item;
+      var getPublicData = self.getPublicData;
+      if (forinternal) {
+        getPublicData = function (id, item) {
+          return item;
+        };
+      }
 
       for (id in items) {
         item = items[id];
         if (item[property] === value) {
-          filtered.push(self.getPublicData(id, item));
+          filtered.push(getPublicData(id, item));
         }
       }
       return filtered;
