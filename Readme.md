@@ -4,8 +4,23 @@ http://www.jetbrains.com/webstorm/webhelp/running-and-debugging-node-js.html
 
 # deployment
 
+## global dependencies
+
+node.js installation
+http://nodejs.org/
+
+phantom.js installation
+http://phantomjs.org/
+
+## npm install
+
 npm install from cmd line will install missing packages specified in package.json ->.dependencies
 package.json contains * as version so npm update works
+
+## npm global dependencies
+
+gulp
+bower
 
 bower install from cmd line will install missing packages specified in bower.json ->.dependencies
 
@@ -13,85 +28,113 @@ use
 npm install gulp -g //installs gulp globally
 gulp                // use gulp to compile / style check / convert stuff
 
-## dev dependencies
+### dev dependencies
 
-gulp            task runner / compiler replacement
+#### gulp
+task runner / compiler replacement
 
-gulp-jshint     reports bad js style
+#### gulp-jshint
+reports bad js style
 
-gulp-less       converts less to css
+####gulp-less
+converts less to css
 
-gulp-concat     concats files
+####gulp-concat
+concats files
 
-gulp-qunit      unit tests
+####gulp-csslint    
+reports bad css style
 
-gulp-csslint    reports bad css style
+####express-livereload
+automatic client refresh
+ 
+####karma
+testrunner
 
-amdefine        package definition
+####gulp-karma
+testrunner
 
-bower           client package manager
+####karma-jasmine
+testrunner
 
-## dependencies
+####karma-phantomjs-launcher
+testrunner
 
-connect         used for socket listening
+### dependencies
 
-requirejs       dependency management / late loading
+####express
+server / routing framework
 
-express         mvc control implementation
+####debug
 
-hbs             mvc view implementation rendering on server
 
-mime            helper for discovery of mime types
+####bower
+client package manager
 
-path            helper for manipulating path strings
+####serve-favicon
+liefert fav icon
 
-## ui / bower dependencies
 
-jquery                      improved dom manipulation
+####morgan
 
-jquery-ui                   widgets and interaction behaviors
+####cookie-parser
 
-Cookies                     cookies
+####body-parser
 
-qunit                       unittests
+####socket.io
+web socket server for data updates
 
-requirejs-domready          waiting for domready the requirejs way
+####jade
+templating engine for serverside error page rendering
 
-linqjs-amd                  linq for js searching / filtering / sorting / joining of enumerables + aggregate functions
+####passport
+authentification framework
 
-handlebars                  mvc view implementation for rendering from view model
+####passport-local
+authentification strategy
 
-require-handlebars-plugin   require views for rendering
+####q-io
+file api with promises
 
-# documentation
+### bower dependencies
 
-DomainModel created with
-https://creately.com/
+####angular
+spa framework
+####json3
+####es5-shim
+####bootstrap
+ui framework
 
-## architecture
+####angular-resource
 
-v-vm-m-c
+####angular-cookies
+####angular-sanitize
+####angular-animate
+####angular-touch
+####angular-route
 
-### view 
+####socket.io-client
+web socket client to receive data
 
-display stuff
+####angular-local-storage
+api for local storage
 
-### view model
+####angular-bootstrap
+ui framework
 
-logic of interaction between view and model
-should handle events from the view and provide additional information not present in the model
+##gulp tasks
 
-each view model should have:
+###watch
+watch input files and launch other tasks
 
-display method that renders it
+###lint
+check js for code style problems
 
-connectModelWithView method that connects the view with the view model
-this should be replaced by ember or knockout but no time for that yet
+###test
+run unit tests
 
-### model
+###csslint
+check css for code vstyle problems
 
-the data
-
-### controller
-
-handles server side view rendering and provides the model will later handle the manipulation persistence of the model
+###serve
+launch website
