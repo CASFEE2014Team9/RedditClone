@@ -8,6 +8,7 @@
   var qunit = require('gulp-qunit');
   var csslint = require('gulp-csslint');
   var karma = require('gulp-karma');
+  var sass = require('gulp-ruby-sass');
 
   var paths = {
     in: {
@@ -18,7 +19,8 @@
         './backend/**/*.js'],
       tests: [
         './test/**/*.js'],
-      css:     ['./app/styles/**/*.css']
+      css:     ['./app/styles/**/*.css'],
+      sass:     ['./app/styles/**/*.sass']
     },
     out: {
     }
@@ -53,6 +55,13 @@
       .pipe(csslint.reporter());
   });
 
+  gulp.task('sass', function () {
+    return gulp.src('./app/styles/**/*.sass')
+        .pipe(sass({sourcemap: true, sourcemapPath: '../sass'}))
+        .on('error', function (err) { console.log(err.message); })
+        .pipe(gulp.dest('dist/css'));
+  });
+
   gulp.task('serve', function () {
     var server = require('./bin/www');
   });
@@ -63,8 +72,9 @@
     gulp.watch(paths.in.scripts, ['test']);
     gulp.watch(paths.in.tests, ['test']);
     gulp.watch(paths.in.css, ['csslint']);
+    gulp.watch(paths.in.sass, ['sass']);
     gulp.watch(paths.in.gulp, ['default']);
   });
 
-  gulp.task('default', ['watch', 'lint', 'test', 'csslint', 'serve']);
+  gulp.task('default', ['watch', 'lint', 'test', 'csslint', 'sass', 'serve']);
 }());
