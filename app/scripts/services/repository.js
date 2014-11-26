@@ -16,7 +16,7 @@
         var self = this;
         var loc = window.location;
         var url = loc.origin + loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1) + 'data/';
-        url = url + type + 's/';
+        var url = url + type + 's/';
 
         /*get all items*/
         this.getAll = function getAll() {
@@ -65,7 +65,7 @@
 
         /*get one item by its id*/
         this.get = function get(id) {
-          if (typeof id === 'string') {
+          if (typeof id === "string") {
             id = parseInt(id);
           }
           if (!itemsByIdPromises[id]) {

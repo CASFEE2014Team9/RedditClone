@@ -1,6 +1,6 @@
 
 /*jslint browser: true*/
-/*global angular, io */
+/*global window, angular, io */
 
 (function () {
   'use strict';
