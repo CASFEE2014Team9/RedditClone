@@ -25,10 +25,6 @@
         $scope.currentPage = 1;
       });
 
-      $scope.numPages = function () {
-        return Math.ceil($scope.posts.length / $scope.postsPerPage);
-      };
-
       var updatePosts = function (posts, currentPage) {
         if (!currentPage) {
           return;
@@ -42,6 +38,7 @@
         var end = start + $scope.postsPerPage;
 
         $scope.visiblePosts = posts.slice(start, end);
+        $scope.numPages = Math.ceil($scope.posts.length / $scope.postsPerPage);
       };
 
       $scope.$watch('currentPage', function (newValue) {
