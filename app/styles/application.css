@@ -160,9 +160,6 @@ form {
       min-width: 12rem; } }
 @media screen and (min-width: 48em) {
   #login-btn {
-    margin-right: 6rem; }
-
-  body {
-    border: 10px solid red !important; } }
+    margin-right: 6rem; } }
 
 /*# sourceMappingURL=application.css.map */
