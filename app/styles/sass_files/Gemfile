@@ -1,5 +1,0 @@
-source 'https://rubygems.org'
-
-gem 'guard-sass', require: false
-gem 'guard-sprockets'
-gem 'guard-coffeescript'

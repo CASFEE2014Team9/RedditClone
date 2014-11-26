@@ -20,7 +20,7 @@
       tests: [
         './test/**/*.js'],
       css:     ['./app/styles/**/*.css'],
-      sass:     ['./app/styles/**/*.sass']
+      sass:    ['./app/styles/**/*.sass']
     },
     out: {
     }
@@ -56,10 +56,10 @@
   });
 
   gulp.task('sass', function () {
-    return gulp.src('./app/styles/**/*.sass')
-        .pipe(sass({sourcemap: true, sourcemapPath: '../sass'}))
+    gulp.src(paths.in.sass)
+        .pipe(sass())
         .on('error', function (err) { console.log(err.message); })
-        .pipe(gulp.dest('dist/css'));
+        .pipe(gulp.dest('./app/styles/'));
   });
 
   gulp.task('serve', function () {
