@@ -18,7 +18,7 @@
       $scope.visiblePosts = [];
       $scope.maxVisiblePages = 5;
       $scope.currentPage = 0;
-      $scope.postsPerPage = 1;
+      $scope.postsPerPage = 5;
 
       postRepository.getAll().then(function (data) {
         $scope.posts = data;
@@ -29,20 +29,29 @@
         return Math.ceil($scope.posts.length / $scope.postsPerPage);
       };
 
-      $scope.$watch('currentPage', function (newValue) {
-        if (!newValue) {
+      var updatePosts = function (posts, currentPage) {
+        if (!currentPage) {
           return;
         }
 
-        if ($scope.posts === undefined) {
+        if (!posts) {
           return;
         }
 
-        var start = ($scope.currentPage - 1) * $scope.postsPerPage;
+        var start = (currentPage - 1) * $scope.postsPerPage;
         var end = start + $scope.postsPerPage;
 
-        $scope.visiblePosts = $scope.posts.slice(start, end);
+        $scope.visiblePosts = posts.slice(start, end);
+      };
+
+      $scope.$watch('currentPage', function (newValue) {
+        updatePosts($scope.posts, newValue);
       }, true);
+
+      $scope.$watch('posts', function (newValue) {
+        updatePosts(newValue, $scope.currentPage);
+      }, true);
+
     }])
     .controller('PostCtrl', ['$scope', '$injector', function ($scope, $injector) {
       var userRepository = $injector.get('userRepository');

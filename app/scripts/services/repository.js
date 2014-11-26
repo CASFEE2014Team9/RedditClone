@@ -12,17 +12,36 @@
         this.type = type;
         var itemsPromise = null;
         var itemsByIdPromises = {};
+        var update = {};
         var itemsByPropertyPromises = {};
         var self = this;
         var loc = window.location;
         var url = loc.origin + loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1) + 'data/';
-        var url = url + type + 's/';
+        url = url + type + 's/';
+
+        var indexOf = function (items, id) {
+          var i = 0;
+          for (i; i < items.length; i++) {
+            if (parseInt(items[i].id) === id) {
+              return i;
+            }
+          }
+          return -1;
+        };
+
+        var getInternal = function (items, id) {
+          var idx = indexOf(items, id);
+          if (idx === -1) {
+            return null;
+          }
+          return items[idx];
+        };
 
         /*get all items*/
         this.getAll = function getAll() {
-          var result = [];
           if (!itemsPromise) {
-            itemsPromise = $http.get(url).then(function (data) {
+            update = itemsPromise = $http.get(url).then(function (data) {
+              var result = [];
               if (data.data.ret === 'success') {
                 var id;
                 for (id in data.data.data) {
@@ -36,7 +55,7 @@
           return itemsPromise;
         };
 
-        /*get all items where the given property matches the given value*/
+          /*get all items where the given property matches the given value*/
         this.getMatching = function getMatching(property, value) {
           if (!itemsByPropertyPromises[property]) {
             itemsByPropertyPromises[property] = {};
@@ -65,18 +84,12 @@
 
         /*get one item by its id*/
         this.get = function get(id) {
-          if (typeof id === "string") {
+          if (typeof id === 'string') {
             id = parseInt(id);
           }
           if (!itemsByIdPromises[id]) {
             itemsByIdPromises[id] = self.getAll().then(function (data) {
-              var i = 0;
-              for (i; i < data.length; i++) {
-                if (parseInt(data[i].id) === id) {
-                  return data[i];
-                }
-              }
-              return null;
+              return getInternal(data, id);
             });
           }
           return itemsByIdPromises[id];
@@ -84,41 +97,40 @@
 
         /*is called if a post was successful or io receives an update*/
         var onPostSuccess = function (item) {
-          self.getAll().then(function (existing) {
+          update = update.then(function (existing) {
             var property, promise;
 
-            existing[item.id] = item;
-
             var updatePromise = function (filtered) {
-              var idx = -1;
-              filtered.some(function (fi, index) {
-                var result = fi.id === item.id;
-                if (result) {
-                  idx = index;
-                }
-                return result;
-              });
+              var idx = indexOf(filtered, item.id);
               if (idx >= 0) {
                 filtered[idx] = item;
               } else {
                 filtered.push(item);
               }
+              return filtered;
             };
+
+            updatePromise(existing);
 
             for (property in itemsByPropertyPromises) {
               promise = itemsByPropertyPromises[property][item[property]];
               if (promise) {
-                promise.then(updatePromise);
+                itemsByPropertyPromises[property][item[property]] = promise.then(updatePromise);
               }
             }
-            return item;
+            return existing;
           });
+          return item;
         };
 
         /*is called if a delete was successful or io receives an delete*/
         var onDeleteSuccess = function (id) {
-          self.getAll().then(function (existing) {
-            delete existing[id];
+          update = update.then(function (existing) {
+            var idx = indexOf(existing, id);
+            if (idx !== -1) {
+              existing.splice(idx, 1);
+            }
+            return existing;
           });
         };
 
