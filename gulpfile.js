@@ -8,6 +8,7 @@
   var qunit = require('gulp-qunit');
   var csslint = require('gulp-csslint');
   var karma = require('gulp-karma');
+  var sass = require('gulp-ruby-sass');
 
   var paths = {
     in: {
@@ -18,12 +19,8 @@
         './backend/**/*.js'],
       tests: [
         './test/**/*.js'],
-<<<<<<< HEAD
       css:     ['./app/styles/**/*.css'],
       sass:    ['./app/styles/**/*.sass']
-=======
-      css:     ['./app/styles/**/*.css']
->>>>>>> 77ce1c23ea2096d16863947f8b59a59a5a843a7a
     },
     out: {
     }
@@ -75,8 +72,9 @@
     gulp.watch(paths.in.scripts, ['test']);
     gulp.watch(paths.in.tests, ['test']);
     gulp.watch(paths.in.css, ['csslint']);
+    gulp.watch(paths.in.sass, ['sass']);
     gulp.watch(paths.in.gulp, ['default']);
   });
 
-  gulp.task('default', ['watch', 'lint', 'test', 'csslint', 'serve']);
+  gulp.task('default', ['watch', 'lint', 'test', 'csslint', 'sass', 'serve']);
 }());
