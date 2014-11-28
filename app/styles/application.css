@@ -91,6 +91,19 @@ body {
   .post__ranking button[disabled] {
     color: #BBBBBB; }
 
+.comment__ranking {
+    text-align: right; }
+.comment__ranking p {
+    margin-bottom: 0; }
+.comment__ranking button {
+    background: none;
+    color: #cd4a4a;
+    border: none; }
+.comment__ranking button:hover, .post__ranking button:focus {
+    color: #191919; }
+.comment__ranking button[disabled] {
+    color: #BBBBBB; }
+
 .post__delete {
   display: inline-block; }
   .post__delete .btn {
