@@ -21,7 +21,7 @@
 
         <a ng-href="post.url" ng-bind="post.url"></a>
         <div class='is-right-aligned'>
-        <p class='post__created-by'>by user "{{post.user.name}}" at {{post.createdAt}}</p>
+        <p class='post__created-by'>by user "{{post.user.name}}" at {{createdAt | date:'medium'}}</p>
         </div>
 
         <div ng-controller="CommentsCtrl">
@@ -32,10 +32,10 @@
                       <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': commentGroupIsOpen, 'glyphicon-chevron-right': !commentGroupIsOpen}"></i>
                     </accordion-heading>
                     <div class='panel-item' ng-repeat="comment in post.comments">
-                      <div class='content'>
+                      <div class='content' ng-controller="CommentCtrl" >
                         <p>{{comment.comment}}</p>
                         <div class='is-left-aligned'>
-                          <p class='post__created-by'>by user "{{comment.user.name}}" at {{comment.createdAt}}</p>
+                          <p class='post__created-by'>by user "{{comment.user.name}}" at {{createdAt | date:'medium'}}</p>
                         </div>
                       </div>
                       <div ng-controller="VoteCtrl" class="comment__ranking">

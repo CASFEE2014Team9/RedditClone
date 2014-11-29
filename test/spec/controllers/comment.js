@@ -9,9 +9,14 @@ describe('Controller: CommentCtrl', function () {
   beforeEach(module('redditcloneApp'));
 
   var scope,
-    injector,
     $httpBackend,
     $controller;
+
+  var comment = {
+    userId : 1,
+    postId : 1,
+    createdAt : '2014-11-09T14:44:57.974Z'
+  };
 
   var user = {
     "name": "Someone",
@@ -39,7 +44,6 @@ describe('Controller: CommentCtrl', function () {
     inject(function ($injector) {
       $controller =  $injector.get('$controller');
       $httpBackend = $injector.get('$httpBackend');
-      injector = $injector;
 
       $httpBackend.when('GET', 'http://localhost:8080/data/users/')
         .respond({
@@ -55,10 +59,7 @@ describe('Controller: CommentCtrl', function () {
     });
 
     scope = $rootScope.$new();
-    scope.comment = {
-      userId : 1,
-      postId : 1
-    };
+    scope.comment = comment;
   }));
 
   afterEach(function () {
@@ -77,6 +78,9 @@ describe('Controller: CommentCtrl', function () {
       });
 
       $httpBackend.flush();
+
+      var convertedDate = new Date(comment.createdAt);
+      expect(scope.createdAt.getTime()).toBe(convertedDate.getTime());
 
       expect(scope.comment.post).not.toBe(null);
       expect(scope.comment.post.id).toBe(post.id);
