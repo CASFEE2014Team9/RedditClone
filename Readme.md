@@ -151,3 +151,13 @@ check css for code vstyle problems
 
 ###serve
 launch website
+
+## security disclaimer
+
+we are aware that security of this website is not well implemented. 
+
+for realworld apps https hosting with a valid certificate should be used.
+
+the authentification should be switched to oauth 2.0 
+ 
+ 
