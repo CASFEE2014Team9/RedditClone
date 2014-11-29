@@ -93,7 +93,7 @@ body {
 
 .comment__ranking {
     text-align: center;
-    widht: 35%; }
+    widht: 15%; }
 .comment__ranking p {
     margin-bottom: 0; }
 .comment__ranking button {
@@ -150,7 +150,7 @@ body {
 }
 
 .content {
-    width: 65%;
+    width: 85%;
 }
 
 .comment__ranking, .content {
