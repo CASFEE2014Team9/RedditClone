@@ -1,65 +1,65 @@
-<div class='nav-btn'>
+<div class="nav-btn">
     <a ng-href="#/new">New Post</a>
 </div>
 
-<div class="list-group" ng-repeat='post in visiblePosts'>
-    <div class='post list-group-item' ng-controller="PostCtrl" transfer="post" >
+<div class="list-group" ng-repeat="post in visiblePosts">
+    <div class="post list-group-item" ng-controller="PostCtrl" transfer="post" >
         <div ng-controller="VoteCtrl" class="post__ranking">
-          <button class='up' href="" ng-click="voteUp()" ng-disabled="ratingDisabled" > <span class="glyphicon glyphicon-plus"></span></button>
-          <p>
-            <span class="glyphicon glyphicon-heart-empty"></span>
-            Ranking:
-            <span ng-bind="post.score"></span>
-          </p>
-          <button class='down' href="" ng-click="voteDown()" ng-disabled="ratingDisabled" > <span class="glyphicon glyphicon-minus"></span></button>
+            <button class="up" href="" ng-click="voteUp()" ng-disabled="ratingDisabled" > <span class="glyphicon glyphicon-plus"></span></button>
+                <p>
+                    <span class="glyphicon glyphicon-heart-empty"></span>
+                    Ranking:
+                    <span ng-bind="post.score"></span>
+                </p>
+            <button class="down" href="" ng-click="voteDown()" ng-disabled="ratingDisabled" > <span class="glyphicon glyphicon-minus"></span></button>
         </div>
-        <div class='post__delete is-right-aligned'>
-          <button class="btn" ng-click="delete()" owns-or-admin-to-enable="post" ><span class="glyphicon glyphicon-remove-circle"></span></button>
+        <div class="post__delete is-right-aligned">
+            <button class="btn" ng-click="delete()" owns-or-admin-to-enable="post" ><span class="glyphicon glyphicon-remove-circle"></span></button>
         </div>
         <p ng-bind="post.description"></p>
 
 
         <a ng-href="post.url" ng-bind="post.url"></a>
-        <div class='is-right-aligned'>
-        <p class='post__created-by'>by user "{{post.user.name}}" at {{createdAt | date:'medium'}}</p>
+        <div class="is-right-aligned">
+            <p class="post__created-by">by user "{{post.user.name}}" at {{createdAt | date:"medium"}}</p>
         </div>
 
         <div ng-controller="CommentsCtrl">
             <accordion close-others="oneAtATime">
                 <accordion-group is-open="status.openComments">
                     <accordion-heading>
-                      {{post.comments.length}} Comments
-                      <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': commentGroupIsOpen, 'glyphicon-chevron-right': !commentGroupIsOpen}"></i>
+                        {{post.comments.length}} Comments
+                        <i class="pull-right glyphicon" ng-class="{"glyphicon-chevron-down": commentGroupIsOpen, "glyphicon-chevron-right": !commentGroupIsOpen}"></i>
                     </accordion-heading>
-                    <div class='panel-item' ng-repeat="comment in post.comments">
-                      <div class='content' ng-controller="CommentCtrl" >
-                        <p>{{comment.comment}}</p>
-                        <div class='is-left-aligned'>
-                          <p class='post__created-by'>by user "{{comment.user.name}}" at {{createdAt | date:'medium'}}</p>
+                    <div class="panel-item" ng-repeat="comment in post.comments">
+                        <div class="content" ng-controller="CommentCtrl" >
+                            <p>{{comment.comment}}</p>
+                            <div class="is-left-aligned">
+                                <p class="post__created-by">by user "{{comment.user.name}}" at {{createdAt | date:"medium"}}</p>
+                            </div>
                         </div>
-                      </div>
-                      <div ng-controller="VoteCtrl" class="comment__ranking">
-                        <button class='up' href="" ng-click="voteUp()" ng-disabled="ratingDisabled" > <span class="glyphicon glyphicon-plus"></span></button>
-                        <p>
-                          <span class="glyphicon glyphicon-heart-empty"></span>
-                            Ranking:
-                          <span ng-bind="post.score"></span>
-                        </p>
-                        <button class='down' href="" ng-click="voteDown()" ng-disabled="ratingDisabled" > <span class="glyphicon glyphicon-minus"></span></button>
-                      </div>
+                        <div ng-controller="VoteCtrl" class="comment__ranking">
+                            <button class="up" href="" ng-click="voteUp()" ng-disabled="ratingDisabled" > <span class="glyphicon glyphicon-plus"></span></button>
+                            <p>
+                                <span class="glyphicon glyphicon-heart-empty"></span>
+                                Ranking:
+                                <span ng-bind="post.score"></span>
+                            </p>
+                            <button class="down" href="" ng-click="voteDown()" ng-disabled="ratingDisabled" > <span class="glyphicon glyphicon-minus"></span></button>
+                        </div>
                     </div>
 
                     <accordion-group is-open="status.openAdd" heading="add">
-                      <div ng-controller="CommentEditCtrl" transfer="post">
-                        <form name='newCommentForm'>
-                          <div class="form-group">
-                            <textarea id='comment' name="comment" placeholder="your thoughts..." ng-model='comment.comment' required/>
-                          </div>
+                        <div ng-controller="CommentEditCtrl" transfer="post">
+                            <form name="newCommentForm">
+                              <div class="form-group">
+                                  <textarea id="comment" name="comment" placeholder="your thoughts..." ng-model="comment.comment" required/>
+                              </div>
 
-                          <button class="btn btn-primary" ng-click="addComment()">Add</button>
-                          <button class="btn" ng-click="cancel()">Cancel</button>
-                        </form>
-                      </div>
+                              <button class="btn btn-primary" ng-click="addComment()">Add</button>
+                              <button class="btn" ng-click="cancel()">Cancel</button>
+                            </form>
+                        </div>
                     </accordion-group>
                 </accordion-group>
             </accordion>

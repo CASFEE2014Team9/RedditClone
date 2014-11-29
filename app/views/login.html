@@ -1,25 +1,26 @@
 <div ng-if="session.user.role == 1" >
-  <form name='loginForm' >
-    <h2> Please Login </h2>
-    <div class="form-group">
-      <label for='user'>User Name</label>
-      <input type='text' id='user' name="user" ng-model='session.user.name' required>
-      <span class="error" ng-show="loginForm.user.$error.required">Required!</span><br>
-    </div>
-    <div class="form-group">
-      <label for='password'>Password</label>
-      <input type='password' id='password' name="password" ng-model='session.user.password' required>
-      <span class="error" ng-show="loginForm.password.$error.required">Required!</span><br>
-    </div>
-    <!--
-    <p>{{ session.user.role }}</p>
-    -->
-    <button type="submit" class="btn" ng-click='session.login()' ng-disabled="!loginForm.password.$valid" >Login</button>
-    <button type="submit" class="btn" ng-click="register()" ng-disabled="!loginForm.password.$valid" >Register</button>
-  </form>
+    <form name="loginForm" >
+        <h2> Please Login </h2>
+        <div class="form-group">
+            <label for="user">User Name</label>
+            <input type="text" id="user" name="user" ng-model="session.user.name" required>
+            <span class="error" ng-show="loginForm.user.$error.required">Required!</span><br>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" ng-model="session.user.password" required>
+            <span class="error" ng-show="loginForm.password.$error.required">Required!</span><br>
+        </div>
+        <!--
+        <p>{{ session.user.role }}</p>
+        -->
+        <button type="submit" class="btn" ng-click="session.login()" ng-disabled="!loginForm.password.$valid" >Login</button>
+        <button type="submit" class="btn" ng-click="register()" ng-disabled="!loginForm.password.$valid" >Register</button>
+    </form>
 </div>
-  <div ng-if="session.user.role > 1" >
+
+<div ng-if="session.user.role > 1" >
     <div class="nav-btn">
-    <button class="btn btn-primary" ng-click="session.logout()" >Logout</button>
-  </div>
+        <button class="btn btn-primary" ng-click="session.logout()" >Logout</button>
+    </div>
 </div>
