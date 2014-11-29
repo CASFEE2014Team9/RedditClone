@@ -2,7 +2,14 @@
 
 http://www.jetbrains.com/webstorm/webhelp/running-and-debugging-node-js.html
 
-# deployment
+# deployment and run
+
+install global dependencies
+npm install
+bower install
+
+build and run it with 
+gulp
 
 ## global dependencies
 
@@ -11,6 +18,12 @@ http://nodejs.org/
 
 phantom.js installation
 http://phantomjs.org/
+
+ruby installation 
+https://www.ruby-lang.org/de/downloads/
+
+sass ruby
+http://sass-lang.com/install
 
 ## npm install
 
