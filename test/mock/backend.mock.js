@@ -2,12 +2,14 @@
 
 'use strict';
 var comment = {
+  "id": "1",
   "userId" : "1",
   "postId" : "1",
   "createdAt" : "\"2014-11-09T14:44:57.974Z\""
 };
 
 var rating = {
+  "id": "1",
   "userId" : "1",
   "postId" : "1",
   "score" : "1"

@@ -1,5 +1,5 @@
 
-/*global describe, beforeEach, afterEach, it, expect, inject,
+/*global describe, beforeEach, afterEach, it, expect, inject, jasmine, customMatchers,
  setupBackend, post, user, rating, comment */
 
 (function () {
@@ -16,6 +16,7 @@
 
     // Initialize the controller and a mock scope
     beforeEach(inject(function ($rootScope, $injector) {
+      jasmine.addMatchers(customMatchers);
       $httpBackend =  $injector.get('$httpBackend');
       $controller =  $injector.get('$controller');
 
@@ -47,6 +48,25 @@
       expect(scope.post.user.id).toBe(user.id);
       expect(scope.post.user.name).toBe(user.name);
       expect(scope.post.user.email).toBe(user.email);
+
+
+      expect(scope.post.comments).anyItemMatchProperty({
+        property : 'id',
+        value : comment.id
+      });
+      expect(scope.user.comments).allItemsMatchProperty({
+        property : 'userId',
+        value : user.id
+      });
+
+      expect(scope.post.ratings).anyItemMatchProperty({
+        property : 'id',
+        value : rating.id
+      });
+      expect(scope.user.ratings).allItemsMatchProperty({
+        property : 'userId',
+        value : user.id
+      });
     });
   });
 }());

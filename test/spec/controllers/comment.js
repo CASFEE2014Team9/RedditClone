@@ -1,5 +1,5 @@
 
-/*global describe, beforeEach, afterEach, it, expect, inject,
+/*global describe, beforeEach, afterEach, it, expect, inject, jasmine, customMatchers,
   setupBackend, post, user, rating, comment */
 
 (function () {
@@ -16,6 +16,7 @@
 
     // Initialize the controller and a mock scope
     beforeEach(inject(function ($rootScope, $injector) {
+      jasmine.addMatchers(customMatchers);
       $httpBackend =  $injector.get('$httpBackend');
       $controller =  $injector.get('$controller');
 
