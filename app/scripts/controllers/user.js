@@ -24,13 +24,13 @@
       var ratingRepository = $injector.get('ratingRepository');
 
       postRepository.getMatching('userId', $scope.user.id).then(function (posts) {
-        $scope.post.posts = posts;
+        $scope.user.posts = posts;
       });
       commentRepository.getMatching('userId', $scope.user.id).then(function (comments) {
-        $scope.post.comments = comments;
+        $scope.user.comments = comments;
       });
       ratingRepository.getMatching('userId', $scope.user.id).then(function (ratings) {
-        $scope.post.ratings = ratings;
+        $scope.user.ratings = ratings;
       });
     }]);
 }());
