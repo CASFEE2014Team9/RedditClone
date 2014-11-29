@@ -32,7 +32,7 @@
                       <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': commentGroupIsOpen, 'glyphicon-chevron-right': !commentGroupIsOpen}"></i>
                     </accordion-heading>
                     <div class='panel-item' ng-repeat="comment in post.comments">
-                      <div>
+                      <div class='content'>
                         <p>{{comment.comment}}</p>
                         <div class='is-left-aligned'>
                           <p class='post__created-by'>by user "{{comment.user.name}}" at {{comment.createdAt}}</p>

@@ -92,7 +92,8 @@ body {
     color: #BBBBBB; }
 
 .comment__ranking {
-    text-align: right; }
+    text-align: center;
+    widht: 35%; }
 .comment__ranking p {
     margin-bottom: 0; }
 .comment__ranking button {
@@ -139,7 +140,24 @@ body {
     color: #191919; }
 .panel .panel-item {
   border-bottom: 1px solid #BBBBBB;
-  margin-bottom: 0.5rem; }
+  margin-bottom: 0.5rem;
+  overflow: hidden; }
+
+.panel-item:after {
+    clear: both;
+    content: "";
+    display: block;
+}
+
+.content {
+    width: 65%;
+}
+
+.comment__ranking, .content {
+  float: left;
+  margin-bottom: -1000em;
+  padding-bottom: 1001em;
+}
 
 form {
   background-color: #FFF;
