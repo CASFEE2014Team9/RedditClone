@@ -93,7 +93,9 @@
     }])
     .controller('EditCtrl', ['$window', '$location', '$scope', 'localStorageService', 'session', 'postRepository', function ($window, $location, $scope, localStorageService, session, repository) {
       // load 'post' form information from local storage
-      $scope.post = localStorageService.get('postForm');
+      if (!$scope.post) {
+        $scope.post = localStorageService.get('postForm');
+      }
 
       // callback function -> if 'post' form data changed
       var onDataChanged = function () {
@@ -124,7 +126,7 @@
         $scope.post.createdAt = JSON.stringify(new Date());
 
         // update post (data)
-        repository.post($scope.post);
+        var promise = repository.post($scope.post);
 
         // clear 'post' form and local storage
         $scope.post = {};
@@ -132,6 +134,7 @@
 
         // go back to where you came from
         $location.path('/');
+        return promise;
       };
 
       // cancel creating new post, go back to last page

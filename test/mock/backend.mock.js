@@ -18,7 +18,8 @@ var rating = {
 var user = {
   "name": "Someone",
   "email": "something@somewhere.com",
-  "id": "1"
+  "id": "1",
+  "password": "1234"
 };
 
 var post = {
@@ -30,31 +31,48 @@ var post = {
 };
 
 var setupBackend = function ($injector) {
+  var success = function (data) {
+    return {
+      "ret" : "success",
+      "data": data
+    };
+  };
+
   var $httpBackend = $injector.get('$httpBackend');
 
   $httpBackend.when('GET', 'http://localhost:8080/data/users/')
-    .respond({
-      "ret" : "success",
-      "data": { "1": user }
-    });
+    .respond(success({
+      "1": user
+    }));
 
   $httpBackend.when('GET', 'http://localhost:8080/data/posts/')
-    .respond({
-      "ret" : "success",
-      "data": { "1": post }
-    });
+    .respond(success({
+      "1": post
+    }));
 
   $httpBackend.when('GET', 'http://localhost:8080/data/comments/')
-    .respond({
-      "ret" : "success",
-      "data": { "1": comment }
-    });
+    .respond(success({
+      "1": comment
+    }));
 
   $httpBackend.when('GET', 'http://localhost:8080/data/ratings/')
-    .respond({
-      "ret" : "success",
-      "data": { "1": rating }
-    });
+    .respond(success({
+      "1": rating
+    }));
+
+  $httpBackend.when('POST', 'http://localhost:8080/login')
+    .respond(success(user));
+
+  var cached;
+  $httpBackend.when('POST', 'http://localhost:8080/data/posts', function (data) {
+    cached = data;
+    return true;
+  })
+    .respond(success(cached));
+
+
+  $httpBackend.when('POST', 'http://localhost:8080/data/posts')
+    .respond(success(post));
 };
 
 // override io here

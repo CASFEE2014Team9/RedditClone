@@ -38,7 +38,7 @@
 
       var login = function () {
         var loc = window.location;
-        var url = loc.origin + loc.pathname + 'login';
+        var url = loc.origin + loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1) + 'login';
 
         return $http.post(url, {
           credentialsUser : user.name,
@@ -63,7 +63,7 @@
           return user.role === userRoles.user || user.role === userRoles.admin;
         },
         login : function () {
-          login().then(function (data) {
+          return login().then(function (data) {
             $cookies.user = user.name;
             $cookies.password = user.password;
             history.back();
