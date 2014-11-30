@@ -91,20 +91,6 @@ body {
   .post__ranking button[disabled] {
     color: #BBBBBB; }
 
-.comment__ranking {
-    text-align: center;
-    widht: 15%; }
-.comment__ranking p {
-    margin-bottom: 0; }
-.comment__ranking button {
-    background: none;
-    color: #cd4a4a;
-    border: none; }
-.comment__ranking button:hover, .post__ranking button:focus {
-    color: #191919; }
-.comment__ranking button[disabled] {
-    color: #BBBBBB; }
-
 .post__delete {
   display: inline-block; }
   .post__delete .btn {
@@ -140,24 +126,7 @@ body {
     color: #191919; }
 .panel .panel-item {
   border-bottom: 1px solid #BBBBBB;
-  margin-bottom: 0.5rem;
-  overflow: hidden; }
-
-.panel-item:after {
-    clear: both;
-    content: "";
-    display: block;
-}
-
-.content {
-    width: 85%;
-}
-
-.comment__ranking, .content {
-  float: left;
-  margin-bottom: -1000em;
-  padding-bottom: 1001em;
-}
+  margin-bottom: 0.5rem; }
 
 form {
   background-color: #FFF;
