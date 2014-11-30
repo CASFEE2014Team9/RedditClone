@@ -59,7 +59,10 @@
                         <div ng-controller="CommentEditCtrl" transfer="post">
                             <form name="newCommentForm">
                               <div class="form-group">
+                                <label for="comment">Comment</label>
+                                <div class='textarea-wrapper'>
                                   <textarea id="comment" name="comment" placeholder="your thoughts..." ng-model="comment.comment" required/>
+                                </div>
                               </div>
 
                               <button class="btn btn-primary" ng-click="addComment()">Add</button>
