@@ -139,6 +139,23 @@ form {
   .ranking button[disabled] {
     color: #BBBBBB; }
 
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  background-color: #cd4a4a;
+  border-color: #BBBBBB; }
+.pagination > li > a,
+.pagination > li > span {
+  color: #cd4a4a; }
+.pagination > li > a:hover,
+.pagination > span:hover,
+.pagination > li > a:focus,
+.pagination > span:focus {
+  color: #191919; }
+
 @media screen and (min-width: 25em) {
   #header {
     padding: 4rem; }
