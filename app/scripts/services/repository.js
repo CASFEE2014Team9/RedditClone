@@ -22,7 +22,7 @@
         var indexOf = function (items, id) {
           var i = 0;
           for (i; i < items.length; i++) {
-            if (parseInt(items[i].id) === id) {
+            if (parseInt(items[i].id) == id) {
               return i;
             }
           }

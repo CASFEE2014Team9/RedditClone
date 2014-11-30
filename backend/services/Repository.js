@@ -59,7 +59,7 @@
 
       for (id in items) {
         item = items[id];
-        if (item[property] === value) {
+        if (item[property] == value) {
           filtered.push(getPublicData(id, item));
         }
       }
