@@ -77,19 +77,6 @@
         }
       };
     })
-    .factory('lazy', function () {
-      var lazy = function (promise, assign) {
-        assign(function () {
-          promise().then(function (data) {
-            assign(function () {
-              return data;
-            });
-          });
-          return null;
-        });
-      };
-      return lazy;
-    })
     .factory('history', function ($rootScope, $location) {
       var back = function back() {
         var prevUrl = history.stack.length > 1 ? history.stack.splice(-2)[0] : '/';
