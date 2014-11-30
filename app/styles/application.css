@@ -78,19 +78,6 @@ body {
   font-size: 1.1rem;
   margin-top: 0.2rem; }
 
-.post__ranking {
-  text-align: center; }
-  .post__ranking p {
-    margin-bottom: 0; }
-  .post__ranking button {
-    background: none;
-    color: #cd4a4a;
-    border: none; }
-    .post__ranking button:hover, .post__ranking button:focus {
-      color: #191919; }
-  .post__ranking button[disabled] {
-    color: #BBBBBB; }
-
 .post__delete {
   display: inline-block; }
   .post__delete .btn {
@@ -138,6 +125,20 @@ form {
   form input[type="password"] {
     width: 100%; }
 
+.ranking {
+  text-align: center; }
+  .ranking p {
+    margin-bottom: 0;
+    font-size: 1.2rem; }
+  .ranking button {
+    background: none;
+    color: #cd4a4a;
+    border: none; }
+    .ranking button:hover, .ranking button:focus {
+      color: #191919; }
+  .ranking button[disabled] {
+    color: #BBBBBB; }
+
 @media screen and (min-width: 25em) {
   #header {
     padding: 4rem; }
@@ -157,7 +158,10 @@ form {
       display: inline-block;
       width: auto; }
     form label {
-      min-width: 12rem; } }
+      min-width: 12rem; }
+
+  .ranking p {
+    font-size: 1.4rem; } }
 @media screen and (min-width: 48em) {
   #login-btn {
     margin-right: 6rem; } }

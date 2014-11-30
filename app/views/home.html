@@ -4,7 +4,7 @@
 
 <div class="list-group" ng-repeat="post in visiblePosts">
     <div class="post list-group-item" ng-controller="PostCtrl" transfer="post" >
-        <div ng-controller="VoteCtrl" class="post__ranking">
+        <div ng-controller="VoteCtrl" class="ranking">
             <button class="up" href="" ng-click="voteUp()" ng-disabled="ratingDisabled" > <span class="glyphicon glyphicon-plus"></span></button>
                 <p>
                     <span class="glyphicon glyphicon-heart-empty"></span>
@@ -32,21 +32,27 @@
                         <i class="pull-right glyphicon" ng-class="{"glyphicon-chevron-down": commentGroupIsOpen, "glyphicon-chevron-right": !commentGroupIsOpen}"></i>
                     </accordion-heading>
                     <div class="panel-item" ng-repeat="comment in post.comments">
-                        <div class="content" ng-controller="CommentCtrl" >
-                            <p>{{comment.comment}}</p>
-                            <div class="is-left-aligned">
-                                <p class="post__created-by">by user "{{comment.user.name}}" at {{createdAt | date:"medium"}}</p>
-                            </div>
+                      <div class='row'>
+                        <div class='col-xs-8'>
+                          <div class="content" ng-controller="CommentCtrl" >
+                              <p>{{comment.comment}}</p>
+                              <div class="is-left-aligned">
+                                  <p class="post__created-by">by user "{{comment.user.name}}" at {{createdAt | date:"medium"}}</p>
+                              </div>
+                          </div>
                         </div>
-                        <div ng-controller="VoteCtrl" class="comment__ranking">
-                            <button class="up" href="" ng-click="voteUp()" ng-disabled="ratingDisabled" > <span class="glyphicon glyphicon-plus"></span></button>
-                            <p>
-                                <span class="glyphicon glyphicon-heart-empty"></span>
-                                Ranking:
-                                <span ng-bind="post.score"></span>
-                            </p>
-                            <button class="down" href="" ng-click="voteDown()" ng-disabled="ratingDisabled" > <span class="glyphicon glyphicon-minus"></span></button>
+                        <div class='col-xs-4'>
+                          <div ng-controller="VoteCtrl" class="ranking">
+                              <button class="up" href="" ng-click="voteUp()" ng-disabled="ratingDisabled" > <span class="glyphicon glyphicon-plus"></span></button>
+                              <p>
+                                  <span class="glyphicon glyphicon-heart-empty"></span>
+                                  Ranking:
+                                  <span ng-bind="post.score"></span>
+                              </p>
+                              <button class="down" href="" ng-click="voteDown()" ng-disabled="ratingDisabled" > <span class="glyphicon glyphicon-minus"></span></button>
+                          </div>
                         </div>
+                      </div>
                     </div>
 
                     <accordion-group is-open="status.openAdd" heading="add">
