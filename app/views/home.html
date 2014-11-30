@@ -19,7 +19,7 @@
         <p ng-bind="post.description"></p>
 
 
-        <a ng-href="post.url" ng-bind="post.url"></a>
+        <a ng-href="{{post.url}}" ng-bind="post.url"></a>
         <div class="is-right-aligned">
             <p class="post__created-by">by user "{{post.user.name}}" at {{createdAt | date:"medium"}}</p>
         </div>
