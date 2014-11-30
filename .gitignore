@@ -171,3 +171,4 @@ Frontend/Lib/require-handlebars-plugin/
 bower_components/
 
 .sass_cache/*
+.sass-cache/
