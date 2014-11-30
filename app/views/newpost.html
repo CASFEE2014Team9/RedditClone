@@ -3,10 +3,14 @@
         <h3> Create new Post. </h3>
         <p> Enter a link and a description.</p>
         <div class="form-group">
-            <input type="text" id="link" name="link" placeholder="http://..." ng-model="post.url">
+            <label for="link">Link</label>
+            <input type="text" id="link" name="link" placeholder="http://..." ng-model="post.url" required>
         </div>
         <div class="form-group">
-            <textarea id="description" name="description" placeholder="describe your post..." ng-model="post.description" />
+            <label for="description">Description</label>
+            <div class='textarea-wrapper'>
+              <textarea id="description" name="description" placeholder="describe your post..." ng-model="post.description" required/>
+            </div>
         </div>
 
         <button class="btn btn-primary" ng-click="create()">Create</button>

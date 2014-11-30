@@ -158,7 +158,20 @@ form {
       display: inline-block;
       width: auto; }
     form label {
-      min-width: 12rem; }
+      min-width: 12rem;
+      vertical-align: top; }
+
+  .textarea-wrapper {
+    display: inline-block;
+    width: 40rem; }
+    .textarea-wrapper textarea {
+      height: 10rem; }
+
+  .ng-invalid.ng-dirty {
+    border-color: red; }
+
+  .ng-invalid.ng-dirty {
+    border-color: green; }
 
   .ranking p {
     font-size: 1.4rem; } }
