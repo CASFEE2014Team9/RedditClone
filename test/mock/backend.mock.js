@@ -15,6 +15,13 @@ var rating = {
   "score" : "1"
 };
 
+var commentRating = {
+  "id": "1",
+  "userId" : "1",
+  "commentId" : "1",
+  "score" : "1"
+};
+
 var user = {
   "name": "Someone",
   "email": "something@somewhere.com",
@@ -58,6 +65,11 @@ var setupBackend = function ($injector) {
   $httpBackend.when('GET', 'http://localhost:8080/data/ratings/')
     .respond(success({
       "1": rating
+    }));
+
+  $httpBackend.when('GET', 'http://localhost:8080/data/commentRatings/')
+    .respond(success({
+      "1": commentRating
     }));
 
   $httpBackend.when('POST', 'http://localhost:8080/login')

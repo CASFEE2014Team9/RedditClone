@@ -5,7 +5,6 @@
   var less = require('gulp-less');
   var jshint = require('gulp-jshint');
   var concat = require('gulp-concat');
-  var qunit = require('gulp-qunit');
   var csslint = require('gulp-csslint');
   var karma = require('gulp-karma');
   var sass = require('gulp-ruby-sass');
