@@ -6,6 +6,7 @@
   var PostController = require('./../controller/PostController');
   var RatingController = require('./../controller/RatingController');
   var CommentController = require('./../controller/CommentController');
+  var CommentRatingController = require('./../controller/CommentRatingController');
 
   var routeController = function (path, Controller, io) {
     Controller.repository.handleUpdates(io.of(path));
@@ -43,6 +44,7 @@
     routeController('/posts', PostController, io);
     routeController('/ratings', RatingController, io);
     routeController('/comments', CommentController, io);
+    routeController('/commentRatings', CommentRatingController, io);
 
     return router;
   };

@@ -42,12 +42,12 @@
                           </div>
                         </div>
                         <div class='col-xs-4'>
-                          <div ng-controller="VoteCtrl" class="ranking">
+                          <div ng-controller="CommentVoteCtrl" class="ranking" transfer="comment">
                               <button class="up" href="" ng-click="voteUp()" ng-disabled="ratingDisabled" > <span class="glyphicon glyphicon-plus"></span></button>
                               <p>
                                   <span class="glyphicon glyphicon-heart-empty"></span>
                                   Ranking:
-                                  <span ng-bind="post.score"></span>
+                                  <span ng-bind="comment.score"></span>
                               </p>
                               <button class="down" href="" ng-click="voteDown()" ng-disabled="ratingDisabled" > <span class="glyphicon glyphicon-minus"></span></button>
                           </div>

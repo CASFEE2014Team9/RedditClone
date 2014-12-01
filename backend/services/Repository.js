@@ -104,15 +104,27 @@
       }
     };
 
-    FS.exists(dataPath).then(function success() {
-      FS.read(dataPath).then(function success(data) {
-        items = JSON.parse(data);
-      });
-    }, function failed() {
+    var onReadFailed = function failed() {
       items = {
         maxId : 0
       };
-    });
+    };
+
+    FS.exists(dataPath).then(function success() {
+      return FS.read(dataPath).then(function success(data) {
+        items = JSON.parse(data);
+
+        if (!items) {
+          items = {};
+        }
+
+        if (!items.maxId) {
+          items.maxId = 0;
+        }
+        return items;
+      }, onReadFailed);
+    }, onReadFailed)
+      .then(null, onReadFailed);
 
     this.handleUpdates = function (io) {
       io.on('connection', function (socket) {

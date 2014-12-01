@@ -108,6 +108,9 @@
     .factory('ratingRepository', ['Repository', function (Repository) {
       return new Repository('rating');
     }])
+    .factory('commentRatingRepository', ['Repository', function (Repository) {
+      return new Repository('commentRating');
+    }])
     /*jshint unused: false*/
     .run(function (history, session) {
     });
