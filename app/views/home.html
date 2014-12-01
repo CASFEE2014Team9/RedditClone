@@ -29,7 +29,7 @@
                 <accordion-group is-open="status.openComments">
                     <accordion-heading>
                         {{post.comments.length}} Comments
-                        <i class="pull-right glyphicon" ng-class="{"glyphicon-chevron-down": commentGroupIsOpen, "glyphicon-chevron-right": !commentGroupIsOpen}"></i>
+                        <i class="pull-right glyphicon" ng-class="{ 'glyphicon-chevron-down' : commentGroupIsOpen, 'glyphicon-chevron-right' : !commentGroupIsOpen} "></i>
                     </accordion-heading>
                     <div class="panel-item" ng-repeat="comment in post.comments">
                       <div class='row'>
