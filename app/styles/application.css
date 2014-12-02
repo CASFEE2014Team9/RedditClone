@@ -33,7 +33,8 @@ body {
   text-align: center;
   position: relative; }
 
-#login-btn {
+#login-btn,
+#logout-btn {
   color: #FFF;
   text-transform: uppercase;
   position: absolute;
@@ -41,7 +42,9 @@ body {
   right: 0;
   margin: 0.3rem 0.6rem 0 0.3rem;
   text-decoration: none; }
-  #login-btn:hover, #login-btn:focus {
+  #login-btn:hover, #login-btn:focus,
+  #logout-btn:hover,
+  #logout-btn:focus {
     border-bottom: 2px solid #FFF; }
 
 #logo {
@@ -160,7 +163,8 @@ form {
   #header {
     padding: 4rem; }
 
-  #login-btn {
+  #login-btn,
+  #logout-btn {
     font-size: 1.5rem;
     margin-right: 2rem; }
 
@@ -193,7 +197,8 @@ form {
   .ranking p {
     font-size: 1.4rem; } }
 @media screen and (min-width: 48em) {
-  #login-btn {
+  #login-btn,
+  #logout-btn {
     margin-right: 6rem; } }
 
 /*# sourceMappingURL=application.css.map */
