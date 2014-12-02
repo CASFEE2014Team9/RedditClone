@@ -6,13 +6,13 @@
 
   <div class="post list-group-item" ng-controller="PostCtrl" transfer="post" >
     <div ng-controller="VoteCtrl" class="ranking">
-      <button class="up" href="" ng-click="voteUp()" ng-disabled="ratingDisabled" > <span class="glyphicon glyphicon-plus"></span></button>
+      <button class="up" href="" ng-click="voteUp()" ng-disabled="upRatingDisabled" > <span class="glyphicon glyphicon-plus"></span></button>
       <p>
         <span class="glyphicon glyphicon-heart-empty"></span>
         Ranking:
         <span ng-bind="post.score"></span>
       </p>
-      <button class="down" href="" ng-click="voteDown()" ng-disabled="ratingDisabled" > <span class="glyphicon glyphicon-minus"></span></button>
+      <button class="down" href="" ng-click="voteDown()" ng-disabled="downRatingDisabled" > <span class="glyphicon glyphicon-minus"></span></button>
     </div>
 
     <div class="post__delete is-right-aligned">
@@ -48,13 +48,13 @@
 
               <div class='col-xs-4'>
                 <div ng-controller="CommentVoteCtrl" class="ranking" transfer="comment">
-                  <button class="up" href="" ng-click="voteUp()" ng-disabled="ratingDisabled" > <span class="glyphicon glyphicon-plus"></span></button>
+                  <button class="up" href="" ng-click="voteUp()" ng-disabled="upRatingDisabled" > <span class="glyphicon glyphicon-plus"></span></button>
                   <p>
                     <span class="glyphicon glyphicon-heart-empty"></span>
                     Ranking:
                     <span ng-bind="comment.score"></span>
                   </p>
-                  <button class="down" href="" ng-click="voteDown()" ng-disabled="ratingDisabled" > <span class="glyphicon glyphicon-minus"></span></button>
+                  <button class="down" href="" ng-click="voteDown()" ng-disabled="downRatingDisabled" > <span class="glyphicon glyphicon-minus"></span></button>
                 </div>
               </div>
 

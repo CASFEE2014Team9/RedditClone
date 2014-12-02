@@ -183,19 +183,40 @@
         if (!newValue) {
           return;
         }
-        var ratingDisabled = false;
+
+        var upRatingDisabled = false;
+        var downRatingDisabled = false;
+        var upRatingId = 0;
+        var downRatingId = 0;
 
         if (session.isLoggedIn()) {
           newValue.forEach(function (item) {
             if (item.userId === session.user.data.id) {
-              ratingDisabled = true;
+              if (item.score === 1) {
+                upRatingDisabled = true;
+                upRatingId = item.id;
+              }
+              if (item.score === -1) {
+                downRatingDisabled = true;
+                downRatingId = item.id;
+              }
+
+              if (upRatingDisabled && downRatingDisabled) {
+                repository.delete(upRatingId);
+                upRatingDisabled = false;
+
+                repository.delete(downRatingId);
+                downRatingDisabled = false;
+              }
             }
           });
         } else {
-          ratingDisabled = true;
+          upRatingDisabled = true;
+          downRatingDisabled = true;
         }
 
-        $scope.ratingDisabled = ratingDisabled;
+        $scope.upRatingDisabled = upRatingDisabled;
+        $scope.downRatingDisabled = downRatingDisabled;
 
       }, true);
 
