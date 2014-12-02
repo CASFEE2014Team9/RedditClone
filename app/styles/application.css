@@ -58,6 +58,15 @@ body {
   #footer p {
     margin-bottom: 0; }
 
+#blank-slate {
+  margin: 0 0 1rem 0;
+  padding: 3rem;
+  font-size: 1.5rem;
+  background: #FFF; }
+
+.blank-slate-newPost {
+  font-size: 3rem; }
+
 .is-right-aligned {
   text-align: right; }
 
@@ -199,6 +208,15 @@ form {
 @media screen and (min-width: 48em) {
   #login-btn,
   #logout-btn {
-    margin-right: 6rem; } }
+    margin-right: 6rem; }
+
+  #blank-slate {
+    margin: 0 0 1rem 0;
+    padding: 9rem;
+    font-size: 3rem;
+    background: #FFF; }
+
+  .blank-slate-newPost {
+    font-size: 6rem; } }
 
 /*# sourceMappingURL=application.css.map */

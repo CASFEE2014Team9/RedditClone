@@ -88,3 +88,9 @@
 <div class="ng-hide" ng-hide="hasNoPage">
   <pagination class="pagination-sm" items-per-page="postsPerPage" total-items="posts.length" ng-model="currentPage" max-size="maxVisiblePages" boundary-links="true"></pagination>
 </div>
+
+<div id="blank-slate" class="ng-hide" ng-hide="posts.length > 0">
+  <p>Currently no posts.</p>
+  <p>Create one:</p>
+  <a class="blank-slate-newPost" ng-href="#/new">New Post</a>
+</div>
