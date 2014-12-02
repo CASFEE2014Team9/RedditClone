@@ -19,17 +19,12 @@
       });
     }])
     .controller('CommentCtrl', ['$scope', '$injector', function ($scope, $injector) {
-      var postRepository = $injector.get('postRepository');
       var userRepository = $injector.get('userRepository');
       var commentRatingRepository = $injector.get('commentRatingRepository');
 
       userRepository.get($scope.comment.userId).then(function (user) {
         $scope.comment.user = user;
       });
-      postRepository.get($scope.comment.postId).then(function (post) {
-        $scope.comment.post = post;
-      });
-
       commentRatingRepository.getMatching('commentId', $scope.comment.id).then(function (ratings) {
         $scope.comment.ratings = ratings;
       });
